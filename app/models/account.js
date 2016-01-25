@@ -6,7 +6,7 @@ export default DS.Model.extend({
   lastName: DS.attr('string'),
   email: DS.attr('string'),
   phone: DS.attr('phone'),
+  profile: DS.attr(), // Should match config.profileSchema layout
 
-  profile: DS.belongsTo('config'),
   sessions: DS.hasMany('session')
 });

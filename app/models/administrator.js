@@ -6,5 +6,5 @@ export default DS.Model.extend({
   email: DS.attr('string'),
 
   experiments: DS.hasMany('experiment'),
-  configs: DS.hasMany('config'), // TODO: One config (if admins are designated per experiment), or many (if admins are designated per namespace)?
+  configs: DS.belongsTo('config'),
 });

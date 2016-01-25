@@ -2,6 +2,9 @@
 
 module.exports = function(environment) {
   var ENV = {
+
+    jamDbUrl: 'http://localhost:1212',
+
     modulePrefix: 'experimenter',
     environment: environment,
     baseURL: '/',
