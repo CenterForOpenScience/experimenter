@@ -1,0 +1,42 @@
+{
+    "schema": {
+        "additionalProperties": false,
+        "id": "admin",
+        "properties": {
+            "experiments": {
+                "id": "experiments",
+                "items": {
+                    "type": "string"
+                },
+                "type": "array",
+                "uniqueItems": true
+            },
+            "firstName": {
+                "id": "firstName",
+                "pattern": "^(?:[\\w\\.]){3,60}",
+                "type": "string"
+            },
+            "lastName": {
+                "id": "lastName",
+                "pattern": "^(?:[\\w\\.]){3,60}",
+                "type": "string"
+            },
+            "password": {
+                "id": "password",
+                "pattern": "^\\$2b\\$1[0-3]\\$\\S{53}$",
+                "type": "string"
+            },
+            "username": {
+                "id": "username",
+                "pattern": "([a-z0-9!#$%&'*+\\/=?^_`{|.}~-]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)",
+                "type": "string"
+            }
+        },
+        "required": [
+            "username",
+            "password"
+        ],
+        "type": "object"
+    },
+    "type": "jsonschema"
+}
