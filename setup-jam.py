@@ -18,37 +18,20 @@ try:
 except jam.exceptions.KeyExists:
     users_col = exp_ns.get_collection('admins')
 
-exp_ns.update('users', [{
-    'op': 'add', 'path': '/schema', 'value': {
-        'type': 'jsonschema',
-        'schema': {
-            'id': '/',
-            'type': 'object',
-            'properties': {
-                'password': {
-                    'id': 'password',
-                    'type': 'string',
-                    'pattern': '^\$2b\$1[0-3]\$\S{53}$'
-                },
-            },
-            'required': ['password']
-        }
-    }
-}], USER)
-
-for username in ('root', ):
-    try:
-        users_col.create(
-            username, {
-                'username': username,
-                'password': '$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G'
-            }, ''
-        )
-    except jam.exceptions.KeyExists:
-        print('\nUser {user} already exists in the users collection'.format(user=username))
-
 admin_schema = json.load(open('./schemas/admin.json', 'r'))
 exp_ns.update('admins', [{'op': 'add', 'path': '/schema', 'value': admin_schema}], 'system')
+
+try:
+    users_col.create(
+        'root', {
+            'username': 'root',
+            'password': '$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G',
+            'first_name': 'Victor',
+            'last_name': 'Frankenstein'
+        }, ''
+    )
+except jam.exceptions.KeyExists:
+    print('\nUser {user} already exists in the users collection'.format(user='root'))
 
 nsm.update('experimenter', [
     {
