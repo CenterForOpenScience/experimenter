@@ -2,6 +2,11 @@
 
 module.exports = function(environment) {
   var ENV = {
+    OSF: {
+        clientId: '0c0f85938ffe45df9b47522468a99749',
+        scope: 'osf.users.all_read',
+        url: 'https://staging-accounts.osf.io',
+    },
     modulePrefix: 'experimenter',
     environment: environment,
     baseURL: '/',
@@ -11,6 +16,9 @@ module.exports = function(environment) {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       }
+    },
+    'ember-simple-auth': {
+        authenticationRoute: 'login'
     },
 
     APP: {
