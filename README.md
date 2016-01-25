@@ -21,9 +21,10 @@ You will need the following things properly installed on your computer.
 
 ## Running / Development
 
+First:
 * make sure jamdb is running, see: https://github.com/CenterForOpenScience/jamdb
 * with your jamdb virtualenv active:
-  * make sure commonregex is installed `pip install commonregex`
+  * make sure commonregex is installed: `pip install commonregex`
   * run `python schemnas/generate.py` to generate json-schema files
   * run the setup-jam script: `python setup-jam.py`
 
