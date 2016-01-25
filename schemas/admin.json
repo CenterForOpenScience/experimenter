@@ -1,0 +1,39 @@
+{
+    "additionalProperties": false,
+    "id": "admin",
+    "properties": {
+        "email": {
+            "id": "email",
+            "pattern": "([a-z0-9!#$%&'*+\\/=?^_`{|.}~-]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)",
+            "type": "string"
+        },
+        "experiments": {
+            "id": "experiments",
+            "items": {
+                "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
+        "first_name": {
+            "id": "email",
+            "pattern": "^(?:[\\w\\.]){3, 60}",
+            "type": "string"
+        },
+        "last_name": {
+            "id": "email",
+            "pattern": "^(?:[\\w\\.]){3, 60}",
+            "type": "string"
+        },
+        "password": {
+            "id": "password",
+            "pattern": "^\\$2b\\$1[0-3]\\$\\S{53}$",
+            "type": "string"
+        }
+    },
+    "required": [
+        "username",
+        "password"
+    ],
+    "type": "object"
+}
