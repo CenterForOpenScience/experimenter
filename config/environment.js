@@ -3,9 +3,9 @@
 module.exports = function(environment) {
   var ENV = {
     OSF: {
-        clientId: '0c0f85938ffe45df9b47522468a99749',
-        scope: 'osf.users.all_read',
-        url: 'https://staging-accounts.osf.io',
+        clientId: process.env.OSF_CLIENT_ID,
+        scope: process.env.OSF_SCOPE,
+        url: process.env.OSF_URL,
     },
     modulePrefix: 'experimenter',
     environment: environment,
