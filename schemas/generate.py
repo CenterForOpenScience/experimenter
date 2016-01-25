@@ -18,13 +18,13 @@ USER = {
                 "type": "string",
                 "pattern": "^\$2b\$1[0-3]\$\S{53}$"
             },
-            "first_name": {
-                "id": "email",
+            "firstName": {
+                "id": "firstName",
                 "type": "string",
                 "pattern": "^(?:[\w\.]){3,60}"
             },
-            "last_name": {
-                "id": "email",
+            "lastName": {
+                "id": "lastName",
                 "type": "string",
                 "pattern": "^(?:[\w\.]){3,60}"
             },

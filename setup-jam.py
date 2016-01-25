@@ -28,8 +28,8 @@ try:
         'root', {
             'username': USERNAME,
             'password': '$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G',
-            'first_name': 'Victor',
-            'last_name': 'Frankenstein'
+            'firstName': 'Victor',
+            'lastName': 'Frankenstein'
         }, ''
     )
 except jam.exceptions.KeyExists:
@@ -43,7 +43,7 @@ try:
     ], USER)
 except jam.exceptions.MalformedData:
     pass
-    
+
 try:
     nsm.update('experimenter', [
         {

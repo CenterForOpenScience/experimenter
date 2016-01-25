@@ -11,13 +11,13 @@
                 "type": "array",
                 "uniqueItems": true
             },
-            "first_name": {
-                "id": "email",
+            "firstName": {
+                "id": "firstName",
                 "pattern": "^(?:[\\w\\.]){3,60}",
                 "type": "string"
             },
-            "last_name": {
-                "id": "email",
+            "lastName": {
+                "id": "lastName",
                 "pattern": "^(?:[\\w\\.]){3,60}",
                 "type": "string"
             },
