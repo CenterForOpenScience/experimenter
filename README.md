@@ -1,7 +1,13 @@
 # Experimenter
 
 This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+
+To login via OSF:
+* create .env file in top directory
+* in .env file include:
+  * OSF_CLIENT_ID="\<client ID for staging account\>"
+  * OSF_SCOPE="osf.users.all_read"
+  * OSF_URL="https://staging-accounts.osf.io"
 
 ## Prerequisites
 
