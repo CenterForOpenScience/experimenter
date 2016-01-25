@@ -1,3 +1,7 @@
-<h2> Index </h2>
+<h2> Dashboard </h2>
 
-{{outlet}}
+<ul>
+  {{#each model as |experiment|}}
+    <li>{{experiment}}</li>
+  {{/each}}
+</ul>
