@@ -1,7 +1,6 @@
 # Experimenter
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+A platform to create and administer experiments.
 
 ## Prerequisites
 
@@ -22,6 +21,21 @@ You will need the following things properly installed on your computer.
 
 ## Running / Development
 
+First:
+* make sure jamdb is running, see: https://github.com/CenterForOpenScience/jamdb
+* with your jamdb virtualenv active:
+  * make sure commonregex is installed: `pip install commonregex`
+  * run `python schemnas/generate.py` to generate json-schema files
+  * run the setup-jam script: `python setup-jam.py`
+
+This:
+- Makes the _experimenter_ namespace in jamdb.
+- Creates an _admins_ collection under the _experimenter_ namespace.
+- Configures jamdb to use the schema from `schemas/admin.json` to validate _admins_ records.
+- Adds a record 'root', with password 'password' to the _admins_ collection. This can be used to log in to the toast interface.
+- Give the 'root' user ADMIN permissions on the _experimenter_ namespace.
+
+Then:
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
