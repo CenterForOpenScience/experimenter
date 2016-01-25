@@ -1,5 +1,14 @@
 # Experimenter
 
+This README outlines the details of collaborating on this Ember application.
+
+To login via OSF:
+* create .env file in top directory
+* in .env file include:
+  * OSF_CLIENT_ID="\<client ID for staging account\>"
+  * OSF_SCOPE="osf.users.all_read"
+  * OSF_URL="https://staging-accounts.osf.io"
+
 A platform to create and administer experiments.
 
 ## Prerequisites
@@ -26,7 +35,7 @@ First:
 * with your jamdb virtualenv active:
   * make sure commonregex is installed: `pip install commonregex`
   * run `python schemnas/generate.py` to generate json-schema files
-  * run the setup-jam script: `python setup-jam.py`
+  * run the setup-jam script: `python dev/setup-jam.py`
 
 This:
 - Makes the _experimenter_ namespace in jamdb.
@@ -34,6 +43,7 @@ This:
 - Configures jamdb to use the schema from `schemas/admin.json` to validate _admins_ records.
 - Adds a record 'root', with password 'password' to the _admins_ collection. This can be used to log in to the toast interface.
 - Give the 'root' user ADMIN permissions on the _experimenter_ namespace.
+- Populates the appropriate collections with the sample data in `dev/data`.
 
 Then:
 * `ember server`

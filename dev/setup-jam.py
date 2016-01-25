@@ -1,7 +1,10 @@
+from glob import glob
 import json
+import os
 
 import jam
 import jam.auth
+
 
 NS = 'experimenter'
 USER = 'tracked-OPENTRIALS|users-scrapi'
@@ -28,8 +31,8 @@ try:
         'root', {
             'username': USERNAME,
             'password': '$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G',
-            'first_name': 'Victor',
-            'last_name': 'Frankenstein'
+            'firstName': 'Victor',
+            'lastName': 'Frankenstein'
         }, ''
     )
 except jam.exceptions.KeyExists:
@@ -43,7 +46,7 @@ try:
     ], USER)
 except jam.exceptions.MalformedData:
     pass
-    
+
 try:
     nsm.update('experimenter', [
         {
@@ -54,22 +57,21 @@ except Exception:
     pass
 
 
-try:
-    users_col = exp_ns.create_collection('accounts', USER)
-except jam.exceptions.KeyExists:
-    users_col = exp_ns.get_collection('accounts')
+for sample in glob('./dev/data/*.json'):
+    col_name = os.path.basename(sample).split('.json')[0]
+    try:
+        sample_data = json.load(open(sample, 'r'))
+    except json.decoder.JSONDecodeError as e:
+        print("Error loading sample data for {}".format(col_name))
+        raise
 
-try:
-    users_col = exp_ns.create_collection('configs', USER)
-except jam.exceptions.KeyExists:
-    users_col = exp_ns.get_collection('configs')
+    try:
+        col = exp_ns.get_collection(col_name)
+    except jam.exceptions.NotFound:
+        col = exp_ns.create_collection(col_name, 'system')
 
-try:
-    users_col = exp_ns.create_collection('experiments', USER)
-except jam.exceptions.KeyExists:
-    users_col = exp_ns.get_collection('experiments')
-
-try:
-    users_col = exp_ns.create_collection('sessions', USER)
-except jam.exceptions.KeyExists:
-    users_col = exp_ns.get_collection('sessions')
+    for record in sample_data:
+        try:
+            col.create(col_name, record, 'system')
+        except jam.exceptions.KeyExists:
+            pass
