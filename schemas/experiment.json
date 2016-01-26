@@ -1,0 +1,26 @@
+{
+    "schema": {
+        "additionalProperties": false,
+        "id": "experiment",
+        "properties": {
+            "active": {
+                "id": "active",
+                "type": "boolean"
+            },
+            "eligibilityCriteria": {
+                "id": "eligibilityCriteria",
+                "type": "object"
+            },
+            "structure": {
+                "id": "structure",
+                "type": "object"
+            }
+        },
+        "required": [
+            "structure",
+            "active"
+        ],
+        "type": "object"
+    },
+    "type": "jsonschema"
+}
