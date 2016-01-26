@@ -59,6 +59,14 @@ except Exception:
 
 for sample in glob('./dev/data/*.json'):
     col_name = os.path.basename(sample).split('.json')[0]
+
+    try:
+        schema = json.load(open('./schmeas/{}.json'.format('col_name'), 'r'))
+    except OSError:
+        pass
+    else:
+        exp_ns.update(col_name, [{'op': 'add', 'path': '/schema', 'value': admin_schema}], 'system')
+
     try:
         sample_data = json.load(open(sample, 'r'))
     except json.decoder.JSONDecodeError as e:

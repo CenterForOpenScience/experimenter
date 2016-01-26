@@ -4,9 +4,13 @@ import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-
 export default Em.Route.extend(UnauthenticatedRouteMixin, {
     beforeModel() {
         this._super(...arguments);
-        var hash = window.location.hash.substring(1).split('&').map(function(str) {return this[str.split('=')[0]] = str.split('=')[1], this;}.bind({}))[0];
+        var hash = window.location.hash.substring(1).split('&').map(function(str) {
+            return this[str.split('=')[0]] = str.split('=')[1], this;
+        }.bind({}))[0];
         window.location.hash = '';
-        if (!hash.access_token) return;
+        if (!hash.access_token) {
+            return null;
+        }
         this.get('session').authenticate('authenticator:osf-osf-jwt', hash.access_token, hash.expires_in);
         return this.transitionTo('index');
     }
