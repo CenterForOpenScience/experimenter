@@ -1,7 +1,8 @@
 
 {{#if isEditing}}
-  <h2>{{participant.firstName}} {{participant.lastName}}</h2>
-  <p>Email: {{participant.username}}</p>
+  <p>First name: {{input value=participant.firstName}}</p> 
+  <p>Last name: {{input value=participant.lastName}}</p>
+  <p>Email: {{input value=participant.username}}</p>
   <p>Kids: {{participant.kids}}</p>
   <p>Experiments: {{participant.experiments}}</p>
   <button {{action "stopEditing"}}>Cancel</button>
