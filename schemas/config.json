@@ -1,0 +1,22 @@
+{
+    "schema": {
+        "additionalProperties": true,
+        "id": "config",
+        "properties": {
+            "profileSchema": {
+                "id": "profileSchema",
+                "type": "object"
+            },
+            "profilesMax": {
+                "id": "profilesMin",
+                "type": "integer"
+            },
+            "profilesMin": {
+                "id": "profilesMin",
+                "type": "integer"
+            }
+        },
+        "type": "object"
+    },
+    "type": "jsonschema"
+}

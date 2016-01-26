@@ -212,6 +212,6 @@ ACCOUNT = {
     }
 }
 
-for schema in (ADMIN, CONFIG, EXPERIMENT, SESSION, ACCOUNT):
+for schema in (ADMIN, CONFIG, EXPERIMENT, SESSION, ACCOUNT, PROFILE):
     with open('./{}/{}.json'.format(os.path.dirname(__file__), schema['schema']['id']), 'w') as fp:
         json.dump(schema, fp, indent=4, sort_keys=True)
