@@ -7,8 +7,9 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('login');
-  this.route('index');
+  this.route('dashboard');
   this.route('participants');
+  this.route('experiment', { path: '/:experiment_id' });
 });
 
 export default Router;
