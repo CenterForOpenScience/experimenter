@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('dashboard');
   this.route('participants');
   this.route('experiment', { path: '/:experiment_id' });
+  this.route('settings');
 });
 
 export default Router;
