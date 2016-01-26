@@ -1,9 +1,8 @@
 import Em from 'ember';
-import ENV from 'experimenter/config/environment';
 import Base from 'ember-simple-auth/authenticators/base';
 
 export default Base.extend({
-    authenticate(access_token, expires) {
+    authenticate(access_token, _) {
         return Em.RSVP.resolve(JSON.stringify({data: {
                 type: 'users',
                 attributes: {
@@ -11,5 +10,5 @@ export default Base.extend({
                     access_token
                 }
             }}));
-    },
+    }
 });
