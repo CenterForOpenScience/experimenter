@@ -47,6 +47,36 @@ ADMIN = {
     }
 }
 
+# default profile schema
+PROFILE = {
+    "type": "jsonschema",
+    "schema": {
+        "id": "profile",
+        "type": "object",
+        "properties": {
+            "firstName": {
+                "id": "firstName",
+                "type": "string",
+                "pattern": "^\w{3,64}",
+            },
+            "lastName": {
+                "id": "lastName",
+                "type": "string",
+                "pattern": "^\w{3,64}",
+            },
+            "birthday": {
+                "id": "birthday",
+                "type": "string",
+                "pattern": ISO_DATE_PATTERN
+            }
+        },
+        "required": [
+            "firstName", "lastName", "birthday"
+        ],
+        "additionalProperties": False
+    }
+}
+
 CONFIG = {
     "type": "jsonschema",
     "schema": {
@@ -57,12 +87,12 @@ CONFIG = {
                 "id": "profileSchema",
                 "type": "object"
             },
-            "accountsMin": {
-                "id": "accountsMin",
+            "profilesMin": {
+                "id": "profilesMin",
                 "type": "integer"
             },
-            "accountsMax": {
-                "id": "accountsMin",
+            "profilesMax": {
+                "id": "profilesMin",
                 "type": "integer"
             }
         },
@@ -182,36 +212,6 @@ ACCOUNT = {
     }
 }
 
-# default profile schema
-PROFILE = {
-    "type": "jsonschema",
-    "schema": {
-        "id": "profile",
-        "type": "object",
-        "properties": {
-            "firstName": {
-                "id": "firstName",
-                "type": "string",
-                "pattern": "^\w{3,64}",
-            },
-            "lastName": {
-                "id": "lastName",
-                "type": "string",
-                "pattern": "^\w{3,64}",
-            },
-            "birthday": {
-                "id": "birthday",
-                "type": "string",
-                "pattern": ISO_DATE_PATTERN
-            }
-        },
-        "required": [
-            "firstName", "lastName", "birthday"
-        ],
-        "additionalProperties": False
-    }
-}
-
-for schema in (ADMIN, CONFIG, EXPERIMENT, SESSION, ACCOUNT, PROFILE):
+for schema in (ADMIN, CONFIG, EXPERIMENT, SESSION, ACCOUNT):
     with open('./{}/{}.json'.format(os.path.dirname(__file__), schema['schema']['id']), 'w') as fp:
         json.dump(schema, fp, indent=4, sort_keys=True)
