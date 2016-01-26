@@ -1,7 +1,5 @@
 <h2> Participants </h2>
 
-<ul>
-  {{#each model as |participant|}}
-    <li>{{participant}}</li>
-  {{/each}}
-</ul>
+{{#each model as |participant|}}
+  {{participant-info participant=participant}}
+{{/each}}

@@ -3,6 +3,26 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	model() {
-    	return ['Sally Jane', 'Bob Builder', 'Julius Salad'];
+    	return [
+    		{
+    			"firstName": "Sally",
+    			"lastName": "Jane",
+    			"username": "jSally", 
+    			"kids": [],
+    			"experiments": [],
+	    	}, {
+	    		"firstName": "Bob",
+	    		"lastName": "Builder",
+	    		"username": "bBuilder", 
+    			"kids": [],
+    			"experiments": [],
+	    	}, {
+	    		"firstName": "Julius", 
+	    		"lastName": "Salad",
+	    		"username": "jSalad", 
+    			"kids": [],
+    			"experiments": [],
+	    	}
+	    ];
   	}
 });
