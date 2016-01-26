@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('participants');
   this.route('experiment', { path: '/:experiment_id' });
   this.route('settings');
+  this.route('creator');
 });
 
 export default Router;
