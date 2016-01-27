@@ -32,7 +32,7 @@ First:
 * make sure jamdb is running, see: https://github.com/CenterForOpenScience/jamdb
 * with your jamdb virtualenv active:
   * make sure commonregex is installed: `pip install commonregex`
-  * run `python schemnas/generate.py` to generate json-schema files
+  * run `python schemas/generate.py` to generate json-schema files
   * run the setup-jam script: `python dev/setup-jam.py`
 
 This:
