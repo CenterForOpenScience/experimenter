@@ -12,8 +12,6 @@ module.exports = function(environment) {
         url: 'http://localhost:1212'
     },
 
-    jamDbUrl: 'http://localhost:1212',
-
     modulePrefix: 'experimenter',
     environment: environment,
     baseURL: '/',
