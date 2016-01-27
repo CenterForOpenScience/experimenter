@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('experiment', { path: '/:experiment_id' });
   this.route('settings');
   this.route('creator');
+  this.route('testmodel');
 });
 
 export default Router;
