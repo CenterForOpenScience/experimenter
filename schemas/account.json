@@ -1,6 +1,5 @@
 {
     "schema": {
-        "additionalProperties": false,
         "id": "account",
         "properties": {
             "password": {
@@ -23,6 +22,10 @@
                 },
                 "type": "array",
                 "uniqueItems": true
+            },
+            "username": {
+                "id": "username",
+                "type": "string"
             }
         },
         "required": [

@@ -1,11 +1,14 @@
 {
     "schema": {
-        "additionalProperties": false,
         "id": "experiment",
         "properties": {
             "active": {
                 "id": "active",
                 "type": "boolean"
+            },
+            "description": {
+                "id": "description",
+                "type": "string"
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
@@ -13,7 +16,14 @@
             },
             "structure": {
                 "id": "structure",
-                "type": "object"
+                "items": {
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "title": {
+                "id": "title",
+                "type": "string"
             }
         },
         "required": [
