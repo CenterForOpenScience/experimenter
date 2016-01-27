@@ -1,7 +1,13 @@
 <h1>A test model page</h1>
 
 
-<!--And then there are the models-->
-<!--{/{#each model as |collection|}}-->
-  <!--{/{collection}}-->
-<!--{/{/each}}-->
+And then there are the models
+{{#each model as |doc|}}
+  <br>
+
+  Username: {{doc.username}}<br>
+  password: {{doc.password}}<br>
+  First name: {{doc.firstName}}<br>
+  Last name: {{doc.lastName}}<br>
+  <hr>
+{{/each}}
