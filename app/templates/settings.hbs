@@ -1,0 +1,18 @@
+<h2> Profile Settings <a>edit</a></h2> 
+
+ <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            	{{#each model as |info|}}
+					<div> <strong>{{info.firstName}} {{info.lastName}}</strong> </div>
+					<div> <a>{{info.username}}</a> </div>
+					Experiments:
+					<ul>
+						{{#each info.experiments as |experiment|}}
+							<li> {{experiment}} </li>
+						{{/each}}
+					</ul>
+				{{/each}}
+        </div>
+    </div>
+</div>
