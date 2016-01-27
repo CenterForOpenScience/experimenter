@@ -5,7 +5,10 @@ module.exports = function(environment) {
     OSF: {
         clientId: process.env.OSF_CLIENT_ID,
         scope: process.env.OSF_SCOPE,
-        url: process.env.OSF_URL,
+        url: process.env.OSF_URL
+    },
+    JAMDB: {
+        url: 'http://localhost:1212'
     },
     modulePrefix: 'experimenter',
     environment: environment,
