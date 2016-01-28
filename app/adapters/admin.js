@@ -1,6 +1,10 @@
 import ApplicationAdapter from './application';
+import ENV from 'experimenter/config/environment';
+
 
 export default ApplicationAdapter.extend({
-  findAllUrlTemplate: '{+host}/v2/collections/experimenter.admins/documents',
-  queryUrlTemplate: '{+host}/v2/collections/experimenter.admins/_search'
+  urlSegments: {
+    collectionId: () => 'admins',
+  }
 });
+

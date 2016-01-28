@@ -9,7 +9,8 @@ module.exports = function(environment) {
         url: process.env.OSF_URL
     },
     JAMDB: {
-        url: 'http://localhost:1212'
+        url: 'http://localhost:1212',
+        namespace: 'experimenter'
     },
 
     modulePrefix: 'experimenter',
