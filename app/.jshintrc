@@ -14,7 +14,6 @@
     "node": true,
     "evil": true,
     "esversion": 6,
-    "esnext": true,
     "predef": ["window", "document"],
     "browser": true,
     "validthis": true
