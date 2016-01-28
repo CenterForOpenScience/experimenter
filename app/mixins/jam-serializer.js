@@ -12,7 +12,7 @@ export default Ember.Mixin.create({
   },
 
   modelNameFromPayloadKey: function(key) {
-    // Replace the generic JamDB rsponse type of 'documents' with the name of the model to deserialize as
+    // Replace the generic JamDB response type of 'documents' with the name of the model to deserialize as
     return this.modelName || this._super(key);
   },
 
