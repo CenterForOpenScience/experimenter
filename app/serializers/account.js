@@ -1,9 +1,10 @@
 import DS from 'ember-data';
 
+
 // TODO: DRY
 function JSONAPIify(payload) {
   // Reset the type to match the expected model
-  payload.type = 'admins';
+  payload.type = 'accounts';
 
   // Ember data expects the API data to be dash-delimited, and it will remap to camelCase model names.
   // Field names will fail to be serialized if they do not start out as dash-separated
