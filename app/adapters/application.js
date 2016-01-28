@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 import UrlTemplates from 'ember-data-url-templates';
@@ -16,7 +17,7 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, UrlTemplates, {
   queryUrlTemplate: '{+host}/{namespace}/collections/{+jamNamespace}.{+collectionId}/_search',
 
   urlSegments: {
-    collectionId: () => null,
+    collectionId: (type, id, snapshot, query) => Ember.Inflector.inflector.pluralize(type),
     jamNamespace: () => ENV.JAMDB.namespace,
   }
 });
