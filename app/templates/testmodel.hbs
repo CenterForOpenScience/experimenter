@@ -1,10 +1,8 @@
 <h1>A test model page</h1>
 
-
-And then there are the models
+<p>Display a list of records in sequence:</p>
 {{#each model as |doc|}}
-  <br>
-
+  Raw document: {{doc}}<br>
   Username: {{doc.username}}<br>
   password: {{doc.password}}<br>
   First name: {{doc.firstName}}<br>

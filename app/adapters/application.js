@@ -4,7 +4,6 @@ import DS from 'ember-data';
 import UrlTemplates from 'ember-data-url-templates';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
-
 import ENV from 'experimenter/config/environment';
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, UrlTemplates, {
@@ -13,8 +12,9 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, UrlTemplates, {
   host: ENV.JAMDB.url,
   namespace: 'v2',
 
-  findAllUrlTemplate: '{+host}/{+namespace}/collections/{+jamNamespace}.{+collectionId}/documents',
-  queryUrlTemplate: '{+host}/{namespace}/collections/{+jamNamespace}.{+collectionId}/_search',
+  findRecordUrlTemplate: '{+host}{/namespace}/documents{/jamNamespace}.{+collectionId}.{id}',
+  findAllUrlTemplate: '{+host}/{namespace}/collections{/jamNamespace}.{+collectionId}/documents',
+  queryUrlTemplate: '{+host}/{namespace}/collections{/jamNamespace}.{+collectionId}/_search',
 
   urlSegments: {
     collectionId: (type, id, snapshot, query) => Ember.Inflector.inflector.pluralize(type),
