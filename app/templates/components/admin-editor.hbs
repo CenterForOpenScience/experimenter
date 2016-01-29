@@ -1,0 +1,15 @@
+<div class="admin-record">
+  Raw document: {{document}}<br>
+  Username: {{document.username}}<br>
+  password: {{document.password}}<br>
+  First name: {{document.firstName}}<br>
+  Last name: {{document.lastName}}<br>
+
+  <p>
+      {{#if document.experiments}}
+        Relationships present!: {{document.experiments}}
+
+      {{/if}}
+  </p>
+  <hr>
+</div>
