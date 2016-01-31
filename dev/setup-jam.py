@@ -10,9 +10,9 @@ import permissions
 
 
 NS = 'experimenter'
-USER = 'tracked-OPENTRIALS|users-scrapi'
+USER = 'tracked-experimenter|admin-root'
 
-USERNAME = 'root@foo.io'
+USERNAME = 'root'
 
 nsm = jam.NamespaceManager()
 
@@ -26,9 +26,6 @@ try:
 except jam.exceptions.KeyExists:
     users_col = exp_ns.get_collection('admins')
 
-admin_schema = json.load(open('./schemas/admin.json', 'r'))
-exp_ns.update('admins', [{'op': 'add', 'path': '/schema', 'value': admin_schema}], 'system')
-
 try:
     users_col.create(
         'root', {
@@ -41,42 +38,24 @@ try:
 except jam.exceptions.KeyExists:
     print('\nUser {user} already exists in the users collection'.format(user=USERNAME))
 
-try:
-    nsm.update('experimenter', [
-        {
-            'op': 'add', 'path': '/permissions/tracked-experimenter|admins-root', 'value': jam.auth.Permissions.ADMIN
-        }
-    ], 'system')
-except jam.exceptions.MalformedData:
-    pass
-
-try:
-    nsm.update('experimenter', [
-        {
-            'op': 'remove', 'path': '/permissions/{0}'.format(USER)
-        }
-    ], 'system')
-except Exception:
-    pass
-
 
 for sample in glob('./dev/data/*.json'):
-    col_name = os.path.basename(sample).split('.json')[0]
+    col_name = os.path.basename(sample).split('.json')[0] + 's'
 
     try:
         col = exp_ns.get_collection(col_name)
     except jam.exceptions.NotFound:
-        col = exp_ns.create_collection(col_name, 'system')
+        col = exp_ns.create_collection(col_name, user=USER)
 
     try:
-        schema = json.load(open('./schemas/{}.json'.format(col_name), 'r'))
+        schema = json.load(open('./schemas/{}.json'.format(col_name.rstrip('s')), 'r'))
     except OSError:
         print("No schema file found for {}, skipping".format(col_name))
     else:
-        exp_ns.update(col_name, [{'op': 'add', 'path': '/schema', 'value': schema}], 'system')
+        exp_ns.update(col_name, [{'op': 'add', 'path': '/schema', 'value': schema}], USER)
 
     try:
-        col_permissions = getattr(permissions, col_name)
+        col_permissions = getattr(permissions, col_name.rstrip('s'))
     except AttributeError as e:
         print("No permissions found for collection {}, skipping".format(col_name))
         pass
@@ -87,7 +66,7 @@ for sample in glob('./dev/data/*.json'):
                 {
                     'op': 'add', 'path': '/permissions/{0}'.format(pair[0]), 'value': pair[1]
                 }
-            ], 'system')
+            ], '*')
 
     try:
         sample_data = json.load(open(sample, 'r'))
@@ -101,7 +80,7 @@ for sample in glob('./dev/data/*.json'):
             col.create(record.get(
                 'id',
                 str(bson.ObjectId())
-            ), record, 'system')
+            ), record, '*')
         except jam.exceptions.KeyExists:
             pass
         else:

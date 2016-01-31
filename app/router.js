@@ -7,13 +7,14 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
     this.route('login');
-    this.route('dashboard');
-    this.route('participants');
-    this.route('experiment', {
-        path: '/:experiment_id'
+    this.route('experiments', function() {
+        this.route(':experiment_id', function() {
+            this.route('edit');
+            this.route('results');
+        });
     });
+    this.route('participants');
     this.route('settings');
-    this.route('creator');
     this.route('testmodel');
 });
 
