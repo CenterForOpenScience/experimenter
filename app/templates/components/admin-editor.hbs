@@ -1,0 +1,23 @@
+<div class="admin-record">
+  <h2>A document, {{document.id}}</h2>
+  Raw document: {{document}}<br>
+  Username: {{document.username}}<br>
+  password: {{document.password}}<br>
+  First name: {{document.firstName}}<br>
+  Last name: {{document.lastName}}<br>
+
+  {{#if document.experiments}}
+    <h3>Relationships present</h3>
+      {{document.experiments}}
+  {{/if}}
+
+  <h3>History data</h3>
+    Raw history set: {{document.history}}
+    {{#each document.history as |hist|}}
+      <ul>
+        <li>{{hist}}</li>
+      </ul>
+    {{/each}}
+
+  <hr>
+</div>

@@ -50,7 +50,19 @@
     {{/if}}
   </div>
 
-{{else}}
+<aside class="main-sidebar">
+  <section class="sidebar" style="height: auto;">    
+    <div class="user-panel" style="display: flex; justify-content: center;"></div>
+    <ul class="nav sidebar-menu">
+      <li class="header">Menu</li>
+      <li> {{#link-to 'experiments'}}Experiments{{/link-to}} </li>
+      <li> {{#link-to 'participants'}}Participants{{/link-to}} </li>
+      <li> {{#link-to 'settings'}}Profile Settings{{/link-to}} </li>
+    </ul>
+  </section>
+</aside>
+
+<div class="content-wrapper" style="height: 100vh;">
   {{outlet}}
 {{/if}}
 
