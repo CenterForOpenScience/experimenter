@@ -3,31 +3,34 @@
   {{#if isExpanded}}
     <nav class="collapse navbar navbar-collapse col-xs-2">
       <div class="collapse navbar-collapse">
-        <div class="fa fa-flask fa-5x fa-align-center"></div>
-        <a class="fa fa-angle-left" {{action "toggleMenu"}}>
-        </a>
+        <div>
+          <a class="fa fa-angle-left fa-pull-right" {{action "toggleMenu"}}></a>
+        </div>
+        <div><span class="fa fa-flask fa-5x text-center"></span></div>
+        
         <ul class="nav nav-pills nav-stacked">
-          <li> {{#link-to 'dashboard'}}Dashboard{{/link-to}} </li>
-          <li> {{#link-to 'participants'}}Participants{{/link-to}} </li>
-          <li> {{#link-to 'settings'}}Profile Settings{{/link-to}} </li>
-          <li> {{#link-to 'creator'}}Create Experiment{{/link-to}} </li>
-          <li> {{#link-to 'testmodel'}}Model test page{{/link-to}} </li>
+          <li> {{#link-to 'dashboard' class="fa fa-th-list"}} Experiments{{/link-to}} </li>
+          <li> {{#link-to 'participants' class="fa fa-users"}} Participants{{/link-to}} </li>
+          <li> {{#link-to 'creator' class="fa fa-wrench"}} Create Experiment{{/link-to}} </li>
+          <li> {{#link-to 'testmodel' class="fa fa-smile-o"}} Model test page{{/link-to}} </li>
         </ul>
+        <div> {{#link-to 'settings' class="fa fa-user"}} Profile Settings{{/link-to}} </div>
       </div>
     </nav>
   {{else}}
     <nav class="collapse navbar navbar-collapse col-xs-1">
       <div class="collapse navbar-collapse" id="menu-expand">
+        <div>
+          <a class="fa fa-angle-right fa-pull-right" {{action "toggleMenu"}}></a>
+        </div>
         <div class="fa fa-flask fa-2x fa-align-center"></div>
-        <a class="fa fa-angle-right" {{action "toggleMenu"}}>
-        </a>
         <ul class="nav nav-pills nav-stacked">
-          <li class="fa fa-home"> {{#link-to 'dashboard'}}{{/link-to}} </li>
-          <li class="fa fa-users"> {{#link-to 'participants'}}{{/link-to}} </li>
-          <li class="fa fa-cog"> {{#link-to 'settings'}}{{/link-to}} </li>
-          <li class="fa fa-wrench"> {{#link-to 'creator'}}{{/link-to}} </li>
-          <li class="fa fa-smile-o"> {{#link-to 'testmodel'}}{{/link-to}} </li>
+          <li> {{#link-to 'dashboard' class="fa fa-th-list"}}{{/link-to}} </li>
+          <li> {{#link-to 'participants' class="fa fa-users"}}{{/link-to}} </li>
+          <li> {{#link-to 'creator' class="fa fa-wrench"}}{{/link-to}} </li>
+          <li> {{#link-to 'testmodel' class="fa fa-smile-o"}}{{/link-to}} </li>
         </ul>
+        <li class="fa fa-user"> {{#link-to 'settings'}}{{/link-to}} </li>
       </div>
     </nav>
   {{/if}}
