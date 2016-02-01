@@ -6,6 +6,9 @@ export default DS.Model.extend({
     username: DS.attr('string'),
     password: DS.attr('string'),
 
+    permissions: DS.attr(),
+
+    configs: DS.belongsTo('config'),
     experiments: DS.hasMany('experiment'),
-    configs: DS.belongsTo('config')
+    history: DS.hasMany('history'),
 });

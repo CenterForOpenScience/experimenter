@@ -8,5 +8,8 @@ export default DS.Model.extend({
   phone: DS.attr('phone'),
   profile: DS.attr(), // Should match config.profileSchema layout
 
+  history: DS.hasMany('history'),
+  permissions: DS.attr(),
+
   sessions: DS.hasMany('session')
 });
