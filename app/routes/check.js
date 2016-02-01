@@ -4,7 +4,11 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Em.Route.extend(AuthenticatedRouteMixin, {
     model () {
         var auth = this.get('session.data.authenticated');
-        return this.store.find('admin', 'foo'); // auth.id);
+        return this.store.findRecord('admin', auth.id);
+    },
+    afterModel () {
+        // The 'check' route should never actually run
+        this.transitionTo('experiments');
     },
     actions: {
         error (err, transition) {

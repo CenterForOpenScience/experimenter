@@ -13,6 +13,7 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, UrlTemplates, {
   host: ENV.JAMDB.url,
   namespace: 'v2',
 
+  findRecordUrlTemplate: '{+host}/{+namespace}/documents/{+jamNamespace}.{+collectionId}.{+id}',
   findAllUrlTemplate: '{+host}/{+namespace}/collections/{+jamNamespace}.{+collectionId}/documents',
   queryUrlTemplate: '{+host}/{namespace}/collections/{+jamNamespace}.{+collectionId}/_search',
 
