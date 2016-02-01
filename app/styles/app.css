@@ -1,17 +1,61 @@
 html,body,.ember-view, .container-fluid, .row
 {
-    height:100%;
+    height: 100%;
 }
 
 .col-md-6 {
-	padding-bottom:5px;
-}
-
-.navbar-collapse.collapse {
-	height:100%;
+	padding-bottom: 5px;
 }
 
 .navbar {
-	background-color: gray;
-	height:100%;
+	background-color: #606060;
+	border-top: 0px;
+	border-bottom: 0px;
+}
+
+.increase {
+	font-size: 125%;
+}
+
+#logo {
+	color: white;
+	margin-bottom: 10px;
+	padding-top: 20px;
+}
+
+#logo-title {
+	color: white;
+	margin-bottom: 30px;
+	font-size: 200%;
+}
+
+#main-navigation {
+	color: #606060;
+	background-color: #c0c0c0;
+}
+
+#main-navigation:hover {
+	background-color: white;
+	text-decoration: none;
+}
+
+a#main-navigation:hover {
+	color: orange;
+	background-color: white;
+	text-decoration: none;
+}
+
+a#sub-navigation {
+	color: white;
+	text-decoration: none;
+}
+
+a#sub-navigation:visited {
+	color: white;
+	text-decoration: none;
+}
+
+a#sub-navigation:hover {
+	color: orange;
+	text-decoration: none;
 }
