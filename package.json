@@ -39,11 +39,7 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-resolver": "^2.0.3",
-    "ember-simple-auth": "1.0.1",
-    "express": "^4.13.4",
-    "minimist": "^1.2.0",
-    "oauth": "^0.9.14",
-    "simple-oauth2": "^0.5.1"
+    "ember-simple-auth": "1.0.1"
   },
   "dependencies": {
     "exp-player": "latest"
