@@ -1,6 +1,6 @@
 <h1>A test model page</h1>
 
-<p>Display a list of records in sequence:</p>
+<p>Display a list of {{model.length}} records in sequence:</p>
 {{#each model as |doc|}}
   {{admin-editor document=doc}}
 {{/each}}
