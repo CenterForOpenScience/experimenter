@@ -1,42 +1,39 @@
-<div class="{{skin}} wrapper">
+<div class="container-fluid">
 
-<header class="main-header">
-  <!-- Logo -->
-  {{#link-to "index" class="logo"}}
-    <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>E</b> D</span>
-    <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Experimenter</b> Dashboard</span>
-  {{/link-to}}
+  {{#if isExpanded}}
+    <nav class="collapse navbar navbar-collapse col-xs-2">
+      <div class="collapse navbar-collapse">
+        <div class="fa fa-flask fa-5x fa-align-center"></div>
+        <a class="fa fa-angle-left" {{action "toggleMenu"}}>
+        </a>
+        <ul class="nav nav-pills nav-stacked">
+          <li> {{#link-to 'dashboard'}}Dashboard{{/link-to}} </li>
+          <li> {{#link-to 'participants'}}Participants{{/link-to}} </li>
+          <li> {{#link-to 'settings'}}Profile Settings{{/link-to}} </li>
+          <li> {{#link-to 'creator'}}Create Experiment{{/link-to}} </li>
+          <li> {{#link-to 'testmodel'}}Model test page{{/link-to}} </li>
+        </ul>
+      </div>
+    </nav>
+  {{else}}
+    <nav class="collapse navbar navbar-collapse col-xs-1">
+      <div class="collapse navbar-collapse" id="menu-expand">
+        <div class="fa fa-flask fa-2x fa-align-center"></div>
+        <a class="fa fa-angle-right" {{action "toggleMenu"}}>
+        </a>
+        <ul class="nav nav-pills nav-stacked">
+          <li class="fa fa-home"> {{#link-to 'dashboard'}}{{/link-to}} </li>
+          <li class="fa fa-users"> {{#link-to 'participants'}}{{/link-to}} </li>
+          <li class="fa fa-cog"> {{#link-to 'settings'}}{{/link-to}} </li>
+          <li class="fa fa-wrench"> {{#link-to 'creator'}}{{/link-to}} </li>
+          <li class="fa fa-smile-o"> {{#link-to 'testmodel'}}{{/link-to}} </li>
+        </ul>
+      </div>
+    </nav>
+  {{/if}}
 
-  <nav class="navbar navbar-static-top" role="navigation">
-    <div class="navbar-custom-menu">
-    </div>
-  </nav>
-</header>
+  <div class="content-wrapper" style="height: 100vh;">
+    {{outlet}}
+  </div>
 
-<aside class="main-sidebar">
-	<section class="sidebar" style="height: auto;">
-
-      <div class="user-panel" style="display: flex; justify-content: center;"></div>
-
-	  <ul class="nav sidebar-menu">
-	    <li class="header">Menu</li>
-	    <li> {{#link-to 'dashboard'}}Dashboard{{/link-to}} </li>
-	    <li> {{#link-to 'participants'}}Participants{{/link-to}} </li>
-      <li> {{#link-to 'settings'}}Profile Settings{{/link-to}} </li>
-      <li> {{#link-to 'creator'}}Create Experiment{{/link-to}} </li>
-      <li> {{#link-to 'testmodel'}}Model test page{{/link-to}} </li>
-	  </ul>
-	</section>
-</aside>
-
-<div class="content-wrapper" style="height: 100vh;">
-  {{outlet}}
 </div>
-
-<footer>
-  &copy;2016 Lookit, Inc.
-</footer>
-</div>
-
