@@ -1,12 +1,16 @@
 <div class="container-fluid">
 
+{{#if isNotLogin}}
   {{#if isExpanded}}
     <nav class="collapse navbar navbar-collapse col-xs-2">
       <div class="collapse navbar-collapse">
         <div>
           <a class="fa fa-angle-left fa-pull-right" {{action "toggleMenu"}}></a>
         </div>
-        <div><span class="fa fa-flask fa-5x text-center"></span></div>
+        <div>
+          <div class="fa fa-flask fa-5x text-center"></div>
+          Experimenter
+        </div>
         
         <ul class="nav nav-pills nav-stacked">
           <li> {{#link-to 'dashboard' class="fa fa-th-list"}} Experiments{{/link-to}} </li>
@@ -15,6 +19,7 @@
           <li> {{#link-to 'testmodel' class="fa fa-smile-o"}} Model test page{{/link-to}} </li>
         </ul>
         <div> {{#link-to 'settings' class="fa fa-user"}} Profile Settings{{/link-to}} </div>
+        <li class="fa fa-user" {{action 'invalidateSession'}}>Logout</li>
       </div>
     </nav>
   {{else}}
@@ -31,6 +36,7 @@
           <li> {{#link-to 'testmodel' class="fa fa-smile-o"}}{{/link-to}} </li>
         </ul>
         <li class="fa fa-user"> {{#link-to 'settings'}}{{/link-to}} </li>
+        <li class="fa fa-user" {{action 'invalidateSession'}}></li>
       </div>
     </nav>
   {{/if}}
@@ -38,5 +44,9 @@
   <div class="content-wrapper" style="height: 100vh;">
     {{outlet}}
   </div>
+
+{{else}}
+  {{outlet}}
+{{/if}}
 
 </div>
