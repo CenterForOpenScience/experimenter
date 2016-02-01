@@ -35,6 +35,13 @@ export default Ember.Mixin.create({
           }))
       };
     }
+
+    // Manually rebuild the history relationship. This can be removed upon resolution of
+    // issue with the auto-generated history link: ticket https://github.com/CenterForOpenScience/jamdb/issues/3
+    if (this.modelName !== 'history') {
+      relationships.history.links.related = 'http://localhost:1212/v2/documents/' + resourceHash.id + '/history';
+      relationships.history.links.self = relationships.history.links.related;
+    }
     return relationships;
   }
 });

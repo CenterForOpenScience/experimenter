@@ -6,6 +6,8 @@ export default DS.Model.extend({
   parameters: DS.Store(), // TODO: Nested document
   data: DS.Store(),  // TODO: Nested document
   timestamp: DS.Store('date'),
+
+  history: DS.hasMany('history'),
   permissions: DS.attr(),
 
   // JamDB requires two pieces of info to unambiguously identify a record

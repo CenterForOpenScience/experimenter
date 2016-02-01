@@ -6,6 +6,7 @@ export default DS.Model.extend({
   accountsMin: DS.attr('number'),
   accountsMax: DS.attr('number'),
   permissions: DS.attr(),
+  history: DS.hasMany('history'),
 
   administrators: DS.hasMany('administrators'),
 });

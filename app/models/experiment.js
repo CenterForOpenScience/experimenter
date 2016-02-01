@@ -7,5 +7,6 @@ export default DS.Model.extend({
   permissions: DS.attr(),
 
   administrators: DS.hasMany('administrator'),  // TODO: Is Many-to-many correct relationship type?
+  history: DS.hasMany('history'),
   sessions: DS.hasMany('session'),
 });
