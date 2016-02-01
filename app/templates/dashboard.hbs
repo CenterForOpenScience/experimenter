@@ -1,12 +1,10 @@
 <h2> Dashboard </h2>
 
-<div class="row">
-  {{#each model as |experiment|}}
-      <div class="col-md-6 large">
-        {{#link-to "experiment" experiment.id}}
-            <div><strong>{{experiment.id}}</strong>: <i> {{experiment.title}} </i></div>
-        {{/link-to}}
-          <div> {{experiment.description}} </div>
-      </div>
-  {{/each}}
-</div>
+{{#each model as |experiment|}}
+    <div class="col-md-5 large">
+      {{#link-to "experiment" experiment.id}}
+          <div><strong>{{experiment.id}}</strong>: <i> {{experiment.title}} </i></div>
+      {{/link-to}}
+        <div> {{experiment.description}} </div>
+    </div>
+{{/each}}
