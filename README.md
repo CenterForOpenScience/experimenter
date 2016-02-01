@@ -31,17 +31,20 @@ To login via OSF:
 First:
 * make sure jamdb is running, see: https://github.com/CenterForOpenScience/jamdb
 * with your jamdb virtualenv active:
-  * make sure commonregex is installed: `pip install commonregex`
-  * run `python schemas/generate.py` to generate json-schema files
   * run the setup-jam script: `python dev/setup-jam.py`
 
 This:
 - Makes the _experimenter_ namespace in jamdb.
 - Creates an _admins_ collection under the _experimenter_ namespace.
-- Configures jamdb to use the schema from `schemas/admin.json` to validate _admins_ records.
-- Adds a record 'root', with password 'password' to the _admins_ collection. This can be used to log in to the toast interface.
-- Give the 'root' user ADMIN permissions on the _experimenter_ namespace.
-- Populates the appropriate collections with the sample data in `dev/data`.
+- Configures jamdb to use the schemas from `schemas/*.json` to validate records in the corresponding collections.
+- Sets up permissions as defined in `dev/permissions.py`
+- Populates the appropriate collections with the sample data in `dev/data`. See `dev/data/admins.json` for example logins; use:
+```
+namespace=experimenter
+collection=admins
+username=<id>
+password=password
+```
 
 Then:
 * `ember server`
