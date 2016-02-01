@@ -10,11 +10,11 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, UrlTemplates, {
   authorizer: 'authorizer:osf-jwt',
 
   host: ENV.JAMDB.url,
-  namespace: 'v2',
+  namespace: 'v1/id',
 
-  findRecordUrlTemplate: '{+host}{/namespace}/documents{/jamNamespace}.{+collectionId}.{id}',
-  findAllUrlTemplate: '{+host}/{namespace}/collections{/jamNamespace}.{+collectionId}/documents',
-  queryUrlTemplate: '{+host}/{namespace}/collections{/jamNamespace}.{+collectionId}/_search',
+  findRecordUrlTemplate: '{+host}/{+namespace}/documents{/jamNamespace}.{+collectionId}.{id}',
+  findAllUrlTemplate: '{+host}/{+namespace}/collections{/jamNamespace}.{+collectionId}/documents',
+  queryUrlTemplate: '{+host}/{+namespace}/collections{/jamNamespace}.{+collectionId}/_search',
 
   createRecordUrlTemplate: '{+host}/v2/namespaces{/jamNamespace}/collections',
   // TODO: Find delete URL for JAM
