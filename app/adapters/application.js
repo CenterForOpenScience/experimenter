@@ -22,6 +22,6 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, UrlTemplates, {
 
   urlSegments: {
     collectionId: (type, id, snapshot, query) => Ember.Inflector.inflector.pluralize(type),
-    jamNamespace: () => ENV.JAMDB.namespace,
+    jamNamespace: () => ENV.JAMDB.namespace
   }
 });

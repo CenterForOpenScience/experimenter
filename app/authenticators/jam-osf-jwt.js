@@ -21,9 +21,9 @@ export default Base.extend({
                     access_token: accessToken
                 }
             }})
-        }).then(function(data) {
-            data.data.attributes.accessToken =accessToken;
-            return data.data.attributes;
+        }).then(function(res) {
+            res.data.attributes.accessToken = accessToken;
+            return res.data.attributes;
         });
     },
     authenticate(access_token, expires) {
@@ -40,9 +40,9 @@ export default Base.extend({
                     access_token
                 }
             }})
-        }).then(function(data) {
-            data.data.attributes.accessToken = access_token;
-            return data.data.attributes;
+        }).then(function(res) {
+            res.data.attributes.accessToken = access_token;
+            return res.data.attributes;
         });
     },
     invalidate(data) {
