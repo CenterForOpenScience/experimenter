@@ -8,9 +8,12 @@ import jam.auth
 
 import permissions
 
+# Regenerate json-schemas
+import generate_schemas  # noqa
+
 
 NS = 'experimenter'
-USER = 'tracked-experimenter|admin-root'
+USER = 'tracked-experimenter|admins-root'
 
 USERNAME = 'root'
 
@@ -25,19 +28,6 @@ try:
     users_col = exp_ns.create_collection('admins', USER)
 except jam.exceptions.KeyExists:
     users_col = exp_ns.get_collection('admins')
-
-try:
-    users_col.create(
-        'root', {
-            'username': USERNAME,
-            'password': '$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G',
-            'firstName': 'Victor',
-            'lastName': 'Frankenstein'
-        }, ''
-    )
-except jam.exceptions.KeyExists:
-    print('\nUser {user} already exists in the users collection'.format(user=USERNAME))
-
 
 for sample in glob('./dev/data/*.json'):
     col_name = os.path.basename(sample).split('.json')[0] + 's'
@@ -66,7 +56,7 @@ for sample in glob('./dev/data/*.json'):
                 {
                     'op': 'add', 'path': '/permissions/{0}'.format(pair[0]), 'value': pair[1]
                 }
-            ], '*')
+            ], USER)
 
     try:
         sample_data = json.load(open(sample, 'r'))
@@ -80,9 +70,20 @@ for sample in glob('./dev/data/*.json'):
             col.create(record.get(
                 'id',
                 str(bson.ObjectId())
-            ), record, '*')
+            ), record, USER)
         except jam.exceptions.KeyExists:
             pass
         else:
             n_records += 1
-    print("Created {} sample records in the {} collection".format(n_records, col_name))
+    print("Created {} sample records in the {} collection".format(n_records, col_name[:-1]))
+
+nsm.update(NS, [
+    {
+        'op': 'add', 'path': '/permissions/user-osf-*', 'value': 'ADMIN'
+    }
+], USER)
+nsm.update(NS, [
+    {
+        'op': 'add', 'path': '/permissions/tracked-experimenter|admins-*', 'value': 'ADMIN'
+    }
+], USER)
