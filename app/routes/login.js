@@ -11,7 +11,8 @@ export default Em.Route.extend(UnauthenticatedRouteMixin, {
         if (!hash.access_token) {
             return null;
         }
-        this.get('session').authenticate('authenticator:jam-osf-jwt', hash.access_token, hash.expires_in);
-        return this.transitionTo('dashboard');
+        return this.get('session').authenticate('authenticator:jam-osf-jwt', hash.access_token, hash.expires_in).then((data) => {
+            this.transitionTo('check');
+        });
     }
 });
