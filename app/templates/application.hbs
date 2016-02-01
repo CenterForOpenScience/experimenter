@@ -20,7 +20,7 @@
             <li> {{#link-to 'testmodel' class="fa fa-smile-o"}} Model test page{{/link-to}} </li>
           </ul>
           <div> {{#link-to 'settings' class="fa fa-user"}} Profile Settings{{/link-to}} </div>
-          <div><a class="fa fa-user"{{action 'invalidateSession'}}>Logout</a></div>
+          <div><a class="fa fa-sign-out"{{action 'invalidateSession'}}> Logout</a></div>
         </div>
       </nav>
       <div class="col-md-10">
@@ -40,7 +40,7 @@
             <li> {{#link-to 'testmodel' class="fa fa-smile-o"}}{{/link-to}} </li>
           </ul>
           <li class="fa fa-user"> {{#link-to 'settings'}}{{/link-to}} </li>
-          <li><a class="fa fa-user"{{action 'invalidateSession'}}></a></li>
+          <li><a class="fa fa-sign-out"{{action 'invalidateSession'}}></a></li>
         </div>
       </nav>
       <div class="col-md-11">
