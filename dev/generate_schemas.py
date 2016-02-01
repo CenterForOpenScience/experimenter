@@ -1,4 +1,3 @@
-import commonregex
 import json
 import os
 
@@ -11,10 +10,13 @@ ADMIN = {
         "id": "admin",
         "type": "object",
         "properties": {
+            "id": {
+                "id": "id",
+                "type": "string"
+            },
             "username": {
                 "id": "username",
-                "type": "string",
-                "pattern": commonregex.email.pattern
+                "type": "string"
             },
             "password": {
                 "id": "password",
@@ -230,5 +232,6 @@ ACCOUNT = {
 }
 
 for schema in (ADMIN, CONFIG, EXPERIMENT, SESSION, ACCOUNT, PROFILE):
-    with open('./{}/{}.json'.format(os.path.dirname(__file__), schema['schema']['id']), 'w') as fp:
+    with open('{}/../schemas/{}.json'.format(os.path.dirname(__file__), schema['schema']['id']), 'w') as fp:
+        print('Made schema for {}'.format(schema['schema']['id']))
         json.dump(schema, fp, indent=4, sort_keys=True)
