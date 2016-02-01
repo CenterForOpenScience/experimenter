@@ -1,61 +1,97 @@
-html,body,.ember-view, .container-fluid, .row
+html,body,.ember-view, .container-fluid
 {
     height: 100%;
 }
 
-.col-md-6 {
-	padding-bottom: 5px;
+.menu {
+	background-color: #606060;
 }
 
-.navbar {
-	background-color: #606060;
-	border-top: 0px;
-	border-bottom: 0px;
+@media (min-width: 992px) {
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: block;
+    background-color: #606060;
+  }
+}
+
+.clickable {
+	width: 100%;
+	height: 100%;
 }
 
 .increase {
 	font-size: 125%;
 }
 
-#logo {
+.logo {
 	color: white;
 	margin-bottom: 10px;
 	padding-top: 20px;
 }
 
-#logo-title {
+.logo-title {
 	color: white;
-	margin-bottom: 30px;
+	margin-bottom: 60px;
 	font-size: 200%;
+	width: 100%;
 }
 
-#main-navigation {
+.nav-divider {
+	margin-bottom: 30%;
+}
+
+.title-divider {
+	margin-bottom: 20%;
+}
+
+.logo-divider {
+	margin-bottom: 30%;
+}
+
+.main-navigation {
 	color: #606060;
 	background-color: #c0c0c0;
+	padding: 3%;
 }
 
-#main-navigation:hover {
+.main-navigation:hover {
 	background-color: white;
 	text-decoration: none;
 }
 
-a#main-navigation:hover {
+.main-navigation:active {
+	background-color: white;
+	text-decoration: none;
+}
+
+a.main-navigation:active {
+	background-color: white;
+	text-decoration: none;
+}
+
+a.main-navigation:hover {
 	color: orange;
 	background-color: white;
 	text-decoration: none;
 }
 
-a#sub-navigation {
+a.sub-navigation {
+	color: white;
+	text-decoration: none;
+	padding: 3%;
+}
+
+a.sub-navigation:visited {
 	color: white;
 	text-decoration: none;
 }
 
-a#sub-navigation:visited {
-	color: white;
-	text-decoration: none;
-}
-
-a#sub-navigation:hover {
+a.sub-navigation:hover {
 	color: orange;
 	text-decoration: none;
 }

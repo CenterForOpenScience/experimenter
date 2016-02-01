@@ -3,51 +3,57 @@
 {{#if isNotLogin}}
   <div class="row">
     {{#if isExpanded}}
-      <nav class="collapse navbar navbar-collapse col-md-3">
+      <div class="menu col-md-2">
         <div>
-          <a class="fa fa-angle-left fa-pull-right" id="sub-navigation" {{action "toggleMenu"}}></a>
+          <a class="fa fa-angle-left fa-pull-right fa-2x sub-navigation" {{action "toggleMenu"}}></a>
         </div>
-        <div class="text-center" id="logo-title">
-          <div class="fa fa-flask fa-2x" id="logo"></div>
+        <div class="text-center logo-title">
+          <div class="fa fa-flask fa-2x logo"></div>
           Experimenter
         </div>
-        
-        <div class="row" id="main-navigation">
-          {{#link-to 'experiments' class="fa fa-th-list increase" id="main-navigation"}} Experiments{{/link-to}}
+        <div class="title-divider"></div>
+        <div class="row main-navigation">
+          {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}} Experiments{{/link-to}}
         </div>
-        <div class="row" id="main-navigation">
-          {{#link-to 'participants' class="fa fa-users increase" id="main-navigation"}} Participants{{/link-to}}
+        <div class="row main-navigation">
+          {{#link-to 'participants' class="fa fa-users increase main-navigation clickable"}} Participants{{/link-to}}
         </div>
-        <div class="row" id="sub-navigation"> 
-          {{#link-to 'settings' class="fa fa-user increase" id="sub-navigation"}} My Profile{{/link-to}}
+        <div class="nav-divider"></div>
+        <div class="row sub-navigation"> 
+          {{#link-to 'settings' class="fa fa-user increase sub-navigation"}} My Profile{{/link-to}}
         </div>
-        <div class="row" id="sub-navigation">
-          <a class="fa fa-sign-out increase" id="sub-navigation" {{action 'invalidateSession'}}> Logout</a>
+        <div class="row sub-navigation">
+          <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> Logout</a>
         </div>
-      </nav>
-      <div class="col-md-9">
+      </div>
+      <div class="col-md-10 col-md-offset-2 content">
         {{outlet}}
       </div>
     {{else}}
-      <nav class="collapse navbar navbar-collapse col-md-1">
-        <div>
-          <a class="fa fa-angle-right fa-pull-right" id="sub-navigation" {{action "toggleMenu"}}></a>
+      <div class="menu col-md-1">
+        <div class="row text-center">
+          <a class="fa fa-angle-right fa-2x sub-navigation" {{action "toggleMenu"}}></a>
         </div>
-        <div class="fa fa-flask fa-3x fa-align-center text-center" id="logo-title"></div>
-        <div class="row text-center" id="main-navigation">
-          {{#link-to 'experiments' class="fa fa-th-list" id="main-navigation"}}{{/link-to}}
+        <div class="logo-divider"></div>
+        <div class="row text-center"> 
+          <span class="fa fa-flask logo-title"></span>
         </div>
-        <div class="row text-center" id="main-navigation">
-          {{#link-to 'participants' class="fa fa-users" id="main-navigation"}}{{/link-to}}
+        <div class="logo-divider"></div>
+        <div class="row text-center main-navigation">
+          {{#link-to 'experiments' class="fa fa-th-list main-navigation clickable"}}{{/link-to}}
         </div>
-        <div class="row text-center" id="sub-navigation">
-          {{#link-to 'settings' class="fa fa-user" id="sub-navigation"}}{{/link-to}}
+        <div class="row text-center main-navigation">
+          {{#link-to 'participants' class="fa fa-users main-navigation clickable"}}{{/link-to}}
         </div>
-        <div class="text-center" id="sub-navigation">
-          <a class="fa fa-sign-out" id="sub-navigation" {{action 'invalidateSession'}}></a>
+        <div class="nav-divider"></div>
+        <div class="row text-center sub-navigation">
+          {{#link-to 'settings' class="fa fa-user sub-navigation"}}{{/link-to}}
         </div>
-      </nav>
-      <div class="col-md-11">
+        <div class="text-center sub-navigation">
+          <a class="fa fa-sign-out sub-navigation" {{action 'invalidateSession'}}></a>
+        </div>
+      </div>
+      <div class="col-md-11 col-md-offset-1 content">
         {{outlet}}
       </div>
 
