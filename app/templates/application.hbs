@@ -14,10 +14,8 @@
           </div>
           
           <ul class="nav nav-pills nav-stacked">
-            <li> {{#link-to 'dashboard' class="fa fa-th-list"}} Experiments{{/link-to}} </li>
+            <li> {{#link-to 'experiments' class="fa fa-th-list"}} Experiments{{/link-to}} </li>
             <li> {{#link-to 'participants' class="fa fa-users"}} Participants{{/link-to}} </li>
-            <li> {{#link-to 'creator' class="fa fa-wrench"}} Create Experiment{{/link-to}} </li>
-            <li> {{#link-to 'testmodel' class="fa fa-smile-o"}} Model test page{{/link-to}} </li>
           </ul>
           <div> {{#link-to 'settings' class="fa fa-user"}} Profile Settings{{/link-to}} </div>
           <div><a class="fa fa-sign-out"{{action 'invalidateSession'}}> Logout</a></div>
@@ -34,10 +32,8 @@
           </div>
           <div class="fa fa-flask fa-2x fa-align-center"></div>
           <ul class="nav nav-pills nav-stacked">
-            <li> {{#link-to 'dashboard' class="fa fa-th-list"}}{{/link-to}} </li>
+            <li> {{#link-to 'experiments' class="fa fa-th-list"}}{{/link-to}} </li>
             <li> {{#link-to 'participants' class="fa fa-users"}}{{/link-to}} </li>
-            <li> {{#link-to 'creator' class="fa fa-wrench"}}{{/link-to}} </li>
-            <li> {{#link-to 'testmodel' class="fa fa-smile-o"}}{{/link-to}} </li>
           </ul>
           <li class="fa fa-user"> {{#link-to 'settings'}}{{/link-to}} </li>
           <li><a class="fa fa-sign-out"{{action 'invalidateSession'}}></a></li>
@@ -49,20 +45,7 @@
 
     {{/if}}
   </div>
-
-<aside class="main-sidebar">
-  <section class="sidebar" style="height: auto;">    
-    <div class="user-panel" style="display: flex; justify-content: center;"></div>
-    <ul class="nav sidebar-menu">
-      <li class="header">Menu</li>
-      <li> {{#link-to 'experiments'}}Experiments{{/link-to}} </li>
-      <li> {{#link-to 'participants'}}Participants{{/link-to}} </li>
-      <li> {{#link-to 'settings'}}Profile Settings{{/link-to}} </li>
-    </ul>
-  </section>
-</aside>
-
-<div class="content-wrapper" style="height: 100vh;">
+{{else}}
   {{outlet}}
 {{/if}}
 
