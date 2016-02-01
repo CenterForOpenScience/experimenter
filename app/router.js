@@ -6,7 +6,17 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+    this.route('index', {path: '/'});
+
     this.route('login');
+
+    // A post-login route that checks the current OSF user's auth
+    // against the jam API
+    this.route('check');
+    this.route('errors', function() {
+        this.route('no-account');
+    });
+
     this.route('experiments', function() {
         this.route(':experiment_id', function() {
             this.route('edit');
@@ -15,7 +25,6 @@ Router.map(function() {
     });
     this.route('participants');
     this.route('settings');
-    this.route('testmodel');
 });
 
 export default Router;
