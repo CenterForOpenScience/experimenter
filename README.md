@@ -19,6 +19,11 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
+### Install exp-player
+
+The Experimenter player (which runs the actual experiments) lives in it's own repository to support sharing of code and
+parallel development. That code, along with installation instructions can be found [here](https://github.com/samchrisinger/exp-player).
+
 ## Running / Development
 
 To login via OSF:
