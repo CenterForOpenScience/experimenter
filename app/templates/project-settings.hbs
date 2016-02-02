@@ -1,0 +1,9 @@
+<h1>Project Settings</h1>
+<!--TODO: Add permissions widget that shows permission and optionally updates entire list -->
+
+{{#each-in model.osfUsers as |userId permission|}}
+    ID: {{userId}} / Permission level: {{permission}}<br>
+    <hr>
+{{/each-in}}
+
+{{outlet}}
