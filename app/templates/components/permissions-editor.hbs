@@ -1,0 +1,33 @@
+<thead>
+  <tr>
+    <th width="5%"></th>
+    <th>User Selector</th>
+    <th>Permission Level</th>
+  </tr>
+</thead>
+<tbody>
+{{#each-in permissions as |user-selector permission|}}
+  <tr>
+    <td></td>
+    <td>{{user-selector}}</td>
+    <td>{{permission}}</td>
+  </tr>
+{{/each-in}}
+  <tr>
+    <td>
+      <button {{action 'addPermission'}} class="btn btn-xs bg-black">
+        <i class="fa fa-plus"></i>
+      </button>
+    </td>
+    <td>
+      {{input value=newPermissionSelector type="text" class="form-control"}}
+    </td>
+    <td>
+      <select onchange={{action (mut newPermissionLevel) value="target.value"}}>
+        {{#each permissionLevels as |permission|}}
+          <option>{{permission}}</option>
+        {{/each}}
+      </select>
+    </td>
+  </tr>
+</tbody>
