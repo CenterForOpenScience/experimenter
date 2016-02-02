@@ -25,9 +25,7 @@ Router.map(function() {
 
     this.route('participants');
     this.route('settings');
-
-    // TODO deleteme
-    this.route('creator');
+    this.route('project-settings');
 });
 
 export default Router;
