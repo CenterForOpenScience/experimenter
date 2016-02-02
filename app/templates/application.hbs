@@ -7,18 +7,28 @@
         <div>
           <a class="fa fa-angle-left fa-pull-right fa-2x sub-navigation" {{action "toggleMenu"}}></a>
         </div>
-        <div class="text-center logo-title">
+        <div class="text-center logo-title title-divider row">
           <div class="fa fa-flask fa-2x logo"></div>
           Experimenter
         </div>
-        <div class="title-divider"></div>
-        <div class="row main-navigation">
-          {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}} Experiments{{/link-to}}
-        </div>
-        <div class="row main-navigation">
-          {{#link-to 'participants' class="fa fa-users increase main-navigation clickable"}} Participants{{/link-to}}
-        </div>
-        <div class="nav-divider"></div>
+        {{#if isExperiments}}
+          <div class="row main-navigation selected">
+            {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable selected"}} Experiments{{/link-to}}
+          </div>
+        {{else}}
+          <div class="row main-navigation">
+            {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}} Experiments{{/link-to}}
+          </div>
+        {{/if}}
+        {{#if isParticipants}}
+          <div class="row main-navigation nav-divider selected">
+            {{#link-to 'participants' class="fa fa-users increase main-navigation clickable selected"}} Participants{{/link-to}}
+          </div>
+        {{else}}
+          <div class="row main-navigation nav-divider">
+            {{#link-to 'participants' class="fa fa-users increase main-navigation clickable"}} Participants{{/link-to}}
+          </div>
+        {{/if}}
         <div class="row sub-navigation"> 
           {{#link-to 'settings' class="fa fa-user increase sub-navigation"}} My Profile{{/link-to}}
         </div>
@@ -31,26 +41,36 @@
       </div>
     {{else}}
       <div class="menu col-md-1">
-        <div class="row text-center">
+        <div class="row text-center logo-divider">
           <a class="fa fa-angle-right fa-2x sub-navigation" {{action "toggleMenu"}}></a>
         </div>
-        <div class="logo-divider"></div>
         <div class="row text-center"> 
           <span class="fa fa-flask logo-title"></span>
         </div>
         <div class="logo-divider"></div>
-        <div class="row text-center main-navigation">
-          {{#link-to 'experiments' class="fa fa-th-list main-navigation clickable"}}{{/link-to}}
-        </div>
-        <div class="row text-center main-navigation">
-          {{#link-to 'participants' class="fa fa-users main-navigation clickable"}}{{/link-to}}
-        </div>
-        <div class="nav-divider"></div>
+        {{#if isExperiments}}
+          <div class="row text-center main-navigation selected">
+            {{#link-to 'experiments' class="fa fa-th-list main-navigation clickable increase selected"}}{{/link-to}}
+          </div>
+        {{else}}
+          <div class="row text-center main-navigation">
+            {{#link-to 'experiments' class="fa fa-th-list main-navigation clickable increase"}}{{/link-to}}
+          </div>
+        {{/if}}
+        {{#if isParticipants}}
+          <div class="row text-center main-navigation nav-divider selected">
+            {{#link-to 'participants' class="fa fa-users main-navigation clickable increase selected"}}{{/link-to}}
+          </div>
+        {{else}}
+          <div class="row text-center main-navigation nav-divider">
+            {{#link-to 'participants' class="fa fa-users main-navigation clickable increase"}}{{/link-to}}
+          </div>
+        {{/if}}
         <div class="row text-center sub-navigation">
-          {{#link-to 'settings' class="fa fa-user sub-navigation"}}{{/link-to}}
+          {{#link-to 'settings' class="fa fa-user sub-navigation increase"}}{{/link-to}}
         </div>
-        <div class="text-center sub-navigation">
-          <a class="fa fa-sign-out sub-navigation" {{action 'invalidateSession'}}></a>
+        <div class="row text-center sub-navigation">
+          <a class="fa fa-sign-out sub-navigation increase" {{action 'invalidateSession'}}></a>
         </div>
       </div>
       <div class="col-md-11 col-md-offset-1 content">

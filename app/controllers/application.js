@@ -9,6 +9,20 @@ export default Ember.Controller.extend({
 	  		return false
 	  	}
 	}),
+	isExperiments: Ember.computed('this.currentPath', function() {
+	  	if (this.currentPath === "experiments.index") {
+	  		return true
+	  	} else {
+	  		return false
+	  	}
+	}),
+	isParticipants: Ember.computed('this.currentPath', function() {
+	  	if (this.currentPath === "participants") {
+	  		return true
+	  	} else {
+	  		return false
+	  	}
+	}),
 
 	actions: {
 	    toggleMenu: function() {
