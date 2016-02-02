@@ -3,12 +3,28 @@ html,body,.ember-view, .container-fluid
     height: 100%;
 }
 
-.menu {
+.menu-expanded {
+	background-color: #606060;
+}
+
+.menu-collapsed {
 	background-color: #606060;
 }
 
 @media (min-width: 992px) {
-  .menu {
+  .menu-expanded {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: block;
+    background-color: #606060;
+  }
+}
+
+@media (min-width: 400px) {
+  .menu-collapsed {
     position: fixed;
     top: 0;
     left: 0;
@@ -31,13 +47,13 @@ html,body,.ember-view, .container-fluid
 
 .logo {
 	color: white;
-	margin-bottom: 8%;
-	padding-top: 20%;
+	margin-bottom: 16px;
+	padding-top: 40px;
 }
 
 .logo-title {
 	color: white;
-	margin-bottom: 45%;
+	margin-bottom: 80px;
 	font-size: 200%;
 	width: 100%;
 }
@@ -47,11 +63,11 @@ html,body,.ember-view, .container-fluid
 }
 
 .title-divider {
-	margin-bottom: 20%;
+	margin-bottom: 60px;
 }
 
 .logo-divider {
-	margin-bottom: 30%;
+	margin-bottom: 30px;
 }
 
 .main-navigation {
@@ -87,7 +103,7 @@ a.main-navigation:hover {
 a.sub-navigation {
 	color: white;
 	text-decoration: none;
-	padding: 3%;
+	padding: 12px;
 }
 
 a.sub-navigation:visited {
