@@ -1,3 +1,7 @@
+/*
+Manage data about one or more documents in the sessions collection
+ */
+
 import DS from 'ember-data';
 
 export default DS.Model.extend({

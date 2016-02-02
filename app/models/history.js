@@ -1,3 +1,7 @@
+/*
+Manage the history of a specified document
+ */
+
 import DS from 'ember-data';
 
 Ember.Inflector.inflector.uncountable('history');
