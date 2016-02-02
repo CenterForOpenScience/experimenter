@@ -1,10 +1,9 @@
 <h1>Project Settings</h1>
 <!--TODO: Add permissions widget that shows permission and optionally updates entire list -->
 
-{{#each-in model.osfUsers as |userId permission|}}
-    ID: {{userId}} / Permission level: {{permission}}<br>
-    <hr>
-{{/each-in}}
+
+<h2>Add administrator to project</h2>
+<p>Enter the OSF ID for the desired user, one per line.</p>
 
 {{permissions-editor model.permissions onchange=(action 'permissionsUpdated')}}
 
