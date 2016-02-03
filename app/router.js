@@ -18,11 +18,11 @@ Router.map(function() {
     });
 
     this.route('experiments', function() {
-        this.route(':experiment_id', function() {
-            this.route('edit');
-            this.route('results');
-        });
+        this.route('detail', {path: '/:experiment_id/'});
+        this.route('edit', {path: '/:experiment_id/edit/'});
+        this.route('results', {path: '/:experiment_id/results/'});
     });
+
     this.route('participants');
     this.route('settings');
     this.route('project-settings');
