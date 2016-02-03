@@ -1,3 +1,7 @@
 <h2> Participants </h2>
 
-{{models-table data=model columns=columns useFilteringByColumns=false}}
+<!-- Test how models table handles search/pagination with an expanded dataset (more accounts than the page limit for models) -->
+
+{{models-table data=model
+  columns=columns
+  useFilteringByColumns=false}}

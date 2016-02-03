@@ -3,6 +3,6 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	model(params) {
-        return this.store.findAll('account');
+        return this.store.findAll('profile');  // The fields we want in a table are profile fields, not account data
   	}
 });

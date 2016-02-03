@@ -6,14 +6,12 @@ import DS from 'ember-data';
 import JamModel from '../mixins/jam-model';
 
 export default DS.Model.extend(JamModel, {
-    // TODO: Add validators and length limits to fields for UI layer
-    firstName: DS.attr('string'),
-    lastName: DS.attr('string'),
     username: DS.attr('string'),
-    phone: DS.attr('phone'),
-    profile: DS.attr(), // Should match config.profileSchema layout
+    password: DS.attr('string'),
+
     permissions: DS.attr(),
 
     history: DS.hasMany('history'),
+    profile: DS.belongsTo('profile'),
     sessions: DS.hasMany('session')
 });
