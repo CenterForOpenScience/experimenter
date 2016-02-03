@@ -1,38 +1,87 @@
-<div class="{{skin}} wrapper">
+<div class="container-fluid">
 
-<header class="main-header">
-  <!-- Logo -->
-  {{#link-to "index" class="logo"}}
-    <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>E</b> D</span>
-    <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Experimenter</b> Dashboard</span>
-  {{/link-to}}
+{{#if isNotLogin}}
+  <div class="row">
+    {{#if isExpanded}}
+      <div class="menu-expanded col-md-2">
+        <div>
+          <a class="fa fa-angle-left fa-pull-right fa-2x sub-navigation" {{action "toggleMenu"}}></a>
+        </div>
+        <div class="text-center logo-title title-divider row">
+          <div class="fa fa-flask fa-2x logo"></div>
+          Experimenter
+        </div>
+        <!-- TODO: get rid of duplicate html -->
+        {{#if isExperiments}}
+          <div class="row main-navigation selected">
+            {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable selected"}} Experiments{{/link-to}}
+          </div>
+        {{else}}
+          <div class="row main-navigation">
+            {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}} Experiments{{/link-to}}
+          </div>
+        {{/if}}
+        {{#if isParticipants}}
+          <div class="row main-navigation nav-divider selected">
+            {{#link-to 'participants' class="fa fa-users increase main-navigation clickable selected"}} Participants{{/link-to}}
+          </div>
+        {{else}}
+          <div class="row main-navigation nav-divider">
+            {{#link-to 'participants' class="fa fa-users increase main-navigation clickable"}} Participants{{/link-to}}
+          </div>
+        {{/if}}
+        <div class="row sub-navigation"> 
+          {{#link-to 'settings' class="fa fa-user increase sub-navigation"}} My Profile{{/link-to}}
+        </div>
+        <div class="row sub-navigation">
+          <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> Logout</a>
+        </div>
+      </div>
+      <div class="col-md-10 col-md-offset-2 content">
+        {{outlet}}
+      </div>
+    {{else}}
+      <div class="menu-collapsed col-xs-1">
+        <div class="row text-center logo-divider">
+          <a class="fa fa-angle-right fa-2x sub-navigation hidden-sm hidden-xs" {{action "toggleMenu"}}></a>
+        </div>
+        <div class="row text-center logo-divider"> 
+          <span class="fa fa-flask logo-title"></span>
+        </div>
+        <!-- TODO: get rid of duplicate html -->
+        {{#if isExperiments}}
+          <div class="row text-center main-navigation selected">
+            {{#link-to 'experiments' class="fa fa-th-list main-navigation clickable increase selected"}}{{/link-to}}
+          </div>
+        {{else}}
+          <div class="row text-center main-navigation">
+            {{#link-to 'experiments' class="fa fa-th-list main-navigation clickable increase"}}{{/link-to}}
+          </div>
+        {{/if}}
+        {{#if isParticipants}}
+          <div class="row text-center main-navigation nav-divider selected">
+            {{#link-to 'participants' class="fa fa-users main-navigation clickable increase selected"}}{{/link-to}}
+          </div>
+        {{else}}
+          <div class="row text-center main-navigation nav-divider">
+            {{#link-to 'participants' class="fa fa-users main-navigation clickable increase"}}{{/link-to}}
+          </div>
+        {{/if}}
+        <div class="row text-center sub-navigation">
+          {{#link-to 'settings' class="fa fa-user sub-navigation increase"}}{{/link-to}}
+        </div>
+        <div class="row text-center sub-navigation">
+          <a class="fa fa-sign-out sub-navigation increase" {{action 'invalidateSession'}}></a>
+        </div>
+      </div>
+      <div class="col-xs-11 col-xs-offset-1 content">
+        {{outlet}}
+      </div>
 
-  <nav class="navbar navbar-static-top" role="navigation">
-    <div class="navbar-custom-menu">
-    </div>
-  </nav>
-</header>
-
-<aside class="main-sidebar">
-  <section class="sidebar" style="height: auto;">
-    <div class="user-panel" style="display: flex; justify-content: center;"></div>
-    <ul class="nav sidebar-menu">
-      <li class="header">Menu</li>
-      <li> {{#link-to 'experiments'}}Experiments{{/link-to}} </li>
-      <li> {{#link-to 'participants'}}Participants{{/link-to}} </li>
-      <li> {{#link-to 'settings'}}Profile Settings{{/link-to}} </li>
-      <li> {{#link-to "project-settings"}}Project Settings{{/link-to}} </li>
-    </ul>
-  </section>
-</aside>
-
-<div class="content-wrapper" style="height: 100vh;">
+    {{/if}}
+  </div>
+{{else}}
   {{outlet}}
-</div>
+{{/if}}
 
-<footer>
-</footer>
 </div>
-
