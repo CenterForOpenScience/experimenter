@@ -1,5 +1,3 @@
 <h2> Participants </h2>
 
-{{#each model as |participant|}}
-  {{participant-info participant=participant}}
-{{/each}}
+{{models-table data=model columns=columns useFilteringByColumns=false}}

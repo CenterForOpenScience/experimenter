@@ -26,6 +26,7 @@ Router.map(function() {
     this.route('participants');
     this.route('settings');
     this.route('project-settings');
+    this.route('testmodel');
 });
 
 export default Router;
