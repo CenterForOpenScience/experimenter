@@ -1,4 +1,5 @@
 import Ember from 'ember';
+var dasherize = Ember.String.dasherize;
 
 export default Ember.Mixin.create({
     payloadKeyFromModelName: function(modelName) {
@@ -15,4 +16,18 @@ export default Ember.Mixin.create({
         relationships.history.links.self = relationships.history.links.related;
         return relationships;
     },
+
+    extractAttributes: function(modelClass, resourceHash) {
+        // Merge meta attributes into the attributes available on model
+        var attributes = this._super(...arguments);
+        if (resourceHash.meta) {
+            modelClass.eachAttribute((key) => {
+                let attributeKey = dasherize(key);  // Unlike other payload fields, the ones in meta are dash-case
+                if (resourceHash.meta.hasOwnProperty(attributeKey)) {
+                    attributes[key] = resourceHash.meta[attributeKey];
+                }
+            });
+        }
+        return attributes;
+    }
 });
