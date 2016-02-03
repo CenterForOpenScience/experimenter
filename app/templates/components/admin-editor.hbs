@@ -12,7 +12,8 @@
   {{/if}}
 
   <h3>History data</h3>
-    Raw history set: {{document.history}}
+    <p>Raw history set: {{document.history}}</p>
+    List of history entries:
     {{#each document.history as |hist|}}
       <ul>
         <li>{{hist}}</li>
