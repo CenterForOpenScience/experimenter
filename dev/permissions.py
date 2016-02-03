@@ -3,8 +3,8 @@ from jam.auth import Permissions
 # TODO make user specific
 OSF = 'user-osf-*'
 
-ADMIN = 'tracked-experimenter|admins-*'
-PARTICIPANT = 'tracked-experimenter|accounts-*'
+ADMIN = 'jam-experimenter:admins-*'
+PARTICIPANT = 'jam-experimenter:accounts-*'
 
 config = [
     (ADMIN, Permissions.CRUD),

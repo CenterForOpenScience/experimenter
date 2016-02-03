@@ -13,7 +13,7 @@ import generate_schemas  # noqa
 
 
 NS = 'experimenter'
-USER = 'tracked-experimenter|admins-root'
+USER = 'jam-experimenter:admins-root'
 
 USERNAME = 'root'
 
@@ -84,6 +84,6 @@ nsm.update(NS, [
 ], USER)
 nsm.update(NS, [
     {
-        'op': 'add', 'path': '/permissions/tracked-experimenter|admins-*', 'value': 'ADMIN'
+        'op': 'add', 'path': '/permissions/jam-experimenter:admins-*', 'value': 'ADMIN'
     }
 ], USER)
