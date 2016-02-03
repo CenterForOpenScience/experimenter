@@ -14,13 +14,11 @@ ADMIN = {
         "properties": {
             "id": {
                 "id": "id",
-                "type": "string",
-                "pattern": USERNAME_PATTERN
+                "type": "string"
             },
             "username": {
                 "id": "username",
-                "type": "string",
-                "pattern": USERNAME_PATTERN
+                "type": "string"
             },
             "password": {
                 "id": "password",
