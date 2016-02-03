@@ -3,8 +3,9 @@ Manage data about one or more documents in the sessions collection
  */
 
 import DS from 'ember-data';
+import JamModel from '../mixins/jam-model';
 
-export default DS.Model.extend({
+export default DS.Model.extend(JamModel, {
 
   softwareVersion: DS.Store('string'),
   parameters: DS.Store(), // TODO: Nested document

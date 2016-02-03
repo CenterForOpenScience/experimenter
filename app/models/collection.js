@@ -1,8 +1,11 @@
+/*
+Manage data about a given collection
+ */
+
 import DS from 'ember-data';
+import JamModel from '../mixins/jam-model';
 
-
-// Store data about a collection
-export default DS.Model.extend({
+export default DS.Model.extend(JamModel, {
     name: function() {
       return this.get('id').split('.')[1];
     }.property(),

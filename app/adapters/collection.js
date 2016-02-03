@@ -1,6 +1,3 @@
-/*
-Manage data about a given collection
- */
 import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({

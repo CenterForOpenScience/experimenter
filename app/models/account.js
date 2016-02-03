@@ -3,8 +3,9 @@ Manage data about one or more documents in the accounts collection
  */
 
 import DS from 'ember-data';
+import JamModel from '../mixins/jam-model';
 
-export default DS.Model.extend({
+export default DS.Model.extend(JamModel, {
     // TODO: Add validators and length limits to fields for UI layer
     firstName: DS.attr('string'),
     lastName: DS.attr('string'),
