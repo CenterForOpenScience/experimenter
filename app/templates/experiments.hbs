@@ -16,9 +16,6 @@
 <hr>
 <div class="row">
   {{#each model as |experiment|}}
-      <div class="col-md-12 large">
-        <div><strong>{{experiment.id}}</strong>: <i> {{experiment.title}} </i></div>
-        <div> {{experiment.description}} </div>
-      </div>
+  		{{experiment-summary experiment=experiment}}
   {{/each}}
 </div>
