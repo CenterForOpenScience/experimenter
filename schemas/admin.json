@@ -6,6 +6,7 @@
             "experiments": {
                 "id": "experiments",
                 "items": {
+                    "pattern": "[\\w]+\\.[\\w]+\\.[\\w]+",
                     "type": "string"
                 },
                 "type": "array",

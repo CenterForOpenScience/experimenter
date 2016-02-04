@@ -23,7 +23,9 @@ Router.map(function() {
         this.route('results', {path: '/:experiment_id/results/'});
     });
 
-    this.route('participants');
+    this.route('participants', function() {
+      this.route('profile', {path: ':profile_id/'});
+    });
     this.route('settings');
     this.route('project-settings');
 });

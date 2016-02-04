@@ -7,22 +7,6 @@
                 "pattern": "^\\$2b\\$1[0-3]\\$\\S{53}$",
                 "type": "string"
             },
-            "profiles": {
-                "id": "profiles",
-                "items": {
-                    "type": "string"
-                },
-                "type": "array",
-                "uniqueItems": true
-            },
-            "sessions": {
-                "id": "sessions",
-                "items": {
-                    "type": "string"
-                },
-                "type": "array",
-                "uniqueItems": true
-            },
             "username": {
                 "id": "username",
                 "type": "string"

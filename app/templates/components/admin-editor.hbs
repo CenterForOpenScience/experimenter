@@ -1,18 +1,26 @@
 <div class="admin-record">
-  <h2>A document, {{document.id}}</h2>
+
+  <h2>Document {{document.id}} / {{document.shortId}}</h2>
   Raw document: {{document}}<br>
   Username: {{document.username}}<br>
   password: {{document.password}}<br>
   First name: {{document.firstName}}<br>
   Last name: {{document.lastName}}<br>
 
+  <h3>Relationships</h3>
   {{#if document.experiments}}
-    <h3>Relationships present</h3>
-      {{document.experiments}}
+      <ul>
+        {{#each document.experiments as |experiment|}}
+            <li>{{experiment.id}} - {{experiment.title}}</li>
+        {{/each}}
+      </ul>
+  {{else}}
+      <p>No relationships found</p>
   {{/if}}
 
   <h3>History data</h3>
-    Raw history set: {{document.history}}
+    <p>Raw history set: {{document.history}}</p>
+    List of history entries:
     {{#each document.history as |hist|}}
       <ul>
         <li>{{hist}}</li>

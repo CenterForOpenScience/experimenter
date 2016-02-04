@@ -1,19 +1,18 @@
-/*
-Manage data about one or more documents in the admin collection
- */
-
 import DS from 'ember-data';
+
 import JamModel from '../mixins/jam-model';
 
 export default DS.Model.extend(JamModel, {
     firstName: DS.attr('string'),
     lastName: DS.attr('string'),
-    username: DS.attr('string'),
-    password: DS.attr('string'),
-
+    birthday: DS.attr('date'),
     permissions: DS.attr(),
 
-    configs: DS.belongsTo('config'),
-    experiments: DS.hasMany('experiment'),
+    account: DS.belongsTo('account'),
     history: DS.hasMany('history'),
+    sessions: DS.hasMany('session'),
+
+    fullName: Ember.computed('firstName', 'lastName', function() {
+        return `${this.get('firstName')} ${this.get('lastName')}`;
+    }),
 });
