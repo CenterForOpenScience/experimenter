@@ -1,23 +1,23 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-	// queryParams: ['status'],
-	// status: null,
+	queryParams: ['active'],
+	active: null,
 
-	// filteredExperiments: Ember.computed('status', 'model', function() {
-	// 	var status = this.get('status');
-	// 	var experiments = this.get('model');
+	filteredExperiments: Ember.computed('active', 'model', function() {
+		var active = this.get('active');
+		var experiments = this.get('model');
 
-	// 	if (status) {
-	// 	  	return experiments.filterBy('status', status);
-	// 	} else {
-	// 	  	return experiments;
-	// 	}
-	// }),
+		if (active) {
+		  	return experiments.filterBy('active', active);
+		} else {
+		  	return experiments;
+		}
+	}),
 
-	// actions: {
-	//     selectStatusFilter: function(status) {
-	//       this.set('status', status);
-	//     },
-	// }
+	actions: {
+	    selectStatusFilter: function(status) {
+	      this.set('active', status);
+	    },
+	}
 });
