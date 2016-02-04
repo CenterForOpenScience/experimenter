@@ -6,6 +6,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     },
     model() {
-    	return this.store.findAll('experiment');
+    	return this.store.query('experiment', {filter: {active: 'Active'}});
+    	//return this.store.queryRecord('experiment', {"filter[title]": "Abomination of Gudul"})
+    	//return this.store.query('experiment', {filter: {title: 'Abomination of Gudul'}});
+    	//return this.store.queryRecord('experiment', { filter: { title: 'Abomination of Gudul' } })
+    	// return this.store.findAll('experiment');
     }
 });
