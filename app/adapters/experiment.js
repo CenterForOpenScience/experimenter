@@ -1,5 +1,5 @@
 import ApplicationAdapter from './application';
-import JamCollectionAdapter from '../mixins/jam-collection-adapter';
+import JamDocumentAdapter from '../mixins/jam-document-adapter';
 
-export default ApplicationAdapter.extend(JamCollectionAdapter, {
+export default ApplicationAdapter.extend(JamDocumentAdapter, {
 });

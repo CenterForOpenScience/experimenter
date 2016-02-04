@@ -2,5 +2,6 @@
     "id": "prof1",
     "firstName": "Tester",
     "lastName": "Testington",
-    "birthday": "2016-01-26T15:44:23.861094"
+    "birthday": "2016-01-26T15:44:23.861094",
+    "account": "experimenter.accounts.tester1"
 }]

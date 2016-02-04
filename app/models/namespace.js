@@ -4,11 +4,11 @@ Manage data about the shared project namespace
 
 import Ember from 'ember';
 import DS from 'ember-data';
-
+import JamModel from '../mixins/jam-model';
 
 var osfRegex = /^user-osf-([^*]{5,})$/;  // Pattern for externally validated users authenticated via OSF
 
-export default DS.Model.extend({
+export default DS.Model.extend(JamModel, {
     name: DS.attr('string'),
     permissions: DS.attr(),
     createdOn: DS.attr('date'),

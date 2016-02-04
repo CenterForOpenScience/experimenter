@@ -2,21 +2,21 @@
     "firstName": "Sam",
     "username": "x679r",
     "id": "x679r",
-    "experiments": ["test"],
+    "experiments": ["experimenter.experiments.test0", "experimenter.experiments.test2"],
     "lastName": "Chrisinger",
     "password": "$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G"
 }, {
     "firstName": "Andy",
     "username": "7bauz",
     "id": "7bauz",
-    "experiments": ["test"],
+    "experiments": ["experimenter.experiments.test2", "experimenter.experiments.test3"],
     "lastName": "Boughton",
     "password": "$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G"
 }, {
     "firstName": "Lauren",
     "username": "92jdq",
     "id": "92jdq",
-    "experiments": ["test"],
+    "experiments": ["experimenter.experiments.test3", "experimenter.experiments.test4"],
     "lastName": "Barker",
     "password": "$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G"
 }]

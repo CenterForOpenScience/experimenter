@@ -6,6 +6,8 @@ ISO_DATE_PATTERN = r'^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]
 
 USERNAME_PATTERN = r'^(\*|[^\s\-\*]+\-\*|[^\s\-\*]+\-[^\s\-\*]+\-\*|[^\s\-\*]+\-[^\s\-\*]+\-[^\s\-\*]+)$'
 
+JAM_ID_PATTERN = r'[\w]+\.[\w]+\.[\w]+'
+
 ADMIN = {
     "type": "jsonschema",
     "schema": {
@@ -39,7 +41,8 @@ ADMIN = {
                 "id": "experiments",
                 "type": "array",
                 "items": {
-                    "type": "string"
+                    "type": "string",
+                    "pattern": JAM_ID_PATTERN
                 },
                 "uniqueItems": True
             }
@@ -73,10 +76,24 @@ PROFILE = {
                 "id": "birthday",
                 "type": "string",
                 "pattern": ISO_DATE_PATTERN
+            },
+            "account": {
+                "id": "account",
+                "type": "string",
+                "pattern": JAM_ID_PATTERN
+            },
+            "sessions": {
+                "id": "sessions",
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "pattern": JAM_ID_PATTERN,
+                },
+                "uniqueItems": True
             }
         },
         "required": [
-            "firstName", "lastName", "birthday"
+            "firstName", "lastName", "birthday", "account"
         ],
         # "additionalProperties": False  // todo: re-enable
     }
@@ -209,22 +226,6 @@ ACCOUNT = {
                 "type": "string",
                 "pattern": "^\$2b\$1[0-3]\$\S{53}$"
             },
-            "profiles": {
-                "id": "profiles",
-                "type": "array",
-                "items": {
-                    "type": "string"
-                },
-                "uniqueItems": True
-            },
-            "sessions": {
-                "id": "sessions",
-                "type": "array",
-                "items": {
-                    "type": "string"
-                },
-                "uniqueItems": True
-            }
         },
         "required": [
             "password"

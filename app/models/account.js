@@ -3,17 +3,13 @@ Manage data about one or more documents in the accounts collection
  */
 
 import DS from 'ember-data';
+import JamModel from '../mixins/jam-model';
 
-export default DS.Model.extend({
-  // TODO: Add validators and length limits to fields for UI layer
-  firstName: DS.attr('string'),
-  lastName: DS.attr('string'),
-  username: DS.attr('string'),
-  phone: DS.attr('phone'),
-  profile: DS.attr(), // Should match config.profileSchema layout
+export default DS.Model.extend(JamModel, {
+    username: DS.attr('string'),
+    password: DS.attr('string'),
 
-  history: DS.hasMany('history'),
-  permissions: DS.attr(),
+    permissions: DS.attr(),
 
-  sessions: DS.hasMany('session')
+    history: DS.hasMany('history'),
 });
