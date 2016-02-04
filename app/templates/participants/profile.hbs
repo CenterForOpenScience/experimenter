@@ -1,2 +1,14 @@
-This is a page with a record
-{{outlet}}
+<!-- TODO: Add breadcrumb to parent -->
+
+<h2>{{model.fullName}}</h2>
+
+<div class="clearfix">
+    <div class="pull-left">Email address: <strong>{{model.email}}</strong></div>
+    <div class="pull-right"><strong>Last active:</strong> {{model.modifiedOn}}</div>
+</div>
+
+<hr>
+
+<h3>Experiments</h3>
+A table of experiment sessions should go here
+

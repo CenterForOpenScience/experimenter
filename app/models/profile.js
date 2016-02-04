@@ -10,6 +10,9 @@ export default DS.Model.extend(JamModel, {
 
     account: DS.belongsTo('account'),
     history: DS.hasMany('history'),
-    sessions: DS.hasMany('session')
+    sessions: DS.hasMany('session'),
 
+    fullName: Ember.computed('firstName', 'lastName', function() {
+        return `${this.get('firstName')} ${this.get('lastName')}`;
+    }),
 });
