@@ -10,5 +10,6 @@ export default DS.Model.extend(JamModel, {
       return this.get('id').split('.')[1];
     }.property(),
     permissions: DS.attr(),
+
     namespace: DS.belongsTo('namespace'),
 });
