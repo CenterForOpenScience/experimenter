@@ -12,6 +12,5 @@ export default DS.Model.extend(JamModel, {
     permissions: DS.attr(),
 
     history: DS.hasMany('history'),
-    profile: DS.belongsTo('profile'),
     sessions: DS.hasMany('session')
 });

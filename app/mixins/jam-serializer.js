@@ -38,10 +38,20 @@ export default Ember.Mixin.create({
         }
 
         for (var relName of this.relationAttrs) {
-          var relData = resourceHash.attributes[relName] || [];
-          relationships[relName] = {
-            data: relData.map(makeRel)
-          };
+            var relData = resourceHash.attributes[relName];
+            var newRel;
+            if (relData) {
+                // If no value found, assume array if plural, else singular entry. This may be fragile for some words.
+                if (Ember.Inflector.inflector.singularize(relName) === relName) {
+                    newRel = makeRel(relData);
+                } else {
+                    newRel = relData.map(relData);
+                }
+
+                relationships[relName] = {
+                    data: newRel,
+                };
+            }
         }
         return relationships;
     }
