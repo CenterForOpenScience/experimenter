@@ -21,6 +21,15 @@
                 "id": "lastName",
                 "pattern": "^\\w{3,64}",
                 "type": "string"
+            },
+            "sessions": {
+                "id": "sessions",
+                "items": {
+                    "pattern": "[\\w]+\\.[\\w]+\\.[\\w]+",
+                    "type": "string"
+                },
+                "type": "array",
+                "uniqueItems": true
             }
         },
         "required": [
