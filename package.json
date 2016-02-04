@@ -45,6 +45,7 @@
     "ember-simple-auth": "1.0.1"
   },
   "dependencies": {
-    "exp-player": "latest"
+    "exp-player": "latest",
+    "exp-models": "latest"
   }
 }
