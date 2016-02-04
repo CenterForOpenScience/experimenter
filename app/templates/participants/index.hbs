@@ -2,14 +2,7 @@
 
 <!--  TODO: Test how models table handles search/pagination with an expanded dataset (more accounts than the page limit for models) -->
 
-Raw: {{model}}<br>
-
-{{#each model as |val|}}
-    {{val}} <br>
-{{/each}}
-
-The table is broken. TODO: Fix it.
-{/{models-table data=model
+{{models-table data=model
   columns=columns
   useFilteringByColumns=false
   multipleColumnsSorting=false
