@@ -7,15 +7,6 @@ export default Ember.Mixin.create({
     modelName: null,  // Collection items specify a generic type of "documents"; specify model to use explicitly
     relationAttrs: [],  // List of field names (in JSONAPI attributes section) that contain list of relationship IDs
 
-    // Suppress fields that should not be sent to the server
-    attrs: { // TODO: This may yield warnings for history entries
-        createdOn: {serialize: false},
-        createdBy: {serialize: false},
-        modifiedOn: {serialize: false},
-        modifiedBy: {serialize: false},
-    },
-
-
     keyForAttribute: function(attr, method) {
         // Override the default ember data behavior, so that Jam can use exactly the same keys as in the model (no dasherizing)
         return attr;
@@ -45,7 +36,7 @@ export default Ember.Mixin.create({
                 if (Ember.Inflector.inflector.singularize(relName) === relName) {
                     newRel = makeRel(relData);
                 } else {
-                    newRel = relData.map(relData);
+                    newRel = relData.map(makeRel);
                 }
 
                 relationships[relName] = {

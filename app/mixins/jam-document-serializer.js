@@ -2,6 +2,14 @@ import Ember from 'ember';
 var dasherize = Ember.String.dasherize;
 
 export default Ember.Mixin.create({
+    // Suppress fields that should not be sent to the server
+    attrs: {
+        createdOn: {serialize: false},
+        createdBy: {serialize: false},
+        modifiedOn: {serialize: false},
+        modifiedBy: {serialize: false},
+    },
+
     payloadKeyFromModelName: function(modelName) {
         // JamDB expects all collections to specify JSONAPI type 'documents'
         return 'documents';
