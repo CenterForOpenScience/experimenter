@@ -4,5 +4,5 @@ import JamSerializer from '../mixins/jam-serializer';
 import JamDocumentSerializer from '../mixins/jam-document-serializer';
 
 export default DS.JSONAPISerializer.extend(JamSerializer, JamDocumentSerializer, {
-  modelName: 'config',
+    modelName: 'config',
 });

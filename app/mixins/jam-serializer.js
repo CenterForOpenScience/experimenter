@@ -8,7 +8,7 @@ export default Ember.Mixin.create({
     relationAttrs: [],  // List of field names (in JSONAPI attributes section) that contain list of relationship IDs
 
     // Suppress fields that should not be sent to the server
-    attrs: {
+    attrs: { // TODO: This may yield warnings for history entries
         createdOn: {serialize: false},
         createdBy: {serialize: false},
         modifiedOn: {serialize: false},
