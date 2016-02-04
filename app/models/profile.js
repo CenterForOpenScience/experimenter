@@ -10,4 +10,6 @@ export default DS.Model.extend(JamModel, {
 
     account: DS.belongsTo('account'),
     history: DS.hasMany('history'),
+    sessions: DS.hasMany('session')
+
 });

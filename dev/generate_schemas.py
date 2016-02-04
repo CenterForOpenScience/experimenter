@@ -81,6 +81,15 @@ PROFILE = {
                 "id": "account",
                 "type": "string",
                 "pattern": JAM_ID_PATTERN
+            },
+            "sessions": {
+                "id": "sessions",
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "pattern": JAM_ID_PATTERN,
+                },
+                "uniqueItems": True
             }
         },
         "required": [
@@ -217,14 +226,6 @@ ACCOUNT = {
                 "type": "string",
                 "pattern": "^\$2b\$1[0-3]\$\S{53}$"
             },
-            "sessions": {
-                "id": "sessions",
-                "type": "array",
-                "items": {
-                    "type": "string"
-                },
-                "uniqueItems": True
-            }
         },
         "required": [
             "password"

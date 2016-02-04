@@ -12,5 +12,4 @@ export default DS.Model.extend(JamModel, {
     permissions: DS.attr(),
 
     history: DS.hasMany('history'),
-    sessions: DS.hasMany('session')
 });
