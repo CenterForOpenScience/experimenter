@@ -5,13 +5,11 @@ export default Ember.Route.extend({
         return this.store.findRecord('profile', params.profile_id);
     },
 
-    afterModel(resolvedModel, transition) {
-        // Get all sessions associated with this profile
-        this.set('profileSessions', 'placeholder');
-    },
-
-    setupController(controller, model){
+    setupController(controller, model) {
         this._super(...arguments);
-        controller.set('profileSessions', this.get('profileSessions'));
+        this.store.findAll('experiment').then(function(res) {
+            // TODO get correct model
+            controller.set('profileSessions', res);
+        });
     }
 });
