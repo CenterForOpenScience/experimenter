@@ -42,10 +42,8 @@
     "ember-jsoneditor": "0.1.1",
     "ember-models-table": "1.5.0",
     "ember-resolver": "^2.0.3",
-    "ember-simple-auth": "1.0.1"
-  },
-  "dependencies": {
-    "exp-player": "latest",
-    "exp-models": "latest"
+    "ember-simple-auth": "1.0.1",
+    "exp-player": "file:./ext/exp-addons/exp-player",
+    "exp-models": "file:./ext/exp-addons/exp-models"
   }
 }
