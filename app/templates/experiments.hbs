@@ -10,13 +10,13 @@
 	<button class="btn btn-default" {{action "selectStatusFilter" "null"}}>All</button>
 </div>
 <div class="row">
-	<div class="col-xs-8"><strong>Title </strong><i class="fa fa-sort"></i></div>
-	<div class="col-xs-2 text-center"><strong>Begin Date </strong><i class="fa fa-sort"></i></div>
-	<div class="col-xs-2 text-center"><strong>End Date </strong><i class="fa fa-sort"></i></div>
+	<div class="col-xs-8" {{action "selectSortingMethod" "title"}}><strong>Title </strong><i class="fa fa-sort"></i></div>
+	<div class="col-xs-2 text-center" {{action "selectSortingMethod" "beginDate"}}><strong>Begin Date </strong><i class="fa fa-sort"></i></div>
+	<div class="col-xs-2 text-center" {{action "selectSortingMethod" "endDate"}}><strong>End Date </strong><i class="fa fa-sort"></i></div>
 </div>
 <hr>
 <div class="row results">
-  {{#each model as |experiment|}}
-  		{{experiment-summary experiment=experiment}}
+  {{#each sortedExperiments as |experiment|}}
+  	{{experiment-summary experiment=experiment}}
   {{/each}}
 </div>
