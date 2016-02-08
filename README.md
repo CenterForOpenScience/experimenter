@@ -19,13 +19,21 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
-### Install exp-player
+### Install submodule dependencies
 
-The Experimenter player (which runs the actual experiments) lives in it's own repository to support sharing of code and parallel development. See: https://github.com/CenterForOpenScience/exp-addons/tree/develop/exp-player
+```bash
+cd lib
+git submodule init
+git submodule update
+```
 
-### Install exp-models
+#### Addons development
 
-See: https://github.com/CenterForOpenScience/exp-addons/tree/develop/exp-models
+The exp-player and exp-models addons live in the lib directory. This is Ember's conventional place
+for putting in-repo-addons (see package.json also). If you need to develop on either of the exp-*
+addons, simply do your work in the submodule directory (lib/exp-<name>) and when you're ready commit
+and push the changes like usual.
+
 
 ## Running / Development
 
