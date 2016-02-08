@@ -14,6 +14,7 @@ Router.map(function() {
     // against the jam API
     this.route('check');
     this.route('errors', function() {
+        this.route('generic');
         this.route('no-account');
     });
 
