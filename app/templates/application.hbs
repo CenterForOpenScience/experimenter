@@ -12,24 +12,12 @@
           Experimenter
         </div>
         <!-- TODO: get rid of duplicate html -->
-        {{#if (route-matches currentRouteName 'experiments')}}
-          <div class="row main-navigation selected">
-            {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable selected"}} Experiments{{/link-to}}
-          </div>
-        {{else}}
-          <div class="row main-navigation">
+          <div class="row main-navigation {{if (route-matches currentRouteName 'experiments') 'selected'}}">
             {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}} Experiments{{/link-to}}
           </div>
-        {{/if}}
-        {{#if (route-matches currentRouteName 'participants.index')}}
-          <div class="row main-navigation nav-divider selected">
+          <div class="row main-navigation nav-divider {{if (route-matches currentRouteName 'participants') 'selected'}}">
             {{#link-to 'participants' class="fa fa-users increase main-navigation clickable selected"}} Participants{{/link-to}}
           </div>
-        {{else}}
-          <div class="row main-navigation nav-divider">
-            {{#link-to 'participants' class="fa fa-users increase main-navigation clickable"}} Participants{{/link-to}}
-          </div>
-        {{/if}}
         <div class="row sub-navigation"> 
           {{#link-to 'settings' class="fa fa-user increase sub-navigation"}} My Profile{{/link-to}}
         </div>
