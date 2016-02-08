@@ -19,25 +19,21 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
-### Install exp-player and exp-models
+### Install submodule dependencies
 
-See: https://github.com/CenterForOpenScience/exp-addons for instructions
+```bash
+cd lib
+git submodule init
+git submodule update
+```
 
 #### Addons development
 
-If your work requires that you make changes to one of the exp-addon modules you can use `npm link` for
-local development. This allows you to make changes to the code without having to push to github. To do
-this:
+The exp-player and exp-models addons live in the lib directory. This is Ember's conventional place
+for putting in-repo-addons (see package.json also). If you need to develop on either of the exp-*
+addons, simply do your work in the submodule directory (lib/exp-<name>) and when you're ready commit
+and push the changes like usual.
 
-```bash
-cd ext/exp-addons/exp-player
-npm link
-cd ../../..
-npm link exp-player
-```
-
-Any changes made in exp-player (except adding files, in which case you may need to relink the module) should
-now be automagically reflected in the consuming project.
 
 ## Running / Development
 
