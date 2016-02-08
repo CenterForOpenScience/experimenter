@@ -1,0 +1,3 @@
+[submodule "ext/exp-addons"]
+	path = ext/exp-addons
+	url = https://github.com/CenterForOpenScience/exp-addons.git

@@ -19,13 +19,25 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
-### Install exp-player
+### Install exp-player and exp-models
 
-The Experimenter player (which runs the actual experiments) lives in it's own repository to support sharing of code and parallel development. See: https://github.com/CenterForOpenScience/exp-addons/tree/develop/exp-player
+See: https://github.com/CenterForOpenScience/exp-addons for instructions
 
-### Install exp-models
+#### Addons development
 
-See: https://github.com/CenterForOpenScience/exp-addons/tree/develop/exp-models
+If your work requires that you make changes to one of the exp-addon modules you can use `npm link` for
+local development. This allows you to make changes to the code without having to push to github. To do
+this:
+
+```bash
+cd ext/exp-addons/exp-player
+npm link
+cd ../../..
+npm link exp-player
+```
+
+Any changes made in exp-player (except adding files, in which case you may need to relink the module) should
+now be automagically reflected in the consuming project.
 
 ## Running / Development
 
