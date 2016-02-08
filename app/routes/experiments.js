@@ -16,7 +16,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     		return this.store.query('experiment', {filter: params});
     	}
     	return this.store.findAll('experiment');
-    	
-    	// return this.store.query('experiment', {filter: {title: 'Abomination of Gudul'}});
     }
 });
