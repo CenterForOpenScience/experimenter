@@ -1,0 +1,45 @@
+[{
+    "id": "session1a",
+    "profileId": "experimenter.profiles.prof1",
+    "profileVersion": null,
+    "experimentId": "experimenter.experiments.test0",
+    "experimentVersion": null,
+    "parameters": {},
+    "softwareVersion": null,
+    "data": {},
+    "timestamp": "2016-02-08 11:04:39.932419"
+},
+{
+    "id": "session1b",
+    "profileId": "experimenter.profiles.prof1",
+    "profileVersion": null,
+    "experimentId": "experimenter.experiments.test1",
+    "experimentVersion": null,
+    "parameters": {},
+    "softwareVersion": null,
+    "data": {},
+    "timestamp": "2016-02-08 11:04:39.932419"
+},
+{
+    "id": "session2a",
+    "profileId": "experimenter.profiles.prof2",
+    "profileVersion": null,
+    "experimentId": "experimenter.experiments.test0",
+    "experimentVersion": null,
+    "parameters": {},
+    "softwareVersion": null,
+    "data": {},
+    "timestamp": "2016-02-08 11:04:39.932419"
+},
+{
+    "id": "session2b",
+    "profileId": "experimenter.profiles.prof2",
+    "profileVersion": null,
+    "experimentId": "experimenter.experiments.test0",
+    "experimentVersion": null,
+    "parameters": {},
+    "softwareVersion": null,
+    "data": {},
+    "timestamp": "2016-02-08 11:04:39.932419"
+}
+]
