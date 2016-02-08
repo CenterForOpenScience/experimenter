@@ -1,34 +1,32 @@
 <div class="container-fluid">
-
-{{#if isNotLogin}}
-  <div class="row">
-      <div class="{{if isExpanded 'menu-expanded col-md-2' 'menu-collapsed col-xs-1' }}">
-        <div>
-          <a class="fa fa-angle-{{if isExpanded 'left' 'right'}} fa-pull-right fa-2x sub-navigation hidden-sm hidden-xs" {{action "toggleMenu"}}></a>
+  {{#if isNotLogin}}
+    <div class="row">
+        <div class="{{if isExpanded 'menu-expanded col-md-2' 'menu-collapsed col-xs-1'}}">
+          <div class="{{unless isExpanded 'row text-center logo-divider'}}">
+            <a class="fa fa-angle-{{if isExpanded 'left fa-pull-right' 'right'}} fa-2x sub-navigation hidden-sm hidden-xs" {{action "toggleMenu"}}></a>
+          </div>
+          <div class="row text-center {{if isExpanded 'logo-title title-divider' 'logo-divider'}}">
+            <div class="fa fa-flask {{if isExpanded 'fa-2x logo' 'logo-title'}}"></div>
+            {{if isExpanded 'Experimenter'}}
+          </div>
+          <div class="row main-navigation {{unless isExpanded 'text-center'}} {{if (route-matches currentRouteName 'experiments') 'selected'}}">
+            {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}}{{if isExpanded ' Experiments'}} {{/link-to}}
+          </div>
+          <div class="row main-navigation nav-divider {{unless isExpanded 'text-center'}} {{if (route-matches currentRouteName 'participants') 'selected'}}">
+            {{#link-to 'participants' class="fa fa-users increase main-navigation clickable selected"}} {{if isExpanded ' Participants'}}{{/link-to}}
+          </div>
+          <div class="row sub-navigation {{unless isExpanded 'text-center'}}"> 
+            {{#link-to 'settings' class="fa fa-user increase sub-navigation"}} {{if isExpanded ' My Profile'}}{{/link-to}}
+          </div>
+          <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
+            <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
+          </div>
         </div>
-        <div class="text-center logo-title title-divider row">
-          <div class="fa fa-flask fa-2x logo"></div>
-          Experimenter
-        </div>
-        <div class="row main-navigation {{if (route-matches currentRouteName 'experiments') 'selected'}}">
-          {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}}{{if isExpanded ' Experiments'}} {{/link-to}} 
-        </div>
-        <div class="row main-navigation nav-divider {{if (route-matches currentRouteName 'participants') 'selected'}}">
-          {{#link-to 'participants' class="fa fa-users increase main-navigation clickable selected"}} Participants{{/link-to}}
-        </div>
-        <div class="row sub-navigation"> 
-          {{#link-to 'settings' class="fa fa-user increase sub-navigation"}} My Profile{{/link-to}}
-        </div>
-        <div class="row sub-navigation">
-          <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> Logout</a>
-        </div>
-      </div>
-      <div class="{{if isExpanded 'col-md-10 col-md-offset-2' 'col-xs-11 col-xs-offset-1'}} content">
-        {{outlet}}
-      </div> 
-  </div>
-{{else}}
-  {{outlet}}
-{{/if}}
-
+        <div class="{{if isExpanded 'col-md-10 col-md-offset-2' 'col-xs-11 col-xs-offset-1'}} content">
+          {{outlet}}
+        </div> 
+    </div>
+  {{else}}
+    {{outlet}}
+  {{/if}}
 </div>
