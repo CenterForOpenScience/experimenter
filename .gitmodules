@@ -1,3 +1,6 @@
 [submodule "ext/exp-addons"]
 	path = ext/exp-addons
 	url = https://github.com/CenterForOpenScience/exp-addons.git
+[submodule "lib"]
+	path = lib
+	url = git@github.com:CenterForOpenScience/exp-addons.git
