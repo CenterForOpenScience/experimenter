@@ -19,13 +19,9 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
-### Install exp-player
+### Install exp-player and exp-models
 
-The Experimenter player (which runs the actual experiments) lives in it's own repository to support sharing of code and parallel development. See: https://github.com/CenterForOpenScience/exp-addons/tree/develop/exp-player
-
-### Install exp-models
-
-See: https://github.com/CenterForOpenScience/exp-addons/tree/develop/exp-models
+See: https://github.com/CenterForOpenScience/exp-addons for instructions
 
 ## Running / Development
 
