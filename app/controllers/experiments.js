@@ -3,31 +3,30 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 	queryParams: ['active'],
 	active: null,
-	sortingMethod: null,
-
-	sortedExperiments: Ember.computed('sortingMethod', 'model', function() {
-		var sortingMethod = this.get('sortingMethod');
-		var experiments = this.get('model');
-
-		if (sortingMethod) {
-			return experiments.sortBy('experiments', sortingMethod);
-		}
-		return experiments
+	sortProperty: 'title',
+	sortOrder: 'asc',
+	sortProperties: Ember.computed('sortProperty', 'sortOrder', function() {
+		return [`${this.get('sortProperty')}:${this.get('sortOrder')}`];
 	}),
-	// using standard ascending sort
-	// experimentTitleSorting: ['title'],
-	// sortedExperimentsTitle: Ember.computed.sort('experiments', 'experimentTitleSorting'),
-
-	// using descending sort
-	// experimentTitleSortingDesc: ['title:desc'],
-	// sortedExperimentsTitleDesc: Ember.computed.sort('experiments', 'experimentTitleSortingDesc'),
-
+	sortedExperiments: Ember.computed.sort('model', 'sortProperties'),
+	toggleOrder: function(order) {
+		if (order === 'asc') {
+    		this.set('sortOrder', 'desc'); 
+    	} else {
+    		this.set('sortOrder', 'asc');
+    	}
+	},
 	actions: {
 	    selectStatusFilter: function(status) {
 	      	this.set('active', status);
 	    },
-	    selectSortingMethod: function(sortingMethod) {
-	      	this.set('sortingMethod', sortingMethod);
+	    sortingMethod: function(sortProperty) {
+	    	if (this.get('sortProperty') === sortProperty) {
+	    		this.toggleOrder(this.get('sortOrder'));
+	    	} else {
+	    		this.set('sortOrder', 'asc');
+	    	}
+	      	this.set('sortProperty', sortProperty);
 	      	this.get('sortedExperiments');
 	    },
 	}
