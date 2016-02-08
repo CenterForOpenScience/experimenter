@@ -18,7 +18,8 @@
     "AdminLTE": "admin-lte#~2.3.2",
     "jsoneditor": "~5.1.2",
     "alpaca": "1.5.14",
-    "handlebars": "3.0.3"
+    "handlebars": "3.0.3",
+    "toastr": "^2.1.2"
   },
   "resolutions": {
     "ember": "2.2.0"
