@@ -6,13 +6,15 @@ export default Em.Route.extend({
 
   actions: {
     error (err, transition) {
-      if (ENV.environment !== 'development')
+      if (ENV.environment !== 'development') {
         this.get('toast').error(err.message, err.name);
-      else
+      } else {
+        console.error(err);
         this.get('toast').error(err.stack, err, {
           timeOut: 0,
           closeButton: true,
         });
+      }
 
       this.transitionTo('errors.generic');
     }
