@@ -1,26 +1,26 @@
 <div class="col-md-12 well">
-	<div class="row table-block">
-		<div class="col-xs-8">
-			<strong>{{experiment.title}}</strong>
-		</div>
-		<div class="col-xs-2 text-center">
-			<strong>{{moment-format experiment.beginDate 'MMMM D, YYYY'}}</strong>
-		</div>
-		<div class="col-xs-2 text-center">
-			<strong>{{moment-format experiment.endDate 'MMMM D, YYYY'}}</strong>
-		</div>
-	</div>
-	<div class="row table-block">
-		<div class="col-xs-12">
-			{{experiment.description}}
-		</div>
-	</div>
-	<div class="row table-block">
-		<div class="col-xs-2">
-			<strong>Status: </strong>{{experiment.active}}
-		</div>
-		<div class="col-xs-3">
-			<strong>Last Edited: </strong>{{moment-format experiment.lastEdited 'M/D/YYYY'}}
-		</div>
-	</div>
+  <div class="row table-block">
+    <div class="col-xs-8">
+      <strong>{{experiment.title}}</strong>
+    </div>
+    <div class="col-xs-2 text-center">
+      <strong>{{moment-format experiment.beginDate 'MMMM D, YYYY'}}</strong>
+    </div>
+    <div class="col-xs-2 text-center">
+      <strong>{{moment-format experiment.endDate 'MMMM D, YYYY'}}</strong>
+    </div>
+  </div>
+  <div class="row table-block">
+    <div class="col-xs-12">
+      {{experiment.description}}
+    </div>
+  </div>
+  <div class="row table-block">
+    <div class="col-xs-2">
+      <strong>Status: </strong>{{experiment.active}}
+    </div>
+    <div class="col-xs-3">
+      <strong>Last Edited: </strong>{{moment-format experiment.lastEdited 'M/D/YYYY'}}
+    </div>
+  </div>
 </div>
