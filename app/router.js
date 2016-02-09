@@ -25,8 +25,6 @@ Router.map(function() {
     });
     this.route('settings');
     this.route('project-settings');
-
-    this.route('testplayer');
 });
 
 export default Router;

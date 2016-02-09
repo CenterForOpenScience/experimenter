@@ -8,6 +8,11 @@
             "id": "pre-consent",
             "type": "consent",
             "body": "Hello world"
+        },
+        {
+            "id": "post-consent",
+            "type": "consent",
+            "body": "You have finished!"
         }
     ]
 }, {
@@ -99,11 +104,5 @@
     "title": "A Test Experiment",
     "description": "This is just for testing.",
     "active": true,
-    "structure": [
-        {
-            "id": "pre-consent",
-            "type": "consent",
-            "body": "Hello world"
-        }
-    ]
+    "structure": []
 }]
