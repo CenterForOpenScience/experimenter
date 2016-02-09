@@ -75,7 +75,7 @@ html,body,.ember-view, .container-fluid
 	background-color: #c0c0c0;
 }
 
-.selected {
+.selected > .fa {
 	background-color: white; 
 }
 
