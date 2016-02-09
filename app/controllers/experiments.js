@@ -3,16 +3,16 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 	queryParams: ['active', 'sortProperties', 'match'],
 	active: null,
-	order: 'asc',
 	match: '*',
 
 	sortProperty: 'title',
 	sortOrder: 'asc',
 	sortProperties: Ember.computed('sortProperty', 'sortOrder', function() {
+		debugger;
 		if (this.get('sortProperty') == null) {
 			return null
 		}
-		return [`${this.get('sortProperty')}:${this.get('sortOrder')}`];
+		return `${this.get('sortProperty')}:${this.get('sortOrder')}`;
 	}),
 	toggleOrder: function(order) {
 		if (order === 'asc') {
@@ -34,12 +34,13 @@ export default Ember.Controller.extend({
 	    		this.set('sortOrder', 'asc');
 	    	}
 	      	this.set('sortProperty', sortProperty);
+	      	this.get('sortProperties');
 	    },
 	    resetParams: function() {
 	    	this.set('active', null);
 	      	this.set('match', '*');
 	      	this.set('sortProperty', 'title');
-	      	this.set('order', 'asc');
+	      	this.set('sortOrder', 'asc');
 	    },
 	    updateSearch: function(value) {
 	    	this.set('match', value);
