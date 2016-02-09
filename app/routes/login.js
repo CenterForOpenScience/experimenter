@@ -12,7 +12,7 @@ export default Em.Route.extend(UnauthenticatedRouteMixin, {
             return null;
         }
         return this.get('session').authenticate('authenticator:jam-osf-jwt', hash.access_token, hash.expires_in).then((data) => {
-            this.transitionTo('check');
+            this.transitionTo('experiments');
         });
     }
 });

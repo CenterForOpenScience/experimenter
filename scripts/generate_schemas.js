@@ -190,8 +190,8 @@ var SESSION = {
                 "id": "softwareVersion",
                 "type": "string"  // TODO pattern? semver?
             },
-            "data": {
-                "id": "data",
+            "expData": {
+                "id": "expData",
                 "type": "object"
             },
             "timestamp": {
@@ -204,7 +204,7 @@ var SESSION = {
             "profileId", "profileVersion",
             "experimentId", "experimentVersion",
             "parameters", "softwareVersion",
-            "data", "timestamp"
+            "expData", "timestamp"
         ],
         "additionalProperties": false
     }
