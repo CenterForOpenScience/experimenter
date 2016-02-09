@@ -1,36 +1,36 @@
 {
+    "type": "jsonschema",
     "schema": {
         "id": "experiment",
+        "type": "object",
         "properties": {
-            "active": {
-                "id": "active",
-                "type": "boolean"
+            "structure": {
+                "id": "structure",
+                "type": "array",
+                "items": {
+                    "type": "object"
+                }
+            },
+            "title": {
+                "id": "title",
+                "type": "string"
             },
             "description": {
                 "id": "description",
                 "type": "string"
             },
+            "active": {
+                "id": "active",
+                "type": "boolean"
+            },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
                 "type": "object"
-            },
-            "structure": {
-                "id": "structure",
-                "items": {
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "title": {
-                "id": "title",
-                "type": "string"
             }
         },
         "required": [
             "structure",
             "active"
-        ],
-        "type": "object"
-    },
-    "type": "jsonschema"
+        ]
+    }
 }

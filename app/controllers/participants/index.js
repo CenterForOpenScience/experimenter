@@ -7,6 +7,6 @@ export default Ember.Controller.extend({
         {propertyName: 'firstName'},
         {propertyName: 'lastName'},
         {propertyName: 'modifiedOn', title: 'Last active'},  // TODO: That's not quite what this field does, but useful first approximation
-        {title: '', template: 'custom/profile-link'}
+        {title: '', template: 'table-custom/profile-link'}
     ],
 });
