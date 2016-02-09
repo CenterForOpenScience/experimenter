@@ -237,6 +237,8 @@ var ACCOUNT = {
 module.exports = function main() {
     for (var schema in [ADMIN, CONFIG, EXPERIMENT, SESSION, ACCOUNT, PROFILE]) {
         var schemaData = JSON.stringify(schema, null, 4);
-        fs.writeFile(path.dirname(__filename) + '/../schemas/{}.json', schemaData);
+        var base = path.dirname(__filename);
+        var filename = schema.schema.id;
+        fs.writeFile(`${base}/../schemas/${filename}.json`, schemaData);
     }
 };

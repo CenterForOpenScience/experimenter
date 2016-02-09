@@ -1,3 +1,4 @@
+
 var fs = require('fs');
 var Promise = require('bluebird');
 var request = require('request-promise');
@@ -144,13 +145,6 @@ COLLECTIONS = ['admin'].concat(fs
     .map(function(name) {
         return name.replace('.json', '');
     }));
-
-//NOTE: this script assumes the following commands have already been run
-// jam create experimenter
-// jam create experimenter sys
-// jam update experimenter -p "jam-experimenter:sys-root ADMIN"
-// jam userify experimenter sys
-// echo '{"password":"$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G"}' | jam create experimenter sys root
 
 authorize()
     .then(function(token) {

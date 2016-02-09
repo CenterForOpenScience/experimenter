@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "bootstrap": "node ./scripts/bootstrap.js",
+    "bootstrap": "./scripts/bootstrap.sh && node ./scripts/bootstrap.js",
     "build": "ember build",
     "start": "ember server",
     "test": "ember test"
