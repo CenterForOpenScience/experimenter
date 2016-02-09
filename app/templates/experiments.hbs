@@ -1,13 +1,13 @@
 <h2> Experiments <button class="btn btn-primary pull-right">New Experiment</button> </h2> 
 
 <div class="row text-center">
-	{{input type="text" placeholder="Filter" size="50"}}
+	{{input type="text" placeholder="Filter" size="50" enter="updateSearch" name="searchBar"}}
 </div>
 <div class="row text-center button-block">
 	<button class="btn btn-default" {{action "selectStatusFilter" "Active"}}>Active</button>
 	<button class="btn btn-default" {{action "selectStatusFilter" "Draft"}}>Draft</button>
 	<button class="btn btn-default" {{action "selectStatusFilter" "Archive"}}>Archive</button>
-	<button class="btn btn-default" {{action "selectStatusFilter" "null"}}>All</button>
+	<button class="btn btn-default" {{action "resetParams"}}>All</button>
 </div>
 <div class="row">
 	<div class="col-xs-8" {{action "sortingMethod" "title"}}><strong>Title </strong><i class="fa fa-sort"></i></div>
@@ -16,7 +16,7 @@
 </div>
 <hr>
 <div class="row results">
-  {{#each sortedExperiments as |experiment|}}
+  {{#each model as |experiment|}}
   	{{experiment-summary experiment=experiment}}
   {{/each}}
 </div>
