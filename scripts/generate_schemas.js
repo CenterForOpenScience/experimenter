@@ -1,14 +1,14 @@
-import json
-import os
+var path = require('path');
+var fs = require('fs');
 
-# h/t: https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s07.html
-ISO_DATE_PATTERN = r'^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$'
+// h/t: https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s07.html
+var ISO_DATE_PATTERN = '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$';
 
-USERNAME_PATTERN = r'^(\*|[^\s\-\*]+\-\*|[^\s\-\*]+\-[^\s\-\*]+\-\*|[^\s\-\*]+\-[^\s\-\*]+\-[^\s\-\*]+)$'
+var USERNAME_PATTERN = '^(\*|[^\s\-\*]+\-\*|[^\s\-\*]+\-[^\s\-\*]+\-\*|[^\s\-\*]+\-[^\s\-\*]+\-[^\s\-\*]+)$';
 
-JAM_ID_PATTERN = r'[\w]+\.[\w]+\.[\w]+'
+var JAM_ID_PATTERN = '[\w]+\.[\w]+\.[\w]+';
 
-ADMIN = {
+var ADMIN = {
     "type": "jsonschema",
     "schema": {
         "id": "admin",
@@ -44,19 +44,19 @@ ADMIN = {
                     "type": "string",
                     "pattern": JAM_ID_PATTERN
                 },
-                "uniqueItems": True
+                "uniqueItems": true
             }
         },
         "required": [
             "username",
             "password"
         ],
-        "additionalProperties": False
+        "additionalProperties": false
     }
-}
+};
 
-# default profile schema
-PROFILE = {
+// default profile schema
+var PROFILE = {
     "type": "jsonschema",
     "schema": {
         "id": "profile",
@@ -65,12 +65,12 @@ PROFILE = {
             "firstName": {
                 "id": "firstName",
                 "type": "string",
-                "pattern": "^\w{3,64}",
+                "pattern": "^\w{3,64}"
             },
             "lastName": {
                 "id": "lastName",
                 "type": "string",
-                "pattern": "^\w{3,64}",
+                "pattern": "^\w{3,64}"
             },
             "birthday": {
                 "id": "birthday",
@@ -87,19 +87,19 @@ PROFILE = {
                 "type": "array",
                 "items": {
                     "type": "string",
-                    "pattern": JAM_ID_PATTERN,
+                    "pattern": JAM_ID_PATTERN
                 },
-                "uniqueItems": True
+                "uniqueItems": true
             }
         },
         "required": [
             "firstName", "lastName", "birthday", "account"
-        ],
-        # "additionalProperties": False  // todo: re-enable
+        ]
+        // "additionalProperties": false  // todo: re-enable
     }
-}
+};
 
-CONFIG = {
+var CONFIG = {
     "type": "jsonschema",
     "schema": {
         "id": "config",
@@ -118,11 +118,11 @@ CONFIG = {
                 "type": "integer"
             }
         },
-        "additionalProperties": True
+        "additionalProperties": true
     }
-}
+};
 
-EXPERIMENT = {
+var EXPERIMENT = {
     "type": "jsonschema",
     "schema": {
         "id": "experiment",
@@ -155,12 +155,12 @@ EXPERIMENT = {
         "required": [
             "structure",
             "active"
-        ],
-        # "additionalProperties": False // TODO re-enable
+        ]
+        // "additionalProperties": false // TODO re-enable
     }
-}
+};
 
-SESSION = {
+var SESSION = {
     "type": "jsonschema",
     "schema": {
         "id": "session",
@@ -188,7 +188,7 @@ SESSION = {
             },
             "softwareVersion": {
                 "id": "softwareVersion",
-                "type": "string"  # TODO pattern? semver?
+                "type": "string"  // TODO pattern? semver?
             },
             "expData": {
                 "id": "expData",
@@ -206,35 +206,39 @@ SESSION = {
             "parameters", "softwareVersion",
             "expData", "timestamp"
         ],
-        "additionalProperties": False
+        "additionalProperties": false
     }
-}
+};
 
-ACCOUNT = {
+var ACCOUNT = {
     "type": "jsonschema",
     "schema": {
         "id": "account",
         "type": "object",
         "properties": {
-            "username": {  # TODO can this be an id?
+            "username": {  // TODO can this be an id?
                 "id": "username",
-                "type": "string",
-                # "pattern": commonregex.email.pattern
+                "type": "string"
+                // # "pattern": commonregex.email.pattern
             },
             "password": {
                 "id": "password",
                 "type": "string",
                 "pattern": "^\$2b\$1[0-3]\$\S{53}$"
-            },
+            }
         },
         "required": [
             "password"
-        ],
-        # "additionalProperties": False
+        ]
+        // "additionalProperties": false
     }
-}
+};
 
-for schema in (ADMIN, CONFIG, EXPERIMENT, SESSION, ACCOUNT, PROFILE):
-    with open('{}/../schemas/{}.json'.format(os.path.dirname(__file__), schema['schema']['id']), 'w') as fp:
-        print('Made schema for {}'.format(schema['schema']['id']))
-        json.dump(schema, fp, indent=4, sort_keys=True)
+module.exports = function main() {
+    [ADMIN, CONFIG, EXPERIMENT, SESSION, ACCOUNT, PROFILE].forEach(function(schema) {
+        var schemaData = JSON.stringify(schema, null, 4);
+        var base = path.dirname(__filename);
+        var filename = schema.schema.id;
+        fs.writeFile(`${base}/../schemas/${filename}.json`, schemaData);
+    });
+};

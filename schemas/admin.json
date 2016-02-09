@@ -1,46 +1,46 @@
 {
+    "type": "jsonschema",
     "schema": {
-        "additionalProperties": false,
         "id": "admin",
+        "type": "object",
         "properties": {
-            "experiments": {
-                "id": "experiments",
-                "items": {
-                    "pattern": "[\\w]+\\.[\\w]+\\.[\\w]+",
-                    "type": "string"
-                },
-                "type": "array",
-                "uniqueItems": true
-            },
-            "firstName": {
-                "id": "firstName",
-                "pattern": "^(?:[\\w\\.]){3,60}",
-                "type": "string"
-            },
             "id": {
                 "id": "id",
-                "type": "string"
-            },
-            "lastName": {
-                "id": "lastName",
-                "pattern": "^(?:[\\w\\.]){3,60}",
-                "type": "string"
-            },
-            "password": {
-                "id": "password",
-                "pattern": "^\\$2b\\$1[0-3]\\$\\S{53}$",
                 "type": "string"
             },
             "username": {
                 "id": "username",
                 "type": "string"
+            },
+            "password": {
+                "id": "password",
+                "type": "string",
+                "pattern": "^$2b$1[0-3]$S{53}$"
+            },
+            "firstName": {
+                "id": "firstName",
+                "type": "string",
+                "pattern": "^(?:[w.]){3,60}"
+            },
+            "lastName": {
+                "id": "lastName",
+                "type": "string",
+                "pattern": "^(?:[w.]){3,60}"
+            },
+            "experiments": {
+                "id": "experiments",
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "pattern": "[w]+.[w]+.[w]+"
+                },
+                "uniqueItems": true
             }
         },
         "required": [
             "username",
             "password"
         ],
-        "type": "object"
-    },
-    "type": "jsonschema"
+        "additionalProperties": false
+    }
 }
