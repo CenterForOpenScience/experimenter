@@ -3,8 +3,8 @@
         "additionalProperties": false,
         "id": "session",
         "properties": {
-            "data": {
-                "id": "data",
+            "expData": {
+                "id": "expData",
                 "type": "object"
             },
             "experimentId": {
@@ -44,7 +44,7 @@
             "experimentVersion",
             "parameters",
             "softwareVersion",
-            "data",
+            "expData",
             "timestamp"
         ],
         "type": "object"
