@@ -46,8 +46,7 @@ To login via OSF:
 
 First:
 * make sure jamdb is running, see: https://github.com/CenterForOpenScience/jamdb
-* with your jamdb virtualenv active:
-  * run the setup-jam script: `python dev/setup-jam.py`
+* then: `npm run bootstrap`
 
 This:
 - Makes the _experimenter_ namespace in jamdb.
