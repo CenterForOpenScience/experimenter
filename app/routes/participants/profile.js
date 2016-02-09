@@ -2,6 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
     model(params) {
-        return this.store.findRecord('profile', params.profile_id);
+        return Ember.RSVP.hash(
+            {
+                'profile': this.store.findRecord('profile', params.profile_id),
+                'sessions': this.store.query('session',
+                    {filter: {profile: params.profile_id}}),
+            });
     }
 });

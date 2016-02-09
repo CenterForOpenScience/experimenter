@@ -1,14 +1,18 @@
 <!-- TODO: Add breadcrumb to parent -->
 
-<h2>{{model.fullName}}</h2>
+<h2>{{model.profile.fullName}}</h2>
 
 <div class="clearfix">
-    <div class="pull-left">Email address: <strong>{{model.email}}</strong></div>
-    <div class="pull-right"><strong>Last active:</strong> {{model.modifiedOn}}</div>
+    <div class="pull-left">Email address: <strong>{{model.profile.email}}</strong></div>
+    <div class="pull-right"><strong>Last active:</strong> {{model.profile.modifiedOn}}</div>
 </div>
 
 <hr>
 
 <h3>Experiments</h3>
-A table of experiment sessions should go here
 
+{{models-table data=model.sessions
+  columns=columns
+  useFilteringByColumns=false
+  multipleColumnsSorting=false
+  filteringIgnoreCase=true}}
