@@ -1,21 +1,21 @@
 {
+    "type": "jsonschema",
     "schema": {
         "id": "account",
+        "type": "object",
         "properties": {
-            "password": {
-                "id": "password",
-                "pattern": "^\\$2b\\$1[0-3]\\$\\S{53}$",
-                "type": "string"
-            },
             "username": {
                 "id": "username",
                 "type": "string"
+            },
+            "password": {
+                "id": "password",
+                "type": "string",
+                "pattern": "^$2b$1[0-3]$S{53}$"
             }
         },
         "required": [
             "password"
-        ],
-        "type": "object"
-    },
-    "type": "jsonschema"
+        ]
+    }
 }
