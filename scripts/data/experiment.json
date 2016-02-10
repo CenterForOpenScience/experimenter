@@ -7,12 +7,16 @@
         {
             "id": "pre-consent",
             "type": "consent",
-            "body": "Hello world"
+            "title": "Pre Consent Form",
+            "body": "Do you agree to begin the experiment?",
+            "consentLabel": "I strongly agree"
         },
         {
             "id": "post-consent",
             "type": "consent",
-            "body": "You have finished!"
+            "title": "Final Notice of Consent",
+            "body": "Do you agree to finish the experiment?",
+            "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
         }
     ]
 }, {
