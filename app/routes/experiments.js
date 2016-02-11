@@ -2,10 +2,18 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-    beforeModel() {
-
-    },
-    model() {
-
-    }
+    queryParams: {
+    	active: {
+	    	refreshModel: true
+	    },
+        sort: {
+            refreshModel: true
+        },
+        q: {
+            refreshModel: true
+        },
+        match: {
+            refreshModel: true
+        }
+	}
 });
