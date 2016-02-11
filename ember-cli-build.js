@@ -6,7 +6,12 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
       'ember-bootstrap': {
           'importBootstrapTheme': true
-      }
+      },
+      sassOptions: {
+        includePaths: [
+            'app/styles'
+        ]
+    }
   });
 
   app.import('bower_components/lodash/lodash.js');
@@ -27,8 +32,6 @@ module.exports = function(defaults) {
   app.import('bower_components/font-awesome/fonts/fontawesome-webfont.woff', {destDir: 'fonts'});
   app.import('bower_components/font-awesome/fonts/fontawesome-webfont.woff2', {destDir: 'fonts'});
   app.import('bower_components/font-awesome/fonts/FontAwesome.otf', {destDir: 'fonts'});
-
-  app.import('app/styles/experiment.css');
 
   // Use `app.import` to add additional libraries to the generated
   // output files.
