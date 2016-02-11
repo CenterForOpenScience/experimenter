@@ -1,10 +1,10 @@
 #!/bin/bash
 # For local development we need this script tp create collections in a local jamdb.
-# For deployment this will need to be run manaually.
+# For deployment this will need to be run manually.
 
-source ~/.bashrc
+#source ~/.bashrc
 
-workon `lsvirtualenv -b |grep jam`
+#workon `lsvirtualenv -b |grep jam`
 jam create experimenter
 jam create experimenter sys
 jam update experimenter -p "jam-experimenter:sys-root ADMIN"
