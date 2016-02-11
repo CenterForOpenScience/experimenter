@@ -1,28 +1,57 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    queryParams: ['active', 'sortProperties', 'match'],
+    queryParams: ['sort', 'match', 'active'],
     active: null,
     match: '*',
-    sortProperty: 'title',
-    sortOrder: 'asc',
-    sortProperties: Ember.computed('sortProperty', 'sortOrder', {
-        get(key) {
-            if (this.get('sortProperty') == null) {
-                return null
+    sort: 'title:asc',
+    sortProperty: Ember.computed('sort', {
+        get() {
+            var sort = this.get('sort');
+            if (sort) {
+                var [prop,] = sort.split(':');
+                return prop;
             }
-            return `${this.get('sortProperty')}:${this.get('sortOrder')}`;
+            else {
+                return null;
+            }
         },
-        set(key, value) {
-            var [sortProperty, sortOrder] = value.split(/\:/);
-            this.set('sortProperty', sortProperty);
-            this.set('sortOrder',  sortOrder);
-            return value;
+        set (_, value) {
+            var sort = this.get('sort');
+            if (sort) {
+                var [, order] = sort.split(':');
+                this.set('sort', `${value}:${order}`);
+            }
+            else {
+                this.set('sort', `${value}:asc`);
+            }
+        }
+    }),
+    sortOrder: Ember.computed('sort', {
+        get() {
+            var sort = this.get('sort');
+            if (sort) {
+                var [, order] = sort.split(':');
+                return order;
+            }
+            else {
+                return null;
+            }
+        },
+        set (_, value) {
+            var sort = this.get('sort');
+            if (sort) {
+                var [prop, ] = sort.split(':');
+                this.set('sort', `${prop}:${value}`);
+            }
+            else {
+                this.set('sort', `title:${value}`);
+            }
         }
     }),
     toggleOrder: function(order) {
         if (order === 'asc') {
-            this.set('sortOrder', 'desc'); 
+            this.set('sortOrder', 'desc');
         } else {
             this.set('sortOrder', 'asc');
         }
@@ -50,6 +79,6 @@ export default Ember.Controller.extend({
         updateSearch: function(value) {
             this.set('match', value);
             this.set('sortProperty', null);
-        },
+        }
     }
 });

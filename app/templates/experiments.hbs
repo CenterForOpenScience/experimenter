@@ -1,4 +1,4 @@
-<h2> Experiments <button class="btn btn-primary pull-right">New Experiment</button> </h2> 
+<h2> Experiments <button class="btn btn-primary pull-right">New Experiment</button> </h2>
 
 <div class="row text-center">
 	{{input type="text" placeholder="Filter" size="50" enter="updateSearch" name="searchBar"}}
@@ -16,7 +16,5 @@
 </div>
 <hr>
 <div class="row results">
-  {{#each model as |experiment|}}
-  	{{experiment-summary experiment=experiment}}
-  {{/each}}
+  {{outlet}}
 </div>
