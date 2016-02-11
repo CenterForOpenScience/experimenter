@@ -5,7 +5,12 @@ export default Ember.Component.extend({
     data: null,
     processData: function(data) {
         console.log(data);
-        this.set('data', data.content);
+        var dataArray = data.content;
+        var jsonData = "";
+        for (var i = 0; i < dataArray.length; i++) {
+            jsonData = jsonData + JSON.stringify(dataArray[i]._data);
+        }
+        this.set('data', jsonData);
     },
     actions: {
         loadData: function() {
