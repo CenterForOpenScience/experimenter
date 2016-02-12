@@ -1,0 +1,84 @@
+<div class="col-md-12">
+  {{#if (not editing) }}
+    <div class="row">
+      <h3> {{experiment.title}}     <button class="btn btn-default pull-right" {{ action 'toggleEditing' }}><i class="fa fa-pencil-square-o"></i> Edit Details</button> </h3>
+      <br />
+    </div>
+    <div class="row">
+      <p> {{experiment.description}} </p>
+    </div>
+    <div class="row">
+      <label>Participant Eligibility: </label> {{experiment.eligibilityString}}
+    </div>
+  {{/if}}
+  {{#if editing }}
+    <form>
+      <div class="row">
+        {{input class="increase-4" value=experiment.title}}  <button class="btn btn-success pull-right" {{action 'toggleEditing'}}><i class="fa fa-save"></i> Save Details</button>
+        <br />
+      </div>
+      <div class="row">
+        <p> {{textarea value=experiment.description class="experiment-textarea"}} </p>
+      </div>
+      <div class="row">
+        <label>Participant Eligibility: </label> {{input value=experiment.eligibilityString}}
+      </div>
+    </form>
+  {{/if}}
+  <div class="row">
+    <label>Begin Date: </label> {{moment-format experiment.beginDate 'MMMM D, YYYY'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>End Date: </label> {{moment-format experiment.endDate 'MMMM D, YYYY'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Last Edited: </label> {{moment-format experiment.lastEdited 'MMMM D, YYYY'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br />
+    <br />
+  </div>
+  <div class="row">
+    <label>Status:</label>  {{experiment.active}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {{#if (eq experiment.active 'Active')}}
+    <button class="btn btn-danger"> Stop Experiment Now </button>
+    {{/if}}
+    {{#if (eq experiment.active 'Draft') }}
+    <button class="btn btn-success"> Start Experiment Now </button>
+    {{/if}}
+    {{#if (eq experiment.active 'Archived') }}
+    <button class="btn btn-primary"> Re-run Experiment Now </button>
+    {{/if}}
+    <br />
+    <br />
+    <br />
+  </div>
+  <div class="row">
+    <div class="btn col-md-4">
+      <div class="well">
+        <center>
+          <p><i class="increase-4 fa fa-list"></i></p>
+          <h4> Build Experiment </h4>
+          <p> Add/Modify experiment components </p>
+        </center>
+      </div>
+    </div>
+    <div class="btn col-md-4">
+      <div class="well">
+        <center>
+          <p><i class="increase-4 fa fa-file-text-o"></i></p>
+          <h4> View <strong>{{experiment.sessions.length}}</strong> Responses </h4>
+          <p> Inspect responses from studies </p>
+        </center>
+      </div>
+    </div>
+    <div class="btn col-md-4">
+      <div class="well">
+        <center>
+          <p><i class="increase-4 fa fa-files-o"></i></p>
+          <h4> Clone Experiment </h4>
+          <p> Copy experiment structure and details </p>
+        </center>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-danger" disabled={{experiment.isActive}} > Delete this Experiment</button>  {{#if experiment.isActive }}&nbsp;&nbsp;You can't delete active experiments {{/if}}
+    </div>
+  </div>
+</div>
