@@ -6,7 +6,7 @@ export default Ember.Route.extend({
             {
                 'profile': this.store.findRecord('profile', params.profile_id),
                 'sessions': this.store.query('session',
-                    {filter: {profile: params.profile_id}}),
+                    {filter: {profileId: params.profile_id}}),
             });
     }
 });

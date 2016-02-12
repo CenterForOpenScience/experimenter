@@ -172,16 +172,16 @@ var SESSION = {
         "id": "session",
         "type": "object",
         "properties": {
-            "profile": {
-                "id": "profile",
+            "profileId": {
+                "id": "profileId",
                 "type": "string"
             },
             "profileVersion": {
                 "id": "profileVersion",
                 "type": "string"
             },
-            "experiment": {
-                "id": "experiment",
+            "experimentId": {
+                "id": "experimentId",
                 "type": "string"
             },
             "experimentVersion": {
@@ -207,8 +207,8 @@ var SESSION = {
             }
         },
         "required": [
-            "profile", "profileVersion",
-            "experiment", "experimentVersion",
+            "profileId", "profileVersion",
+            "experimentId", "experimentVersion",
             "parameters", "softwareVersion",
             "expData", "timestamp"
         ],
