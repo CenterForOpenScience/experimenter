@@ -4,13 +4,6 @@
         "id": "experiment",
         "type": "object",
         "properties": {
-            "structure": {
-                "id": "structure",
-                "type": "array",
-                "items": {
-                    "type": "object"
-                }
-            },
             "title": {
                 "id": "title",
                 "type": "string"
@@ -22,6 +15,28 @@
             "active": {
                 "id": "active",
                 "type": "boolean"
+            },
+            "beginDate": {
+                "id": "beginDate",
+                "format": "date-time",
+                "type": "string"
+            },
+            "endDate": {
+                "id": "endDate",
+                "format": "date-time",
+                "type": "string"
+            },
+            "lastEdited": {
+                "id": "lastEdited",
+                "format": "date-time",
+                "type": "string"
+            },
+            "structure": {
+                "id": "structure",
+                "type": "array",
+                "items": {
+                    "type": "object"
+                }
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",

@@ -23,15 +23,6 @@
                 "id": "account",
                 "type": "string",
                 "pattern": "[w]+.[w]+.[w]+"
-            },
-            "sessions": {
-                "id": "sessions",
-                "type": "array",
-                "items": {
-                    "type": "string",
-                    "pattern": "[w]+.[w]+.[w]+"
-                },
-                "uniqueItems": true
             }
         },
         "required": [

@@ -1,6 +1,6 @@
 #!/bin/bash
 # For local development we need this script tp create collections in a local jamdb.
-# For deployment this will need to be run manaually.
+# For deployment this will need to be run manually.
 
 source ~/.bashrc
 

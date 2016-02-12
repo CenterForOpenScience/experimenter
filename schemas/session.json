@@ -4,16 +4,16 @@
         "id": "session",
         "type": "object",
         "properties": {
-            "profileId": {
-                "id": "profileId",
+            "profile": {
+                "id": "profile",
                 "type": "string"
             },
             "profileVersion": {
                 "id": "profileVersion",
                 "type": "string"
             },
-            "experimentId": {
-                "id": "experimentId",
+            "experiment": {
+                "id": "experiment",
                 "type": "string"
             },
             "experimentVersion": {
@@ -39,9 +39,9 @@
             }
         },
         "required": [
-            "profileId",
+            "profile",
             "profileVersion",
-            "experimentId",
+            "experiment",
             "experimentVersion",
             "parameters",
             "softwareVersion",
