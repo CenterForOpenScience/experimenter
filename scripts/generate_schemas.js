@@ -150,18 +150,13 @@ var SESSION = {
             "expData": {
                 "id": "expData",
                 "type": "object"
-            },
-            "timestamp": {
-                "id": "timestamp",
-                "type": "string",
-                "pattern": ISO_DATE_PATTERN
             }
         },
         "required": [
             "profileId", "profileVersion",
             "experimentId", "experimentVersion",
             "parameters", "softwareVersion",
-            "expData", "timestamp"
+            "expData"
         ],
         "additionalProperties": false
     }
