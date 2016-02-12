@@ -6,40 +6,6 @@ var ISO_DATE_PATTERN = '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1
 
 var JAM_ID_PATTERN = '[\w]+\.[\w]+\.[\w]+';
 
-// default profile schema
-var PROFILE = {
-    "type": "jsonschema",
-    "schema": {
-        "id": "profile",
-        "type": "object",
-        "properties": {
-            "firstName": {
-                "id": "firstName",
-                "type": "string",
-                "pattern": "^\w{3,64}"
-            },
-            "lastName": {
-                "id": "lastName",
-                "type": "string",
-                "pattern": "^\w{3,64}"
-            },
-            "birthday": {
-                "id": "birthday",
-                "type": "string",
-                "pattern": ISO_DATE_PATTERN
-            },
-            "account": {
-                "id": "account",
-                "type": "string",
-                "pattern": JAM_ID_PATTERN
-            },
-        },
-        "required": [
-            "firstName", "lastName", "birthday", "account"
-        ]
-        // "additionalProperties": false  // todo: re-enable
-    }
-};
 
 var CONFIG = {
     "type": "jsonschema",
@@ -125,7 +91,8 @@ var SESSION = {
         "properties": {
             "profileId": {
                 "id": "profileId",
-                "type": "string"
+                "type": "string",
+                "pattern": JAM_ID_PATTERN,
             },
             "profileVersion": {
                 "id": "profileVersion",
@@ -133,7 +100,8 @@ var SESSION = {
             },
             "experimentId": {
                 "id": "experimentId",
-                "type": "string"
+                "type": "string",
+                "pattern": JAM_ID_PATTERN,
             },
             "experimentVersion": {
                 "id": "experimentVersion",
@@ -163,31 +131,53 @@ var SESSION = {
 };
 
 var ACCOUNT = {
-    "type": "jsonschema",
+    definitions: {
+        "profile": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "pattern": "^\w{3,64}"
+                },
+                "lastName": {
+                    "type": "string",
+                    "pattern": "^\w{3,64}"
+                },
+                "birthday": {
+                    "type": "string",
+                    "pattern": ISO_DATE_PATTERN
+                },
+            },
+            "required": ["firstName", "lastName", "birthday"]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "schema": {
         "id": "account",
         "type": "object",
         "properties": {
             "username": {  // TODO can this be an id?
-                "id": "username",
                 "type": "string"
                 // # "pattern": commonregex.email.pattern
             },
             "password": {
-                "id": "password",
                 "type": "string",
                 "pattern": "^\$2b\$1[0-3]\$\S{53}$"
+            },
+            "profiles": {
+                "type": "array",  // Could also do this as an object, as long as keys were guaranteed unique
+                "items": {
+                    "$ref": "#/definitions/profile"
+                }
             }
         },
-        "required": [
-            "password"
-        ]
+        "required": ["username", "password"]
         // "additionalProperties": false
     }
 };
 
 module.exports = function main() {
-    [CONFIG, EXPERIMENT, SESSION, ACCOUNT, PROFILE].forEach(function(schema) {
+    [CONFIG, EXPERIMENT, SESSION, ACCOUNT].forEach(function(schema) {
         var schemaData = JSON.stringify(schema, null, 4);
         var base = path.dirname(__filename);
         var filename = schema.schema.id;

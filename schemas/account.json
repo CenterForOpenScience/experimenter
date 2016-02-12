@@ -1,20 +1,49 @@
 {
-    "type": "jsonschema",
+    "definitions": {
+        "profile": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "pattern": "^w{3,64}"
+                },
+                "lastName": {
+                    "type": "string",
+                    "pattern": "^w{3,64}"
+                },
+                "birthday": {
+                    "type": "string",
+                    "pattern": "^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
+                }
+            },
+            "required": [
+                "firstName",
+                "lastName",
+                "birthday"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "schema": {
         "id": "account",
         "type": "object",
         "properties": {
             "username": {
-                "id": "username",
                 "type": "string"
             },
             "password": {
-                "id": "password",
                 "type": "string",
                 "pattern": "^$2b$1[0-3]$S{53}$"
+            },
+            "profiles": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/profile"
+                }
             }
         },
         "required": [
+            "username",
             "password"
         ]
     }
