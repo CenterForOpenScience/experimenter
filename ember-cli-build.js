@@ -6,7 +6,12 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
       'ember-bootstrap': {
           'importBootstrapTheme': true
-      }
+      },
+      sassOptions: {
+        includePaths: [
+            'app/styles'
+        ]
+    }
   });
 
   app.import('bower_components/lodash/lodash.js');
