@@ -1,6 +1,6 @@
 [{
     "id": "session1a",
-    "profileId": "experimenter.profiles.prof1",
+    "profileId": "tester1.prof1",
     "profileVersion": null,
     "experimentId": "experimenter.experiments.test0",
     "experimentVersion": null,
@@ -11,7 +11,7 @@
 },
 {
     "id": "session1b",
-    "profileId": "experimenter.profiles.prof1",
+    "profileId": "tester1.prof1",
     "profileVersion": null,
     "experimentId": "experimenter.experiments.test1",
     "experimentVersion": null,
@@ -22,7 +22,7 @@
 },
 {
     "id": "session2a",
-    "profileId": "experimenter.profiles.prof2",
+    "profileId": "tester1.prof2",
     "profileVersion": null,
     "experimentId": "experimenter.experiments.test0",
     "experimentVersion": null,
@@ -32,7 +32,7 @@
 },
 {
     "id": "session2b",
-    "profileId": "experimenter.profiles.prof2",
+    "profileId": "tester1.prof2",
     "profileVersion": null,
     "experimentId": "experimenter.experiments.test0",
     "experimentVersion": null,

@@ -2,5 +2,24 @@
     "id": "tester1",
     "username": "tester1",
     "password": "$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G",
-    "sessions": []
+    "profiles": [
+        {
+            "id": "tester1.prof1",
+            "firstName": "Tester",
+            "lastName": "Testington",
+            "birthday": "2016-01-26T15:44:23.861094"
+        },
+        {
+            "id": "tester1.prof2",
+            "firstName": "Tess",
+            "lastName": "Ting",
+            "birthday": "2014-01-26T15:44:23.861094"
+        },
+        {
+            "id": "tester1.prof3",
+            "firstName": "Sam",
+            "lastName": "Pull",
+            "birthday": "2011-01-26T15:44:23.861094"
+        }
+    ]
 }]

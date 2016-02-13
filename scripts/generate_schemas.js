@@ -135,6 +135,9 @@ var ACCOUNT = {
         "profile": {
             "type": "object",
             "properties": {
+                "profileId": {
+                    "type": "string"
+                },
                 "firstName": {
                     "type": "string",
                     "pattern": "^\w{3,64}"

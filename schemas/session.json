@@ -6,7 +6,8 @@
         "properties": {
             "profileId": {
                 "id": "profileId",
-                "type": "string"
+                "type": "string",
+                "pattern": "[w]+.[w]+.[w]+"
             },
             "profileVersion": {
                 "id": "profileVersion",
@@ -14,7 +15,8 @@
             },
             "experimentId": {
                 "id": "experimentId",
-                "type": "string"
+                "type": "string",
+                "pattern": "[w]+.[w]+.[w]+"
             },
             "experimentVersion": {
                 "id": "experimentVersion",
