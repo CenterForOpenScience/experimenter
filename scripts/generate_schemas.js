@@ -82,15 +82,6 @@ var PROFILE = {
                 "type": "string",
                 "pattern": JAM_ID_PATTERN
             },
-            "sessions": {
-                "id": "sessions",
-                "type": "array",
-                "items": {
-                    "type": "string",
-                    "pattern": JAM_ID_PATTERN
-                },
-                "uniqueItems": true
-            }
         },
         "required": [
             "firstName", "lastName", "birthday", "account"
@@ -128,13 +119,6 @@ var EXPERIMENT = {
         "id": "experiment",
         "type": "object",
         "properties": {
-            "structure": {
-                "id": "structure",
-                "type": "array",
-                "items": {
-                    "type": "object"
-                }
-            },
             "title": {
                 "id": "title",
                 "type": "string"
@@ -146,6 +130,28 @@ var EXPERIMENT = {
             "active": {
                 "id": "active",
                 "type": "boolean"
+            },
+            "beginDate": {
+                "id": "beginDate",
+                "format": "date-time",
+                "type": "string"
+            },
+            "endDate": {
+                "id": "endDate",
+                "format": "date-time",
+                "type": "string"
+            },
+            "lastEdited": {
+                "id": "lastEdited",
+                "format": "date-time",
+                "type": "string"
+            },
+            "structure": {
+                "id": "structure",
+                "type": "array",
+                "items": {
+                    "type": "object"
+                }
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
@@ -166,16 +172,16 @@ var SESSION = {
         "id": "session",
         "type": "object",
         "properties": {
-            "profileId": {
-                "id": "profileId",
+            "profile": {
+                "id": "profile",
                 "type": "string"
             },
             "profileVersion": {
                 "id": "profileVersion",
                 "type": "string"
             },
-            "experimentId": {
-                "id": "experimentId",
+            "experiment": {
+                "id": "experiment",
                 "type": "string"
             },
             "experimentVersion": {
@@ -201,8 +207,8 @@ var SESSION = {
             }
         },
         "required": [
-            "profileId", "profileVersion",
-            "experimentId", "experimentVersion",
+            "profile", "profileVersion",
+            "experiment", "experimentVersion",
             "parameters", "softwareVersion",
             "expData", "timestamp"
         ],
