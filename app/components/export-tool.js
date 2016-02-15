@@ -30,20 +30,15 @@ export default Ember.Component.extend({
     }),
     convertToFormat: function (dataArray, format) {
         if (format === "JSON") {
-            var jsonData = "";
-            
-            for (var i = 0; i < dataArray.length; i++) {
-                jsonData = jsonData + JSON.stringify(dataArray[i]);
-            }
-            return jsonData; 
+            return JSON.stringify(dataArray); 
         } else {
-            var array = typeof dataArray != 'object' ? JSON.parse(dataArray) : dataArray;
+            var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
             var str = '';
 
             for (var i = 0; i < array.length; i++) {
                 var line = '';
                 for (var index in array[i]) {
-                    if (line != '') line += ','
+                    if (line !== '') line += ','
 
                     line += array[i][index];
                 }
@@ -55,7 +50,8 @@ export default Ember.Component.extend({
     actions: {
         downloadFile: function () {
             var blob = new Blob([this.get('processedData')], {type: "text/plain;charset=utf-8"});
-            saveAs(blob, "data.txt");
+            var extension = this.get('dataFormat').toLowerCase();
+            saveAs(blob, "data." + extension);
         },
         selectDataFormat: function(dataFormat) {
           this.set('dataFormat', dataFormat);
