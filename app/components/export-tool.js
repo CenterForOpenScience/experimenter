@@ -26,6 +26,7 @@ export default Ember.Component.extend({
         }, 
         set(_, value) {
             this.set('processedData', value);
+            return value;
         }
     }),
     convertToFormat: function (dataArray, format) {
@@ -37,10 +38,14 @@ export default Ember.Component.extend({
 
             for (var i = 0; i < array.length; i++) {
                 var line = '';
-                for (var index in array[i]) {
-                    if (line !== '') line += ','
+                if (typeof array[i] === 'object') {
+                    for (var index in array[i]) {
+                        if (line !== '') line += ','
 
-                    line += array[i][index];
+                        line += array[i][index];
+                    }
+                } else {
+                    line += array[i];
                 }
                 str += line + '\r\n';
             }
