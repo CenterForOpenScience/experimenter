@@ -1,8 +1,8 @@
 <div class="row text-center">
   <div class="col-xs-2 col-xs-offset-5 form-goup">
     <select class="form-control">
-      <option>CSV</option>
       <option>JSON</option>
+      <option>CSV</option>
     </select>
   </div>
 </div>
@@ -10,5 +10,5 @@
   {{textarea cols="80" rows="6" value=processedData}}
 </div>
 <div class="row text-center">
-  <button>Download</button>
+  <button{{action "downloadFile"}}>Download</button>
 </div>
