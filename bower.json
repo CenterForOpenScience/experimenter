@@ -19,7 +19,8 @@
     "jsoneditor": "~5.1.2",
     "alpaca": "1.5.14",
     "handlebars": "3.0.3",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "file-saver.js": "^1.20150507.2"
   },
   "resolutions": {
     "ember": "2.2.0"
