@@ -13,9 +13,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         if (isPresent(params.active)) {
             query['filter[active]'] = params.active;
         }
-        // if (isPresent(params.sort)) {
-        //     query.sort = params.sort;
-        // }
+        if (isPresent(params.sort)) {
+            query.sort = params.sort;
+        }
         if (isPresent(params.match)) {
             query.q = params.match;
         }
