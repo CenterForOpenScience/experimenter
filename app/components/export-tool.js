@@ -1,25 +1,45 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    store: Ember.inject.service(),
-    data: null,
-    processData: function(data) {
-        console.log(data);
-        var dataArray = data.content;
-        var jsonData = "";
-        for (var i = 0; i < dataArray.length; i++) {
-            jsonData = jsonData + JSON.stringify(dataArray[i]._data);
+    attributeBindings: ['data', 'mappingFunction'],
+    processedData: Ember.computed( 'data', {
+        get() {
+            var dataArray = this.get('data');
+            if (Ember.isPresent(dataArray)) {
+                console.log(dataArray);
+                // var dataArray = data.content;
+                var jsonData = "";
+                
+                for (var i = 0; i < dataArray.length; i++) {
+                    jsonData = jsonData + JSON.stringify(dataArray[i]._data);
+                }
+                //var csvData = this.convertToCSV(dataArray);
+                return jsonData; 
+            } else {
+                return null;
+            }
+            
+        }, 
+        set(_, value) {
+            this.set('processedData', value);
         }
-        this.set('data', jsonData);
+    }),
+    convertToCSV: function (objArray) {
+        var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+        var str = '';
+
+        for (var i = 0; i < array.length; i++) {
+            var line = '';
+            for (var index in array[i]) {
+                if (line != '') line += ','
+
+                line += array[i][index];
+            }
+
+            str += line + '\r\n';
+        }
+
+        return str;
     },
-    actions: {
-        loadData: function() {
-            var store = this.get('store');
-            var self = this;
-            var data = store.findAll('profile').then( function(results) {
-                console.log(results);
-                self.processData(results);
-            })
-        }
-    }
+    
 });
