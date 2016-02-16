@@ -4,9 +4,10 @@ let ASC = '';
 let DESC = '-';
 
 export default Ember.Controller.extend({
+    breadCrumb: 'Experiments',
     queryParams: ['sort', 'match', 'active', 'q'],
     active: null,
-    match: '*',
+    match: null,
     sort: 'title',
     sortProperty: Ember.computed('sort', {
         get() {
@@ -75,12 +76,12 @@ export default Ember.Controller.extend({
         },
         resetParams: function() {
             this.set('active', null);
-            this.set('match', '*');
+            this.set('match', null);
             this.set('sortProperty', 'title');
             this.set('sortOrder', ASC);
         },
         updateSearch: function(value) {
-            this.set('match', value);
+            this.set('match', `${value}*`);
             this.set('sortProperty', null);
         }
     }
