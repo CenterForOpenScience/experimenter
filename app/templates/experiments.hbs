@@ -2,13 +2,16 @@
 
 {{#if isShowingModal}}
   {{#modal-dialog close="toggleModal"
-                  attachment="center"
+                  targetAttachment="center"
                   translucentOverlay=true
                   container-class="col-xs-5"}}
-    <div class="row">
+    <div class="modal-header">
+        <h2>Name your New Experiment</h2>
+    </div>
+    <div class="modal-body">
         <form role="form" class="col-xs-12">
             <div class="form-group">
-                <label>Title of New Experiment:</label>
+                <label>Title:</label>
                 {{input type="text" value=newTitle class="form-control"}}
             </div>
             <button class="btn btn-danger" {{action "toggleModal"}}>Cancel</button>
