@@ -1,15 +1,17 @@
-<div class="row text-center">
-  <div class="col-xs-2 col-xs-offset-5 form-goup">
-    <select class="form-control" onchange={{action (mut dataFormat) value="target.value"}}>
-      {{#each dataFormats as |dataFormatChoice|}}
-        <option value={{dataFormatChoice}} selected={{eq dataFormat dataFormatChoice}}>{{dataFormatChoice}}</option>
-      {{/each}}
-    </select>
+<div class="bg-info component-container">
+  <div class="row text-center">
+    <div class="col-xs-2 col-xs-offset-5 form-goup">
+      <select class="form-control" onchange={{action (mut dataFormat) value="target.value"}}>
+        {{#each dataFormats as |dataFormatChoice|}}
+          <option value={{dataFormatChoice}} selected={{eq dataFormat dataFormatChoice}}>{{dataFormatChoice}}</option>
+        {{/each}}
+      </select>
+    </div>
   </div>
-</div>
-<div class="row text-center">
-  {{textarea cols="80" rows="6" value=processedData}}
-</div>
-<div class="row text-center">
-  <button{{action "downloadFile"}}>Download</button>
+  <div class="row text-center">
+    {{textarea value=processedData class="download-box"}}
+  </div>
+  <div class="row text-center">
+    <button class="btn btn-primary" {{action "downloadFile"}}>Download</button>
+  </div>
 </div>
