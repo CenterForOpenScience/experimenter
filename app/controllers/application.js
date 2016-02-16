@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  breadCrumb: 'Home',
+
 	isExpanded: true,
 	isNotLogin: Ember.computed('this.currentPath', function() {
 	  	if (this.currentPath !== 'login') {
