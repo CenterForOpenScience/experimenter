@@ -9,12 +9,10 @@
         <form role="form" class="col-xs-12">
             <div class="form-group">
                 <label>Title of New Experiment:</label>
-                {{input type="text" name="titleField" class="form-control"}}
+                {{input type="text" value=newTitle class="form-control"}}
             </div>
-
-            <button class="btn btn-danger" {{Action "toggleModal"}}>Cancel</button>
-            {{#link-to "experiment" experiment class="btn btn-success" }}Continue{{/link-to}}
-
+            <button class="btn btn-danger" {{action "toggleModal"}}>Cancel</button>
+            <button class="btn btn-success" {{action "createExperiment"}}>Continue</button>
         </form>    
     </div>
   {{/modal-dialog}}

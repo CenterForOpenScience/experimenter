@@ -4,6 +4,7 @@ let ASC = '';
 let DESC = '-';
 
 export default Ember.Controller.extend({
+    newTitle: '',
     isShowingModal: false,
     breadCrumb: 'Experiments',
     queryParams: ['sort', 'match', 'active', 'q'],
@@ -87,6 +88,13 @@ export default Ember.Controller.extend({
         },
         toggleModal: function() {
             this.toggleProperty('isShowingModal');
-        }
+        },
+        createExperiment: function() {
+            var newExperiment = this.store.createRecord('experiment', {
+                title: this.get('newTitle'),
+            });
+            newExperiment.save();
+            this.transitionToRoute('experiment', newExperiment);
+        },
     }
 });
