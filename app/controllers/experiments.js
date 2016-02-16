@@ -4,6 +4,7 @@ let ASC = '';
 let DESC = '-';
 
 export default Ember.Controller.extend({
+    isShowingModal: false,
     breadCrumb: 'Experiments',
     queryParams: ['sort', 'match', 'active', 'q'],
     active: null,
@@ -83,6 +84,9 @@ export default Ember.Controller.extend({
         updateSearch: function(value) {
             this.set('match', `${value}*`);
             this.set('sortProperty', null);
+        },
+        toggleModal: function() {
+            this.toggleProperty('isShowingModal');
         }
     }
 });
