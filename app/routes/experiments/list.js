@@ -9,18 +9,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model() {
         let params = this.paramsFor('experiments');
 
-        var query = {};
+        var query = {
+            q: []
+        };
         if (isPresent(params.active)) {
-            query['filter[active]'] = params.active;
+            query.q.push(`active:${params.active}`);
         }
-        // if (isPresent(params.sort)) {
-        //     query.sort = params.sort;
-        // }
+        if (isPresent(params.sort)) {
+            query.sort = params.sort;
+        }
         if (isPresent(params.match)) {
-            query.q = params.match;
+            query.q.push(params.match);
         }
 
-        if (Ember.keys(query).length) {
+        if (query.q.length || query.sort) {
             return this.store.query('experiment', query);
         }
         else {

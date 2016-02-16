@@ -18,14 +18,16 @@ Router.map(function() {
 
     this.route('experiments', function() {
         this.route('list', {path: '/'});
-        this.route('detail', {
-            path: '/:experiment_id/'
-        });
+    });
+
+    this.route('experiment', {
+        path: '/experiments/:experiment_id/'
+    }, function() {
         this.route('edit', {
-            path: '/:experiment_id/edit/'
+            path: '/edit/'
         });
         this.route('results', {
-            path: '/:experiment_id/results/'
+            path: '/results/'
         });
     });
 

@@ -22,5 +22,8 @@
     <div class="col-xs-3">
       <strong>Last Edited: </strong>{{moment-format experiment.lastEdited 'M/D/YYYY'}}
     </div>
+    <div class="col-xs-2 pull-right">
+      {{#link-to "experiment" experiment class="btn btn-default" }}Details{{/link-to}}
+    </div>
   </div>
 </div>

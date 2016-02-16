@@ -25,6 +25,7 @@
     "broccoli-sass": "^0.7.0",
     "ember-ajax": "0.7.1",
     "ember-bootstrap": "0.6.0",
+    "ember-breadcrumbs": "0.1.7",
     "ember-cli": "2.3.0-beta.1",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.5",
