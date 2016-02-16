@@ -3,6 +3,6 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(params) {
-        return this.store.findAll('account');  // TODO: Unwrap the list of accounts into a list of profiles
+        return this.store.findAll('account');
   	}
 });
