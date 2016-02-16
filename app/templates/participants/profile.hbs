@@ -1,10 +1,12 @@
 <!-- TODO: Add breadcrumb to parent -->
 
-<h2>{{model.profile.fullName}}</h2>
+{{log "The profile is:" model.account}}
+
+<h2>{{model.account.firstName}} {{model.account.lastName}}</h2>
 
 <div class="clearfix">
-    <div class="pull-left">Email address: <strong>{{model.profile.email}}</strong></div>
-    <div class="pull-right"><strong>Last active:</strong> {{model.profile.modifiedOn}}</div>
+    <div class="pull-left">Email address: <strong>{{model.account.email}}</strong></div>
+    <div class="pull-right"><strong>Last active:</strong> {{model.account.modifiedOn}}</div>
 </div>
 
 <hr>

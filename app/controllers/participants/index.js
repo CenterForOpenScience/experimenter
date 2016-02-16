@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
 
         var profiles = [];
         accounts.forEach(function(item) {
-            profiles= profiles.concat(item.get('profiles')); // Need to use get or field won't be fetched
+            profiles = profiles.concat(item.get('profiles')); // Need to use get or field won't be fetched
         });
         return profiles;
     }),
