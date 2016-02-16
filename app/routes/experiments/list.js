@@ -20,7 +20,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             query.q = params.match;
         }
 
-        if (Ember.keys(query).length) {
+        if (Object.keys(query).length) {
             return this.store.query('experiment', query);
         }
         else {
