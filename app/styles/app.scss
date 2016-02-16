@@ -1,9 +1,11 @@
+@import "components/experiment-detail";
 @import "routes/experiments";
 
 /* application.hbs styles only! */
 $large-width: 992px;
 $small-width: 400px;
 $background-dark: #606060;
+
 html,
 body,
 .ember-view,
@@ -39,9 +41,21 @@ body,
     height: 100%;
     padding: 12px;
 }
+
 .increase {
     font-size: 125%;
 }
+.increase-2 {
+    font-size: 150%;
+}
+.increase-3 {
+    font-size: 175%;
+}
+.increase-4 {
+    font-size: 200%;
+}
+
+
 .logo {
     color: white;
     margin-bottom: 16px;
