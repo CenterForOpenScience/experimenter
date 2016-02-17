@@ -32,11 +32,6 @@
                 "format": "date-time",
                 "type": "string"
             },
-            "lastEdited": {
-                "id": "lastEdited",
-                "format": "date-time",
-                "type": "string"
-            },
             "structure": {
                 "id": "structure",
                 "type": "array",
