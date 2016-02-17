@@ -4,17 +4,19 @@
         "id": "session",
         "type": "object",
         "properties": {
-            "profile": {
-                "id": "profile",
-                "type": "string"
+            "profileId": {
+                "id": "profileId",
+                "type": "string",
+                "pattern": "[w]+.[w]+.[w]+"
             },
             "profileVersion": {
                 "id": "profileVersion",
                 "type": "string"
             },
-            "experiment": {
-                "id": "experiment",
-                "type": "string"
+            "experimentId": {
+                "id": "experimentId",
+                "type": "string",
+                "pattern": "[w]+.[w]+.[w]+"
             },
             "experimentVersion": {
                 "id": "experimentVersion",
@@ -31,22 +33,16 @@
             "expData": {
                 "id": "expData",
                 "type": "object"
-            },
-            "timestamp": {
-                "id": "timestamp",
-                "type": "string",
-                "pattern": "^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
             }
         },
         "required": [
-            "profile",
+            "profileId",
             "profileVersion",
-            "experiment",
+            "experimentId",
             "experimentVersion",
             "parameters",
             "softwareVersion",
-            "expData",
-            "timestamp"
+            "expData"
         ],
         "additionalProperties": false
     }

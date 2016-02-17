@@ -5,6 +5,6 @@ export default Ember.Controller.extend({
     columns: [
         {propertyName: 'experimentId', title:'Experiment ID'}, // TODO: Would prefer experiment name or ID here?
         {propertyName: 'experimentVersion'},
-        {propertyName: 'timestamp', title: 'Last active'},  // TODO: Is this the correct field to use here?
+        {propertyName: 'modifiedOn', title: 'Last active'},  // TODO: Is this the correct field to use here?
     ],
 });
