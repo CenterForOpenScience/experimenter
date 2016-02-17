@@ -1,5 +1,25 @@
-<h2> Experiments <button class="btn btn-primary pull-right">New Experiment</button> </h2>
+<h2> Experiments <button class="btn btn-primary pull-right" {{action "toggleModal"}}>New Experiment</button> </h2>
 
+{{#if isShowingModal}}
+  {{#modal-dialog close="toggleModal"
+                  targetAttachment="center"
+                  translucentOverlay=true
+                  container-class="col-xs-5"}}
+    <div class="modal-header">
+        <h2>Name your New Experiment</h2>
+    </div>
+    <div class="modal-body">
+        <form role="form" class="col-xs-12">
+            <div class="form-group">
+                <label>Title:</label>
+                {{input type="text" value=newTitle class="form-control" enter="createExperiment"}}
+            </div>
+            <button type="button" class="btn btn-danger" {{action "toggleModal"}}>Cancel</button>
+            <button class="btn btn-success" {{action "createExperiment"}}>Continue</button>
+        </form>    
+    </div>
+  {{/modal-dialog}}
+{{/if}}
 <div class="row text-center">
 	{{input type="text" placeholder="Filter" size="50" enter="updateSearch" name="searchBar"}}
 </div>
