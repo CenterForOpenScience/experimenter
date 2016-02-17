@@ -31,7 +31,7 @@ export default Ember.Component.extend({
     }),
     convertToFormat: function (dataArray, format) {
         if (format === "JSON") {
-            return JSON.stringify(dataArray); 
+            return JSON.stringify(dataArray, undefined, 4); 
         } else {
             var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
             var str = '';
