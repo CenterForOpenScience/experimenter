@@ -1,8 +1,8 @@
 [{
     "id": "session1a",
-    "profile": "experimenter.profiles.prof1",
+    "profileId": "tester1.prof1",
     "profileVersion": null,
-    "experiment": "experimenter.experiments.test0",
+    "experimentId": "experimenter.experiments.test0",
     "experimentVersion": null,
     "parameters": {},
     "softwareVersion": null,
@@ -11,9 +11,9 @@
 },
 {
     "id": "session1b",
-    "profile": "experimenter.profiles.prof1",
+    "profileId": "tester1.prof1",
     "profileVersion": null,
-    "experiment": "experimenter.experiments.test1",
+    "experimentId": "experimenter.experiments.test1",
     "experimentVersion": null,
     "parameters": {},
     "softwareVersion": null,
@@ -22,24 +22,22 @@
 },
 {
     "id": "session2a",
-    "profile": "experimenter.profiles.prof2",
+    "profileId": "tester1.prof2",
     "profileVersion": null,
-    "experiment": "experimenter.experiments.test0",
+    "experimentId": "experimenter.experiments.test0",
     "experimentVersion": null,
     "parameters": {},
     "softwareVersion": null,
-    "expData": {},
-    "timestamp": "2016-02-08 11:04:39.932419"
+    "expData": {}
 },
 {
     "id": "session2b",
-    "profile": "experimenter.profiles.prof2",
+    "profileId": "tester1.prof2",
     "profileVersion": null,
-    "experiment": "experimenter.experiments.test0",
+    "experimentId": "experimenter.experiments.test0",
     "experimentVersion": null,
     "parameters": {},
     "softwareVersion": null,
-    "expData": {},
-    "timestamp": "2016-02-08 11:04:39.932419"
+    "expData": {}
 }
 ]

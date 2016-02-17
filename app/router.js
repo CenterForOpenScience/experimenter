@@ -38,6 +38,7 @@ Router.map(function() {
     });
     this.route('settings');
     this.route('project-settings');
+
 });
 
 export default Router;
