@@ -94,7 +94,9 @@ export default Ember.Controller.extend({
             var self = this;
             var newExperiment = this.store.createRecord('experiment', {
                 title: this.get('newTitle'),
+                description: 'Give your experiment a description here...',
                 active: 'Draft',
+                lastEdited: new Date(),
             });
             this.send('toggleModal');
             newExperiment.save().then(function() {self.transitionToRoute('experiment', newExperiment);});;
