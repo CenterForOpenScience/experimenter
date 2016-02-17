@@ -3,17 +3,17 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     queryParams: {
-    	active: {
-	    	refreshModel: true
-	    },
-        sort: {
-            refreshModel: true
-        },
-        q: {
-            refreshModel: true
-        },
-        match: {
-            refreshModel: true
-        }
-	}
+      active: {
+        refreshModel: true
+      },
+      sort: {
+          refreshModel: true
+      },
+      q: {
+          refreshModel: true
+      },
+      match: {
+          refreshModel: true
+      }
+  }
 });
