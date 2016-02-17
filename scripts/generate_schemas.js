@@ -13,10 +13,6 @@ var CONFIG = {
         "id": "config",
         "type": "object",
         "properties": {
-            "profileSchema": {
-                "id": "profileSchema",
-                "type": "object"
-            },
             "profilesMin": {
                 "id": "profilesMin",
                 "type": "integer"
@@ -58,11 +54,6 @@ var EXPERIMENT = {
                 "format": "date-time",
                 "type": "string"
             },
-            "lastEdited": {
-                "id": "lastEdited",
-                "format": "date-time",
-                "type": "string"
-            },
             "structure": {
                 "id": "structure",
                 "type": "array",
@@ -83,6 +74,7 @@ var EXPERIMENT = {
     }
 };
 
+/*  TODO
 var SESSION = {
     "type": "jsonschema",
     "schema": {
@@ -92,7 +84,7 @@ var SESSION = {
             "profileId": {
                 "id": "profileId",
                 "type": "string",
-                "pattern": JAM_ID_PATTERN,
+                "pattern": JAM_ID_PATTERN
             },
             "profileVersion": {
                 "id": "profileVersion",
@@ -101,7 +93,7 @@ var SESSION = {
             "experimentId": {
                 "id": "experimentId",
                 "type": "string",
-                "pattern": JAM_ID_PATTERN,
+                "pattern": JAM_ID_PATTERN
             },
             "experimentVersion": {
                 "id": "experimentVersion",
@@ -129,6 +121,7 @@ var SESSION = {
         "additionalProperties": false
     }
 };
+*/
 
 var ACCOUNT = {
     definitions: {
@@ -142,16 +135,12 @@ var ACCOUNT = {
                     "type": "string",
                     "pattern": "^\w{3,64}"
                 },
-                "lastName": {
-                    "type": "string",
-                    "pattern": "^\w{3,64}"
-                },
                 "birthday": {
                     "type": "string",
                     "pattern": ISO_DATE_PATTERN
-                },
+                }
             },
-            "required": ["firstName", "lastName", "birthday"]
+            "required": ["firstName", "birthday"]
         }
     },
     "$schema": "http://json-schema.org/draft-04/schema#",

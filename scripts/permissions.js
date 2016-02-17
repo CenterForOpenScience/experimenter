@@ -1,52 +1,52 @@
 // TODO make user specific
-OSF = 'user-osf-*'
-ADMIN = 'jam-experimenter:admins-*'
-PARTICIPANT = 'jam-experimenter:accounts-*'
+var OSF = 'user-osf-*';
 
-config = [
+var ADMIN = 'jam-experimenter:admins-*';
+var PARTICIPANT = 'jam-experimenter:accounts-*';
+
+var config = [
     [ADMIN, 'CRUD'],
-    [OSF, 'CRUD'],
-]
+    [OSF, 'CRUD']
+];
 
-admin = [
+var admin = [
     [ADMIN, 'READ'],
     [OSF, 'READ'],
     [ADMIN, 'CREATE'],
     [OSF, 'CREATE']
-]
+];
 
-experiment = [
+var experiment = [
     [ADMIN, 'READ'],
     [OSF, 'READ'],
     [ADMIN, 'CREATE'],
     [OSF, 'CREATE'],
     [PARTICIPANT, 'READ']
-]
+];
 
-session = [
+var session = [
     [PARTICIPANT, 'CREATE'],
     [ADMIN, 'READ'],
     [OSF, 'READ']
-]
+];
 
-account = [
-    [ADMIN, 'CREATE'],
-    [OSF, 'CREATE'],
+var account = [
+    ['*', 'CREATE'],
     [ADMIN, 'READ'],
     [OSF, 'READ']
-]
+];
 
-profile = [
+var profile = [
     [PARTICIPANT, 'CREATE'],
     [ADMIN, 'READ'],
     [OSF, 'READ']
-]
+];
 
 module.exports = {
-  account: account,
-  admin: admin,
-  config: config,
-  experiment: experiment,
-  profile: profile,
-  session: session,
-}
+    account: account,
+    admin: admin,
+    config: config,
+    experiment: experiment,
+    profile: profile
+    // session: session
+};
