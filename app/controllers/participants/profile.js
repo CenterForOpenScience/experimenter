@@ -7,9 +7,4 @@ export default Ember.Controller.extend({
         {propertyName: 'experimentVersion'},
         {propertyName: 'modifiedOn', title: 'Last active'},  // TODO: Is this the correct field to use here?
     ],
-
-    profile: Ember.computed('model', function() {
-        var modelHash = this.get('model');
-        return modelHash.account.profileById(this.get('params').profile_id);
-    })
 });
