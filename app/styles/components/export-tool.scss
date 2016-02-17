@@ -1,3 +1,20 @@
+.content {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: block;
+}
+.component-container {
+    height: 100%;
+    text-align: center;
+}
+.text-container {
+    height: 70%;
+}
+select {
+    min-width: 70px;
+}
 textarea {
     width: 90%;
     background-color: black;
