@@ -170,7 +170,7 @@ var ACCOUNT = {
 };
 
 module.exports = function main() {
-    [CONFIG, EXPERIMENT, SESSION, ACCOUNT].forEach(function(schema) {
+    [CONFIG, EXPERIMENT, ACCOUNT].forEach(function(schema) {
         var schemaData = JSON.stringify(schema, null, 4);
         var base = path.dirname(__filename);
         var filename = schema.schema.id;

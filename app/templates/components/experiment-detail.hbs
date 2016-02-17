@@ -33,15 +33,15 @@
     <br />
   </div>
   <div class="row">
-    <label>Status:</label>  {{experiment.active}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    {{#if (eq experiment.active 'Active')}}
-    <button class="btn btn-danger"> Stop Experiment Now </button>
+    <label>Status:</label>  {{experiment.state}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {{#if (eq experiment.state 'Active')}}
+    <button class="btn btn-danger" {{ action 'stop' }}> Stop Experiment Now </button>
     {{/if}}
-    {{#if (eq experiment.active 'Draft') }}
-    <button class="btn btn-success"> Start Experiment Now </button>
+    {{#if (eq experiment.state 'Draft') }}
+    <button class="btn btn-success" {{ action 'start' }}> Start Experiment Now </button>
     {{/if}}
-    {{#if (eq experiment.active 'Archived') }}
-    <button class="btn btn-primary"> Re-run Experiment Now </button>
+    {{#if (eq experiment.state 'Archived') }}
+    <button class="btn btn-primary" {{ action 'start' }}> Re-run Experiment Now </button>
     {{/if}}
     <br />
     <br />
@@ -78,7 +78,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <button class="btn btn-danger" disabled={{experiment.isActive}} > Delete this Experiment</button>  {{#if experiment.isActive }}&nbsp;&nbsp;You can't delete active experiments {{/if}}
+      <button class="btn btn-danger" disabled={{experiment.isActive}} {{action 'delete' }}> Delete this Experiment</button>  {{#if experiment.isActive }}&nbsp;&nbsp;You can't delete active experiments {{/if}}
     </div>
   </div>
 </div>
