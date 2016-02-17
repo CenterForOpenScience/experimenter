@@ -12,9 +12,9 @@
         <form role="form" class="col-xs-12">
             <div class="form-group">
                 <label>Title:</label>
-                {{input type="text" value=newTitle class="form-control"}}
+                {{input type="text" value=newTitle class="form-control" enter="createExperiment"}}
             </div>
-            <button class="btn btn-danger" {{action "toggleModal"}}>Cancel</button>
+            <button type="button" class="btn btn-danger" {{action "toggleModal"}}>Cancel</button>
             <button class="btn btn-success" {{action "createExperiment"}}>Continue</button>
         </form>    
     </div>
