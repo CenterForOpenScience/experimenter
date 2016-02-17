@@ -40,9 +40,10 @@ var EXPERIMENT = {
                 "id": "description",
                 "type": "string"
             },
-            "active": {
-                "id": "active",
-                "type": "boolean"
+            "state": {
+                "id": "state",
+                "type": "string",
+                "enum": ["Draft", "Active", "Archived", "Deleted"]
             },
             "beginDate": {
                 "id": "beginDate",
@@ -68,7 +69,7 @@ var EXPERIMENT = {
         },
         "required": [
             "structure",
-            "active"
+            "state"
         ]
         // "additionalProperties": false // TODO re-enable
     }
