@@ -87,14 +87,17 @@ export default Ember.Controller.extend({
             this.set('sortProperty', null);
         },
         toggleModal: function() {
+            this.set('newTitle', '');
             this.toggleProperty('isShowingModal');
         },
         createExperiment: function() {
+            var self = this;
             var newExperiment = this.store.createRecord('experiment', {
                 title: this.get('newTitle'),
+                active: 'Draft',
             });
-            newExperiment.save();
-            this.transitionToRoute('experiment', newExperiment);
+            this.send('toggleModal');
+            newExperiment.save().then(function() {self.transitionToRoute('experiment', newExperiment);});;
         },
     }
 });
