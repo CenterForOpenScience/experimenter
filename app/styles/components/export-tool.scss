@@ -1,21 +1,21 @@
-.content {
+.app-content {
     position: fixed;
     top: 0;
     bottom: 0;
     z-index: 1000;
     display: block;
 }
-.component-container {
+.export-tool-container {
     height: 100%;
     text-align: center;
 }
-.text-container {
+.export-tool-textarea-container {
     height: 70%;
 }
-.format-select {
+.export-tool-select {
     min-width: 70px;
 }
-.download-textarea {
+.export-tool-textarea {
     width: 90%;
     max-width: 90%;
     background-color: black;

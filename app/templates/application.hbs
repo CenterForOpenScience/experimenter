@@ -22,7 +22,7 @@
             <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
           </div>
         </div>
-        <div class="{{if isExpanded 'col-md-10 col-md-offset-2' 'col-xs-11 col-xs-offset-1'}} content">
+        <div class="{{if isExpanded 'col-md-10 col-md-offset-2' 'col-xs-11 col-xs-offset-1'}} app-content">
           <br>
           <div>{{ bread-crumbs }}</div>
           {{outlet}}
