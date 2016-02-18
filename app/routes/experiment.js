@@ -6,7 +6,6 @@ export default Ember.Route.extend({
         return this.store.find('experiment', params.experiment_id).then(function(experiment) {
             // When experiment loaded, ensure there are corresponding session models
             var collId = experiment.get('sessionCollectionId');
-            experiment._registerSessionModels(); // TODO: async?
 
             return Ember.RSVP.hash({
                 // The actual return of the model hook: two models, loaded sequentially
