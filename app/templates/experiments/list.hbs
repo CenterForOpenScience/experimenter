@@ -1,3 +1,32 @@
-{{#each model as |experiment|}}
-  {{experiment-summary experiment=experiment}}
-{{/each}}
+<h2> Experiments <button class="btn btn-primary pull-right">New Experiment</button> </h2>
+
+<div class="row text-center">
+  {{input type="text" placeholder="Filter" size="50" enter="updateSearch" name="searchBar"}}
+</div>
+<div class="row text-center button-block">
+  <button class="btn btn-default" {{action "selectStatusFilter" "Active"}}>Active</button>
+  <button class="btn btn-default" {{action "selectStatusFilter" "Draft"}}>Draft</button>
+  <button class="btn btn-default" {{action "selectStatusFilter" "Archive"}}>Archive</button>
+  <button class="btn btn-default" {{action "resetParams"}}>All</button>
+</div>
+<div class="row">
+  <div class="col-xs-8">
+    <strong>Title </strong><i class="fa fa-sort btn" {{action "sortingMethod" "title"}}></i>
+  </div>
+  <div class="col-xs-2 text-center">
+      <strong>Begin Date </strong><i class="fa fa-sort btn" {{action "sortingMethod" "beginDate"}}></i>
+    </div>
+  <div class="col-xs-2 text-center">
+      <strong>End Date </strong><i class="fa fa-sort btn" {{action "sortingMethod" "endDate"}}></i>
+    </div>
+</div>
+<hr>
+<div class="row results">
+  {{#unless model.isPending}}
+    {{#each model as |experiment|}}
+      {{experiment-summary experiment=experiment}}
+    {{/each}}
+  {{else}}
+    LOADING
+  {{/unless}}
+</div>

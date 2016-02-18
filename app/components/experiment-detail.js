@@ -13,6 +13,9 @@ export default Ember.Component.extend({
                     this.get('toast.info')('Experiment saved successfully.');
                 });
             }
+        },
+        editComponents() {
+          this.sendAction('editComponents');
         }
     }
 });
