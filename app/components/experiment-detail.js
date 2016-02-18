@@ -4,6 +4,7 @@ export default Ember.Component.extend({
     experiment: null,
     editing: false,
     toast: Ember.inject.service(),
+    store: Ember.inject.service(),
     actions: {
         toggleEditing: function() {
             this.toggleProperty('editing');
@@ -28,10 +29,20 @@ export default Ember.Component.extend({
             });
         },
         delete: function() {
-            this.get('onDelete')(this.get('experiment'));
+            var exp = this.get('experiment');
+            exp.set('state', exp.DELETED);
+            exp.save().then(() => {
+                this.get('onDelete')();
+            });
         },
         clone: function() {
-
+            var exp = this.get('experiment');
+            var expData = exp.toJSON();
+            expData.title = `Copy of ${expData.title}`;
+            var clone = this.get('store').createRecord('experiment', expData);
+            clone.save().then(() => {
+                this.get('onClone')(clone);
+            });
         }
     }
 });
