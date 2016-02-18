@@ -2,17 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
     model(params) {
-        return this.store.find('experiment', params.experiment_id);
-    },
+        var self = this;
+        return this.store.find('experiment', params.experiment_id).then(function(experiment) {
+            // When experiment loaded, ensure there are corresponding session models
+            var collId = experiment.get('sessionCollectionId');
+            experiment._registerSessionModels(); // TODO: async?
 
-    setupController(controller, model) {
-        // When experiment loaded, ensure there are corresponding session models
-        model._registerSessionModels();
-        var collId = model.get('sessionCollectionId');
-        var thisQuery = this.store.findAll(collId).then(function() {
-            controller.set('someSessions');
+            return Ember.RSVP.hash({
+                // The actual return of the model hook: two models, loaded sequentially
+                experiment: experiment,
+                sessions: self.store.findAll(collId),
+            });
         });
-
-        this._super(...arguments)
-    }
+    },
 });
