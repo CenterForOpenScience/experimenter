@@ -6,5 +6,5 @@
 {{/each}}
 </ul>
 <hr>
-
+{{outlet}}
 {{ experiment-detail experiment=model.experiment sessions=model.sessions onDelete=(action 'onDelete') onClone=(action 'onClone') onResponses=(action 'onResponses')}}
