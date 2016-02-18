@@ -7,8 +7,8 @@ export default Ember.Controller.extend({
     newTitle: '',
     isShowingModal: false,
     breadCrumb: 'Experiments',
-    queryParams: ['sort', 'match', 'active', 'q'],
-    active: null,
+    queryParams: ['sort', 'match', 'state', 'q'],
+    state: null,
     match: null,
     sort: 'title',
     sortProperty: Ember.computed('sort', {
@@ -64,7 +64,7 @@ export default Ember.Controller.extend({
     },
     actions: {
         selectStatusFilter: function(status) {
-            this.set('active', status);
+            this.set('state', status);
             this.set('sortProperty', 'title');
             this.set('sortOrder', ASC);
         },
@@ -77,7 +77,7 @@ export default Ember.Controller.extend({
             this.set('sortProperty', sortProperty);
         },
         resetParams: function() {
-            this.set('active', null);
+            this.set('state', null);
             this.set('match', null);
             this.set('sortProperty', 'title');
             this.set('sortOrder', ASC);
@@ -95,7 +95,7 @@ export default Ember.Controller.extend({
             var newExperiment = this.store.createRecord('experiment', {
                 title: this.get('newTitle'),
                 description: 'Give your experiment a description here...',
-                active: 'Draft',
+                state: 'Draft',
                 lastEdited: new Date(),
             });
             this.send('toggleModal');

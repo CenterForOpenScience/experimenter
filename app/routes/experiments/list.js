@@ -12,7 +12,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         var query = {
             q: ['state:(-Deleted)']
         };
-        if (isPresent(params.active)) {
+        if (isPresent(params.state)) {
             query.q.push(`state:${params.state}`);
         }
         if (isPresent(params.sort)) {
