@@ -79,7 +79,7 @@ var EXPERIMENT = {
 var SESSION = {
     "type": "jsonschema",
     "schema": {
-        "id": "session",
+        "id": "sessiontest0",  // Script creates one particular session collection associated with one single experiment
         "type": "object",
         "properties": {
             "profileId": {
@@ -91,7 +91,7 @@ var SESSION = {
                 "id": "profileVersion",
                 "type": "string"
             },
-            "experimentId": {
+            "experimentId": {  // TODO: In the new collection-per-experiment sessions model, this field may be redundant
                 "id": "experimentId",
                 "type": "string",
                 "pattern": JAM_ID_PATTERN
