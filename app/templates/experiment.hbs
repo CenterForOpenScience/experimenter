@@ -1,3 +1,12 @@
 <h4> TODO: breadcrumbs </h4>
 
-{{ experiment-detail experiment=model }}
+<ul>
+{{#each model.sessions as |session|}}
+    <li>session: {{session.profileId}}, {{session.experimentId}}</li>
+{{/each}}
+</ul>
+
+<hr>
+
+
+{{ experiment-detail experiment=model.experiment }}
