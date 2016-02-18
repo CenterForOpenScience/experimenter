@@ -1,7 +1,7 @@
 {
     "type": "jsonschema",
     "schema": {
-        "id": "session",
+        "id": "sessiontest0",
         "type": "object",
         "properties": {
             "profileId": {

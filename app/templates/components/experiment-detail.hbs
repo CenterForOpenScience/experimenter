@@ -33,22 +33,22 @@
     <br />
   </div>
   <div class="row">
-    <label>Status:</label>  {{experiment.active}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    {{#if (eq experiment.active 'Active')}}
-    <button class="btn btn-danger"> Stop Experiment Now </button>
+    <label>Status:</label>  {{experiment.state}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {{#if (eq experiment.state 'Active')}}
+    <button class="btn btn-danger" {{ action 'stop' }}> Stop Experiment Now </button>
     {{/if}}
-    {{#if (eq experiment.active 'Draft') }}
-    <button class="btn btn-success"> Start Experiment Now </button>
+    {{#if (eq experiment.state 'Draft') }}
+    <button class="btn btn-success" {{ action 'start' }}> Start Experiment Now </button>
     {{/if}}
-    {{#if (eq experiment.active 'Archived') }}
-    <button class="btn btn-primary"> Re-run Experiment Now </button>
+    {{#if (eq experiment.state 'Archived') }}
+    <button class="btn btn-primary" {{ action 'start' }}> Re-run Experiment Now </button>
     {{/if}}
     <br />
     <br />
     <br />
   </div>
   <div class="row">
-    <div class="btn col-md-4">
+    {{#link-to 'experiment.edit' experiment tagName='div' class="btn col-md-4"}}
       <div class="well">
         <center>
           <p><i class="increase-4 fa fa-list"></i></p>
@@ -56,7 +56,7 @@
           <p> Add/Modify experiment components </p>
         </center>
       </div>
-    </div>
+    {{/link-to}}
     <div class="btn col-md-4" {{action 'responses'}}>
       <div class="well">
         <center>
@@ -66,7 +66,7 @@
         </center>
       </div>
     </div>
-    <div class="btn col-md-4">
+    <div class="btn col-md-4" {{action 'clone'}}>
       <div class="well">
         <center>
           <p><i class="increase-4 fa fa-files-o"></i></p>
@@ -78,7 +78,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <button class="btn btn-danger" disabled={{experiment.isActive}} > Delete this Experiment</button>  {{#if experiment.isActive }}&nbsp;&nbsp;You can't delete active experiments {{/if}}
+      <button class="btn btn-danger" disabled={{experiment.isActive}} {{action 'delete' }}> Delete this Experiment</button>  {{#if experiment.isActive }}&nbsp;&nbsp;You can't delete active experiments {{/if}}
     </div>
   </div>
 </div>
