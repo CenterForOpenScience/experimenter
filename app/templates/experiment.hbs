@@ -5,8 +5,6 @@
     <li>session: {{session.profileId}}, {{session.experimentId}}</li>
 {{/each}}
 </ul>
-
 <hr>
 
-
-{{ experiment-detail experiment=model.experiment }}
+{{ experiment-detail experiment=model onDelete=(action 'onDelete') onClone=(action 'onClone')}}
