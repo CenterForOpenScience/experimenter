@@ -13,6 +13,10 @@ export default Ember.Component.extend({
                     this.get('toast.info')('Experiment saved successfully.');
                 });
             }
+        },
+        responses: function() {
+            var exp = this.get('experiment');
+            this.get('onResponses')(exp);
         }
     }
 });
