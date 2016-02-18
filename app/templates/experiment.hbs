@@ -7,4 +7,4 @@
 </ul>
 <hr>
 
-{{ experiment-detail experiment=model onDelete=(action 'onDelete') onClone=(action 'onClone') onResponses=(action 'onResponses')}}
+{{ experiment-detail experiment=model.experiment sessions=model.sessions onDelete=(action 'onDelete') onClone=(action 'onClone') onResponses=(action 'onResponses')}}
