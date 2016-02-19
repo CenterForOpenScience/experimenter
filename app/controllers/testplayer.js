@@ -1,8 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    isDirty() {
+    isDirty: function() {
         // TODO: check the session model to see if it contains unsaved data
+        var model = this.get('model.blankSession');
+        return model.get('hasDirtyAttributes');
     },
     actions: {
         saveSession(payload) {
@@ -10,7 +12,8 @@ export default Ember.Controller.extend({
             console.log('controller is attempting to save');
             var model = this.get('model.blankSession');
             model.setProperties(payload);
-            model.save();  // TODO: Do we need to set model with changed result?
+            model.save();
+            // this.set('model', model);  //  TODO: Update model on controller
         }
     }
 });
