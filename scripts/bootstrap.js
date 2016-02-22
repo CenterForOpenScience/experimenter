@@ -95,6 +95,10 @@ function loadExamples(collection, token, examples) {
                     attributes: example
                 }
             })
+        }).then(function() {
+            if (collection === 'experiments') {
+                getOrCreateCollection(`session${example.id}s`, token);
+            }
         }).catch(function(e) {
             console.log(e.error);
             console.log();
