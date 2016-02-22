@@ -7,7 +7,7 @@
             "profileId": {
                 "id": "profileId",
                 "type": "string",
-                "pattern": "[w]+.[w]+.[w]+"
+                "pattern": "\\w+\\.\\w+(\\.\\w+)?"
             },
             "profileVersion": {
                 "id": "profileVersion",
@@ -16,7 +16,7 @@
             "experimentId": {
                 "id": "experimentId",
                 "type": "string",
-                "pattern": "[w]+.[w]+.[w]+"
+                "pattern": "\\w+\\.\\w+(\\.\\w+)?"
             },
             "experimentVersion": {
                 "id": "experimentVersion",
@@ -43,7 +43,6 @@
             "parameters",
             "softwareVersion",
             "expData"
-        ],
-        "additionalProperties": false
+        ]
     }
 }

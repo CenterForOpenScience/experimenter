@@ -1,5 +1,5 @@
-
 var fs = require('fs');
+
 var Promise = require('bluebird');
 var request = require('request-promise');
 var permissions = require('./permissions.js');
@@ -95,6 +95,10 @@ function loadExamples(collection, token, examples) {
                     attributes: example
                 }
             })
+        }).then(function() {
+            if (collection === 'experiments') {
+                getOrCreateCollection(`session${example.id}s`, token);
+            }
         }).catch(function(e) {
             console.log(e.error);
             console.log();
@@ -109,7 +113,7 @@ function bootstrapCollection(token, name) {
         ops.push({
             op: 'add',
             path: '/schema',
-            value: require(`./schemas/${name}.json`)
+            value: require(`../schemas/${name}.json`)
         });
     } catch (e) {
         console.log(`No schema found for collection ${name}, skipping`);
@@ -117,7 +121,7 @@ function bootstrapCollection(token, name) {
 
     var examples = null;
     try {
-        examples = require(`${__dirname}/data/${name}.json`);
+        examples = require(`./data/${name}.json`);
     } catch (e) {
         examples = [];
         console.log(`No example data for ${name}`);
@@ -133,18 +137,17 @@ function bootstrapCollection(token, name) {
             };
         }));
     else
-        console.log('No permissions found for collection ${name}, skipping');
+        console.log(`No permissions found for collection ${name}, skipping`);
 
     return getOrCreateCollection(name + 's', token)
         .then(updateCollection.bind(this, name + 's', token, ops))
         .then(loadExamples.bind(this, name + 's', token, examples));
 }
 
-COLLECTIONS = ['admin'].concat(fs
-    .readdirSync(__dirname + '/data')
-    .map(function(name) {
-        return name.replace('.json', '');
-    }));
+var COLLECTIONS = fs.readdirSync(__dirname + '/data')
+        .map(function(name) {
+            return name.replace('.json', '');
+        });
 
 authorize()
     .then(function(token) {

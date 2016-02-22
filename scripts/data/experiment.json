@@ -6,22 +6,20 @@
     "beginDate": "2016-02-03",
     "endDate": "2016-02-04",
     "lastEdited": "2016-02-04",
-    "structure": [
-        {
-            "id": "pre-consent",
-            "type": "consent",
-            "title": "Pre Consent Form",
-            "body": "Do you agree to begin the experiment?",
-            "consentLabel": "I strongly agree"
-        },
-        {
-            "id": "post-consent",
-            "type": "consent",
-            "title": "Final Notice of Consent",
-            "body": "Do you agree to finish the experiment?",
-            "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
-        }
-    ]
+    "eligibilityCriteria": "age > 3 months and age < 9 months",
+    "structure": [{
+        "id": "pre-consent",
+        "type": "consent",
+        "title": "Pre Consent Form",
+        "body": "Do you agree to begin the experiment?",
+        "consentLabel": "I strongly agree"
+    }, {
+        "id": "post-consent",
+        "type": "consent",
+        "title": "Final Notice of Consent",
+        "body": "Do you agree to finish the experiment?",
+        "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
+    }]
 }, {
     "id": "test1",
     "title": "Absolver Thrull",
@@ -30,13 +28,11 @@
     "beginDate": "2016-02-02",
     "endDate": "2016-02-03",
     "lastEdited": "2016-02-04",
-    "structure": [
-        {
-            "id": "pre-consent",
-            "type": "consent",
-            "body": "Hello world"
-        }
-    ]
+    "structure": [{
+        "id": "pre-consent",
+        "type": "consent",
+        "body": "Hello world"
+    }]
 }, {
     "id": "test2",
     "title": "Barbarian Bully",

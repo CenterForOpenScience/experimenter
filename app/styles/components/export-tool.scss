@@ -1,0 +1,19 @@
+.export-tool-container {
+    height: 100%;
+    text-align: center;
+}
+.export-tool-textarea-container {
+    height: 70%;
+}
+.export-tool-select {
+    min-width: 70px;
+}
+.export-tool-textarea {
+    width: 90%;
+    max-width: 90%;
+    background-color: black;
+    color: white;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+}
