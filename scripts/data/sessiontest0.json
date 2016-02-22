@@ -1,43 +1,37 @@
 [{
     "id": "session1a",
     "profileId": "tester1.prof1",
-    "profileVersion": null,
+    "profileVersion": "abcdefgab",
     "experimentId": "experimenter.experiments.test0",
-    "experimentVersion": null,
+    "experimentVersion": "qwertyuiop",
     "parameters": {},
-    "softwareVersion": null,
-    "expData": {},
-    "timestamp": "2016-02-08 11:04:39.932419"
-},
-{
+    "softwareVersion": "0.0.1",
+    "expData": {}
+}, {
     "id": "session1b",
     "profileId": "tester1.prof1",
-    "profileVersion": null,
+    "profileVersion": "abcdefgab",
     "experimentId": "experimenter.experiments.test0",
-    "experimentVersion": null,
+    "experimentVersion": "qwertyuiop",
     "parameters": {},
-    "softwareVersion": null,
-    "expData": {},
-    "timestamp": "2016-02-08 11:04:39.932419"
-},
-{
+    "softwareVersion": "0.0.1",
+    "expData": {}
+}, {
     "id": "session2a",
     "profileId": "tester1.prof2",
-    "profileVersion": null,
+    "profileVersion": "abcdefgab",
     "experimentId": "experimenter.experiments.test0",
-    "experimentVersion": null,
+    "experimentVersion": "qwertyuiop",
     "parameters": {},
-    "softwareVersion": null,
+    "softwareVersion": "0.0.1",
     "expData": {}
-},
-{
+}, {
     "id": "session2b",
     "profileId": "tester1.prof2",
-    "profileVersion": null,
+    "profileVersion": "abcdefgab",
     "experimentId": "experimenter.experiments.test0",
-    "experimentVersion": null,
+    "experimentVersion": "qwertyuiop",
     "parameters": {},
-    "softwareVersion": null,
+    "softwareVersion": "0.0.1",
     "expData": {}
-}
-]
+}]

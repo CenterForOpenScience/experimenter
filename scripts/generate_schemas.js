@@ -4,7 +4,7 @@ var fs = require('fs');
 // h/t: https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s07.html
 var ISO_DATE_PATTERN = '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$';
 
-var JAM_ID_PATTERN = '[\w]+\.[\w]+\.[\w]+';
+var JAM_ID_PATTERN = new RegExp(/\w+\.\w+(\.\w+)?/).source;
 
 
 var CONFIG = {
@@ -64,7 +64,7 @@ var EXPERIMENT = {
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
-                "type": "object"
+                "type": "string"
             }
         },
         "required": [
@@ -75,7 +75,6 @@ var EXPERIMENT = {
     }
 };
 
-/*  TODO
 var SESSION = {
     "type": "jsonschema",
     "schema": {
@@ -118,11 +117,10 @@ var SESSION = {
             "experimentId", "experimentVersion",
             "parameters", "softwareVersion",
             "expData"
-        ],
-        "additionalProperties": false
+        ]
+        // "additionalProperties": false
     }
 };
-*/
 
 var ACCOUNT = {
     definitions: {
@@ -144,7 +142,7 @@ var ACCOUNT = {
             "required": ["firstName", "birthday"]
         }
     },
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "jsonschema",
     "schema": {
         "id": "account",
         "type": "object",
@@ -170,7 +168,7 @@ var ACCOUNT = {
 };
 
 module.exports = function main() {
-    [CONFIG, EXPERIMENT, ACCOUNT].forEach(function(schema) {
+    [CONFIG, EXPERIMENT, ACCOUNT, SESSION].forEach(function(schema) {
         var schemaData = JSON.stringify(schema, null, 4);
         var base = path.dirname(__filename);
         var filename = schema.schema.id;
