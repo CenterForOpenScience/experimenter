@@ -9,11 +9,10 @@ export default Ember.Controller.extend({
     actions: {
         saveSession(payload) {
             // Save a provided javascript object to a session object
-            console.log('controller is attempting to save');
             var model = this.get('model.blankSession');
             model.setProperties(payload);
             model.save();
-            // this.set('model', model);  //  TODO: Update model on controller
+            this.set('model.blankSession', model);
         }
     }
 });
