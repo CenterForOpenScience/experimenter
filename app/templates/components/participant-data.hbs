@@ -1,5 +1,5 @@
 <div class="col-md-6">
-  <table class="table table-striped">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th>Participant<i class="fa fa-sort btn"></i></th>
@@ -8,9 +8,8 @@
     </thead>
     <tbody>
       {{#each sessions as |session|}}
-        {{log session.profileId}}
-        <tr>
-          <td>John Doe</td>
+        <tr class="clickable-row" {{action 'updateData' session}}>
+          <td>{{session.profileId}}</td>
           <td>{{moment-format session.createdOn 'MM/DD/YYYY'}}</td>
         </tr>
       {{/each}}
@@ -18,7 +17,7 @@
   </table>
 </div> 
 <div class="col-md-6">
-  {{export-tool}}
+  {{export-tool data=participantSession mappingFunction=sessionFunction}}
   <div class="row">Attachments</div>
   {{attachment-download showDate=false}}
 </div>

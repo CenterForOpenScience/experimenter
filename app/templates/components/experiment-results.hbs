@@ -11,9 +11,9 @@
   </div>
   <div id="allData" class="tab-pane fade">
     <h3>All Data</h3>
-    {{export-tool}}
+    {{export-tool data=sessions mappingFunction=allSessionFunction}}
   </div>
   <div id="allAttachments" class="tab-pane fade">
-    {{all-attachments}}
+    {{all-attachments sessions=sessions}}
   </div>
 </div>
