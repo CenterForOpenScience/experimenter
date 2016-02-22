@@ -8,10 +8,10 @@
     </thead>
     <tbody>
       {{#each sessions as |session|}}
-        {{log session.timestamp}}
+        {{log session.profileId}}
         <tr>
           <td>John Doe</td>
-          <td>{{session.timestamp}}</td>
+          <td>{{moment-format session.createdOn 'MM/DD/YYYY'}}</td>
         </tr>
       {{/each}}
     </tbody>

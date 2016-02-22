@@ -45,9 +45,5 @@ export default Ember.Component.extend({
                 this.get('onClone')(clone);
             });
         },
-        responses: function() {
-            var exp = this.get('experiment');
-            this.get('onResponses')(exp);
-        }
     }
 });
