@@ -1,0 +1,19 @@
+[{
+    "id": "prof1",
+    "name": "Tester",
+    "birthday": "2016-01-26T15:44:23.861094",
+    "account": "experimenter.accounts.tester1"
+},
+{
+    "id": "prof2",
+    "name": "Tess",
+    "birthday": "2014-01-26T15:44:23.861094",
+    "account": "experimenter.accounts.tester1"
+},
+{
+    "id": "prof3",
+    "name": "Sam",
+    "birthday": "2011-01-26T15:44:23.861094",
+    "account": "experimenter.accounts.tester1"
+}
+]

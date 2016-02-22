@@ -21,7 +21,7 @@
             ]
         }
     },
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "jsonschema",
     "schema": {
         "id": "account",
         "type": "object",

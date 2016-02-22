@@ -41,7 +41,7 @@
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
-                "type": "object"
+                "type": "string"
             }
         },
         "required": [
