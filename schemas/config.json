@@ -4,10 +4,6 @@
         "id": "config",
         "type": "object",
         "properties": {
-            "profileSchema": {
-                "id": "profileSchema",
-                "type": "object"
-            },
             "profilesMin": {
                 "id": "profilesMin",
                 "type": "integer"

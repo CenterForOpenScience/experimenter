@@ -1,0 +1,37 @@
+[{
+    "id": "session1a",
+    "profileId": "tester1.prof1",
+    "profileVersion": "abcdefgab",
+    "experimentId": "experimenter.experiments.test0",
+    "experimentVersion": "qwertyuiop",
+    "parameters": {},
+    "softwareVersion": "0.0.1",
+    "expData": {}
+}, {
+    "id": "session1b",
+    "profileId": "tester1.prof1",
+    "profileVersion": "abcdefgab",
+    "experimentId": "experimenter.experiments.test0",
+    "experimentVersion": "qwertyuiop",
+    "parameters": {},
+    "softwareVersion": "0.0.1",
+    "expData": {}
+}, {
+    "id": "session2a",
+    "profileId": "tester1.prof2",
+    "profileVersion": "abcdefgab",
+    "experimentId": "experimenter.experiments.test0",
+    "experimentVersion": "qwertyuiop",
+    "parameters": {},
+    "softwareVersion": "0.0.1",
+    "expData": {}
+}, {
+    "id": "session2b",
+    "profileId": "tester1.prof2",
+    "profileVersion": "abcdefgab",
+    "experimentId": "experimenter.experiments.test0",
+    "experimentVersion": "qwertyuiop",
+    "parameters": {},
+    "softwareVersion": "0.0.1",
+    "expData": {}
+}]

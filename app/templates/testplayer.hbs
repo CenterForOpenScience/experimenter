@@ -2,7 +2,8 @@
 
 <div class="clearfix">
 {{exp-player
-    frames=model.structure
+    frames=model.experiment.structure
+    saveHandler=(action 'saveSession')
     frameIndex=selectedFrame
 }}
 </div>

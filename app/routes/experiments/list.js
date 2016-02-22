@@ -10,10 +10,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let params = this.paramsFor('experiments');
 
         var query = {
-            q: []
+            q: ['state:(-Deleted)']
         };
-        if (isPresent(params.active)) {
-            query.q.push(`active:${params.active}`);
+        if (isPresent(params.state)) {
+            query.q.push(`state:${params.state}`);
         }
         if (isPresent(params.sort)) {
             query.sort = params.sort;
@@ -22,11 +22,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             query.q.push(params.match);
         }
 
-        if (query.q.length || query.sort) {
-            return this.store.query('experiment', query);
-        }
-        else {
-            return this.store.findAll('experiment');
-        }
+        return this.store.query('experiment', query);
     }
 });

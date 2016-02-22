@@ -2,46 +2,42 @@
     "id": "test0",
     "title": "Abomination of Gudul",
     "description": "Whenever Abomination of Gudul deals combat damage to a player, you may draw a card. If you do, discard a card.",
-    "active": "Active",
+    "state": "Active",
     "beginDate": "2016-02-03",
     "endDate": "2016-02-04",
     "lastEdited": "2016-02-04",
-    "structure": [
-        {
-            "id": "pre-consent",
-            "type": "consent",
-            "title": "Pre Consent Form",
-            "body": "Do you agree to begin the experiment?",
-            "consentLabel": "I strongly agree"
-        },
-        {
-            "id": "post-consent",
-            "type": "consent",
-            "title": "Final Notice of Consent",
-            "body": "Do you agree to finish the experiment?",
-            "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
-        }
-    ]
+    "eligibilityCriteria": "age > 3 months and age < 9 months",
+    "structure": [{
+        "id": "pre-consent",
+        "type": "consent",
+        "title": "Pre Consent Form",
+        "body": "Do you agree to begin the experiment?",
+        "consentLabel": "I strongly agree"
+    }, {
+        "id": "post-consent",
+        "type": "consent",
+        "title": "Final Notice of Consent",
+        "body": "Do you agree to finish the experiment?",
+        "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
+    }]
 }, {
     "id": "test1",
     "title": "Absolver Thrull",
     "description": "When Absolver Thrull enters the battlefield or the creature it haunts dies, destroy target enchantment.",
-    "active": "Draft",
+    "state": "Draft",
     "beginDate": "2016-02-02",
     "endDate": "2016-02-03",
     "lastEdited": "2016-02-04",
-    "structure": [
-        {
-            "id": "pre-consent",
-            "type": "consent",
-            "body": "Hello world"
-        }
-    ]
+    "structure": [{
+        "id": "pre-consent",
+        "type": "consent",
+        "body": "Hello world"
+    }]
 }, {
     "id": "test2",
     "title": "Barbarian Bully",
     "description": "Discard a card at random: Barbarian Bully gets +2/+2 until end of turn unless a player has Barbarian Bully deal 4 damage to him or her. Activate this ability only once each turn.",
-    "active": "Active",
+    "state": "Active",
     "beginDate": "2016-02-03",
     "endDate": "2016-02-04",
     "lastEdited": "2016-02-04",
@@ -50,7 +46,7 @@
     "id": "test3",
     "title": "Carnivorous Death-Parrot",
     "description": "At the beginning of your upkeep, sacrifice Carnivorous Death-Parrot unless you say its flavor text.",
-    "active": "Archive",
+    "state": "Archived",
     "beginDate": "2016-02-02",
     "endDate": "2016-02-02",
     "lastEdited": "2016-02-04",
@@ -59,7 +55,7 @@
     "id": "test4",
     "title": "Withengar Unbound",
     "description": "Flying, intimidate, trample (A creature with intimidate can't be blocked except by artifact creatures and/or creatures that share a color with it.) Whenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.",
-    "active": "Active",
+    "state": "Active",
     "beginDate": "2016-12-03",
     "endDate": "2016-12-03",
     "lastEdited": "2016-02-04",
@@ -68,7 +64,7 @@
     "id": "test5",
     "title": "Worldspine Wurm",
     "description": "When Worldspine Wurm dies, put three 5/5 green Wurm creature tokens with trample onto the battlefield. When Worldspine Wurm is put into a graveyard from anywhere, shuffle it into its owner's library.",
-    "active": "Active",
+    "state": "Active",
     "beginDate": "2016-10-05",
     "endDate": "2016-10-05",
     "lastEdited": "2016-02-04",
@@ -77,7 +73,7 @@
     "id": "test6",
     "title": "Deadly Grub",
     "description": "Vanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.) When Deadly Grub dies, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield. (It can't be the target of spells or abilities.)",
-    "active": "Archive",
+    "state": "Archived",
     "beginDate": "2016-02-03",
     "endDate": "2016-02-01",
     "lastEdited": "2016-02-04",
@@ -86,7 +82,7 @@
     "id": "test7",
     "title": "Faerie Mechanist",
     "description": "When Faerie Mechanist enters the battlefield, look at the top three cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.",
-    "active": "Draft",
+    "state": "Draft",
     "beginDate": "2016-02-02",
     "endDate": "2016-02-02",
     "lastEdited": "2016-02-04",
@@ -95,7 +91,7 @@
     "id": "test8",
     "title": "Centaur Rootcaster",
     "description": "Whenever Centaur Rootcaster deals combat damage to a player, you may search your library for a basic land card and put that card onto the battlefield tapped. If you do, shuffle your library.",
-    "active": "Active",
+    "state": "Active",
     "beginDate": "2016-02-02",
     "endDate": "2016-02-02",
     "lastEdited": "2016-02-04",

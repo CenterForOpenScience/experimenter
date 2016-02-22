@@ -12,9 +12,15 @@
                 "id": "description",
                 "type": "string"
             },
-            "active": {
-                "id": "active",
-                "type": "boolean"
+            "state": {
+                "id": "state",
+                "type": "string",
+                "enum": [
+                    "Draft",
+                    "Active",
+                    "Archived",
+                    "Deleted"
+                ]
             },
             "beginDate": {
                 "id": "beginDate",
@@ -23,11 +29,6 @@
             },
             "endDate": {
                 "id": "endDate",
-                "format": "date-time",
-                "type": "string"
-            },
-            "lastEdited": {
-                "id": "lastEdited",
                 "format": "date-time",
                 "type": "string"
             },
@@ -40,12 +41,12 @@
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
-                "type": "object"
+                "type": "string"
             }
         },
         "required": [
             "structure",
-            "active"
+            "state"
         ]
     }
 }
