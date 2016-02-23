@@ -19,6 +19,14 @@
         "title": "Final Notice of Consent",
         "body": "Do you agree to finish the experiment?",
         "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
+    }, {
+        "id": "first-video",
+        "type": "video",
+        "autoforwardOnEnd": true,
+        "fullscreen": true,
+        "sources": [
+            {"type": "video/mp4", "src": "BigBuckBunny_320x180.mp4"}
+        ]
     }]
 }, {
     "id": "test1",

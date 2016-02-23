@@ -124,7 +124,7 @@ function bootstrapCollection(token, name) {
         examples = require(`./data/${name}.json`);
     } catch (e) {
         examples = [];
-        console.log(`No example data for ${name}`);
+        console.log(`No example data for ${name}, because of error`, e);
     }
 
     if (Array.isArray(permissions[name]))
