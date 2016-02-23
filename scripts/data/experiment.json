@@ -23,9 +23,12 @@
         "id": "first-video",
         "type": "video",
         "autoforwardOnEnd": true,
+        "autoplay": true,
         "fullscreen": true,
         "sources": [
-            {"type": "video/mp4", "src": "BigBuckBunny_320x180.mp4"}
+            {"type": "video/mp4", "src": "big_buck_bunny.mp4"},
+            {"type": "video/webm", "src": "big_buck_bunny.webm"},
+            {"type": "video/ogg", "src": "big_buck_bunny.ogg"}
         ]
     }]
 }, {
