@@ -26,6 +26,16 @@
             {"type": "video/ogg", "src": "big_buck_bunny.ogg"}
         ]
     }, {
+        "id": "second-video",
+        "type": "video",
+        "autoforwardOnEnd": false,
+        "autoplay": false,
+        "fullscreen": false,
+        "poster": "oceans.jpg",
+        "sources": [
+            {"type": "video/mp4", "src": "oceans.mp4"}
+        ]
+    }, {
         "id": "post-consent",
         "type": "consent",
         "title": "Final Notice of Consent",

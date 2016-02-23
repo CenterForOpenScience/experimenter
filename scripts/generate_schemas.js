@@ -85,7 +85,7 @@ var SESSION = {
             "profileId": {
                 "id": "profileId",
                 "type": "string",
-                "pattern": JAM_ID_PATTERN
+                "pattern": PROFILE_ID_PATTERN
             },
             "profileVersion": {
                 "id": "profileVersion",
