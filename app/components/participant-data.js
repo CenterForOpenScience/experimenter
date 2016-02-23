@@ -19,9 +19,6 @@ export default Ember.Component.extend({
             return value;
         }
     }),
-    sessionFunction: function(session) {
-        return session._internalModel._data;
-    },
     actions: {
         updateData: function(session) {
             this.set('participantSession', [session]);
@@ -36,6 +33,6 @@ export default Ember.Component.extend({
                 this.set('reverse', false);
             }
             this.set('sortBy', sortBy);
-        },
+        }
     }
 });

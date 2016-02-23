@@ -44,6 +44,6 @@ export default Ember.Component.extend({
             clone.save().then(() => {
                 this.get('onClone')(clone);
             });
-        },
+        }
     }
 });
