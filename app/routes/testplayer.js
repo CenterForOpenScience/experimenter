@@ -8,7 +8,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return Ember.RSVP.hash({
                 experiment: experiment,
                 blankSession: self.store.createRecord(experiment.get('sessionCollectionId'), {
-                    experimentId: experiment.id,  // Prefill values before player...
+                    'experimentId': experiment.id,  // Prefill values before player... TODO: Hardcode some for now to avoid validation errors
+                    'experimentVersion': '',
+                    'profileId': 'tester0.prof1',
+                    'profileVersion': '',
+                    'softwareVersion': '',
                 }), // Creates new session but doesn't save to store
             });
         });
