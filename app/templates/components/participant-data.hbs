@@ -2,12 +2,12 @@
   <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th>Participant<i class="fa fa-sort btn"></i></th>
-        <th>Date<i class="fa fa-sort btn"></i></th>
+        <th>Participant ID<i class="fa fa-sort btn" {{action "updateSortBy" "profileId"}}></i></th>
+        <th>Date<i class="fa fa-sort btn" {{action "updateSortBy" "createdOn"}}></i></th>
       </tr>
     </thead>
     <tbody>
-      {{#each sessions as |session|}}
+      {{#each sortedSessions as |session|}}
         <tr class="clickable-row" {{action 'updateData' session}}>
           <td>{{session.profileId}}</td>
           <td>{{moment-format session.createdOn 'MM/DD/YYYY'}}</td>
