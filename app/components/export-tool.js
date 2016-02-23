@@ -7,7 +7,7 @@ export default Ember.Component.extend({
         'CSV', 
     ],
     defaultMappingFunction: function (model) {
-        return model._data;
+        return model._internalModel._data;
     },
     processedData: Ember.computed( 'data', 'mappingFunction', 'dataFormat', {
         get() {
