@@ -14,22 +14,23 @@
         "body": "Do you agree to begin the experiment?",
         "consentLabel": "I strongly agree"
     }, {
-        "id": "post-consent",
-        "type": "consent",
-        "title": "Final Notice of Consent",
-        "body": "Do you agree to finish the experiment?",
-        "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
-    }, {
         "id": "first-video",
         "type": "video",
         "autoforwardOnEnd": true,
         "autoplay": true,
         "fullscreen": true,
+        "poster": "big_buck_bunny.jpg",
         "sources": [
             {"type": "video/mp4", "src": "big_buck_bunny.mp4"},
             {"type": "video/webm", "src": "big_buck_bunny.webm"},
             {"type": "video/ogg", "src": "big_buck_bunny.ogg"}
         ]
+    }, {
+        "id": "post-consent",
+        "type": "consent",
+        "title": "Final Notice of Consent",
+        "body": "Do you agree to finish the experiment?",
+        "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
     }]
 }, {
     "id": "test1",
