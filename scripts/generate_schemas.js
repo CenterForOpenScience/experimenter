@@ -49,12 +49,12 @@ var EXPERIMENT = {
             "beginDate": {
                 "id": "beginDate",
                 "format": "date-time",
-                "type": "string"
+                "type": ["string", "null"]
             },
             "endDate": {
                 "id": "endDate",
                 "format": "date-time",
-                "type": "string"
+                "type": ["string", "null"]
             },
             "structure": {
                 "id": "structure",
@@ -65,7 +65,7 @@ var EXPERIMENT = {
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
-                "type": "string"
+                "type": ["string", "null"]
             }
         },
         "required": [
