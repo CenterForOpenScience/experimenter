@@ -37,7 +37,17 @@
         "sources": [
             {"type": "video/mp4", "src": "big_buck_bunny.mp4"},
             {"type": "video/webm", "src": "big_buck_bunny.webm"},
-            {"type": "video/ogg", "src": "big_buck_bunny.ogg"}
+            {"type": "video/ogg", "src": "big_buck_bunny.ogv"}
+        ]
+    }, {
+        "id": "second-video",
+        "type": "video",
+        "autoforwardOnEnd": false,
+        "autoplay": false,
+        "fullscreen": false,
+        "poster": "oceans.jpg",
+        "sources": [
+            {"type": "video/mp4", "src": "oceans.mp4"}
         ]
     }, {
         "id": "second-audio",
@@ -54,14 +64,14 @@
             {"type": "audio/ogg", "src": "horse.ogg"}
         ]
     }, {
-        "id": "second-video",
+        "id": "third-video",
         "type": "video",
         "autoforwardOnEnd": false,
-        "autoplay": false,
+        "autoplay": true,
         "fullscreen": false,
-        "poster": "oceans.jpg",
+        "poster": "big_buck_bunny.jpg",
         "sources": [
-            {"type": "video/mp4", "src": "oceans.mp4"}
+            {"type": "video/webm", "src": "Physicsworks.ogg.360p.webm"}
         ]
     }, {
         "id": "post-consent",
