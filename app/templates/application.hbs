@@ -15,9 +15,11 @@
           <div class="row main-navigation nav-divider {{unless isExpanded 'text-center'}} {{if (route-matches currentRouteName 'participants') 'selected'}}">
             {{#link-to 'participants' class="fa fa-users increase main-navigation clickable selected"}} {{if isExpanded ' Participants'}}{{/link-to}}
           </div>
-          <div class="row sub-navigation {{unless isExpanded 'text-center'}}"> 
+          <!--
+          <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
             {{#link-to 'settings' class="fa fa-user increase sub-navigation"}} {{if isExpanded ' My Profile'}}{{/link-to}}
           </div>
+          -->
           <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
             <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
           </div>
@@ -26,7 +28,7 @@
           <br>
           <div>{{ bread-crumbs }}</div>
           {{outlet}}
-        </div> 
+        </div>
     </div>
   {{else}}
     {{outlet}}

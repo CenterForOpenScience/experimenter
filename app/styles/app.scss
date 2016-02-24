@@ -105,6 +105,7 @@ a.main-navigation:hover {
     text-decoration: none;
 }
 a.sub-navigation {
+    cursor: pointer;
     color: white;
     text-decoration: none;
     padding: 12px;
@@ -116,4 +117,23 @@ a.sub-navigation:visited {
 a.sub-navigation:hover {
     color: orange;
     text-decoration: none;
+}
+
+#login {
+    overflow: hidden;
+    background: #f7f7f7;
+    padding: 50px;
+    width: 274px;
+    margin: 0 auto;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 8px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.15);
+}
+#loginContainer {
+    padding-top: 10%;
+    background-color: rgba(96, 96, 96, 0.15);
+    height: 100%;
+    width: 100%;
 }

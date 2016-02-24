@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    session: Ember.inject.service(),
     isExpanded: true,
     isNotLogin: Ember.computed('this.currentPath', function() {
         if (this.currentPath !== 'login') {
@@ -23,5 +24,10 @@ export default Ember.Controller.extend({
         toggleMenu: function() {
             this.toggleProperty('isExpanded');
         },
+        invalidateSession: function() {
+            return this.get('session').invalidate().then(() => {
+                window.location.reload(true);
+            });
+        }
     }
 });
