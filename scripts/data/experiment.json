@@ -14,6 +14,20 @@
         "body": "Do you agree to begin the experiment?",
         "consentLabel": "I strongly agree"
     }, {
+        "id": "first-soundcheck",
+        "type": "audioplayer",
+        "autoplay": false,
+        "fullControls": true,
+        "mustPlay": true,
+        "images": [],
+        "prompts": [
+            {"title": "Remove distractions", "text": "Our patented underground bunkers will let you work productively, even in the event of nuclear war. (batteries not included)"},
+            {"title": "Need to run?", "text": "In case of attack by lizard people, press F1 to exit the experiment and choose privacy settings for your video. (helpful if the lizard people don't consent to be recorded)"}
+        ],
+        "sources": [
+            {"type": "audio/ogg", "src": "horse.ogg"}
+        ]
+    }, {
         "id": "first-video",
         "type": "video",
         "autoforwardOnEnd": true,
@@ -24,6 +38,20 @@
             {"type": "video/mp4", "src": "big_buck_bunny.mp4"},
             {"type": "video/webm", "src": "big_buck_bunny.webm"},
             {"type": "video/ogg", "src": "big_buck_bunny.ogg"}
+        ]
+    }, {
+        "id": "second-audio",
+        "type": "audioplayer",
+        "autoplay": true,
+        "fullControls": false,
+        "mustPlay": false,
+        "images": [
+            {"src": "osf_test_file.jpg", "alt": "Photo of a squirrel", "title": "Tooltip for first image"},
+            {"src": "osf_test_file2.jpg", "alt": "Another squirrel", "title": "Tooltip for second image"}
+        ],
+        "prompts": [],
+        "sources": [
+            {"type": "audio/ogg", "src": "horse.ogg"}
         ]
     }, {
         "id": "second-video",
