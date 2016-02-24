@@ -33,6 +33,8 @@ Router.map(function() {
 
     this.route('testplayer');
     this.route('testmodel');
+
+    this.route('preview', {path: '/preview/:experiment_id/'});
 });
 
 export default Router;
