@@ -144,6 +144,26 @@ function bootstrapCollection(token, name) {
         .then(loadExamples.bind(this, name + 's', token, examples));
 }
 
+function setNamespacePermissions(token) {
+    var ops = [
+        {
+            op: 'add',
+            path: '/permissions/user-osf-*',
+            value: 'ADMIN'
+        }
+    ];
+    return request
+        .patch({
+            body: ops,
+            json: true,
+            headers: {
+                Authorization: token,
+                'Content-Type': 'application/vnd.api+json ext="jsonpatch";'
+            },
+            url: `${JAM_URL}/v1/namespaces/${NAMESPACE}`
+        });
+}
+
 var COLLECTIONS = fs.readdirSync(__dirname + '/data')
         .map(function(name) {
             return name.replace('.json', '');
@@ -151,7 +171,9 @@ var COLLECTIONS = fs.readdirSync(__dirname + '/data')
 
 authorize()
     .then(function(token) {
-        return Promise.map(COLLECTIONS, bootstrapCollection.bind(this, token));
+        setNamespacePermissions(token).then(function() {
+            return Promise.map(COLLECTIONS, bootstrapCollection.bind(this, token));
+        });
     })
     .catch(function(err) {
         console.log(err.error);

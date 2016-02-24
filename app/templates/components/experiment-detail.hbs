@@ -48,7 +48,7 @@
     <br />
   </div>
   <div class="row">
-    {{#link-to 'experiment.edit' experiment tagName='div' class="btn col-md-4"}}
+    {{#link-to 'experiments.info.edit' experiment tagName='div' class="btn col-md-4"}}
       <div class="well">
         <center>
           <p><i class="increase-4 fa fa-list"></i></p>
@@ -57,7 +57,7 @@
         </center>
       </div>
     {{/link-to}}
-    <div class="btn col-md-4">
+    {{#link-to 'experiments.info.results' tagName='div' class="btn col-md-4"}}
       <div class="well">
         <center>
           <p><i class="increase-4 fa fa-file-text-o"></i></p>
@@ -65,7 +65,7 @@
           <p> Inspect responses from studies </p>
         </center>
       </div>
-    </div>
+    {{/link-to}}
     <div class="btn col-md-4" {{action 'clone'}}>
       <div class="well">
         <center>

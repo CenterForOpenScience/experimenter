@@ -2,9 +2,10 @@ var path = require('path');
 var fs = require('fs');
 
 // h/t: https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s07.html
-var ISO_DATE_PATTERN = '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$';
+var ISO_DATE_PATTERN = '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$';
 
-var JAM_ID_PATTERN = new RegExp(/\w+\.\w+(\.\w+)?/).source;
+var JAM_ID_PATTERN = '\\w+\\.\\w+\\.\\w+';
+var PROFILE_ID_PATTERN = '\\w+\\.\\w+';
 
 
 var CONFIG = {
@@ -48,12 +49,12 @@ var EXPERIMENT = {
             "beginDate": {
                 "id": "beginDate",
                 "format": "date-time",
-                "type": "string"
+                "type": ["string", "null"]
             },
             "endDate": {
                 "id": "endDate",
                 "format": "date-time",
-                "type": "string"
+                "type": ["string", "null"]
             },
             "structure": {
                 "id": "structure",
@@ -64,7 +65,7 @@ var EXPERIMENT = {
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
-                "type": "string"
+                "type": ["string", "null"]
             }
         },
         "required": [
@@ -84,7 +85,7 @@ var SESSION = {
             "profileId": {
                 "id": "profileId",
                 "type": "string",
-                "pattern": JAM_ID_PATTERN
+                "pattern": PROFILE_ID_PATTERN
             },
             "profileVersion": {
                 "id": "profileVersion",
@@ -123,25 +124,6 @@ var SESSION = {
 };
 
 var ACCOUNT = {
-    definitions: {
-        "profile": {
-            "type": "object",
-            "properties": {
-                "profileId": {
-                    "type": "string"
-                },
-                "firstName": {
-                    "type": "string",
-                    "pattern": "^\w{3,64}"
-                },
-                "birthday": {
-                    "type": "string",
-                    "pattern": ISO_DATE_PATTERN
-                }
-            },
-            "required": ["firstName", "birthday"]
-        }
-    },
     "type": "jsonschema",
     "schema": {
         "id": "account",
@@ -153,12 +135,27 @@ var ACCOUNT = {
             },
             "password": {
                 "type": "string",
-                "pattern": "^\$2b\$1[0-3]\$\S{53}$"
+                "pattern": "^\\$2b\\$1[0-3]\\$\\S{53}$"
             },
             "profiles": {
                 "type": "array",  // Could also do this as an object, as long as keys were guaranteed unique
                 "items": {
-                    "$ref": "#/definitions/profile"
+                    "type": "object",
+                    "properties": {
+                        "profileId": {
+                            "type": "string",
+                            "pattern": PROFILE_ID_PATTERN
+                        },
+                        "firstName": {
+                            "type": "string",
+                            "pattern": "^\\w{3,64}"
+                        },
+                        "birthday": {
+                            "type": "string",
+                            "pattern": ISO_DATE_PATTERN
+                        }
+                    },
+                    "required": ["firstName", "birthday"]
                 }
             }
         },

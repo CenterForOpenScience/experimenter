@@ -18,23 +18,15 @@ Router.map(function() {
 
     this.route('experiments', function() {
         this.route('list', {path: '/'});
-    });
-
-    this.route('experiment', {
-        path: '/experiments/:experiment_id/'
-    }, function() {
-        this.route('edit', {
-            path: '/edit/'
-        });
-        this.route('results', {
-            path: '/results/'
+        this.route('info', {path: '/:experiment_id'}, function() {
+          this.route('index', {path: '/'});
+          this.route('edit', {path: '/edit/'});
+          this.route('results', {path: '/results/'});
         });
     });
 
     this.route('participants', function() {
-        this.route('profile', {
-            path: ':profile_id/'
-        });
+        this.route('profile', {path: ':profile_id/'});
     });
     this.route('settings');
     this.route('project-settings');
