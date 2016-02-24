@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
             this.transitionToRoute('experiments');
         },
         onClone: function(exp) {
-            this.transitionToRoute('experiment', exp);
+            this.transitionToRoute('experiments.info', exp.get('id'));
         }
     }
 });

@@ -12,8 +12,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return Ember.RSVP.hash({
                 // The actual return of the model hook: two models, loaded sequentially
                 experiment: experiment,
-                sessions: self.store.findAll(collId),
+                sessions: self.store.findAll(collId)
             });
         });
-    },
+    }
 });
