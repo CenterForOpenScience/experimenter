@@ -15,7 +15,7 @@
         "consentLabel": "I strongly agree"
     }, {
         "id": "first-soundcheck",
-        "type": "audiochecker",
+        "type": "audioplayer",
         "autoplay": false,
         "fullControls": true,
         "mustPlay": true,
@@ -41,13 +41,13 @@
         ]
     }, {
         "id": "second-audio",
-        "type": "audiochecker",
+        "type": "audioplayer",
         "autoplay": true,
         "fullControls": false,
         "mustPlay": false,
         "images": [
-            {'src': 'image1.jpg', 'alt': 'An image', 'title': 'Tooltip for first image'},
-            {'src': 'image2.jpg', 'alt': 'An image', 'title': 'Tooltip for second image'}
+            {"src": "osf_test_file.jpg", "alt": "Photo of a squirrel", "title": "Tooltip for first image"},
+            {"src": "osf_test_file2.jpg", "alt": "Another squirrel", "title": "Tooltip for second image"}
         ],
         "prompts": [],
         "sources": [
