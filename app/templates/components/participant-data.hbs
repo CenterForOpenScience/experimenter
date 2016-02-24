@@ -1,0 +1,23 @@
+<div class="col-md-6">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Participant ID<i class="fa fa-sort btn" {{action "updateSortBy" "profileId"}}></i></th>
+        <th>Date<i class="fa fa-sort btn" {{action "updateSortBy" "createdOn"}}></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each sortedSessions as |session|}}
+        <tr class="clickable-row" {{action 'updateData' session}}>
+          <td>{{session.profileId}}</td>
+          <td>{{moment-format session.createdOn 'MM/DD/YYYY'}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div> 
+<div class="col-md-6">
+  {{export-tool data=participantSession}}
+  <div class="row">Attachments</div>
+  {{attachment-download showDate=false}}
+</div>

@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     experiment: null,
+    sessions: null,
     editing: false,
     toast: Ember.inject.service(),
     store: Ember.inject.service(),
