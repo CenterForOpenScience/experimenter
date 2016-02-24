@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    breadCrumb: 'Dashboard'
+    breadCrumb: 'Responses',
+    experiment: null,
+    sessions: null
 });
