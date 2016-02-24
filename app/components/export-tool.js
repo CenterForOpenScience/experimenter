@@ -4,10 +4,10 @@ export default Ember.Component.extend({
     attributeBindings: ['data', 'mappingFunction'],
     dataFormat: 'JSON',
     dataFormats: [ 'JSON', 
-        'CSV', 
+        'CSV' 
     ],
     defaultMappingFunction: function (model) {
-        return model._data;
+        return model._internalModel._data;
     },
     processedData: Ember.computed( 'data', 'mappingFunction', 'dataFormat', {
         get() {
@@ -60,7 +60,7 @@ export default Ember.Component.extend({
         },
         selectDataFormat: function(dataFormat) {
           this.set('dataFormat', dataFormat);
-        },
+        }
     }
     
 });

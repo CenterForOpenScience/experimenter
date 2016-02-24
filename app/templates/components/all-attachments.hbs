@@ -1,0 +1,25 @@
+<div class="col-xs-12">
+  <div class="row">
+      <h3>All Attachments
+        <small>
+          <button class="btn btn-primary all-attachments-button">Download All Attachments</button>
+        </small>
+      </h3>
+  </div>
+  <div class="row">
+    {{input type="text" placeholder="Filter" size="50" enter="updateSearch" name="searchBar"}}
+  </div>
+  <div class="row">
+    <div class="col-xs-5">
+      <strong>Name </strong><i class="fa fa-sort btn"></i>
+    </div>
+    <div class="col-xs-2 text-center">
+      <strong>Date </strong><i class="fa fa-sort btn"></i>
+    </div>
+    <div class="col-xs-2 text-center">
+      <strong>Download</strong>
+    </div>
+  </div>
+  <hr>
+  {{attachment-download showDate=true}}
+</div>
