@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
     isShowingModal: false,
     breadCrumb: 'Experiments',
     queryParams: ['sort', 'match', 'state', 'q'],
-    state: null,
+    state: 'All',
     match: null,
     sort: 'title',
     sortProperty: Ember.computed('sort', {
@@ -98,10 +98,10 @@ export default Ember.Controller.extend({
                 title: this.get('newTitle'),
                 description: 'Give your experiment a description here...',
                 state: 'Draft',
-                lastEdited: new Date(),
+                lastEdited: new Date()
             });
             this.send('toggleModal');
             newExperiment.save().then(function() {self.transitionToRoute('experiments', newExperiment);});;
-        },
+        }
     }
 });
