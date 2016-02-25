@@ -15,7 +15,7 @@
             </div>
             <button type="button" class="btn btn-danger" {{action "toggleModal"}}>Cancel</button>
             <button class="btn btn-success" {{action "createExperiment"}}>Continue</button>
-        </form>    
+        </form>
     </div>
   {{/modal-dialog}}
 {{/if}}
@@ -23,10 +23,7 @@
   {{input type="text" placeholder="Filter" size="50" enter="updateSearch" name="searchBar"}}
 </div>
 <div class="row text-center button-block">
-  <button class="btn btn-default" {{action "selectStatusFilter" "Active"}}>Active</button>
-  <button class="btn btn-default" {{action "selectStatusFilter" "Draft"}}>Draft</button>
-  <button class="btn btn-default" {{action "selectStatusFilter" "Archived"}}>Archived</button>
-  <button class="btn btn-default" {{action "resetParams"}}>All</button>
+  {{multi-toggle buttons=activeButtons activeButton=state onSelect=(action 'selectStatusFilter')}}
 </div>
 <div class="row">
   <div class="col-xs-8">
