@@ -1,14 +1,20 @@
 @import "ember-modal-dialog/ember-modal-structure";
 @import "ember-modal-dialog/ember-modal-appearance";
-@import "components/experiment-detail";
-@import "components/export-tool";
-@import "components/all-attachments";
-@import "routes/experiments";
 
-/* application.hbs styles only! */
 $large-width: 992px;
 $small-width: 400px;
 $background-dark: #606060;
+$background-light: rgba(96, 96, 96, 0.15);
+
+@import "components/experiment-detail";
+@import "components/export-tool";
+@import "components/all-attachments";
+@import "components/multi-toggle";
+
+@import "routes/experiments";
+@import "routes/login";
+
+/* application.hbs styles only! */
 
 html,
 body,
@@ -105,6 +111,7 @@ a.main-navigation:hover {
     text-decoration: none;
 }
 a.sub-navigation {
+    cursor: pointer;
     color: white;
     text-decoration: none;
     padding: 12px;

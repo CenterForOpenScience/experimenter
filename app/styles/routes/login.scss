@@ -1,0 +1,18 @@
+#login {
+    overflow: hidden;
+    background: #f7f7f7;
+    padding: 50px;
+    width: 274px;
+    margin: 0 auto;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 8px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.15);
+}
+#loginContainer {
+    padding-top: 10%;
+    background-color: $background-light;
+    height: 100%;
+    width: 100%;
+}
