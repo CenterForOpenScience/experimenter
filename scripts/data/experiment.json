@@ -146,4 +146,15 @@
     "endDate": "2016-02-02",
     "lastEdited": "2016-02-04",
     "structure": []
+}, {
+    "id": "test9",
+    "title": "Lookit Test",
+    "description": "It's a test",
+    "state": "Active",
+    "eligibilityCriteria": "age >= 3 years and age < 6 years",
+    "structure": [
+        {
+            "type": "lookit-overview"
+        }
+    ]
 }]
