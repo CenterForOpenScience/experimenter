@@ -35,7 +35,7 @@
         "fullscreen": true,
         "poster": "big_buck_bunny.jpg",
         "sources": [
-            {"type": "video/mp4", "src": "big_buck_bunny.mp4"},
+            {"type": "video/mp4", "src": "big_buck_bunny.m4v"},
             {"type": "video/webm", "src": "big_buck_bunny.webm"},
             {"type": "video/ogg", "src": "big_buck_bunny.ogv"}
         ]
@@ -71,7 +71,7 @@
         "fullscreen": false,
         "poster": "big_buck_bunny.jpg",
         "sources": [
-            {"type": "video/webm", "src": "Physicsworks.ogg.360p.webm"}
+            {"type": "video/webm", "src": "physics-clip.webm"}
         ]
     }, {
         "id": "post-consent",
