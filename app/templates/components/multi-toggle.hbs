@@ -1,0 +1,7 @@
+<div style="display: inline-block; float: none;">
+  <ul class="nav nav-pills">
+    {{#each buttons as |button|}}
+    <li class="multi-toggle-filter btn {{if (eq activeButton button) 'active' ''}}" onclick={{action 'onSelect' button}}>{{button}}</li>
+    {{/each}}
+  </ul>
+</div>

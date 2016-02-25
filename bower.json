@@ -1,14 +1,14 @@
 {
   "name": "experimenter",
   "dependencies": {
-    "bootstrap": ">=3.3.6",
+    "bootstrap": "~3.3.5",
     "ember": "2.3.0",
     "ember-cli-shims": "0.1.0",
     "ember-cli-test-loader": "0.2.2",
     "ember-load-initializers": "0.1.7",
     "ember-qunit-notifications": "0.1.0",
     "font-awesome": "~4.4.0",
-    "jquery": ">=1.11.1",
+    "jquery": ">=1.11.3",
     "jquery.fancytree": "fancytree#~2.14.0",
     "loader.js": "^3.5.0",
     "lodash": "~3.10.1",
@@ -20,9 +20,13 @@
     "handlebars": "3.0.3",
     "toastr": "^2.1.2",
     "bcryptjs": "^2.3.0",
-    "file-saver.js": "^1.20150507.2"
+    "file-saver.js": "^1.20150507.2",
+    "fontawesome": "~4.5.0"
   },
   "resolutions": {
-    "ember": "2.2.0"
+    "ember": "2.2.0",
+    "jquery": "1.9.1 - 2",
+    "moment": ">=2.9.0",
+    "bootstrap": ">= 2.3.2"
   }
 }

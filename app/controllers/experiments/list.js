@@ -62,6 +62,7 @@ export default Ember.Controller.extend({
             this.set('sortOrder', ASC);
         }
     },
+    activeButtons: ['Active', 'Draft', 'Archived', 'All'],
     actions: {
         selectStatusFilter: function(status) {
             this.set('state', status);
@@ -101,7 +102,9 @@ export default Ember.Controller.extend({
                 lastEdited: new Date()
             });
             this.send('toggleModal');
-            newExperiment.save().then(function() {self.transitionToRoute('experiments', newExperiment);});;
+            newExperiment.save().then(function() {
+                self.transitionToRoute('experiments', newExperiment);
+            });
         }
     }
 });
