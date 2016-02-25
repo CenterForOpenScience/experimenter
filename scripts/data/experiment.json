@@ -28,6 +28,53 @@
             {"type": "audio/ogg", "src": "horse.ogg"}
         ]
     }, {
+        "id": "one-randomizer",
+        "type": "random-choice",
+        "options": [{
+            "id": "maybe-consent",
+            "type": "consent",
+            "title": "Just checking",
+            "body": "Are you sure you know what you're getting into?",
+            "consentLabel": "I was told there were cookies"
+        }, {
+            "id": "maybe-soundcheck",
+            "type": "audioplayer",
+            "autoplay": false,
+            "fullControls": true,
+            "mustPlay": true,
+            "images": [],
+            "prompts": [
+                {"title": "Instead of a consent form...", "text": "Here's a helpful tip."},
+                {"title": "A horse is a horse", "text": "But please don't say that backwards."}
+            ],
+            "sources": [
+                {"type": "audio/ogg", "src": "horse.ogg"}
+            ]
+        }]
+    }, {
+        "id": "second-randomizer",
+        "type": "random-choice",
+        "options": [{
+            "id": "maybe-consent",
+            "type": "consent",
+            "title": "But seriously. Are you SURE?",
+            "body": "It's possible you didn't get the last consent form, so we will try to ask again",
+            "consentLabel": "If it's good enough for the IRB, it's good enough for me"
+        }, {
+            "id": "maybe-more-media",
+            "type": "audioplayer",
+            "autoplay": false,
+            "fullControls": true,
+            "mustPlay": true,
+            "images": [],
+            "prompts": [
+                {"title": "Hello, world!", "text": "You can generate a sound file on your mac by typing say 'Hello, world' -o ~/Desktop/test_assets/helloworld.mp4 --file-format mp4f"}
+            ],
+            "sources": [
+                {"type": "audio/mp4", "src": "helloworld.mp4"}
+            ]
+        }]
+    }, {
         "id": "first-video",
         "type": "video",
         "autoforwardOnEnd": true,
