@@ -10,13 +10,13 @@
     "structure": {
         "frames": {
             "pre-consent": {
-                "type": "exp-consent",
+                "kind": "exp-consent",
                 "title": "Pre Consent Form",
                 "body": "Do you agree to begin the experiment?",
                 "consentLabel": "I strongly agree"
             },
             "first-soundcheck": {
-                "type": "exp-audioplayer",
+                "kind": "exp-audioplayer",
                 "autoplay": false,
                 "fullControls": true,
                 "mustPlay": true,
@@ -39,21 +39,21 @@
                 ]
             },
             "one-randomizer": {
-                "type": "random-choice",
-                "sample": "random",
+                "kind": "choice",
+                "sampler": "random",
                 "options": [
                     "maybe-consent",
                     "maybe-soundcheck"
                 ]
             },
             "maybe-consent": {
-                "type": "exp-consent",
+                "kind": "exp-consent",
                 "title": "Just checking",
                 "body": "Are you sure you know what you're getting into?",
                 "consentLabel": "I was told there were cookies"
             },
             "maybe-soundcheck": {
-                "type": "exp-audioplayer",
+                "kind": "exp-audioplayer",
                 "autoplay": false,
                 "fullControls": true,
                 "mustPlay": true,
@@ -76,21 +76,21 @@
                 ]
             },
             "second-randomizer": {
-                "type": "random-choice",
-                "sample": "random",
+                "kind": "choice",
+                "sampler": "random",
                 "options": [
                     "maybe-consent2",
                     "maybe-more-media"
                 ]
             },
             "maybe-consent2": {
-                "type": "exp-consent",
+                "kind": "exp-consent",
                 "title": "But seriously. Are you SURE?",
                 "body": "It's possible you didn't get the last consent form, so we will try to ask again",
                 "consentLabel": "If it's good enough for the IRB, it's good enough for me"
             },
             "maybe-more-media": {
-                "type": "exp-audioplayer",
+                "kind": "exp-audioplayer",
                 "autoplay": false,
                 "fullControls": true,
                 "mustPlay": true,
@@ -109,7 +109,7 @@
                 ]
             },
             "first-video": {
-                "type": "exp-video",
+                "kind": "exp-video",
                 "autoforwardOnEnd": true,
                 "autoplay": true,
                 "fullscreen": true,
@@ -130,7 +130,7 @@
                 ]
             },
             "second-audio": {
-                "type": "exp-audioplayer",
+                "kind": "exp-audioplayer",
                 "autoplay": true,
                 "fullControls": false,
                 "mustPlay": false,
@@ -155,7 +155,7 @@
                 ]
             },
             "second-video": {
-                "type": "exp-video",
+                "kind": "exp-video",
                 "autoforwardOnEnd": false,
                 "autoplay": false,
                 "fullscreen": false,
@@ -168,7 +168,7 @@
                 ]
             },
             "post-consent": {
-                "type": "exp-consent",
+                "kind": "exp-consent",
                 "title": "Final Notice of Consent",
                 "body": "Do you agree to finish the experiment?",
                 "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
