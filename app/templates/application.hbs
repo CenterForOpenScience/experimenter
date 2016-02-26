@@ -1,7 +1,7 @@
 <div class="container-fluid">
   {{#if isNotLogin}}
     <div class="row">
-        <div class="{{if isExpanded 'menu-expanded col-md-2' 'menu-collapsed col-xs-1'}}">
+        <div id="sidebar" class="{{if isExpanded 'menu-expanded col-md-2' 'menu-collapsed col-xs-1'}}">
           <div class="{{unless isExpanded 'row text-center logo-divider'}}">
             <a class="fa fa-angle-{{if isExpanded 'left fa-pull-right' 'right'}} fa-2x sub-navigation hidden-sm hidden-xs" {{action "toggleMenu"}}></a>
           </div>
@@ -21,7 +21,9 @@
           </div>
           -->
           <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
-            <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
+            {{#if session.isAuthenticated}}
+              <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
+            {{/if}}
           </div>
         </div>
         <div class="{{if isExpanded 'col-md-10 col-md-offset-2' 'col-xs-11 col-xs-offset-1'}} app-content">
