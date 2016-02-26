@@ -164,7 +164,18 @@
     "eligibilityCriteria": "age >= 3 years and age < 6 years",
     "structure": [
         {
-            "type": "lookit-overview"
+            "type": "lookit-overview",
+            "title": "Learning from Others: overview",
+            "duration": "Ten minutes",
+            "whatHappens": "First your child will see two actors naming familiar objects. Sometimes they're correct, sometimes they're not. Then we'll show the same actors naming unfamiliar objects and ask your child some questions abiyt which answers he or she trusts.",
+            "purpose": "How children track and use information about reliability.",
+            "subtitleLeft": "Familiar object videos",
+            "imgLeft": "imgLeft.png",
+            "captionLeft": "The 'Familiar object' videos look like this. Two actors will be introduced and asked to name various familar objects, like a brush or rubber duck. Usually, one is more accurate that the other.",
+            "subtitleRight": "Novel object videos",
+            "imgRight": "imgRight.png",
+            "captionRight": "The 'Novel object' videos look like this. The same two actors will name new, funny-looking objects with nonsense words.",
+            "summary": "Your child will be asked what he or she thinks each object is called. Once your child response, please repeat his or her answer, but try not to either confirm or correct the answer. For instance, if your child said that the funny-looking object was a blicket, you'd just say \"Okay, a blicket!\" (Sometimes we have trouble hearing or understanding what kids are saying, and parents are their best interpreters.)"
         }
     ]
 }]
