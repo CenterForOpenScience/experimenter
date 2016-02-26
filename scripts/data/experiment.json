@@ -117,7 +117,7 @@
                 "sources": [
                     {
                         "type": "video/mp4",
-                        "src": "big_buck_bunny.mp4"
+                        "src": "big_buck_bunny.m4v"
                     },
                     {
                         "type": "video/webm",
@@ -167,6 +167,17 @@
                     }
                 ]
             },
+            "third-video": {
+                "id": "third-video",
+                "type": "video",
+                "autoforwardOnEnd": false,
+                "autoplay": true,
+                "fullscreen": false,
+                "poster": "big_buck_bunny.jpg",
+                "sources": [
+                    {"type": "video/webm", "src": "physics-clip.webm"}
+                ]
+            },
             "post-consent": {
                 "kind": "exp-consent",
                 "title": "Final Notice of Consent",
@@ -178,7 +189,7 @@
     "sequence": [
         "pre-consent", "first-soundcheck", "one-randomizer",
         "second-randomizer", "first-video", "second-audio",
-        "second-video", "post-consent"
+        "second-video", "third-video", "post-consent"
     ]
 } , {
     "id": "test1",
