@@ -1,0 +1,8 @@
+{{#if thumbnail }}
+  <img src={{thumbnail}}  class="darkroom" style="max-width: 300px;"/>
+{{ else }}
+  <div class="img-selector-none">
+    <i class="fa fa-picture-o"></i>
+  </div>
+{{/if}}
+{{input type="file" change=(action 'uploadImage') }}
