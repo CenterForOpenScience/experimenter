@@ -111,6 +111,14 @@ var SESSION = {
             "expData": {
                 "id": "expData",
                 "type": "object"
+            },
+            feedback: {
+                "id": "feedback",
+                "type": "string"
+            },
+            "hasReadFeedback": {
+                "id": "hasReadFeedback",
+                "type": "boolean"
             }
         },
         "required": [
