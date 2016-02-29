@@ -208,7 +208,17 @@
     "beginDate": "2016-02-03",
     "endDate": "2016-02-04",
     "lastEdited": "2016-02-04",
-    "structure": {}
+    "structure": [{
+        "id": "video-config",
+        "type": "video-config",
+        "title": "Pre Video Consent Form",
+        "body": "Do you agree to begin the experiment?"
+    }, {
+        "id": "pre-video-consent",
+        "type": "video-consent",
+        "title": "Pre Video Consent Form",
+        "body": "Do you agree to begin the experiment?"
+    }]
 }, {
     "id": "test3",
     "title": "Carnivorous Death-Parrot",
