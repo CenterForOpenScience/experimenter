@@ -58,10 +58,7 @@ var EXPERIMENT = {
             },
             "structure": {
                 "id": "structure",
-                "type": "array",
-                "items": {
-                    "type": "object"
-                }
+                "type": "object"
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
@@ -100,9 +97,12 @@ var SESSION = {
                 "id": "experimentVersion",
                 "type": "string"
             },
-            "parameters": {
-                "id": "parameters",
-                "type": "object"
+            "sequence": {
+                "id": "sequence",
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
             },
             "softwareVersion": {
                 "id": "softwareVersion",
@@ -124,7 +124,7 @@ var SESSION = {
         "required": [
             "profileId", "profileVersion",
             "experimentId", "experimentVersion",
-            "parameters", "softwareVersion",
+            "sequence", "softwareVersion",
             "expData"
         ]
         // "additionalProperties": false
