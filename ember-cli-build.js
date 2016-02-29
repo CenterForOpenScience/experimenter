@@ -17,10 +17,6 @@ module.exports = function(defaults) {
   app.import('bower_components/moment/moment.js');
   app.import('bower_components/file-saver.js/FileSaver.js');
 
-  app.import('bower_components/fabric/dist/fabric.js');
-  app.import('bower_components/darkroom/build/darkroom.js');
-  app.import('bower_components/darkroom/build/darkroom.css');
-
   app.import('bower_components/bootstrap/dist/js/bootstrap.js');
   app.import('bower_components/bootstrap/dist/css/bootstrap.css');
 
