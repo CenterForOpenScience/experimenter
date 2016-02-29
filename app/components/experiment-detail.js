@@ -47,7 +47,7 @@ export default Ember.Component.extend({
         },
         onSetImage: function(thumbnail) {
             var exp = this.get('experiment');
-            exp.setThumbnail(thumbnail);
+            exp.set('thumbnail', thumbnail);
             exp.save().then(() => {
                 this.get('toast.info')('Thumbnail updated successfully.');
             });
