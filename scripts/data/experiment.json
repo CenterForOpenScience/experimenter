@@ -169,7 +169,7 @@
             },
             "third-video": {
                 "id": "third-video",
-                "type": "video",
+                "kind": "exp-video",
                 "autoforwardOnEnd": false,
                 "autoplay": true,
                 "fullscreen": false,
@@ -184,13 +184,13 @@
                 "body": "Do you agree to finish the experiment?",
                 "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
             }
-        }
-    },
-    "sequence": [
-        "pre-consent", "first-soundcheck", "one-randomizer",
-        "second-randomizer", "first-video", "second-audio",
-        "second-video", "third-video", "post-consent"
-    ]
+        },
+        "sequence": [
+            "pre-consent", "first-soundcheck", "one-randomizer",
+            "second-randomizer", "first-video", "second-audio",
+            "second-video", "third-video", "post-consent"
+        ]
+    }
 } , {
     "id": "test1",
     "title": "Absolver Thrull",

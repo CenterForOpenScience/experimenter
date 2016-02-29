@@ -58,10 +58,7 @@ var EXPERIMENT = {
             },
             "structure": {
                 "id": "structure",
-                "type": "array",
-                "items": {
-                    "type": "object"
-                }
+                "type": "object"
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
