@@ -7,80 +7,191 @@
     "endDate": "2016-02-04",
     "lastEdited": "2016-02-04",
     "eligibilityCriteria": "age > 3 months and age < 9 months",
-    "structure": [{
-        "id": "pre-consent",
-        "type": "consent",
-        "title": "Pre Consent Form",
-        "body": "Do you agree to begin the experiment?",
-        "consentLabel": "I strongly agree"
-    }, {
-        "id": "first-soundcheck",
-        "type": "audioplayer",
-        "autoplay": false,
-        "fullControls": true,
-        "mustPlay": true,
-        "images": [],
-        "prompts": [
-            {"title": "Remove distractions", "text": "Our patented underground bunkers will let you work productively, even in the event of nuclear war. (batteries not included)"},
-            {"title": "Need to run?", "text": "In case of attack by lizard people, press F1 to exit the experiment and choose privacy settings for your video. (helpful if the lizard people don't consent to be recorded)"}
-        ],
-        "sources": [
-            {"type": "audio/ogg", "src": "horse.ogg"}
+    "structure": {
+        "frames": {
+            "pre-consent": {
+                "kind": "exp-consent",
+                "title": "Pre Consent Form",
+                "body": "Do you agree to begin the experiment?",
+                "consentLabel": "I strongly agree"
+            },
+            "first-soundcheck": {
+                "kind": "exp-audioplayer",
+                "autoplay": false,
+                "fullControls": true,
+                "mustPlay": true,
+                "images": [],
+                "prompts": [
+                    {
+                        "title": "Remove distractions",
+                        "text": "Our patented underground bunkers will let you work productively, even in the event of nuclear war. (batteries not included)"
+                    },
+                    {
+                        "title": "Need to run?",
+                        "text": "In case of attack by lizard people, press F1 to exit the experiment and choose privacy settings for your video. (helpful if the lizard people don't consent to be recorded)"
+                    }
+                ],
+                "sources": [
+                    {
+                        "type": "audio/ogg",
+                        "src": "horse.ogg"
+                    }
+                ]
+            },
+            "one-randomizer": {
+                "kind": "choice",
+                "sampler": "random",
+                "options": [
+                    "maybe-consent",
+                    "maybe-soundcheck"
+                ]
+            },
+            "maybe-consent": {
+                "kind": "exp-consent",
+                "title": "Just checking",
+                "body": "Are you sure you know what you're getting into?",
+                "consentLabel": "I was told there were cookies"
+            },
+            "maybe-soundcheck": {
+                "kind": "exp-audioplayer",
+                "autoplay": false,
+                "fullControls": true,
+                "mustPlay": true,
+                "images": [],
+                "prompts": [
+                    {
+                        "title": "Instead of a consent form...",
+                        "text": "Here's a helpful tip."
+                    },
+                    {
+                        "title": "A horse is a horse",
+                        "text": "But please don't say that backwards."
+                    }
+                ],
+                "sources": [
+                    {
+                        "type": "audio/ogg",
+                        "src": "horse.ogg"
+                    }
+                ]
+            },
+            "second-randomizer": {
+                "kind": "choice",
+                "sampler": "random",
+                "options": [
+                    "maybe-consent2",
+                    "maybe-more-media"
+                ]
+            },
+            "maybe-consent2": {
+                "kind": "exp-consent",
+                "title": "But seriously. Are you SURE?",
+                "body": "It's possible you didn't get the last consent form, so we will try to ask again",
+                "consentLabel": "If it's good enough for the IRB, it's good enough for me"
+            },
+            "maybe-more-media": {
+                "kind": "exp-audioplayer",
+                "autoplay": false,
+                "fullControls": true,
+                "mustPlay": true,
+                "images": [],
+                "prompts": [
+                    {
+                        "title": "Hello, world!",
+                        "text": "You can generate a sound file on your mac by typing say 'Hello, world' -o ~/Desktop/test_assets/helloworld.mp4 --file-format mp4f"
+                    }
+                ],
+                "sources": [
+                    {
+                        "type": "audio/mp4",
+                        "src": "helloworld.mp4"
+                    }
+                ]
+            },
+            "first-video": {
+                "kind": "exp-video",
+                "autoforwardOnEnd": true,
+                "autoplay": true,
+                "fullscreen": true,
+                "poster": "big_buck_bunny.jpg",
+                "sources": [
+                    {
+                        "type": "video/mp4",
+                        "src": "big_buck_bunny.m4v"
+                    },
+                    {
+                        "type": "video/webm",
+                        "src": "big_buck_bunny.webm"
+                    },
+                    {
+                        "type": "video/ogg",
+                        "src": "big_buck_bunny.ogg"
+                    }
+                ]
+            },
+            "second-audio": {
+                "kind": "exp-audioplayer",
+                "autoplay": true,
+                "fullControls": false,
+                "mustPlay": false,
+                "images": [
+                    {
+                        "src": "osf_test_file.jpg",
+                        "alt": "Photo of a squirrel",
+                        "title": "Tooltip for first image"
+                    },
+                    {
+                        "src": "osf_test_file2.jpg",
+                        "alt": "Another squirrel",
+                        "title": "Tooltip for second image"
+                    }
+                ],
+                "prompts": [],
+                "sources": [
+                    {
+                        "type": "audio/ogg",
+                        "src": "horse.ogg"
+                    }
+                ]
+            },
+            "second-video": {
+                "kind": "exp-video",
+                "autoforwardOnEnd": false,
+                "autoplay": false,
+                "fullscreen": false,
+                "poster": "oceans.jpg",
+                "sources": [
+                    {
+                        "type": "video/mp4",
+                        "src": "oceans.mp4"
+                    }
+                ]
+            },
+            "third-video": {
+                "id": "third-video",
+                "kind": "exp-video",
+                "autoforwardOnEnd": false,
+                "autoplay": true,
+                "fullscreen": false,
+                "poster": "big_buck_bunny.jpg",
+                "sources": [
+                    {"type": "video/webm", "src": "physics-clip.webm"}
+                ]
+            },
+            "post-consent": {
+                "kind": "exp-consent",
+                "title": "Final Notice of Consent",
+                "body": "Do you agree to finish the experiment?",
+                "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
+            }
+        },
+        "sequence": [
+            "pre-consent", "first-soundcheck", "one-randomizer",
+            "second-randomizer", "first-video", "second-audio",
+            "second-video", "third-video", "post-consent"
         ]
-    }, {
-        "id": "first-video",
-        "type": "video",
-        "autoforwardOnEnd": true,
-        "autoplay": true,
-        "fullscreen": true,
-        "poster": "big_buck_bunny.jpg",
-        "sources": [
-            {"type": "video/mp4", "src": "big_buck_bunny.m4v"},
-            {"type": "video/webm", "src": "big_buck_bunny.webm"},
-            {"type": "video/ogg", "src": "big_buck_bunny.ogv"}
-        ]
-    }, {
-        "id": "second-video",
-        "type": "video",
-        "autoforwardOnEnd": false,
-        "autoplay": false,
-        "fullscreen": false,
-        "poster": "oceans.jpg",
-        "sources": [
-            {"type": "video/mp4", "src": "oceans.mp4"}
-        ]
-    }, {
-        "id": "second-audio",
-        "type": "audioplayer",
-        "autoplay": true,
-        "fullControls": false,
-        "mustPlay": false,
-        "images": [
-            {"src": "osf_test_file.jpg", "alt": "Photo of a squirrel", "title": "Tooltip for first image"},
-            {"src": "osf_test_file2.jpg", "alt": "Another squirrel", "title": "Tooltip for second image"}
-        ],
-        "prompts": [],
-        "sources": [
-            {"type": "audio/ogg", "src": "horse.ogg"}
-        ]
-    }, {
-        "id": "third-video",
-        "type": "video",
-        "autoforwardOnEnd": false,
-        "autoplay": true,
-        "fullscreen": false,
-        "poster": "big_buck_bunny.jpg",
-        "sources": [
-            {"type": "video/webm", "src": "physics-clip.webm"}
-        ]
-    }, {
-        "id": "post-consent",
-        "type": "consent",
-        "title": "Final Notice of Consent",
-        "body": "Do you agree to finish the experiment?",
-        "consentLabel": "I am disinclined to the reverse negation of the decision to not cease the termination of the test"
-    }]
-}, {
+    }
+} , {
     "id": "test1",
     "title": "Absolver Thrull",
     "description": "When Absolver Thrull enters the battlefield or the creature it haunts dies, destroy target enchantment.",
@@ -88,11 +199,7 @@
     "beginDate": "2016-02-02",
     "endDate": "2016-02-03",
     "lastEdited": "2016-02-04",
-    "structure": [{
-        "id": "pre-consent",
-        "type": "consent",
-        "body": "Hello world"
-    }]
+    "structure": {}
 }, {
     "id": "test2",
     "title": "Barbarian Bully",
@@ -101,7 +208,7 @@
     "beginDate": "2016-02-03",
     "endDate": "2016-02-04",
     "lastEdited": "2016-02-04",
-    "structure": []
+    "structure": {}
 }, {
     "id": "test3",
     "title": "Carnivorous Death-Parrot",
@@ -110,7 +217,7 @@
     "beginDate": "2016-02-02",
     "endDate": "2016-02-02",
     "lastEdited": "2016-02-04",
-    "structure": []
+    "structure": {}
 }, {
     "id": "test4",
     "title": "Withengar Unbound",
@@ -119,7 +226,7 @@
     "beginDate": "2016-12-03",
     "endDate": "2016-12-03",
     "lastEdited": "2016-02-04",
-    "structure": []
+    "structure": {}
 }, {
     "id": "test5",
     "title": "Worldspine Wurm",
@@ -128,7 +235,7 @@
     "beginDate": "2016-10-05",
     "endDate": "2016-10-05",
     "lastEdited": "2016-02-04",
-    "structure": []
+    "structure": {}
 }, {
     "id": "test6",
     "title": "Deadly Grub",
@@ -137,7 +244,7 @@
     "beginDate": "2016-02-03",
     "endDate": "2016-02-01",
     "lastEdited": "2016-02-04",
-    "structure": []
+    "structure": {}
 }, {
     "id": "test7",
     "title": "Faerie Mechanist",
@@ -146,7 +253,7 @@
     "beginDate": "2016-02-02",
     "endDate": "2016-02-02",
     "lastEdited": "2016-02-04",
-    "structure": []
+    "structure": {}
 }, {
     "id": "test8",
     "title": "Centaur Rootcaster",
@@ -155,5 +262,30 @@
     "beginDate": "2016-02-02",
     "endDate": "2016-02-02",
     "lastEdited": "2016-02-04",
-    "structure": []
-}]
+    "structure": {}
+}, {
+     "id": "test9",
+     "title": "Lookit Test",
+     "description": "It's a test",
+     "state": "Active",
+     "eligibilityCriteria": "age >= 3 years and age < 6 years",
+     "structure": {
+         frames: {
+             "overview": {
+                 "type": "lookit-overview",
+                 "title": "Learning from Others: overview",
+                 "duration": "Ten minutes",
+                 "whatHappens": "First your child will see two actors naming familiar objects. Sometimes they're correct, sometimes they're not. Then we'll show the same actors naming unfamiliar objects and ask your child some questions about which answers he or she trusts.",
+                 "purpose": "How children track and use information about reliability.",
+                 "subtitleLeft": "Familiar object videos",
+                 "imgLeft": "imgLeft.png",
+                 "captionLeft": "The 'Familiar object' videos look like this. Two actors will be introduced and asked to name various familar objects, like a brush or rubber duck. Usually, one is more accurate that the other.",
+                 "subtitleRight": "Novel object videos",
+                 "imgRight": "imgRight.png",
+                 "captionRight": "The 'Novel object' videos look like this. The same two actors will name new, funny-looking objects with nonsense words.",
+                 "summary": "Your child will be asked what he or she thinks each object is called. Once your child response, please repeat his or her answer, but try not to either confirm or correct the answer. For instance, if your child said that the funny-looking object was a blicket, you'd just say \"Okay, a blicket!\" (Sometimes we have trouble hearing or understanding what kids are saying, and parents are their best interpreters.)"
+             },
+             sequence: ["overview"]
+         }
+     }
+ }]

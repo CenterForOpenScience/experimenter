@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
     isShowingModal: false,
     breadCrumb: 'Experiments',
     queryParams: ['sort', 'match', 'state', 'q'],
-    state: null,
+    state: 'All',
     match: null,
     sort: 'title',
     sortProperty: Ember.computed('sort', {
