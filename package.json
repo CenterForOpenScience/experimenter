@@ -74,5 +74,8 @@
       "lib/exp-models",
       "lib/exp-player"
     ]
+  },
+  "dependencies": {
+    "dotenv": "^2.0.0"
   }
 }

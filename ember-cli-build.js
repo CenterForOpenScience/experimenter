@@ -1,5 +1,6 @@
 /*jshint node:true*/
 /* global require, module */
+require('dotenv').config();
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
@@ -11,6 +12,12 @@ module.exports = function(defaults) {
         includePaths: [
             'app/styles'
         ]
+    },
+    emberWowza: {
+      // Config for video recorder config
+      asp: JSON.parse(process.env.WOWZA_ASP),
+      // Config for actual video recording
+      php: JSON.parse(process.env.WOWZA_PHP),
     }
   });
 
