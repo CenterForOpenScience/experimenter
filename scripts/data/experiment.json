@@ -199,7 +199,15 @@
     "beginDate": "2016-02-02",
     "endDate": "2016-02-03",
     "lastEdited": "2016-02-04",
-    "structure": {}
+    "structure": {
+        "frames": {
+            "exit-survey": {
+                "kind": "exp-exit-survey",
+                "title": "Post-study Exit Survey"
+            },
+            "sequence": ["exit-survey"]
+        }
+    }
 }, {
     "id": "test2",
     "title": "Barbarian Bully",
