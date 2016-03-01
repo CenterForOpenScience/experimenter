@@ -5,6 +5,9 @@
       <br />
     </div>
     <div class="row">
+      {{img-selector thumbnail=experiment.thumbnail.raw onSetImage=(action 'onSetImage')}}
+    </div>
+    <div class="row">
       <p> {{experiment.description}} </p>
     </div>
     <div class="row">
