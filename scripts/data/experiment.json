@@ -270,7 +270,7 @@
      "state": "Active",
      "eligibilityCriteria": "age >= 3 years and age < 6 years",
      "structure": {
-         frames: {
+         "frames": {
              "overview": {
                  "type": "lookit-overview",
                  "title": "Learning from Others: overview",
@@ -285,7 +285,7 @@
                  "captionRight": "The 'Novel object' videos look like this. The same two actors will name new, funny-looking objects with nonsense words.",
                  "summary": "Your child will be asked what he or she thinks each object is called. Once your child response, please repeat his or her answer, but try not to either confirm or correct the answer. For instance, if your child said that the funny-looking object was a blicket, you'd just say \"Okay, a blicket!\" (Sometimes we have trouble hearing or understanding what kids are saying, and parents are their best interpreters.)"
              },
-             sequence: ["overview"]
+             "sequence": ["overview"]
          }
      }
  }]
