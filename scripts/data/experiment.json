@@ -210,9 +210,9 @@
                 "currentDaysSessionsCompleted": 1,
                 "idealSessionsCompleted": 2,
                 "idealDaysSessionsCompleted": 7
-            },
-            "sequence": ["exit-survey"]
-        }
+            }
+        },
+        "sequence": ["exit-survey"]
     }
 }, {
     "id": "test2",
