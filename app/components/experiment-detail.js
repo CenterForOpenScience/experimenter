@@ -44,6 +44,13 @@ export default Ember.Component.extend({
             clone.save().then(() => {
                 this.get('onClone')(clone);
             });
+        },
+        onSetImage: function(thumbnail) {
+            var exp = this.get('experiment');
+            exp.set('thumbnail', thumbnail);
+            exp.save().then(() => {
+                this.get('toast.info')('Thumbnail updated successfully.');
+            });
         }
     }
 });
