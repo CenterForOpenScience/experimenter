@@ -36,7 +36,8 @@ function authorize() {
         });
 }
 
-function getOrCreateCollection(collection, token) {
+function getOrCreateCollection(collection, token, attributes) {
+    attributes = attributes || {};
     return request
         .get({
             json: true,
@@ -45,7 +46,7 @@ function getOrCreateCollection(collection, token) {
             },
             url: `${JAM_URL}/v1/id/collections/${NAMESPACE}.${collection}`
         })
-        .catch(function(err) {
+        .catch(function() {
             return request.post({
                 json: true,
                 headers: {
@@ -56,7 +57,7 @@ function getOrCreateCollection(collection, token) {
                     data: {
                         id: collection,
                         type: 'collections',
-                        attributes: {}
+                        attributes: attributes
                     }
                 }
             });
@@ -77,8 +78,9 @@ function updateCollection(collection, token, ops) {
 }
 
 function loadExamples(collection, token, examples) {
-    if (!Array.isArray(examples) || examples.length < 1)
+    if (!Array.isArray(examples) || examples.length < 1) {
         return console.log(`No example data for ${collection}`);
+    }
 
     return Promise.map(examples, function(example) {
 
@@ -127,7 +129,7 @@ function bootstrapCollection(token, name) {
         console.log(`No example data for ${name}, because of error`, e);
     }
 
-    if (Array.isArray(permissions[name]))
+    if (Array.isArray(permissions[name])) {
         ops = ops.concat(permissions[name].map(function(p) {
             console.log(`Granting ${p[0]} ${p[1]} permissions on collection ${name}`);
             return {
@@ -136,8 +138,10 @@ function bootstrapCollection(token, name) {
                 value: p[1]
             };
         }));
-    else
+    }
+    else {
         console.log(`No permissions found for collection ${name}, skipping`);
+    }
 
     return getOrCreateCollection(name + 's', token)
         .then(updateCollection.bind(this, name + 's', token, ops))
@@ -164,6 +168,38 @@ function setNamespacePermissions(token) {
         });
 }
 
+function createThumbnailsCollection(token) {
+    getOrCreateCollection('thumbnails', token, {
+        'state': 'mongo'
+    }).then(() => {
+        var ops = [
+            {
+                op: 'add',
+                path: '/permissions/user-osf-*',
+                value: 'ADMIN'
+            },
+            {
+                op: 'add',
+                path: '/permissions/*',
+                value: 'READ'
+            }
+        ];
+        return request
+            .patch({
+                body: ops,
+                json: true,
+                headers: {
+                    Authorization: token,
+                    'Content-Type': 'application/vnd.api+json ext="jsonpatch";'
+                },
+                url: `${JAM_URL}/v1/namespaces/${NAMESPACE}/collections/thumbnails/`
+            })
+            .catch(function(err) {
+                console.log(err.error);
+            });
+    });
+}
+
 var COLLECTIONS = fs.readdirSync(__dirname + '/data')
         .map(function(name) {
             return name.replace('.json', '');
@@ -174,6 +210,7 @@ authorize()
         setNamespacePermissions(token).then(function() {
             return Promise.map(COLLECTIONS, bootstrapCollection.bind(this, token));
         });
+        createThumbnailsCollection(token);
     })
     .catch(function(err) {
         console.log(err.error);
