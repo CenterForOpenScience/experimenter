@@ -111,7 +111,6 @@
             },
             "first-video": {
                 "kind": "exp-video",
-                "autoforwardOnEnd": true,
                 "autoplay": true,
                 "poster": "big_buck_bunny.jpg",
                 "sources": [
@@ -156,7 +155,6 @@
             },
             "second-video": {
                 "kind": "exp-video",
-                "autoforwardOnEnd": false,
                 "autoplay": false,
                 "poster": "oceans.jpg",
                 "sources": [
@@ -169,9 +167,8 @@
             "third-video": {
                 "id": "third-video",
                 "kind": "exp-video",
-                "autoforwardOnEnd": false,
                 "autoplay": true,
-                "poster": "big_buck_bunny.jpg",
+                "poster": "",
                 "sources": [
                     {"type": "video/webm", "src": "physics-clip.webm"}
                 ]
