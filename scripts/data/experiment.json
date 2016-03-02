@@ -7,6 +7,7 @@
     "endDate": "2016-02-04",
     "lastEdited": "2016-02-04",
     "eligibilityCriteria": "age > 3 months and age < 9 months",
+    "displayFullscreen": true,
     "structure": {
         "frames": {
             "pre-consent": {
@@ -112,7 +113,6 @@
                 "kind": "exp-video",
                 "autoforwardOnEnd": true,
                 "autoplay": true,
-                "fullscreen": true,
                 "poster": "big_buck_bunny.jpg",
                 "sources": [
                     {
@@ -158,7 +158,6 @@
                 "kind": "exp-video",
                 "autoforwardOnEnd": false,
                 "autoplay": false,
-                "fullscreen": false,
                 "poster": "oceans.jpg",
                 "sources": [
                     {
@@ -172,7 +171,6 @@
                 "kind": "exp-video",
                 "autoforwardOnEnd": false,
                 "autoplay": true,
-                "fullscreen": false,
                 "poster": "big_buck_bunny.jpg",
                 "sources": [
                     {"type": "video/webm", "src": "physics-clip.webm"}
