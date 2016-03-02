@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
             this.set('session', session);
             return session;
         },
-        set: function(session) {
+        set: function(_, session) {
             this.set('_session', session);
             return session;
         }
