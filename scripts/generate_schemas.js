@@ -63,6 +63,10 @@ var EXPERIMENT = {
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
                 "type": ["string", "null"]
+            },
+            "displayFullscreen": {
+                "type": "boolean",
+                "default": false
             }
         },
         "required": [
