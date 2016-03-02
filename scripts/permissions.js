@@ -1,44 +1,34 @@
 // TODO make user specific
 var OSF = 'user-osf-*';
-
-var ADMIN = 'jam-experimenter:admins-*';
 var PARTICIPANT = 'jam-experimenter:accounts-*';
+var GLOBAL = '*';
 
 var config = [
-    [ADMIN, 'CRUD'],
     [OSF, 'CRUD']
 ];
 
 var admin = [
-    [ADMIN, 'READ'],
     [OSF, 'READ'],
-    [ADMIN, 'CREATE'],
     [OSF, 'CREATE']
 ];
 
 var experiment = [
-    [ADMIN, 'READ'],
-    [OSF, 'READ'],
-    [ADMIN, 'CREATE'],
-    [OSF, 'CREATE'],
-    [PARTICIPANT, 'READ']
+    [GLOBAL, 'READ'],
+    [OSF, 'CREATE']
 ];
 
 var session = [
     [PARTICIPANT, 'CREATE'],
-    [ADMIN, 'READ'],
     [OSF, 'READ']
 ];
 
 var account = [
-    ['*', 'CREATE'],
-    [ADMIN, 'READ'],
+    [GLOBAL, 'CREATE'],
     [OSF, 'READ']
 ];
 
 var profile = [
     [PARTICIPANT, 'CREATE'],
-    [ADMIN, 'READ'],
     [OSF, 'READ']
 ];
 
