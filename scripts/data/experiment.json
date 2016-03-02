@@ -222,17 +222,23 @@
     "beginDate": "2016-02-03",
     "endDate": "2016-02-04",
     "lastEdited": "2016-02-04",
-    "structure": [{
-        "id": "video-config",
-        "type": "video-config",
-        "title": "Pre Video Consent Form",
-        "body": "Do you agree to begin the experiment?"
-    }, {
-        "id": "pre-video-consent",
-        "type": "video-consent",
-        "title": "Pre Video Consent Form",
-        "body": "Do you agree to begin the experiment?"
-    }]
+    "structure": {
+        "frames": {
+            "video-config": {
+                "id": "video-config",
+                "type": "exp-video-config",
+                "title": "Pre Video Consent Form",
+                "body": "Do you agree to begin the experiment?"
+            },
+            "video-consent": {
+                "id": "pre-video-consent",
+                "kind": "video-consent",
+                "title": "Pre Video Consent Form",
+                "body": "Do you agree to begin the experiment?"
+            }
+        },
+        "sequence": ["video-config", "video-consent"]
+    }
 }, {
     "id": "test3",
     "title": "Carnivorous Death-Parrot",
@@ -296,7 +302,7 @@
      "structure": {
          "frames": {
              "overview": {
-                 "type": "lookit-overview",
+                 "kind": "exp-lookit-overview",
                  "title": "Learning from Others: overview",
                  "duration": "Ten minutes",
                  "whatHappens": "First your child will see two actors naming familiar objects. Sometimes they're correct, sometimes they're not. Then we'll show the same actors naming unfamiliar objects and ask your child some questions about which answers he or she trusts.",
@@ -308,8 +314,8 @@
                  "imgRight": "imgRight.png",
                  "captionRight": "The 'Novel object' videos look like this. The same two actors will name new, funny-looking objects with nonsense words.",
                  "summary": "Your child will be asked what he or she thinks each object is called. Once your child response, please repeat his or her answer, but try not to either confirm or correct the answer. For instance, if your child said that the funny-looking object was a blicket, you'd just say \"Okay, a blicket!\" (Sometimes we have trouble hearing or understanding what kids are saying, and parents are their best interpreters.)"
-             },
-             "sequence": ["overview"]
-         }
+             }
+         },
+         "sequence": ["overview"]
      }
  }]
