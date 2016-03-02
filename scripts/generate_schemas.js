@@ -142,6 +142,7 @@ var ACCOUNT = {
                 // # "pattern": commonregex.email.pattern
             },
             "password": {
+                "id": "password",
                 "type": "string",
                 "pattern": "^\\$2b\\$1[0-3]\\$\\S{53}$"
             },
@@ -172,8 +173,9 @@ var ACCOUNT = {
     }
 };
 
+// TODO RE-add account
 module.exports = function main() {
-    [CONFIG, EXPERIMENT, ACCOUNT, SESSION].forEach(function(schema) {
+    [CONFIG, EXPERIMENT, SESSION].forEach(function(schema) {
         var schemaData = JSON.stringify(schema, null, 4);
         var base = path.dirname(__filename);
         var filename = schema.schema.id;
