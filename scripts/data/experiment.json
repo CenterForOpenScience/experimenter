@@ -199,7 +199,21 @@
     "beginDate": "2016-02-02",
     "endDate": "2016-02-03",
     "lastEdited": "2016-02-04",
-    "structure": {}
+    "structure": {
+        "frames": {
+            "exit-survey": {
+                "kind": "exp-exit-survey",
+                "title": "Post-study Survey",
+                "exitThankYou": "Thanks so much! We appreciate every family's help. No matter how your child responded, we can learn something from his or her behavior--for instance, if he or she got bored and decided to stop, we know we need to make studies that are more fun!",
+                "exitMessage": "Every session helps us learn about your child's growing brain. We look forward to seeing your family again! You can complete your next \"Physics\" session as soon as tomorrow.",
+                "currentSessionsCompleted": 1,
+                "currentDaysSessionsCompleted": 1,
+                "idealSessionsCompleted": 2,
+                "idealDaysSessionsCompleted": 7
+            }
+        },
+        "sequence": ["exit-survey"]
+    }
 }, {
     "id": "test2",
     "title": "Barbarian Bully",
