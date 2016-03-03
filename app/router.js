@@ -19,9 +19,11 @@ Router.map(function() {
     this.route('experiments', function() {
         this.route('list', {path: '/'});
         this.route('info', {path: '/:experiment_id'}, function() {
-          this.route('index', {path: '/'});
-          this.route('edit', {path: '/edit/'});
-          this.route('results', {path: '/results/'});
+            this.route('index', {path: '/'});
+            this.route('edit', {path: '/edit/'});
+            this.route('results', {path: '/results/'});
+            this.route('preview', {path: '/preview/'});
+
         });
     });
 
@@ -33,7 +35,6 @@ Router.map(function() {
 
     this.route('testmodel');
 
-    this.route('preview', {path: '/preview/:experiment_id/'});
 });
 
 export default Router;
