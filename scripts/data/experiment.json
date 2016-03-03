@@ -47,6 +47,14 @@
                     "maybe-soundcheck"
                 ]
             },
+            "one-shuffle": {
+                "kind": "choice",
+                "sampler": "shuffle",
+                "options": [
+                    "maybe-consent",
+                    "maybe-soundcheck"
+                ]
+            },
             "maybe-consent": {
                 "kind": "exp-consent",
                 "title": "Just checking",
@@ -186,7 +194,7 @@
         "sequence": [
             "pre-consent", "first-soundcheck", "one-randomizer",
             "second-randomizer", "first-video", "second-audio",
-            "second-video", "third-video", "post-consent"
+            "second-video", "third-video", "one-shuffle", "post-consent"
         ]
     }
 } , {
