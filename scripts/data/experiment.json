@@ -224,13 +224,13 @@
         "frames": {
             "video-config": {
                 "id": "video-config",
-                "type": "exp-video-config",
+                "kind": "exp-video-config",
                 "title": "Pre Video Consent Form",
                 "body": "Do you agree to begin the experiment?"
             },
             "video-consent": {
                 "id": "pre-video-consent",
-                "kind": "video-consent",
+                "kind": "exp-video-consent",
                 "title": "Pre Video Consent Form",
                 "body": "Do you agree to begin the experiment?"
             }
@@ -292,28 +292,129 @@
     "lastEdited": "2016-02-04",
     "structure": {}
 }, {
-     "id": "test9",
-     "title": "Lookit Test",
-     "description": "It's a test",
-     "state": "Active",
-     "eligibilityCriteria": "age >= 3 years and age < 6 years",
-     "structure": {
-         "frames": {
-             "overview": {
-                 "kind": "exp-lookit-overview",
-                 "title": "Learning from Others: overview",
-                 "duration": "Ten minutes",
-                 "whatHappens": "First your child will see two actors naming familiar objects. Sometimes they're correct, sometimes they're not. Then we'll show the same actors naming unfamiliar objects and ask your child some questions about which answers he or she trusts.",
-                 "purpose": "How children track and use information about reliability.",
-                 "subtitleLeft": "Familiar object videos",
-                 "imgLeft": "imgLeft.png",
-                 "captionLeft": "The 'Familiar object' videos look like this. Two actors will be introduced and asked to name various familar objects, like a brush or rubber duck. Usually, one is more accurate that the other.",
-                 "subtitleRight": "Novel object videos",
-                 "imgRight": "imgRight.png",
-                 "captionRight": "The 'Novel object' videos look like this. The same two actors will name new, funny-looking objects with nonsense words.",
-                 "summary": "Your child will be asked what he or she thinks each object is called. Once your child response, please repeat his or her answer, but try not to either confirm or correct the answer. For instance, if your child said that the funny-looking object was a blicket, you'd just say \"Okay, a blicket!\" (Sometimes we have trouble hearing or understanding what kids are saying, and parents are their best interpreters.)"
-             }
-         },
-         "sequence": ["overview"]
-     }
- }]
+    "id": "demo",
+    "title": "Lookit Demo",
+    "description": "It's a test",
+    "state": "Active",
+    "eligibilityCriteria": "age >= 3 years and age < 6 years",
+    "structure": {
+        "frames": {
+            "video-config": {
+                "kind": "exp-video-config"
+            },
+            "video-consent": {
+                "kind": "exp-video-consent",
+                "prompt": "\"I have read and agree and understand the information about. I am this child's legal guardian and we both agree to participate in this study.\""
+            },
+            "overview": {
+                "kind": "exp-lookit-overview",
+                "title": "Learning from Others: overview",
+                "duration": "Ten minutes",
+                "whatHappens": "First your child will see two actors naming familiar objects. Sometimes they're correct, sometimes they're not. Then we'll show the same actors naming unfamiliar objects and ask your child some questions about which answers he or she trusts.",
+                "purpose": "How children track and use information about reliability.",
+                "subtitleLeft": "Familiar object videos",
+                "imgLeft": "imgLeft.png",
+                "captionLeft": "The 'Familiar object' videos look like this. Two actors will be introduced and asked to name various familar objects, like a brush or rubber duck. Usually, one is more accurate that the other.",
+                "subtitleRight": "Novel object videos",
+                "imgRight": "imgRight.png",
+                "captionRight": "The 'Novel object' videos look like this. The same two actors will name new, funny-looking objects with nonsense words.",
+                "summary": "Your child will be asked what he or she thinks each object is called. Once your child response, please repeat his or her answer, but try not to either confirm or correct the answer. For instance, if your child said that the funny-looking object was a blicket, you'd just say \"Okay, a blicket!\" (Sometimes we have trouble hearing or understanding what kids are saying, and parents are their best interpreters.)"
+            },
+            "webcam-setup": {
+                "kind": "exp-video-setup",
+                "title": "Getting set up",
+                "heading": "Your webcam",
+                "headingText": "We're interested in your child's responses, so we'd like to see him or her on the webcam video that's recorded.",
+                "instructions": "Sit your child on your lap, and adjust your webcam if needed so that the view from your webcam (above) looks like the center picture below. Try to get your child's face in the center of the picture, with the whole face visible.\n\n During the movies, please try to keep your child in approximately the same position, in view of the webcam. (But don't worry; we know kids squirm!)",
+                "examples": [
+                    {
+                        "src": "video-setup-1.png",
+                        "caption": "Child is off to one side"
+                    },
+                    {
+                        "src": "video-setup-2.png",
+                        "caption": "Great!"
+                    },
+                    {
+                        "src": "video-setup-3.png",
+                        "caption": "A bit too close"
+                    }
+                ]
+            },
+            "soundcheck": {
+                "kind": "exp-audioplayer",
+                "autoplay": false,
+                "fullControls": true,
+                "mustPlay": true,
+                "images": [],
+                "title": "Getting set up",
+                "titlePrompt": {
+                    "title": "Speakers",
+                    "text": "We'll be playing a recorded story for your child, and it's important that your child is able to hear the sound. Please try playing the music below to check that your speaker volume is set to a comfortable level."
+                },
+                "prompts": [{
+                    "title": "Need to run?",
+                    "text": "To end the experiment early at any point, just press 'F1' or close your browser window. You'll be prompted to note any problems you're experiencing and chosee a privacy level for any video recorded."
+                }, {
+                    "title": "Remove distractions",
+                    "text": "The movies we show will be full-screen (you may need to click 'allow' when prompted) and it's important that nothing else 'pops up' and distracts your child. Please exit any programs that might make distracting noises or windows (e.g. an instant messaging program).\n\nReady? Click 'Next' to start the first story."
+                }],
+                "sources": [{
+                    "type": "audio/ogg",
+                    "src": "horse.ogg"
+                }]
+            },
+            "first-video": {
+                "kind": "exp-video",
+                "autoforwardOnEnd": true,
+                "autoplay": true,
+                "poster": "big_buck_bunny.jpg",
+                "sources": [{
+                    "type": "video/webm",
+                    "src": "big_buck_bunny.webm"
+                }, {
+                    "type": "video/ogg",
+                    "src": "big_buck_bunny.ogg"
+                }, {
+                    "type": "video/mp4",
+                    "src": "big_buck_bunny.m4v"
+                }]
+            },
+            "first-video-review": {
+                "kind": "exp-audioplayer",
+                "autoplay": true,
+                "fullControls": true,
+                "mustPlay": true,
+                "images": [{
+                    "src": "actors.png"
+                }, {
+                    "src": "spoon.png"
+                }],
+                "sources": [{
+                    "type": "audio/ogg",
+                    "src": "horse.ogg"
+                }]
+            },
+            "exit-survey": {
+                "kind": "exp-exit-survey",
+                "title": "Post-study Survey",
+                "exitThankYou": "Thanks so much! We appreciate every family's help. No matter how your child responded, we can learn something from his or her behavior--for instance, if he or she got bored and decided to stop, we know we need to make studies that are more fun!",
+                "exitMessage": "Every session helps us learn about your child's growing brain. We look forward to seeing your family again! You can complete your next \"Physics\" session as soon as tomorrow.",
+                "currentSessionsCompleted": 1,
+                "currentDaysSessionsCompleted": 1,
+                "idealSessionsCompleted": 2,
+                "idealDaysSessionsCompleted": 7
+            }
+        },
+        "sequence": [
+            "video-config",
+            "video-consent",
+            "overview",
+            "webcam-setup",
+            "soundcheck",
+            "first-video",
+            "first-video-review",
+            "exit-survey"
+        ]
+    }
+}]
