@@ -211,7 +211,8 @@
             }
         },
         "sequence": ["exit-survey"]
-    }
+    },
+    "exitUrl": "http://google.com"
 }, {
     "id": "test2",
     "title": "Barbarian Bully",

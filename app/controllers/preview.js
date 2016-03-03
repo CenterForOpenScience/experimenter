@@ -9,11 +9,11 @@ export default Ember.Controller.extend({
         return session.get('hasDirtyAttributes');
     },
     actions: {
-        saveSession(payload) {
+        saveSession(payload, callback) {
             // Save a provided javascript object to a session object
             var session = this.get('session');
             session.setProperties(payload);
-            session.save();
+            session.save().then(callback);
             this.set('session', session);
         }
     },
