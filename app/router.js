@@ -31,7 +31,6 @@ Router.map(function() {
     this.route('settings');
     this.route('project-settings');
 
-    this.route('testplayer');
     this.route('testmodel');
 
     this.route('preview', {path: '/preview/:experiment_id/'});
