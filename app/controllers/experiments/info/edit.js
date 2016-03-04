@@ -17,7 +17,15 @@ export default Ember.Controller.extend({
                 return false;
             }
 
-            model.setProperties(payload);  // FIXME: Does not unset properties that were removed, eg patch request
+            model.setProperties(payload);  // Sets all keys in payload, including those not part of model definition
+            // If a key was removed from the JSON, it won't be (re)set above; enforce that absent keys are set to undefined
+            //    (so that the database value for that field is actually changed)
+            model.eachAttribute((key) => {
+                if (!payload.hasOwnProperty(key)) {
+                    model.set(key, undefined);
+                }
+            });
+
             model.save().then(() => { // resolve
                 this.set('model');
                 this.send('toList');
