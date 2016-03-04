@@ -7,20 +7,19 @@ export default Ember.Controller.extend({
 
     actions: {
         save(data) {
-            // TODO: Save model and call transition to list page
             var model = this.get('model');
             var payload;
             try {
                 payload = JSON.parse(data);
             } catch(e)  {
                 console.log(e);
-                this.toast.error('Could not save experiment. Check definition for syntax errors.');
+                this.toast.error('Could not save experiment. Check definition for syntax errors.'); // TODO: Improve error UX
                 return false;
             }
 
-            model.setProperties(payload);  // FIXME: Does not unset properties that were removed
+            model.setProperties(payload);  // FIXME: Does not unset properties that were removed, eg patch request
             model.save().then(() => { // resolve
-                this.set('model'); // TODO: update JSON variable? needed?
+                this.set('model');
                 this.send('toList');
             }, () => { // reject
                 this.toast.error('The server refused to save the data, likely due to a schema error');

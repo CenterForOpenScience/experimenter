@@ -4,6 +4,6 @@ export function initialize(app) {
 }
 
 export default {
-  name: 'register-ace-editor',
-  initialize
+    name: 'register-ace-editor',
+    initialize
 };
