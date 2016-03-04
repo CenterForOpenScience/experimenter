@@ -107,7 +107,7 @@ export default Ember.Controller.extend({
             });
             this.send('toggleModal');
             newExperiment.save().then(function() {
-                self.transitionToRoute('experiments', newExperiment);
+                self.transitionToRoute('experiments.info', newExperiment.id);
             });
         }
     }
