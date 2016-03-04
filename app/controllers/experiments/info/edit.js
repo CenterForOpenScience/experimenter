@@ -4,6 +4,15 @@ export default Ember.Controller.extend({
     breadCrumb: 'Edit',
     toast: Ember.inject.service('toast'),
 
+
+  aceInit: function(editor) {
+    editor.setHighlightActiveLine(false);
+    editor.setShowPrintMargin(false);
+    editor.getSession().setTabSize(4);
+    editor.getSession().setMode('ace/mode/javascript');
+  },
+
+
     actions: {
         save(data) {
             // TODO: Save model and call transition to list page
@@ -11,7 +20,6 @@ export default Ember.Controller.extend({
             var payload;
             try {
                 payload = JSON.parse(data);
-                console.log('payload is', payload);
             } catch(e)  {
                 console.log(e);
                 this.toast.error('Could not save experiment. Check definition for syntax errors.');
