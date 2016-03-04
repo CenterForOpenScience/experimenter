@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     thumbnail: null,
+    edit: true,
     actions: {
         uploadImage: function(e) {
             var self = this;
@@ -15,6 +16,9 @@ export default Ember.Component.extend({
                 }
             };
             reader.readAsDataURL(e.target.files[0]);
+        },
+        clickInput: function() {
+            this.$().find('.img-selector-input').click();
         }
     }
 });
