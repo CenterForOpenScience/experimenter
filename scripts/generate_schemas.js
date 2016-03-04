@@ -71,8 +71,8 @@ var EXPERIMENT = {
                 "default": false
             },
             "exitUrl": {
-                "type": "string",
-                "pattern": URL_PATTERN
+                "type": "string"
+                //"pattern": URL_PATTERN
             }
         },
         "required": [
