@@ -1,19 +1,25 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
+
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(params) {
-        var self = this;
-        return this.store.findRecord('experiment', 'experimenter.experiments.test0').then(function(experiment) {
+        var parentParams = this.paramsFor('experiments.info');
+
+        return this.store.findRecord('experiment', parentParams.experiment_id).then((experiment) => {
+            // When page loads, creates new session, but doesn't save to store
+            var session = this.store.createRecord(experiment.get('sessionCollectionId'), {
+                experimentId: experiment.id,
+                profileId: 'tester0.prof1', // TODO fetch from service
+                profileVersion: '',
+                softwareVersion: ''
+            });
+            experiment.getCurrentVersion().then(function(versionId) {
+                session.set('experimentVersion', versionId);
+            });  // TODO: May be an edge case where experimentVersion isn't set/ resolved before this hash returns
             return Ember.RSVP.hash({
                 experiment: experiment,
-                blankSession: self.store.createRecord(experiment.get('sessionCollectionId'), {
-                    'experimentId': experiment.id,  // Prefill values before player... TODO: Hardcode some for now to avoid validation errors
-                    'experimentVersion': '',
-                    'profileId': 'tester0.prof1',
-                    'profileVersion': '',
-                    'softwareVersion': '',
-                }), // Creates new session but doesn't save to store
+                session: session
             });
         });
     },
@@ -23,6 +29,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // FIXME: This won't prevent back button or manual URL change. See https://guides.emberjs.com/v2.3.0/routing/preventing-and-retrying-transitions/#toc_preventing-transitions-via-code-willtransition-code
             if (this.controller.isDirty() && !confirm('Are you sure you want to exit the experiment?')) {
                 transition.abort();
+                return false;
             } else {
                 // Bubble this action to parent routes
                 return true;
