@@ -12,9 +12,12 @@
           <div class="row main-navigation {{unless isExpanded 'text-center'}} {{if (route-matches currentRouteName 'experiments') 'selected'}}">
             {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}}{{if isExpanded ' Experiments'}} {{/link-to}}
           </div>
+          <!--
           <div class="row main-navigation nav-divider {{unless isExpanded 'text-center'}} {{if (route-matches currentRouteName 'participants') 'selected'}}">
             {{#link-to 'participants' class="fa fa-users increase main-navigation clickable selected"}} {{if isExpanded ' Participants'}}{{/link-to}}
           </div>
+          -->
+          <br >
           <!--
           <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
             {{#link-to 'settings' class="fa fa-user increase sub-navigation"}} {{if isExpanded ' My Profile'}}{{/link-to}}
