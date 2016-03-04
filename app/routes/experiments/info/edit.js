@@ -4,8 +4,8 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(params) {
-        var baseModel = this.modelFor('experiments.info'); // The model hook for the parent gets called anyway
-        return baseModel.experiment;
+        var baseParams = this.paramsFor('experiments.info');
+        return this.store.findRecord('experiment', baseParams.experiment_id);
     },
 
     setupController(controller, model) {

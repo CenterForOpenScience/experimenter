@@ -1,4 +1,4 @@
-<h3>Build Experiment Components</h3>
+<h3></h3>
 
 <div class="row">
     <div class="col-md-8">
@@ -7,8 +7,10 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 pull-left">
         <button class="btn btn-sm btn-danger" {{action 'toList'}}>Discard changes</button>
-        <button class="btn btn-sm btn-primary" {{action 'save' asJSON}}>Save</button>
+        <button class="btn btn-sm btn-success" {{action 'save' asJSON}}>Save</button>
+
+        {{#link-to "experiments.info.preview" model.id tagName="button" class="btn btn-info btn-sm pull-right" }}Try experiment{{/link-to}}
     </div>
 </div>
