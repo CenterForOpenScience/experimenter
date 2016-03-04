@@ -73,6 +73,12 @@ var EXPERIMENT = {
             "exitUrl": {
                 "type": "string"
                 //"pattern": URL_PATTERN
+            },
+            "duration": {
+                "type": "string"
+            },
+            "purpose": {
+                "type": "string"
             }
         },
         "required": [
