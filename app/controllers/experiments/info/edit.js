@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
                 return false;
             }
 
-            model.setProperties(payload);
+            model.setProperties(payload);  // FIXME: Does not unset properties that were removed
             model.save().then(() => { // resolve
                 this.set('model'); // TODO: update JSON variable? needed?
                 this.send('toList');
