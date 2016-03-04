@@ -20,9 +20,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             refreshModel: true
         }
     },
-    model() {
-        let params = this.paramsFor('experiments.list');
-
+    model(params) {
         var query = {
             q: ['state:(-Deleted)']
         };
