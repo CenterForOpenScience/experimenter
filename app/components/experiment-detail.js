@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     actions: {
         toggleEditing: function() {
             this.toggleProperty('editing');
-            if (!this.get('editing')) {
+            if (!this.get('editing') && this.get('experiment.hasDirtyAttributes')) {
                 this.get('experiment').save().then(() => {
                     this.get('toast.info')('Experiment saved successfully.');
                 });
