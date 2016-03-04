@@ -7,13 +7,13 @@ export default Ember.Component.extend({
     classNames: ['ace-editor'],
 
     didInsertElement: function() {
-        var ace = this.get('ace'); // TODO: Why does this work?
+        var ace = this.get('ace');
 
         this.editor = ace.edit(this.get('element'));
 
         this.editor.setHighlightActiveLine(false);
         this.editor.setShowPrintMargin(false);
-        this.editor.getSession().setTabSize(4); // TODO: Redundant?
+        this.editor.getSession().setTabSize(4);
         this.editor.getSession().setMode('ace/mode/json');
 
         this.editor.setValue(this.get('value') || JSON.stringify({}), -1);
@@ -23,9 +23,10 @@ export default Ember.Component.extend({
         });
     },
     valueChanged: function() {
-        if (!this.get('value'))
+        if (!this.get('value')) {
             this.editor.getSession().setValue('');
-        else if (this.editor.getSession().getValue() !== this.get('value'))
+        } else if (this.editor.getSession().getValue() !== this.get('value')) {
             this.editor.getSession().setValue(this.get('value'));
+        }
     }.observes('value')
 });

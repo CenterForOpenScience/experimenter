@@ -5,14 +5,6 @@ export default Ember.Controller.extend({
     toast: Ember.inject.service('toast'),
 
 
-  aceInit: function(editor) {
-    editor.setHighlightActiveLine(false);
-    editor.setShowPrintMargin(false);
-    editor.getSession().setTabSize(4);
-    editor.getSession().setMode('ace/mode/javascript');
-  },
-
-
     actions: {
         save(data) {
             // TODO: Save model and call transition to list page
