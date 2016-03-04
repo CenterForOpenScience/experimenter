@@ -19,6 +19,7 @@ var experiment = [
 
 var session = [
     [PARTICIPANT, 'CREATE'],
+    [PARTICIPANT, 'UPDATE'],
     [OSF, 'READ']
 ];
 
