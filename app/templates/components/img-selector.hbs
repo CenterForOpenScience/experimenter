@@ -5,4 +5,9 @@
     <i class="fa fa-picture-o"></i>
   </div>
 {{/if}}
-{{input type="file" change=(action 'uploadImage') }}
+{{#if edit}}
+<br>
+<br>
+<button class="btn btn-default" onclick={{action 'clickInput'}}>Select an image</button>
+{{input type="file" change=(action 'uploadImage') class="img-selector-input"}}
+{{/if}}

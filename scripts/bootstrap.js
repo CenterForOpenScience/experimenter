@@ -46,7 +46,7 @@ function getOrCreateCollection(collection, token, attributes) {
             },
             url: `${JAM_URL}/v1/id/collections/${NAMESPACE}.${collection}`
         })
-        .catch(function() {
+        .catch(function(e) {
             return request.post({
                 json: true,
                 headers: {
@@ -60,6 +60,8 @@ function getOrCreateCollection(collection, token, attributes) {
                         attributes: attributes
                     }
                 }
+            }).catch((e) => {
+                console.log(e.error);
             });
         });
 }
