@@ -1,39 +1,16 @@
-<h3>Build Experiment Components</h3>
-<br>
-<div class="row">
-  <div class="col-md-4" style="height: 100vh">
-  <ul class="list-group">
-    {{#each blocks as |block index|}}
-      {{experiment-tile
-        index=index
-        title=block.title
-        icon=block.icon
-        click=(action 'tile-click' index)
-        description=block.description}}
-    {{/each}}
-    <a {{action 'add-component'}} class="list-group-item">
-      <div class="row">
-        <div class="col-xs-offset-1 col-xs-9">
-          <h4>Add Component</h4>
-        </div>
-        <div class="col-xs-2">
-          <i class="fa fa-2x fa-plus"></i>
-        </div>
-      </div>
-    </a>
-    </ul>
-    <i>Drag components to change the order</i>
-  </div>
-  <div class="col-md-8">
-    {{#if selected}}
-      {{selected}}
-    {{else}}
-      CREATE
-    {{/if}}
-    <!-- <div class="row" style="background-color: yellow; height: 50vh"> -->
+<h3>Experiment editor</h3>
 
-    <!-- </div> -->
-    <!-- <div class="row" style="background-color: green; height: 50vh"> -->
-    <!-- </div> -->
-  </div>
+<div class="row">
+    <div class="col-md-8">
+        {{ace-editor value=asJSON class="editor"}}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 pull-left">
+        <button class="btn btn-sm btn-danger" {{action 'toList'}}>Discard changes</button>
+        <button class="btn btn-sm btn-success" {{action 'save' asJSON}}>Save</button>
+
+        {{#link-to "experiments.info.preview" model.id tagName="button" class="btn btn-info btn-sm pull-right" }}Try experiment{{/link-to}}
+    </div>
 </div>

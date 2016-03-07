@@ -11,6 +11,7 @@ $background-light: rgba(96, 96, 96, 0.15);
 @import "components/all-attachments";
 @import "components/multi-toggle";
 @import "components/img-selector";
+@import "components/ace-editor";
 
 @import "routes/experiments";
 @import "routes/login";
@@ -23,6 +24,7 @@ body,
 .container-fluid {
     height: 100%;
 }
+
 .menu-expanded {
     background-color: $background-dark;
     @media (min-width: $large-width) {
@@ -35,6 +37,7 @@ body,
         background-color: $background-dark;
     }
 }
+
 .menu-collapsed {
     background-color: $background-dark;
     @media (min-width: $small-width) {
@@ -47,6 +50,7 @@ body,
         background-color: $background-dark;
     }
 }
+
 .clickable {
     width: 100%;
     height: 100%;
@@ -56,71 +60,86 @@ body,
 .increase {
     font-size: 125%;
 }
+
 .increase-2 {
     font-size: 150%;
 }
+
 .increase-3 {
     font-size: 175%;
 }
+
 .increase-4 {
     font-size: 200%;
 }
-
 
 .logo {
     color: white;
     margin-bottom: 16px;
     padding-top: 40px;
 }
+
 .logo-title {
     color: white;
     margin-bottom: 80px;
     font-size: 200%;
     width: 100%;
 }
+
 .nav-divider {
     margin-bottom: 60px;
 }
+
 .title-divider {
     margin-bottom: 60px;
 }
+
 .logo-divider {
     margin-bottom: 30px;
 }
+
 .main-navigation {
     color: $background-dark;
     background-color: #c0c0c0;
 }
+
 .selected > .fa {
     background-color: white;
 }
+
 .main-navigation:hover {
     background-color: white;
     text-decoration: none;
 }
+
 .main-navigation:active {
     background-color: white;
     text-decoration: none;
 }
+
 a.main-navigation:active {
     background-color: white;
     text-decoration: none;
 }
+
 a.main-navigation:hover {
     color: orange;
     background-color: white;
     text-decoration: none;
 }
+
 a.sub-navigation {
     cursor: pointer;
     color: white;
     text-decoration: none;
     padding: 12px;
 }
+
 a.sub-navigation:visited {
     color: white;
     text-decoration: none;
 }
+
 a.sub-navigation:hover {
     color: orange;
     text-decoration: none;
