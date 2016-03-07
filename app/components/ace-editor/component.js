@@ -18,7 +18,7 @@ export default Ember.Component.extend({
     }.property('isValidSyntax'),
 
     didInsertElement() {
-        this.set('_initValue', this.get('value') || '');
+        this.set('_initValue', this.get('value') || '{}');
         this.set('editor', ace.edit(this.$('#editor')[0]));
 
         this.get('editor').getSession().setValue(this.get('_initValue'));
