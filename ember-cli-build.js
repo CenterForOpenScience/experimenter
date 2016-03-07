@@ -21,6 +21,10 @@ module.exports = function(defaults) {
       }
   });
 
+  app.import('bower_components/ace-builds/src/ace.js');
+  app.import('bower_components/ace-builds/src/mode-json.js');
+  app.import('bower_components/ace-builds/src/ext-beautify.js');
+
   app.import('bower_components/moment/moment.js');
   app.import('bower_components/file-saver.js/FileSaver.js');
 
