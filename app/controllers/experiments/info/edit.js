@@ -69,14 +69,13 @@ export default Ember.Controller.extend({
                 additionalProperties: false
             };
 
-            this.set('model.schema', schema);
             this.set('model.structure', parsed);
-
-            this.get('model').save().then(() => { // resolve
-                this.transitionToRoute('experiments.info');
-            }, () => { // reject
-                this.toast.error('The server refused to save the data, likely due to a schema error');
-            });
+            this.set('model.schema', schema);
+            //HACK set just returns the value passed in, not the value returned by the underlying set
+            //But calling get returns the value returned by set....
+            this.get('model.schema', schema).then(() => this.get('model').save())
+                .then(() => this.transitionToRoute('experiments.list'))
+                .catch(() => this.toast.error('The server refused to save the data, likely due to a schema error'));
         }
     }
 });
