@@ -96,13 +96,20 @@ export default Ember.Controller.extend({
                 // should work after split bug is fixed and schema validation handles null values
                 // for structure, beginDate, endDate, and eligibilityCriteria
                 title: this.get('newTitle'),
-                description: 'Give your experiment a description here...',
+                description: 'Give your experiment a description here...',  // TODO: Hardcoded parameter
                 state: 'Draft',
-                lastEdited: new Date()
+                lastEdited: new Date(),
+                purpose: '',
+                duration: '',
+                exitUrl: '',
+                structure: {
+                    frames: {},
+                    sequence: []
+                }
             });
             this.send('toggleModal');
             newExperiment.save().then(function() {
-                self.transitionToRoute('experiments', newExperiment);
+                self.transitionToRoute('experiments.info', newExperiment.id);
             });
         }
     }
