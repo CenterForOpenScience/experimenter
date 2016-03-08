@@ -22,7 +22,7 @@
             {{#if session.isAuthenticated}}
               <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
               <br>
-             {{link-to ' Project Settings' 'project-settings' class="fa fa-cogs increase sub-navigation"}}
+             {{#link-to 'project-settings' class="fa fa-cogs increase sub-navigation"}} {{if isExpanded ' Project Settings'}}{{/link-to}}
             {{/if}}
           </div>
         </div>
