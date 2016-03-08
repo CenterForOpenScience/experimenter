@@ -1,9 +1,12 @@
 import Ember from 'ember';
 import {adminPattern} from  '../utils/patterns';
 
+import config from 'ember-get-config';
 
 export default Ember.Controller.extend({
     breadCrumb: 'Project configuration',
+
+    osfURL: config.OSF.url,
 
     filteredPermissions: Ember.computed('model', function() {
         var permissions = this.get('model.permissions');
