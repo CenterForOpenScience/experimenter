@@ -5,16 +5,16 @@
   </tr>
 </thead>
 <tbody>
-{{#each-in permissions as |user-selector permission|}}
+{{#each usersList as |userId|}}
   <tr>
-    <td>{{user-selector}}</td>
+    <td>{{userId}}</td>
     <td>
-      <button {{action 'removePermission' user-selector}} class="btn btn-xs bg-red">
+      <button {{action 'removePermission' userId}} class="btn btn-xs bg-red">
         <i class="fa fa-remove"></i>
       </button>
     </td>
   </tr>
-{{/each-in}}
+{{/each}}
   <tr>
     <td>
       {{input value=newUserId type="text" class="form-control"}}
