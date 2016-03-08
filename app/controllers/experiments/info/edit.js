@@ -44,7 +44,7 @@ export default Ember.Controller.extend({
 
             let j = 0;
             let props = {};
-            let length = parsed.sequence.length
+            let length = parsed.sequence.length;
 
             for(let i = 0; i < length; i++, j++) {
                 let frame = parsed.frames[parsed.sequence[i]];
@@ -66,14 +66,14 @@ export default Ember.Controller.extend({
             schema.schema.properties.expData = {
                 type: 'object',
                 patternProperties: props,
-                additionalProperties: false,
+                additionalProperties: false
             };
 
             this.set('model.schema', schema);
             this.set('model.structure', parsed);
 
             this.get('model').save().then(() => { // resolve
-                this.transitionToRoute('experiments.list');
+                this.transitionToRoute('experiments.info');
             }, () => { // reject
                 this.toast.error('The server refused to save the data, likely due to a schema error');
             });

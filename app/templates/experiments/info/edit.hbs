@@ -4,7 +4,7 @@
     <div class="col-xs-12">
         {{#ace-editor submit=(action 'submit') height='500px' value=experimentJson as |ctx|}}
             <br>
-            {{#link-to "experiments" tagName="button" class="btn btn-danger btn-sm" }}Discard changes{{/link-to}}
+            {{#link-to "experiments.info" tagName="button" class="btn btn-danger btn-sm" }}Discard changes{{/link-to}}
             <button class="btn btn-default" disabled={{ctx.notValidSyntax}} onclick={{ctx.submit}}>Save</button>
             {{#link-to "experiments.info.preview" model.id tagName="button" class="btn btn-info btn-sm pull-right" }}Try experiment{{/link-to}}
         {{/ace-editor}}
