@@ -22,18 +22,18 @@ let PermissionsEditor = Ember.Component.extend({
     actions: {
         addPermission() {
             var userId = this.get('newUserId');
-
-            this.permissions[`user-osf-${userId}`] = this.get('newPermissionLevel');
+            var permissions = Ember.copy(this.get('permissions'));
+            permissions[`user-osf-${userId}`] = this.get('newPermissionLevel');
             this.set('newUserId', '');
-            this.sendAction('onchange', this.get('permissions'));
-            this.set('permissions', this.permissions);
+            this.sendAction('onchange', permissions);
+            this.set('permissions', permissions);
             this.rerender();
 
         },
 
         removePermission(userId) {
             var selector = `user-osf-${userId}`;
-            var permissions = this.get('permissions');
+            var permissions = Ember.copy(this.get('permissions'));
 
             delete permissions[selector];
             this.sendAction('onchange', permissions);
