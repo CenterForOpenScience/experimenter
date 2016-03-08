@@ -1,6 +1,7 @@
+<!-- A slight hack due to weirdness in routing -->
 {{ experiment-detail
-    experiment=model.experiment
-    sessions=model.sessions
+    experiment=(if experiment experiment model)
+    sessions=sessions
 
     onDelete=(action 'onDelete')
     onClone=(action 'onClone')

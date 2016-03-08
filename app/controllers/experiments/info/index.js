@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    breadCrumb: function() {
-        return `${this.get('model.experiment.title')}`;
+    sessions: function() {
+        return this.store.findAll(this.get('model.sessionCollectionId'));
     }.property('model'),
     actions: {
         editComponents() {
