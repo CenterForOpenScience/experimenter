@@ -3,6 +3,8 @@ import {adminPattern} from  '../utils/patterns';
 
 
 export default Ember.Controller.extend({
+    breadCrumb: 'Project configuration',
+
     filteredPermissions: Ember.computed('model', function() {
         var permissions = this.get('model.permissions');
         var users = {};
