@@ -30,8 +30,8 @@ Router.map(function() {
     this.route('participants', function() {
         this.route('profile', {path: ':profile_id/'});
     });
-    this.route('settings');
-    this.route('project-settings');
+
+    this.route('project-settings', {path: '/settings'});
 
     this.route('testmodel');
 
