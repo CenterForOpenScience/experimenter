@@ -1,7 +1,6 @@
 <thead>
   <tr>
     <th>User Selector</th>
-    <th>Permission Level</th>
     <th width="5%">Add / remove</th>
   </tr>
 </thead>
@@ -9,7 +8,6 @@
 {{#each-in permissions as |user-selector permission|}}
   <tr>
     <td>{{user-selector}}</td>
-    <td>{{permission}}</td>
     <td>
       <button {{action 'removePermission' user-selector}} class="btn btn-xs bg-red">
         <i class="fa fa-remove"></i>
@@ -20,13 +18,6 @@
   <tr>
     <td>
       {{input value=newUserId type="text" class="form-control"}}
-    </td>
-    <td>
-      <select onchange={{action (mut newPermissionLevel) value="target.value"}}>
-        {{#each permissionLevels as |permission|}}
-          <option>{{permission}}</option>
-        {{/each}}
-      </select>
     </td>
     <td>
       <button {{action 'addPermission'}} class="btn btn-xs bg-black">

@@ -5,13 +5,6 @@ import Ember from 'ember';
 let PermissionsEditor = Ember.Component.extend({
     tagName: 'table',
     classNames: ['table'],
-    permissionLevels: [
-        'CREATE',
-        'READ',
-        'UPDATE',
-        'DELETE',
-        'ADMIN'
-    ],
 
     newPermissionLevel: 'ADMIN',
     newPermissionSelector: '',
@@ -26,7 +19,7 @@ let PermissionsEditor = Ember.Component.extend({
             this.sendAction('onchange', this.get('permissions'));
         },
 
-        removePermission(userId) {  // TODO: use same template as above
+        removePermission(userId) {
             var selector = `user-osf-${userId}`;
             delete this.permissions[selector];
             this.rerender();
