@@ -5,8 +5,9 @@
       <br />
     </div>
     <div class="row">
-      {{img-selector thumbnail=experiment.thumbnail.raw onSetImage=(action 'onSetImage')}}
+      {{img-selector thumbnail=experiment.thumbnail.raw edit=false}}
     </div>
+    <br >
     <div class="row">
       <p> {{experiment.description}} </p>
     </div>
@@ -18,19 +19,21 @@
     <form>
       <div class="row">
         {{input class="increase-4" value=experiment.title}}  <button class="btn btn-success pull-right" {{action 'toggleEditing'}}><i class="fa fa-save"></i> Save Details</button>
-        <br />
       </div>
+      <br >
+      <div class="row">
+        {{img-selector thumbnail=experiment.thumbnail.raw edit=true onSetImage=(action 'onSetImage')}}
+      </div>
+      <br>
       <div class="row">
         <p> {{textarea value=experiment.description class="experiment-textarea"}} </p>
       </div>
       <div class="row">
-        <label>Participant Eligibility: </label> {{input value=experiment.eligibilityString}}
+        <label>Participant Eligibility: </label> {{input value=experiment.eligibilityString class="experiment-detail-eligibility"}}
       </div>
     </form>
   {{/if}}
   <div class="row">
-    <label>Begin Date: </label> {{moment-format experiment.beginDate 'MMMM D, YYYY'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label>End Date: </label> {{moment-format experiment.endDate 'MMMM D, YYYY'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label>Last Edited: </label> {{moment-format experiment.lastEdited 'MMMM D, YYYY'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br />
     <br />

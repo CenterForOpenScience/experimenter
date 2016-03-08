@@ -12,13 +12,13 @@ module.exports = function(defaults) {
         includePaths: [
             'app/styles'
         ]
-    },
-    emberWowza: {
-      // Config for video recorder config
-      asp: JSON.parse(process.env.WOWZA_ASP),
-      // Config for actual video recording
-      php: JSON.parse(process.env.WOWZA_PHP),
-    }
+      },
+      emberWowza: {
+          // Config for video recorder config
+          asp: JSON.parse(process.env.WOWZA_ASP),
+          // Config for actual video recording
+          php: JSON.parse(process.env.WOWZA_PHP)
+      }
   });
 
   app.import('bower_components/moment/moment.js');

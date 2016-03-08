@@ -6,7 +6,6 @@ let DESC = '-';
 export default Ember.Controller.extend({
     newTitle: '',
     isShowingModal: false,
-    breadCrumb: 'Experiments',
     queryParams: ['sort', 'match', 'state', 'q'],
     state: 'All',
     match: null,

@@ -19,6 +19,7 @@ var experiment = [
 
 var session = [
     [PARTICIPANT, 'CREATE'],
+    [PARTICIPANT, 'UPDATE'],
     [OSF, 'READ']
 ];
 
@@ -32,11 +33,17 @@ var profile = [
     [OSF, 'READ']
 ];
 
+var thumbnail = [
+    [PARTICIPANT, 'READ'],
+    [OSF, 'CREATE']
+];
+
 module.exports = {
     account: account,
     admin: admin,
     config: config,
     experiment: experiment,
-    profile: profile
+    profile: profile,
+    thumbnail: thumbnail
     // session: session
 };

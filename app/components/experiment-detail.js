@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     actions: {
         toggleEditing: function() {
             this.toggleProperty('editing');
-            if (!this.get('editing')) {
+            if (!this.get('editing') && this.get('experiment.hasDirtyAttributes')) {
                 this.get('experiment').save().then(() => {
                     this.get('toast.info')('Experiment saved successfully.');
                 });
@@ -26,14 +26,14 @@ export default Ember.Component.extend({
             var exp = this.get('experiment');
             exp.set('state', exp.ACTIVE);
             exp.save().then(() => {
-                this.get('toast.info')('Experiment started successfully.');
+                this.toast.info('Experiment started successfully.');
             });
         },
         delete: function() {
             var exp = this.get('experiment');
             exp.set('state', exp.DELETED);
             exp.save().then(() => {
-                this.get('onDelete')();
+                this.sendAction('onDelete');
             });
         },
         clone: function() {
@@ -42,14 +42,14 @@ export default Ember.Component.extend({
             expData.title = `Copy of ${expData.title}`;
             var clone = this.get('store').createRecord('experiment', expData);
             clone.save().then(() => {
-                this.get('onClone')(clone);
+                this.sendAction('onClone', clone);
             });
         },
         onSetImage: function(thumbnail) {
             var exp = this.get('experiment');
             exp.set('thumbnail', thumbnail);
             exp.save().then(() => {
-                this.get('toast.info')('Thumbnail updated successfully.');
+                this.toast.info('Thumbnail updated successfully.');
             });
         }
     }
