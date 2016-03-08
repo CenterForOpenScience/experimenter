@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    breadCrumb: 'Preview',
     isDirty: function() {
         var session = this.get('model.session');
         return session.get('hasDirtyAttributes');
