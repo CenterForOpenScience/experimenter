@@ -10,30 +10,33 @@ let PermissionsEditor = Ember.Component.extend({
         'READ',
         'UPDATE',
         'DELETE',
-        'ADMIN',
+        'ADMIN'
     ],
 
-    newPermissionLevel: 'CREATE',
+    newPermissionLevel: 'ADMIN',
     newPermissionSelector: '',
 
     actions: {
         addPermission() {
-            this.permissions[this.get('newPermissionSelector')] = this.get('newPermissionLevel');
-            this.set('newPermissionSelector', '');
+            var userId = this.get('newUserId');
+
+            this.permissions[`user-osf-${userId}`] = this.get('newPermissionLevel');
+            this.set('newUserId', '');
             this.rerender();
-            this.get('onchange')(this.get('permissions'));
+            this.sendAction('onchange', this.get('permissions'));
         },
 
-        removePermission(selector) {
+        removePermission(userId) {  // TODO: use same template as above
+            var selector = `user-osf-${userId}`;
             delete this.permissions[selector];
             this.rerender();
-            this.get('onchange')(this.get('permissions'));
-        },
+            this.sendAction('onchange', this.get('permissions'));
+        }
     }
 });
 
 PermissionsEditor.reopenClass({
-    positionalParams: ['permissions'],
+    positionalParams: ['permissions']
 });
 
 
