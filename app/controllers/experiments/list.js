@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
     queryParams: ['sort', 'match', 'state', 'q'],
     state: 'All',
     match: null,
-    sort: 'title',
+    sort: 'modified_on',
     sortProperty: Ember.computed('sort', {
         get() {
             var sort = this.get('sort');
@@ -91,7 +91,6 @@ export default Ember.Controller.extend({
             this.toggleProperty('isShowingModal');
         },
         createExperiment: function() {
-            var self = this;
             var newExperiment = this.store.createRecord('experiment', {
                 // should work after split bug is fixed and schema validation handles null values
                 // for structure, beginDate, endDate, and eligibilityCriteria
@@ -99,18 +98,28 @@ export default Ember.Controller.extend({
                 description: 'Give your experiment a description here...',  // TODO: Hardcoded parameter
                 state: 'Draft',
                 lastEdited: new Date(),
-                purpose: '',
-                duration: '',
+                purpose: 'Explain the purpose of your experiment here...',
+                duration: 'Not specified',
                 exitUrl: '',
                 structure: {
                     frames: {},
                     sequence: []
                 }
             });
-            this.send('toggleModal');
-            newExperiment.save().then(function() {
-                self.transitionToRoute('experiments.info', newExperiment.id);
+            var onCreateSessionCollection = () => {
+                this.send('toggleModal');
+                this.transitionToRoute('experiments.info', newExperiment.id);
+            };
+            newExperiment.on('didCreate', () => {
+
+                if (newExperiment.get('_sessionCollection.isNew')) {
+                    newExperiment.get('_sessionCollection').on('didCreate', onCreateSessionCollection);
+                }
+                else {
+                    onCreateSessionCollection();
+                }
             });
+            newExperiment.save();
         }
     }
 });

@@ -8,15 +8,10 @@ export default Em.Route.extend({
     error (err, transition) {
         if (ENV.environment !== 'development') {
             this.get('toast').error(err.message, err.name);
+            this.transitionTo('errors.generic');
         } else {
-            console.error(err);
-            this.get('toast').error(err.stack, err, {
-            timeOut: 0,
-            closeButton: true,
-            });
+            return true;
         }
-
-        this.transitionTo('errors.generic');
     }
   }
 });

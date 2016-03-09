@@ -1,39 +1,50 @@
 import Ember from 'ember';
+import {adminPattern} from  '../utils/patterns';
 
 // FIXME: Known bug in original- if the server save request fails, the value will appear to have been added until page reloaded.
 //  (need to catch and handle errors)
 let PermissionsEditor = Ember.Component.extend({
     tagName: 'table',
     classNames: ['table'],
-    permissionLevels: [
-        'CREATE',
-        'READ',
-        'UPDATE',
-        'DELETE',
-        'ADMIN',
-    ],
 
-    newPermissionLevel: 'CREATE',
+    newPermissionLevel: 'ADMIN',
     newPermissionSelector: '',
+
+    usersList: Ember.computed('permissions', function() {
+        var permissions = this.get('permissions');
+
+        // Assumption: all properties passed into this page will match admin pattern
+        return Object.getOwnPropertyNames(permissions).map(function(key){
+            return adminPattern.exec(key)[1];
+        });
+    }),
 
     actions: {
         addPermission() {
-            this.permissions[this.get('newPermissionSelector')] = this.get('newPermissionLevel');
-            this.set('newPermissionSelector', '');
+            var userId = this.get('newUserId');
+            var permissions = Ember.copy(this.get('permissions'));
+            permissions[`user-osf-${userId}`] = this.get('newPermissionLevel');
+            this.set('newUserId', '');
+            this.sendAction('onchange', permissions);
+            this.set('permissions', permissions);
             this.rerender();
-            this.get('onchange')(this.get('permissions'));
+
         },
 
-        removePermission(selector) {
-            delete this.permissions[selector];
+        removePermission(userId) {
+            var selector = `user-osf-${userId}`;
+            var permissions = Ember.copy(this.get('permissions'));
+
+            delete permissions[selector];
+            this.sendAction('onchange', permissions);
+            this.set('permissions', permissions);
             this.rerender();
-            this.get('onchange')(this.get('permissions'));
-        },
+        }
     }
 });
 
 PermissionsEditor.reopenClass({
-    positionalParams: ['permissions'],
+    positionalParams: ['permissions']
 });
 
 

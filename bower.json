@@ -27,6 +27,7 @@
   "resolutions": {
     "bootstrap": ">= 2.3.2",
     "jquery": ">=1.8.3",
-    "moment": ">=2.9.0"
+    "moment": ">=2.9.0",
+    "ace-builds": "1.1.7"
   }
 }
