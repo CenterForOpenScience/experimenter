@@ -16,7 +16,8 @@ export default Em.Route.extend(UnauthenticatedRouteMixin, {
             .then((data) => {
                 this.transitionTo('experiments');})
             .catch((reason) => {
-                this.set('errorMessage', 'User does not have permissions on the domain'); // TODO: Does this display?
+                // TODO: Pick failure reason off the response for custom messages
+                this.set('errorMessage', 'User does not have permissions on the domain');
             });
     },
 
