@@ -1,8 +1,10 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
+import PastSessionsRouteMixin from 'exp-player/mixins/past-sessions-route';
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+
+export default Ember.Route.extend(AuthenticatedRouteMixin, PastSessionsRouteMixin, {
     model(params) {
         let experiment = this.modelFor('experiments.info');
         let session = this.store.createRecord(experiment.get('sessionCollectionId'), {
@@ -11,8 +13,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             profileVersion: '',
             softwareVersion: '',
             expData: {},
-            sequence: [],
-        })
+            sequence: []
+        });
 
         // TODO: May be an edge case where experimentVersion isn't set/ resolved before this hash returns
         return experiment.getCurrentVersion().then(versionId => {
@@ -22,7 +24,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     setupController: function(controller, model) {
-        controller.set('experiment', this.modelFor('experiments.info'))
+        controller.set('experiment', this.modelFor('experiments.info'));
         return this._super(...arguments);
     },
 
