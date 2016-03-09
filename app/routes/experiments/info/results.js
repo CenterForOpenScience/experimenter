@@ -5,6 +5,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(params) {
         let experiment = this.modelFor('experiments/info');
-        return this.store.findAll(experiment.get('sessionCollectionId'));
+        return this.store.query(experiment.get('sessionCollectionId'),
+            {'filter[completed]': 1});
     }
 });
