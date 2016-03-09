@@ -75,10 +75,10 @@ var EXPERIMENT = {
                 //"pattern": URL_PATTERN
             },
             "duration": {
-                "type": "string"
+                "type": ["string", "null"]
             },
             "purpose": {
-                "type": "string"
+                "type": ["string", "null"]
             }
         },
         "required": [
