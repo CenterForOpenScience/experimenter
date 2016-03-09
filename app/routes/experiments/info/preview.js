@@ -4,24 +4,26 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(params) {
-        var parentParams = this.paramsFor('experiments.info');
+        let experiment = this.modelFor('experiments.info');
+        let session = this.store.createRecord(experiment.get('sessionCollectionId'), {
+            experimentId: experiment.id,
+            profileId: 'tester0.prof1', // TODO fetch from service
+            profileVersion: '',
+            softwareVersion: '',
+            expData: {},
+            sequence: [],
+        })
 
-        return this.store.findRecord('experiment', parentParams.experiment_id).then((experiment) => {
-            // When page loads, creates new session, but doesn't save to store
-            var session = this.store.createRecord(experiment.get('sessionCollectionId'), {
-                experimentId: experiment.id,
-                profileId: 'tester0.prof1', // TODO fetch from service
-                profileVersion: '',
-                softwareVersion: ''
-            });
-            experiment.getCurrentVersion().then(function(versionId) {
-                session.set('experimentVersion', versionId);
-            });  // TODO: May be an edge case where experimentVersion isn't set/ resolved before this hash returns
-            return Ember.RSVP.hash({
-                experiment: experiment,
-                session: session
-            });
+        // TODO: May be an edge case where experimentVersion isn't set/ resolved before this hash returns
+        return experiment.getCurrentVersion().then(versionId => {
+            session.set('experimentVersion', versionId);
+            return session.save().then(() => session);
         });
+    },
+
+    setupController: function(controller, model) {
+        controller.set('experiment', this.modelFor('experiments.info'))
+        return this._super(...arguments);
     },
 
     actions: {
