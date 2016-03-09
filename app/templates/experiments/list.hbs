@@ -20,7 +20,9 @@
   {{/modal-dialog}}
 {{/if}}
 <div class="row text-center">
-  {{input type="text" placeholder="Filter" size="50" enter="updateSearch" name="searchBar"}}
+    <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+        {{input type="text" placeholder="Filter" size="50" class="form-control" enter="updateSearch" name="searchBar"}}
+    </div>
 </div>
 <div class="row text-center button-block">
   {{multi-toggle buttons=activeButtons activeButton=state onSelect=(action 'selectStatusFilter')}}
