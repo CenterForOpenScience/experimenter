@@ -91,7 +91,6 @@ export default Ember.Controller.extend({
             this.toggleProperty('isShowingModal');
         },
         createExperiment: function() {
-            var self = this;
             var newExperiment = this.store.createRecord('experiment', {
                 // should work after split bug is fixed and schema validation handles null values
                 // for structure, beginDate, endDate, and eligibilityCriteria
@@ -107,10 +106,20 @@ export default Ember.Controller.extend({
                     sequence: []
                 }
             });
-            this.send('toggleModal');
-            newExperiment.save().then(function() {
-                self.transitionToRoute('experiments.info', newExperiment.id);
+            var onCreateSessionCollection = () => {
+                this.send('toggleModal');
+                this.transitionToRoute('experiments.info', newExperiment.id);
+            };
+            newExperiment.on('didCreate', () => {
+
+                if (newExperiment.get('_sessionCollection.isNew')) {
+                    newExperiment.get('_sessionCollection').on('didCreate', onCreateSessionCollection);
+                }
+                else {
+                    onCreateSessionCollection();
+                }
             });
+            newExperiment.save();
         }
     }
 });
