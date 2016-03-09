@@ -106,20 +106,20 @@ export default Ember.Controller.extend({
                     sequence: []
                 }
             });
-            newExperiment.save();
+            var onCreateSessionCollection = () => {
+                this.send('toggleModal');
+                this.transitionToRoute('experiments.info', newExperiment.id);
+            };
             newExperiment.on('didCreate', () => {
-                var callback = () => {
-                    this.send('toggleModal');
-                    this.transitionToRoute('experiments.info', newExperiment.id);
-                };
 
                 if (newExperiment.get('_sessionCollection.isNew')) {
-                    newExperiment.get('_sessionCollection').on('didCreate', callback);
+                    newExperiment.get('_sessionCollection').on('didCreate', onCreateSessionCollection);
                 }
                 else {
-                    callback();
+                    onCreateSessionCollection();
                 }
             });
+            newExperiment.save();
         }
     }
 });
