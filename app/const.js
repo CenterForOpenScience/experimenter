@@ -43,6 +43,22 @@ export const SESSIONSCHEMA = {
             'hasReadFeedback': {
                 'id': 'hasReadFeedback',
                 'type': 'boolean'
+            },
+            'didComplete': {
+                'id': 'didCompleteStudy',
+                'type': 'boolean'
+            },
+            'earlyExit': {
+                'id': 'earlyExit',
+                'type': ['object', 'null'],
+                'properties': {
+                    'reason': {
+                        'type': ['string', 'null']
+                    },
+                    'privacy': {
+                        'type': 'string'
+                    }
+                }
             }
         },
         'required': [
