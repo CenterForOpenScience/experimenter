@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
     queryParams: ['sort', 'match', 'state', 'q'],
     state: 'All',
     match: null,
-    sort: 'title',
+    sort: 'modified_on',
     sortProperty: Ember.computed('sort', {
         get() {
             var sort = this.get('sort');
