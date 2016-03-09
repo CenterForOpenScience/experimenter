@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
     queryParams: ['sort', 'match', 'state', 'q'],
     state: 'All',
     match: null,
-    sort: 'title',
+    sort: 'modified_on',
     sortProperty: Ember.computed('sort', {
         get() {
             var sort = this.get('sort');
@@ -98,8 +98,8 @@ export default Ember.Controller.extend({
                 description: 'Give your experiment a description here...',  // TODO: Hardcoded parameter
                 state: 'Draft',
                 lastEdited: new Date(),
-                purpose: '',
-                duration: '',
+                purpose: 'Explain the purpose of your experiment here...',
+                duration: 'Not specified',
                 exitUrl: '',
                 structure: {
                     frames: {},
