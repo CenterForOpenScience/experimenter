@@ -12,11 +12,21 @@
       <p> {{experiment.description}} </p>
     </div>
     <div class="row">
+      <label>Purpose:</label>
+      <p> {{experiment.purpose}} </p>
+    </div>
+    <div class="row">
+      <label>Duration:</label> {{if experiment.duration experiment.duration 'Not specified'}}
+    </div>
+    <div class="row">
+      <label>Exit URL:</label> {{if experiment.exitUrl experiment.exitUrl 'Not specified'}}
+    </div>
+    <div class="row">
       <label>Participant Eligibility: </label> {{experiment.eligibilityString}}
     </div>
   {{/if}}
   {{#if editing }}
-    <form>
+    <div class="form">
       <div class="row">
         {{input class="increase-4" value=experiment.title}}  <button class="btn btn-success pull-right" {{action 'toggleEditing'}}><i class="fa fa-save"></i> Save Details</button>
       </div>
@@ -29,9 +39,20 @@
         <p> {{textarea value=experiment.description class="experiment-textarea"}} </p>
       </div>
       <div class="row">
-        <label>Participant Eligibility: </label> {{input value=experiment.eligibilityString class="experiment-detail-eligibility"}}
+        <label>Purpose: </label>
+        <p> {{textarea value=experiment.purpose class="experiment-textarea"}} </p>
       </div>
-    </form>
+
+      <div class="row">
+        <label>Duration: </label> {{input value=experiment.duration class="experiment-detail-wide"}}
+      </div>
+      <div class="row">
+        <label>Exit URL: </label> {{input value=experiment.exitUrl class="experiment-detail-wide"}}
+      </div>
+      <div class="row">
+        <label>Participant Eligibility: </label> {{input value=experiment.eligibilityString class="experiment-detail-wide"}}
+      </div>
+    </div>
   {{/if}}
   <div class="row">
     <label>Last Edited: </label> {{moment-format experiment.lastEdited 'MMMM D, YYYY'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

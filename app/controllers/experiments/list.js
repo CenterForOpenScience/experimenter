@@ -99,8 +99,8 @@ export default Ember.Controller.extend({
                 description: 'Give your experiment a description here...',  // TODO: Hardcoded parameter
                 state: 'Draft',
                 lastEdited: new Date(),
-                purpose: '',
-                duration: '',
+                purpose: 'Explain the purpose of your experiment here...',
+                duration: 'Not specified',
                 exitUrl: '',
                 structure: {
                     frames: {},
