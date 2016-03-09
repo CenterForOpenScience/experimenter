@@ -23,7 +23,7 @@ function regexRange(lo, hi) {
         return acc + `[${c}-${hi[i++]||c}]`;
     }, ''));
 
-    return `(?:${re.join('|')})`;
+    return `(?:${re.map(s => `(?:${s})`).join('|')})`;
 }
 
 
