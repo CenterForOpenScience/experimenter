@@ -6,6 +6,7 @@
     "beginDate": "2016-02-03",
     "endDate": "2016-02-04",
     "lastEdited": "2016-02-04",
+    "exitUrl": "http://localhost:4200",
     "eligibilityCriteria": "age > 3 months and age < 9 months",
     "displayFullscreen": true,
     "thumbnailId": "experimenter.thumbnails.test0-thumb",
@@ -202,9 +203,8 @@
     "state": "Active",
     "eligibilityCriteria": "age >= 9 months and age < 2 years",
     "duration": "Ten minutes",
-    "whatHappens": "First your child will see two actors naming familiar objects. Sometimes they're correct, sometimes they're not. Then we'll show the same actors naming unfamiliar objects and ask your child some questions about which answers he or she trusts.",
     "purpose": "How children track and use information about reliability.",
-    "exitUrl": "http://localhost:4201",
+    "exitUrl": "http://localhost:4200",
     "thumbnailId": "experimenter.thumbnails.demo-thumb",
     "structure": {
         "frames": {
