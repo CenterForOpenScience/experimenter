@@ -12,6 +12,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ExpPlayerRouteMixin, 
     },
     _getSession(params, experiment) {
         return this.get('currentUser').getCurrentUser().then(([account, profile]) => {
+ session.setProperties({
+                id: 'PREVIEW_DATA_DISREGARD',
+                experimentVersion: versionId
+            });
+
+            return session.reopen({
+                save() {
+                    console.log('Preview Data Save:', this._internalModel._attributes);
+                    return Ember.RSVP.resolve(this);
+                }
+            })
+
             return this.store.createRecord(experiment.get('sessionCollectionId'), {
                 experimentId: experiment.id,
                 profileId: profile.get('id'),
