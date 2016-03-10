@@ -37,12 +37,16 @@ export const SESSIONSCHEMA = {
                 "type": "object"
             },
             "feedback": {
-                "id": "feedback",
-                "type": "string"
+                "$oneOf": [{
+                    "id": "feedback",
+                    "type": "string"
+                }, null]
             },
             "hasReadFeedback": {
-                "id": "hasReadFeedback",
-                "type": "boolean"
+                "$oneOf": [{
+                    "id": "hasReadFeedback",
+                    "type": "boolean"
+                }, null]
             }
         },
         "required": [
