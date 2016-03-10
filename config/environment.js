@@ -33,7 +33,7 @@ module.exports = function(environment) {
     else if (environment === 'staging' || environment === 'production') {
         ENV.JAMDB = {
             url: process.env.JAMDB_URL,
-            namespace: process.env.JAMDB_URL,
+            namespace: process.env.JAMDB_NAMESPACE,
             authorizer: 'osf-jwt'
         };
     }
