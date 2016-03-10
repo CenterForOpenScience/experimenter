@@ -1,40 +1,41 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
+import ExpPlayerRouteMixin from 'exp-player/mixins/exp-player-route';
 import WarnOnExitRouteMixin from 'exp-player/mixins/warn-on-exit-route';
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin, {
-    model(params) {
-        let experiment = this.modelFor('experiments.info');
-        let session = this.store.createRecord(experiment.get('sessionCollectionId'), {
-            experimentId: experiment.id,
-            profileId: 'tester0.prof1', // TODO fetch from service
-            profileVersion: '',
-            completed: false,
-            feedback: '',
-            hasReadFeedback: '',
-            softwareVersion: '',
-            expData: {},
-            sequence: []
+export default Ember.Route.extend(AuthenticatedRouteMixin, ExpPlayerRouteMixin, WarnOnExitMixin, {
+    currentUser: Ember.inject.service(),
+    _getExperiment() {
+        return new Ember.RSVP.Promise((resolve) => {
+            resolve(this.modelFor('experiments.info'));
         });
-
-        return experiment.getCurrentVersion().then(versionId => {
+    },
+    _getSession(params, experiment) {
+        this._super(params, experiment).then((session) => {
             session.setProperties({
-                id: 'PREVIEW_DATA_DISREGARD',
-                experimentVersion: versionId
+                id: 'PREVIEW_DATA_DISREGARD'
             });
 
             return session.reopen({
                 save() {
-                    console.log('Preview Data Save:', this._internalModel._attributes);
+                    // TODO add UI for researcher to see data
+                    console.log('Preview Data Save:', this.toJSON());
                     return Ember.RSVP.resolve(this);
                 }
-            })
+            });
         });
     },
-
-    setupController: function(controller, model) {
-        controller.set('experiment', this.modelFor('experiments.info'));
-        return this._super(...arguments);
+    actions: {
+        willTransition: function(transition) {
+            // FIXME: This won't prevent back button or manual URL change. See https://guides.emberjs.com/v2.3.0/routing/preventing-and-retrying-transitions/#toc_preventing-transitions-via-code-willtransition-code
+            if (this.controller.isDirty() && !confirm('Are you sure you want to exit the experiment?')) {
+                transition.abort();
+                return false;
+            } else {
+                // Bubble this action to parent routes
+                return true;
+            }
+        }
     }
 });
