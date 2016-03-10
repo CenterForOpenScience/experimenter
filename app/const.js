@@ -38,7 +38,7 @@ export const SESSIONSCHEMA = {
             },
             'feedback': {
                 '$oneOf': [{
-                    'id' 'feedback',
+                    'id': 'feedback',
                     'type': 'string'
                 }, null]
             },
