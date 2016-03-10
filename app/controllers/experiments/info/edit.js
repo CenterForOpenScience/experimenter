@@ -46,6 +46,10 @@ function createSchema(container, sequence, frames) {
             props[`^${regexRange(j, j+=(frame.options.length-1))}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
                 $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
             };
+        else if(frame.kind === 'choice' && frame.sampler === 'rotate')
+            props[`^${regexRange(j, j+=(frame.options.length-1))}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
+                $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
+            };
         else
             throw `Experiment definition specifies an unknown kind of frame: ${frame.kind}`;
     }
