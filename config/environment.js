@@ -11,7 +11,10 @@ module.exports = function(environment) {
     JAMDB: {
         url: 'http://localhost:1212',
         namespace: 'experimenter',
-        authorizer: 'osf-jwt'
+        authorizer: 'osf-jwt',
+        testAccount: {
+            id: 'tester0'
+        }
     },
 
     modulePrefix: 'experimenter',
