@@ -14,9 +14,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ExpPlayerRouteMixin, 
             experimentId: experiment.id,
             profileId: 'tester0.prof1', // TODO fetch from service
             profileVersion: '',
+            completed: false,
+            feedback: '',
+            hasReadFeedback: '',
             softwareVersion: '',
             expData: {},
             sequence: []
+        });
+
+        return experiment.getCurrentVersion().then(versionId => {
+            session.set('experimentVersion', versionId);
+            return session.save().then(() => session);
         });
         return new Ember.RSVP.Promise((resolve) => {
             resolve(session);
