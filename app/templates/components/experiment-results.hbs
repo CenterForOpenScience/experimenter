@@ -7,11 +7,11 @@
 <div class="tab-content">
   <div id="participantData" class="tab-pane fade in active">
     <h3>Participant Data</h3>
-    {{participant-data sessions=sessions}}
+    {{participant-data sessions=sessions serializeFields=serializeFields}}
   </div>
   <div id="allData" class="tab-pane fade">
     <h3>All Data</h3>
-    {{export-tool data=sessions}}
+    {{export-tool data=sessions fieldWhitelist=serializeFields}}
   </div>
   <div id="allAttachments" class="tab-pane fade">
     {{all-attachments sessions=sessions}}
