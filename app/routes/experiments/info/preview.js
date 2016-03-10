@@ -6,50 +6,40 @@ import WarnOnExitRouteMixin from 'exp-player/mixins/warn-on-exit-route';
 
 let {RSVP} = Ember;
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin, {
+export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin, ExpPlayerRouteMixin, {
     currentUser: Ember.inject.service(),
     _getSession: Ember.computed.alias('model'),
 
     _getExperiment() {
-        return Ember.RSVP.resolve(this.modelFor('experiments.info'));
+        return new Ember.RSVP.Promise((resolve) => {
+            resolve(this.modelFor('experiments.info'));
+        });
     },
-
-    model(params) {
-        let experiment = this.modelFor('experiments.info');
-        return this.get('currentUser').getCurrentUser().then(([account, profile]) => {
-            var session = this.store.createRecord(experiment.get('sessionCollectionId'), {
-                id: 'PREVIEW_DATA_DISREGARD',
-                experimentId: experiment.id,
-                profileId: profile.get('id'),
-                profileVersion: '', // TODO
-                completed: false,
-                feedback: '',
-                hasReadFeedback: '',
-                softwareVersion: '',
-                expData: {},
-                sequence: []
+    _getSession(params, experiment) {
+        this._super(params, experiment).then((session) => {
+            session.setProperties({
+                id: 'PREVIEW_DATA_DISREGARD'
             });
 
-            session.reopen({
+            return session.reopen({
                 save() {
                     // TODO add UI for researcher to see data
                     console.log('Preview Data Save:', this.toJSON());
                     return Ember.RSVP.resolve(this);
                 }
             });
-
-            return RSVP.hash({
-                session: session,
-                pastSessions: this.get('currentUser').getCurrentUser(([account, profile]) => {
-                    return account.pastSessionsFor(experiment, profile);
-                })
-            })
         });
     },
-
-    setupController: function(controller, model) {
-        this._super(controller, model.session);
-        controller.set('pastSessions', model.pastSessions);
-        controller.set('experiment', this.modelFor('experiments.info'));
+    actions: {
+        willTransition: function(transition) {
+            // FIXME: This won't prevent back button or manual URL change. See https://guides.emberjs.com/v2.3.0/routing/preventing-and-retrying-transitions/#toc_preventing-transitions-via-code-willtransition-code
+            if (this.controller.isDirty() && !confirm('Are you sure you want to exit the experiment?')) {
+                transition.abort();
+                return false;
+            } else {
+                // Bubble this action to parent routes
+                return true;
+            }
+        }
     }
 });

@@ -1,24 +1,45 @@
 import Ember from 'ember';
 
+function rawValue(value) {
+    return value;
+}
+
 export default Ember.Component.extend({
     attributeBindings: ['data', 'mappingFunction'],
     dataFormat: 'JSON',
-    dataFormats: [ 'JSON',
+    dataFormats: [
+        'JSON',
         'CSV'
     ],
+
+    fieldWhitelist: null, // Optionally provide a whitelist of either ["fieldname"] or [{field: name, transform: function}] objects to control individual field serialization
+
     defaultMappingFunction: function (model) {
-        return model._internalModel._data;
+        var data = model._internalModel._data;
+        var whitelist = this.get('fieldWhitelist');
+        if (!whitelist) {
+            return data;
+        } else {  // Transform the passed-in fields according to a field whitelist
+            var transformed = {};
+            whitelist.forEach(function(item) {
+                var transformFunc = item.transform || rawValue;
+                var fieldName = item.field || item;
+                transformed[fieldName] = transformFunc(data[fieldName]);
+            });
+            return transformed;
+        }
     },
     processedData: Ember.computed( 'data', 'mappingFunction', 'dataFormat', {
         get() {
             var dataArray = this.get('data');
             var dataFormat = this.get('dataFormat');
             var mappingFunction = this.get('mappingFunction');
+            var mapped;
             if (Ember.isPresent(dataArray) && Ember.isPresent(mappingFunction)) {
-                var mapped = dataArray.map(mappingFunction);
+                mapped = dataArray.map(mappingFunction.bind(this));
                 return this.convertToFormat(mapped, dataFormat);
             } else if (Ember.isPresent(dataArray)) {
-                var mapped = dataArray.map(this.get('defaultMappingFunction'));
+                mapped = dataArray.map(this.get('defaultMappingFunction').bind(this));
                 return this.convertToFormat(mapped, dataFormat);
             } else {
                 return null;
@@ -32,7 +53,7 @@ export default Ember.Component.extend({
     convertToFormat: function (dataArray, format) {
         if (format === 'JSON') {
             return JSON.stringify(dataArray, undefined, 4);
-        } else {
+        } else if (format==='CSV') {
             var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
             var str = '';
 
@@ -49,6 +70,8 @@ export default Ember.Component.extend({
                 str += line + '\r\n';
             }
             return str;
+        } else {
+            throw 'Unrecognized file format specified';
         }
     },
     actions: {
