@@ -4,30 +4,25 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ExpPlayerRouteMixin from 'exp-player/mixins/exp-player-route';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, ExpPlayerRouteMixin, {
+    currentUser: Ember.inject.service(),
     _getExperiment() {
         return new Ember.RSVP.Promise((resolve) => {
             resolve(this.modelFor('experiments.info'));
         });
     },
     _getSession(params, experiment) {
-        var session = this.store.createRecord(experiment.get('sessionCollectionId'), {
-            experimentId: experiment.id,
-            profileId: 'tester0.prof1', // TODO fetch from service
-            profileVersion: '',
-            completed: false,
-            feedback: '',
-            hasReadFeedback: '',
-            softwareVersion: '',
-            expData: {},
-            sequence: []
-        });
-
-        return experiment.getCurrentVersion().then(versionId => {
-            session.set('experimentVersion', versionId);
-            return session.save().then(() => session);
-        });
-        return new Ember.RSVP.Promise((resolve) => {
-            resolve(session);
+        return this.get('currentUser').getCurrentUser().then(([account, profile]) => {
+            return this.store.createRecord(experiment.get('sessionCollectionId'), {
+                experimentId: experiment.id,
+                profileId: profile.get('id'),
+                profileVersion: '', // TODO
+                completed: false,
+                feedback: '',
+                hasReadFeedback: '',
+                softwareVersion: '',
+                expData: {},
+                sequence: []
+            });
         });
     },
     actions: {
