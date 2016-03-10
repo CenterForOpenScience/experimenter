@@ -9,8 +9,10 @@ export default Ember.Controller.extend({
     actions: {
         saveSession(payload) {
             // Save a provided javascript object to a session object
-            this.get('model').setProperties(payload);
-            this.get('model').save();
+            var model = this.get('model');
+            model.setProperties(payload);
+            model.completed = true;  // TODO: Assumption: saveSession only called once, when saving data at end of session
+            model.save();
         }
     }
 });

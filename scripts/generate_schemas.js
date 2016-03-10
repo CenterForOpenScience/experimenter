@@ -95,6 +95,9 @@ var SESSION = {
         "id": "sessiontest0",  // Script creates one particular session collection associated with one single experiment
         "type": "object",
         "properties": {
+            "completed": {
+                "type": "boolean"
+            },
             "profileId": {
                 "id": "profileId",
                 "type": "string",
@@ -140,6 +143,7 @@ var SESSION = {
         "required": [
             "profileId", "profileVersion",
             "experimentId", "experimentVersion",
+            "completed",
             "sequence", "softwareVersion",
             "expData"
         ]

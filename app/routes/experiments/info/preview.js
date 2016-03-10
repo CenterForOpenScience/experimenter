@@ -9,12 +9,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             experimentId: experiment.id,
             profileId: 'tester0.prof1', // TODO fetch from service
             profileVersion: '',
+            completed: false,
+            feedback: '',
+            hasReadFeedback: '',
             softwareVersion: '',
             expData: {},
-            sequence: [],
-        })
+            sequence: []
+        });
 
-        // TODO: May be an edge case where experimentVersion isn't set/ resolved before this hash returns
         return experiment.getCurrentVersion().then(versionId => {
             session.set('experimentVersion', versionId);
             return session.save().then(() => session);
@@ -22,7 +24,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     setupController: function(controller, model) {
-        controller.set('experiment', this.modelFor('experiments.info'))
+        controller.set('experiment', this.modelFor('experiments.info'));
         return this._super(...arguments);
     },
 
