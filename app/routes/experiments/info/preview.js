@@ -8,7 +8,6 @@ let {RSVP} = Ember;
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin, ExpPlayerRouteMixin, {
     currentUser: Ember.inject.service(),
-    _getSession: Ember.computed.alias('model'),
 
     _getExperiment() {
         return new Ember.RSVP.Promise((resolve) => {
@@ -16,7 +15,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
         });
     },
     _getSession(params, experiment) {
-        this._super(params, experiment).then((session) => {
+        return this._super(params, experiment).then((session) => {
             session.setProperties({
                 id: 'PREVIEW_DATA_DISREGARD'
             });
