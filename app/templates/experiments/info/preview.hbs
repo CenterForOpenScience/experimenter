@@ -1,8 +1,7 @@
 {{
   exp-player
-  experiment=experiment
   session=model
+  experiment=experiment
   pastSessions=pastSessions
-
-  saveHandler=(action 'saveSession')
 }}
+{{exit-warning warn=showWarning onConfirm=(action 'onConfirmExit') onReject=(action 'onRejectExit')}}
