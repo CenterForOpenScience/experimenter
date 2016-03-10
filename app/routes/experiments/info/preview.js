@@ -12,19 +12,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ExpPlayerRouteMixin, 
     },
     _getSession(params, experiment) {
         return this.get('currentUser').getCurrentUser().then(([account, profile]) => {
- session.setProperties({
-                id: 'PREVIEW_DATA_DISREGARD',
-                experimentVersion: versionId
-            });
-
-            return session.reopen({
-                save() {
-                    console.log('Preview Data Save:', this._internalModel._attributes);
-                    return Ember.RSVP.resolve(this);
-                }
-            })
-
-            return this.store.createRecord(experiment.get('sessionCollectionId'), {
+            var session = this.store.createRecord(experiment.get('sessionCollectionId'), {
                 experimentId: experiment.id,
                 profileId: profile.get('id'),
                 profileVersion: '', // TODO
@@ -34,6 +22,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ExpPlayerRouteMixin, 
                 softwareVersion: '',
                 expData: {},
                 sequence: []
+            });
+
+            session.setProperties({
+                id: 'PREVIEW_DATA_DISREGARD'
+            });
+
+            return session.reopen({
+                save() {
+                    // TODO add UI for researcher to see data
+                    console.log('Preview Data Save:', this.toJSON());
+                    return Ember.RSVP.resolve(this);
+                }
             });
         });
     },
