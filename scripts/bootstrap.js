@@ -13,6 +13,14 @@ var COLLECTION = 'sys';
 var PASSWORD = 'password';
 var NAMESPACE = 'experimenter';
 
+ADMIN_OSF_IDS = [
+    'x2zau', '7yrzb',  // Brian "The Food Geek" Geiger
+    'x679r', 'beu32',  // Sam "The Banjo Man" Chrisinger
+    '92jdq', // Lauren "Nickname to be determined" Barker
+    '7bauz', // Andy Boughton
+    'rkaye'  // Chris "Ostriches" Seto
+];
+
 function authorize() {
     return request
         .post({
@@ -151,13 +159,17 @@ function bootstrapCollection(token, name) {
 }
 
 function setNamespacePermissions(token) {
-    var ops = [
-        {
-            op: 'add',
-            path: '/permissions/user-osf-*',
-            value: 'ADMIN'
-        }
-    ];
+    var ops = [];
+    ADMIN_OSF_IDS.forEach((item) => {
+        ops.push(
+            {
+                op: 'add',
+                path: `/permissions/user-osf-${item}`,
+                value: 'ADMIN'
+            }
+        )
+    })
+
     return request
         .patch({
             body: ops,
@@ -175,11 +187,6 @@ function createThumbnailsCollection(token) {
         'state': 'mongo'
     }).then(() => {
         var ops = [
-            {
-                op: 'add',
-                path: '/permissions/user-osf-*',
-                value: 'ADMIN'
-            },
             {
                 op: 'add',
                 path: '/permissions/*',

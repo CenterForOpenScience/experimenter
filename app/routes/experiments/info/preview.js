@@ -10,15 +10,26 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
             experimentId: experiment.id,
             profileId: 'tester0.prof1', // TODO fetch from service
             profileVersion: '',
+            completed: false,
+            feedback: '',
+            hasReadFeedback: '',
             softwareVersion: '',
             expData: {},
             sequence: []
         });
 
-        // TODO: May be an edge case where experimentVersion isn't set/ resolved before this hash returns
         return experiment.getCurrentVersion().then(versionId => {
-            session.set('experimentVersion', versionId);
-            return session.save().then(() => session);
+            session.setProperties({
+                id: 'PREVIEW_DATA_DISREGARD',
+                experimentVersion: versionId
+            });
+
+            return session.reopen({
+                save() {
+                    console.log('Preview Data Save:', this._internalModel._attributes);
+                    return Ember.RSVP.resolve(this);
+                }
+            })
         });
     },
 

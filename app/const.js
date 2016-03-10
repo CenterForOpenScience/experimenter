@@ -36,17 +36,17 @@ export const SESSIONSCHEMA = {
                 'id': 'expData',
                 'type': 'object'
             },
-            'feedback': {
-                'id': 'feedback',
-                'type': 'string'
+            "feedback": {
+                "$oneOf": [{
+                    "id": "feedback",
+                    "type": "string"
+                }, null]
             },
-            'hasReadFeedback': {
-                'id': 'hasReadFeedback',
-                'type': 'boolean'
-            },
-            'didComplete': {
-                'id': 'didCompleteStudy',
-                'type': 'boolean'
+            "hasReadFeedback": {
+                "$oneOf": [{
+                    "id": "hasReadFeedback",
+                    "type": "boolean"
+                }, null]
             },
             'earlyExit': {
                 'id': 'earlyExit',

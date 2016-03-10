@@ -23,8 +23,39 @@ function regexRange(lo, hi) {
         return acc + `[${c}-${hi[i++]||c}]`;
     }, ''));
 
-    return '^' + re.join('|') + '$';
+    return `(?:${re.map(s => `(?:${s})`).join('|')})`;
 }
+
+
+function createSchema(container, sequence, frames) {
+    let i = 0;
+    let j = 0;
+    let props = {};
+    let framePattern = new RegExp(/^exp(?:-\w+)+$/);
+
+    function _parse(frame) {
+        if (framePattern.test(frame.kind))
+            props[`^${j}\\-${escapeRegExp(sequence[i])}$`] = container.lookup(`component:${frame.kind}`).meta.data;
+        else if(frame.kind === 'block')
+            frame.options.forEach(f => _parse(f));
+        else if(frame.kind === 'choice' && (frame.sampler || 'random') === 'random')
+            props[`^${j}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
+                $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
+            };
+        else if(frame.kind === 'choice' && frame.sampler === 'shuffle')
+            props[`^${regexRange(j, j+=(frame.options.length-1))}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
+                $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
+            };
+        else
+            throw `Experiment definition specifies an unknown kind of frame: ${frame.kind}`;
+    }
+
+    for(; i < sequence.length; i++, j++)
+        _parse(frames[sequence[i]]);
+
+    return props;
+}
+
 
 export default Ember.Controller.extend({
     breadCrumb: 'Edit',
@@ -36,38 +67,19 @@ export default Ember.Controller.extend({
 
     actions: {
         submit(editor) {
-            let container = getOwner(this);
             let parsed = JSON.parse(editor.getValue());
-
             let schema = Object.assign({}, SESSIONSCHEMA);
-            var framePattern = new RegExp(/^exp(?:-\w+)+$/);
 
-            let j = 0;
-            let props = {};
-            let length = parsed.sequence.length;
-
-            for(let i = 0; i < length; i++, j++) {
-                let frame = parsed.frames[parsed.sequence[i]];
-
-                if (framePattern.test(frame.kind))
-                    props[`${j}\\-${escapeRegExp(frame.kind)}`] = container.lookup(`component:${frame.kind}`).meta.data;
-                else if(frame.kind === 'block')
-                    frame.options.forEach((f) => {
-                        props[`${j++}\\-${escapeRegExp(f.kind)}`] = container.lookup(`component:${parsed.frames[f].kind}`).meta.data;
-                    });
-                else if(frame.kind === 'choice')
-                    props[`${regexRange(j, j+=(frame.options.length-1))}\\-${escapeRegExp(frame.kind)}`] = {
-                        $oneOf: frame.options.map(f => container.lookup(`component:${parsed.frames[f].kind}`).meta.data)
-                    };
-                else
-                    throw `Experiment definition specifies an unknown kind of frame: ${config.kind}`;
+            try {
+                schema.schema.properties.expData = {
+                    type: 'object',
+                    patternProperties: createSchema(getOwner(this), parsed.sequence, parsed.frames),
+                    additionalProperties: false
+                };
+            } catch(e) {
+                this.toast.error('Error Parsing Experiment: ' + e);
+                return;
             }
-
-            schema.schema.properties.expData = {
-                type: 'object',
-                patternProperties: props,
-                additionalProperties: false
-            };
 
             this.set('model.structure', parsed);
             this.set('model.schema', schema);
