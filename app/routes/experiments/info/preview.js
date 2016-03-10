@@ -11,19 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ExpPlayerRouteMixin, 
         });
     },
     _getSession(params, experiment) {
-        return this.get('currentUser').getCurrentUser().then(([account, profile]) => {
-            var session = this.store.createRecord(experiment.get('sessionCollectionId'), {
-                experimentId: experiment.id,
-                profileId: profile.get('id'),
-                profileVersion: '', // TODO
-                completed: false,
-                feedback: '',
-                hasReadFeedback: '',
-                softwareVersion: '',
-                expData: {},
-                sequence: []
-            });
-
+        this._super(params, experiment).then((session) => {
             session.setProperties({
                 id: 'PREVIEW_DATA_DISREGARD'
             });
