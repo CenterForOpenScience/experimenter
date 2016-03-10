@@ -18,8 +18,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         });
 
         return experiment.getCurrentVersion().then(versionId => {
-            session.set('experimentVersion', versionId);
-            return session.save().then(() => session);
+            session.setProperties({
+                id: 'PREVIEW_DATA_DISREGARD',
+                experimentVersion: versionId
+            });
+
+            return session.reopen({
+                save() {
+                    console.log('Preview Data Save:', this._internalModel._attributes);
+                    return Ember.RSVP.resolve(this);
+                }
+            })
         });
     },
 

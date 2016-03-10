@@ -70,11 +70,16 @@ export default Ember.Controller.extend({
             let parsed = JSON.parse(editor.getValue());
             let schema = Object.assign({}, SESSIONSCHEMA);
 
-            schema.schema.properties.expData = {
-                type: 'object',
-                patternProperties: createSchema(getOwner(this), parsed.sequence, parsed.frames),
-                additionalProperties: false
-            };
+            try {
+                schema.schema.properties.expData = {
+                    type: 'object',
+                    patternProperties: createSchema(getOwner(this), parsed.sequence, parsed.frames),
+                    additionalProperties: false
+                };
+            } catch(e) {
+                this.toast.error('Error Parsing Experiment: ' + e);
+                return;
+            }
 
             this.set('model.structure', parsed);
             this.set('model.schema', schema);

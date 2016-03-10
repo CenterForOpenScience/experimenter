@@ -23,6 +23,7 @@
     "bluebird": "^3.3.0",
     "broccoli-asset-rev": "^2.2.0",
     "broccoli-sass": "^0.7.0",
+    "broccoli-strip-debug": "^1.1.0",
     "ember-ajax": "0.7.1",
     "ember-breadcrumbs": "0.1.7",
     "ember-cli": "2.3.0",
