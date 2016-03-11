@@ -299,12 +299,11 @@
     }
 }, {
     "title": "Preferential Physics",
-    "description": "First your child will see two actors naming familiar objects. Sometimes they're correct, sometimes they're not. Then we'll show the same actors naming unfamiliar objects and ask your child some questions about which answers he or she trusts.",
+    "description": "In this study, your child will see about 30 very short video clips of physical events. On one side, something \"expected\" or normal will happen: e.g., a ball will roll off a table and fall to the ground. On the other side, something unexpected will happen: e.g., the same ball will roll off a table and fall up!",
     "state": "Active",
     "eligibilityCriteria": "age >= 9 months and age < 2 years",
     "duration": "Ten minutes",
-    "whatHappens": "First your child will see two actors naming familiar objects. Sometimes they're correct, sometimes they're not. Then we'll show the same actors naming unfamiliar objects and ask your child some questions about which answers he or she trusts.",
-    "purpose": "How children track and use information about reliability.",
+    "purpose": "We want to see how children respond to \"expected\" and \"unexpected\" events.",
     "exitUrl": "http://localhost:4201",
     "thumbnailId": "experimenter.thumbnails.test0-thumb",
     "structure": {
