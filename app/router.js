@@ -17,24 +17,37 @@ Router.map(function() {
     });
 
     this.route('experiments', function() {
-        this.route('list', {path: '/'});
-        this.route('info', {path: '/:experiment_id'}, function() {
-            this.route('index', {path: '/'});
-            this.route('edit', {path: '/edit/'});
-            this.route('results', {path: '/results/'});
-            this.route('preview', {path: '/preview/'});
+        this.route('list', {
+            path: '/'
+        });
+        this.route('info', {
+            path: '/:experiment_id'
+        }, function() {
+            this.route('index', {
+                path: '/'
+            });
+            this.route('edit', {
+                path: '/edit/'
+            });
+            this.route('results', {
+                path: '/results/'
+            });
+            this.route('preview', {
+                path: '/preview/'
+            });
 
         });
     });
 
     this.route('participants', function() {
-        this.route('profile', {path: ':profile_id/'});
+        this.route('profile', {
+            path: ':profile_id/'
+        });
     });
 
-    this.route('project-settings', {path: '/settings'});
-
-    this.route('testmodel');
-
+    this.route('project-settings', {
+        path: '/settings'
+    });
 });
 
 export default Router;

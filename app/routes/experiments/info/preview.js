@@ -4,8 +4,6 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ExpPlayerRouteMixin from 'exp-player/mixins/exp-player-route';
 import WarnOnExitRouteMixin from 'exp-player/mixins/warn-on-exit-route';
 
-let {RSVP} = Ember;
-
 export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin, ExpPlayerRouteMixin, {
     currentUser: Ember.inject.service(),
 
@@ -24,7 +22,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
                 save() {
                     // TODO add UI for researcher to see data
                     console.log('Preview Data Save:', this.toJSON());
-                    return Ember.RSVP.resolve(this);
+                    if (this.get('completed')) {
+                        return Ember.getOwner(this).lookup('controller:experiments.info.preview').showPreviewData(this).then(() => {
+                            return this.transitionTo('experiments.info');
+                        });
+                    }
+                    else {
+                        return Ember.RSVP.resolve(this);
+                    }
                 }
             });
         });

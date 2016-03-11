@@ -11,13 +11,13 @@ export default Ember.Controller.extend({
         }
     }),
     sizeContainer: function() {
-        var winWidth = $(window).width();
+        var winWidth = Ember.$(window).width();
         if (winWidth < 992 && this.isExpanded) {
             this.send('toggleMenu');
         }
     },
     attachResizeListener : function () {
-        $(window).on('resize', Ember.run.bind(this, this.sizeContainer));
+        Ember.$(window).on('resize', Ember.run.bind(this, this.sizeContainer));
     }.on('init'),
 
     actions: {

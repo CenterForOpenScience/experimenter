@@ -9,7 +9,6 @@
     "exitUrl": "http://localhost:4200",
     "eligibilityCriteria": "age > 3 months and age < 9 months",
     "displayFullscreen": true,
-    "thumbnailId": "experimenter.thumbnails.test0-thumb",
     "structure": {
         "frames": {
             "pre-consent": {
@@ -24,22 +23,17 @@
                 "fullControls": true,
                 "mustPlay": true,
                 "images": [],
-                "prompts": [
-                    {
-                        "title": "Remove distractions",
-                        "text": "Our patented underground bunkers will let you work productively, even in the event of nuclear war. (batteries not included)"
-                    },
-                    {
-                        "title": "Need to run?",
-                        "text": "In case of attack by lizard people, press F1 to exit the experiment and choose privacy settings for your video. (helpful if the lizard people don't consent to be recorded)"
-                    }
-                ],
-                "sources": [
-                    {
-                        "type": "audio/ogg",
-                        "src": "horse.ogg"
-                    }
-                ]
+                "prompts": [{
+                    "title": "Remove distractions",
+                    "text": "Our patented underground bunkers will let you work productively, even in the event of nuclear war. (batteries not included)"
+                }, {
+                    "title": "Need to run?",
+                    "text": "In case of attack by lizard people, press F1 to exit the experiment and choose privacy settings for your video. (helpful if the lizard people don't consent to be recorded)"
+                }],
+                "sources": [{
+                    "type": "audio/ogg",
+                    "src": "horse.ogg"
+                }]
             },
             "one-randomizer": {
                 "kind": "choice",
@@ -69,22 +63,17 @@
                 "fullControls": true,
                 "mustPlay": true,
                 "images": [],
-                "prompts": [
-                    {
-                        "title": "Instead of a consent form...",
-                        "text": "Here's a helpful tip."
-                    },
-                    {
-                        "title": "A horse is a horse",
-                        "text": "But please don't say that backwards."
-                    }
-                ],
-                "sources": [
-                    {
-                        "type": "audio/ogg",
-                        "src": "horse.ogg"
-                    }
-                ]
+                "prompts": [{
+                    "title": "Instead of a consent form...",
+                    "text": "Here's a helpful tip."
+                }, {
+                    "title": "A horse is a horse",
+                    "text": "But please don't say that backwards."
+                }],
+                "sources": [{
+                    "type": "audio/ogg",
+                    "src": "horse.ogg"
+                }]
             },
             "second-randomizer": {
                 "kind": "choice",
@@ -106,82 +95,68 @@
                 "fullControls": true,
                 "mustPlay": true,
                 "images": [],
-                "prompts": [
-                    {
-                        "title": "Hello, world!",
-                        "text": "You can generate a sound file on your mac by typing say 'Hello, world' -o ~/Desktop/test_assets/helloworld.mp4 --file-format mp4f"
-                    }
-                ],
-                "sources": [
-                    {
-                        "type": "audio/mp4",
-                        "src": "helloworld.mp4"
-                    }
-                ]
+                "prompts": [{
+                    "title": "Hello, world!",
+                    "text": "You can generate a sound file on your mac by typing say 'Hello, world' -o ~/Desktop/test_assets/helloworld.mp4 --file-format mp4f"
+                }],
+                "sources": [{
+                    "type": "audio/mp4",
+                    "src": "helloworld.mp4"
+                }]
             },
             "first-video": {
                 "kind": "exp-video",
                 "autoplay": true,
                 "poster": "big_buck_bunny.jpg",
-                "sources": [
-                    {
-                        "type": "video/mp4",
-                        "src": "big_buck_bunny.m4v"
-                    },
-                    {
-                        "type": "video/webm",
-                        "src": "big_buck_bunny.webm"
-                    },
-                    {
-                        "type": "video/ogg",
-                        "src": "big_buck_bunny.ogg"
-                    }
-                ]
+                "sources": [{
+                    "type": "video/mp4",
+                    "src": "big_buck_bunny.m4v"
+                }, {
+                    "type": "video/webm",
+                    "src": "big_buck_bunny.webm"
+                }, {
+                    "type": "video/ogg",
+                    "src": "big_buck_bunny.ogg"
+                }]
             },
             "second-audio": {
                 "kind": "exp-audioplayer",
                 "autoplay": true,
                 "fullControls": false,
                 "mustPlay": false,
-                "images": [
-                    {
-                        "src": "osf_test_file.jpg",
-                        "alt": "Photo of a squirrel",
-                        "title": "Tooltip for first image"
-                    },
-                    {
-                        "src": "osf_test_file2.jpg",
-                        "alt": "Another squirrel",
-                        "title": "Tooltip for second image"
-                    }
-                ],
+                "images": [{
+                    "src": "osf_test_file.jpg",
+                    "alt": "Photo of a squirrel",
+                    "title": "Tooltip for first image"
+                }, {
+                    "src": "osf_test_file2.jpg",
+                    "alt": "Another squirrel",
+                    "title": "Tooltip for second image"
+                }],
                 "prompts": [],
-                "sources": [
-                    {
-                        "type": "audio/ogg",
-                        "src": "horse.ogg"
-                    }
-                ]
+                "sources": [{
+                    "type": "audio/ogg",
+                    "src": "horse.ogg"
+                }]
             },
             "second-video": {
                 "kind": "exp-video",
                 "autoplay": false,
                 "poster": "oceans.jpg",
-                "sources": [
-                    {
-                        "type": "video/mp4",
-                        "src": "oceans.mp4"
-                    }
-                ]
+                "sources": [{
+                    "type": "video/mp4",
+                    "src": "oceans.mp4"
+                }]
             },
             "third-video": {
                 "id": "third-video",
                 "kind": "exp-video",
                 "autoplay": true,
                 "poster": "",
-                "sources": [
-                    {"type": "video/webm", "src": "physics-clip.webm"}
-                ]
+                "sources": [{
+                    "type": "video/webm",
+                    "src": "physics-clip.webm"
+                }]
             },
             "post-consent": {
                 "kind": "exp-consent",
@@ -235,20 +210,16 @@
                 "heading": "Your webcam",
                 "headingText": "We're interested in your child's responses, so we'd like to see him or her on the webcam video that's recorded.",
                 "instructions": "Sit your child on your lap, and adjust your webcam if needed so that the view from your webcam (above) looks like the center picture below. Try to get your child's face in the center of the picture, with the whole face visible.\n\n During the movies, please try to keep your child in approximately the same position, in view of the webcam. (But don't worry; we know kids squirm!)",
-                "examples": [
-                    {
-                        "src": "video-setup-1.png",
-                        "caption": "Child is off to one side"
-                    },
-                    {
-                        "src": "video-setup-2.png",
-                        "caption": "Great!"
-                    },
-                    {
-                        "src": "video-setup-3.png",
-                        "caption": "A bit too close"
-                    }
-                ]
+                "examples": [{
+                    "src": "video-setup-1.png",
+                    "caption": "Child is off to one side"
+                }, {
+                    "src": "video-setup-2.png",
+                    "caption": "Great!"
+                }, {
+                    "src": "video-setup-3.png",
+                    "caption": "A bit too close"
+                }]
             },
             "soundcheck": {
                 "kind": "exp-audioplayer",
@@ -323,6 +294,139 @@
             "soundcheck",
             "first-video",
             "first-video-review",
+            "exit-survey"
+        ]
+    }
+}, {
+    "id": "physics",
+    "title": "Preferential Physics",
+    "description": "In this study, your child will see about 30 very short video clips of physical events. On one side, something \"expected\" or normal will happen: e.g., a ball will roll off a table and fall to the ground. On the other side, something unexpected will happen: e.g., the same ball will roll off a table and fall up!",
+    "state": "Active",
+    "eligibilityCriteria": "age >= 9 months and age < 2 years",
+    "duration": "Ten minutes",
+    "purpose": "We want to see how children respond to \"expected\" and \"unexpected\" events.",
+    "exitUrl": "http://localhost:4201",
+    "thumbnailId": "experimenter.thumbnails.test0-thumb",
+    "structure": {
+        "frames": {
+            "video-config": {
+                "kind": "exp-video-config"
+            },
+            "video-consent": {
+                "kind": "exp-video-consent",
+                "prompt": "\"I have read and agree and understand the information above. I am this child's legal guardian and we both agree to participate in this study.\"",
+                "blocks": [
+                    {
+                        "title": "First",
+                        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                    },
+                    {
+                        "title": "Second",
+                        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                    },
+                    {
+                        "title": "Third",
+                        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                    }
+                ]
+            },
+            "instructions": {
+                "kind": "exp-physics-info"
+            },
+            "video-preview": {
+                "kind": "exp-video-preview",
+                "videos": [{
+                    "sources": [{
+                        "type": "video/webm",
+                        "src": "big_buck_bunny.webm"
+                    }, {
+                        "type": "video/ogg",
+                        "src": "big_buck_bunny.ogg"
+                    }, {
+                        "type": "video/mp4",
+                        "src": "big_buck_bunny.m4v"
+                    }]
+                }, {
+                    "sources": [{
+                        "type": "video/mp4",
+                        "src": "oceans.mp4"
+                    }]
+                }, {
+                    "sources": [{
+                        "type": "video/webm",
+                        "src": "physics-clip.webm"
+                    }]
+                }],
+                "record": false,
+                "text": "Here are the videos your child will see in this study for you to watch ahead of -me. Please do this without your child! Note: videos may be presented in a different order."
+            },
+            "mood-survey": {
+                "kind": "exp-mood-questionnaire"
+            },
+            "pre-video-message": {
+                "kind": "exp-physics-pre-video"
+            },
+            "video-1": {
+                "kind": "exp-video",
+                "autoforwardOnEnd": true,
+                "autoplay": true,
+                "poster": "big_buck_bunny.jpg",
+                "sources": [{
+                    "type": "video/webm",
+                    "src": "big_buck_bunny.webm"
+                }, {
+                    "type": "video/ogg",
+                    "src": "big_buck_bunny.ogg"
+                }, {
+                    "type": "video/mp4",
+                    "src": "big_buck_bunny.m4v"
+                }]
+            },
+            "video-2": {
+                "kind": "exp-video",
+                "autoplay": true,
+                "poster": "oceans.jpg",
+                "sources": [{
+                    "type": "video/mp4",
+                    "src": "oceans.mp4"
+                }]
+            },
+            "video-3": {
+                "id": "third-video",
+                "kind": "exp-video",
+                "autoplay": true,
+                "poster": "",
+                "sources": [{
+                    "type": "video/webm",
+                    "src": "physics-clip.webm"
+                }]
+            },
+            "video-randomizer": {
+                "kind": "choice",
+                "sampler": "rotate",
+                "options": [
+                    "video-1",
+                    "video-2",
+                    "video-3"
+                ]
+            },
+            "exit-survey": {
+                "kind": "exp-exit-survey",
+                "title": "Post-study Survey",
+                "exitThankYou": "Thanks so much! We appreciate every family's help. No matter how your child responded, we can learn something from his or her behavior--for instance, if he or she got bored and decided to stop, we know we need to make studies that are more fun!",
+                "exitMessage": "Every session helps us learn about your child's growing brain. We look forward to seeing your family again! You can complete your next \"Physics\" session as soon as tomorrow.",
+                "idealSessionsCompleted": 2,
+                "idealDaysSessionsCompleted": 7
+            }
+        },
+        "sequence": [
+            "video-config",
+            "video-consent",
+            "instructions",
+            "video-preview",
+            "mood-survey",
+            "pre-video-message",
+            "video-randomizer",
             "exit-survey"
         ]
     }
