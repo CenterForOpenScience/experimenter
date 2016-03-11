@@ -55,18 +55,18 @@ export default Ember.Component.extend({
             expData.state = exp.DRAFT;
             var thumbnailId = expData.thumbnailId;
             delete expData.thumbnailId;
-            var clone = this.get('store').createRecord('experiment', expData);
 
             var finish = () => {
+                var clone = this.get('store').createRecord('experiment', expData);
                 clone.save().then(() => {
                     this.sendAction('onClone', clone);
                 });
             };
 
-            if (expData.thumbnailId) {
+            if (thumbnailId) {
                 var thumbnailData = exp.get('thumbnail').toJSON();
-                this.get('store').createRecord('thumbnail', thumbnailData).then((thumbnail) => {
-                    clone.set('thumbnailId', thumbnail.get('id'));
+                this.get('store').createRecord('thumbnail', thumbnailData).save().then((thumbnail) => {
+                    expData.thumbnailId = thumbnail.get('id');
                     finish();
                 });
             }
