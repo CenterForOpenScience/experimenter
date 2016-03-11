@@ -298,6 +298,7 @@
         ]
     }
 }, {
+    "id": "physics",
     "title": "Preferential Physics",
     "description": "In this study, your child will see about 30 very short video clips of physical events. On one side, something \"expected\" or normal will happen: e.g., a ball will roll off a table and fall to the ground. On the other side, something unexpected will happen: e.g., the same ball will roll off a table and fall up!",
     "state": "Active",
@@ -313,7 +314,21 @@
             },
             "video-consent": {
                 "kind": "exp-video-consent",
-                "prompt": "\"I have read and agree and understand the information above. I am this child's legal guardian and we both agree to participate in this study.\""
+                "prompt": "\"I have read and agree and understand the information above. I am this child's legal guardian and we both agree to participate in this study.\"",
+                "blocks": [
+                    {
+                        "title": "First",
+                        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                    },
+                    {
+                        "title": "Second",
+                        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                    },
+                    {
+                        "title": "Third",
+                        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+                    }
+                ]
             },
             "instructions": {
                 "kind": "exp-physics-info"
@@ -342,7 +357,8 @@
                         "src": "physics-clip.webm"
                     }]
                 }],
-                "record": false
+                "record": false,
+                "text": "Here are the videos your child will see in this study for you to watch ahead of -me. Please do this without your child! Note: videos may be presented in a different order."
             },
             "mood-survey": {
                 "kind": "exp-mood-questionnaire"
@@ -368,7 +384,7 @@
             },
             "video-2": {
                 "kind": "exp-video",
-                "autoplay": false,
+                "autoplay": true,
                 "poster": "oceans.jpg",
                 "sources": [{
                     "type": "video/mp4",
