@@ -1,5 +1,8 @@
 import Ember from 'ember';
 
+import {permissionCreateForAccounts} from 'exp-models/utils/constants';
+
+
 export default Ember.Component.extend({
     experiment: null,
     sessions: null,
@@ -19,21 +22,30 @@ export default Ember.Component.extend({
             var exp = this.get('experiment');
             exp.set('state', exp.ARCHIVED);
             exp.save().then(() => {
-                this.get('toast.info')('Experiment stopped successfully.');
+                return this.get('store').findRecord('collection', exp.get('sessionCollectionId')).then((collection) => {
+                    collection.set('permissions', {});
+                    return collection.save();
+                }).then(() => this.get('toast.info')('Experiment stopped successfully.'));
             });
         },
         start: function() {
             var exp = this.get('experiment');
             exp.set('state', exp.ACTIVE);
             exp.save().then(() => {
-                this.toast.info('Experiment started successfully.');
+                return this.get('store').findRecord('collection', exp.get('sessionCollectionId')).then((collection) => {
+                    collection.set('permissions', permissionCreateForAccounts);
+                    return collection.save();
+                }).then(() => this.get('toast.info')('Experiment started successfully.'));
             });
         },
         delete: function() {
             var exp = this.get('experiment');
             exp.set('state', exp.DELETED);
             exp.save().then(() => {
-                this.sendAction('onDelete');
+                return this.get('store').findRecord('collection', exp.get('sessionCollectionId')).then((collection) => {
+                    collection.set('permissions', {});
+                    return collection.save();
+                }).then(() => this.sendAction('onDelete'));
             });
         },
         clone: function() {
