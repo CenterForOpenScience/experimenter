@@ -21,4 +21,3 @@ install:
 
 script:
   - npm build
-  - npm test
