@@ -1,3 +1,11 @@
+#### Master
+
+![](https://travis-ci.org/CenterForOpenScience/experimenter.svg?branch=master)
+
+#### Develop
+
+![](https://travis-ci.org/CenterForOpenScience/experimenter.svg?branch=develop)
+
 # Experimenter
 
 > A platform to create and administer experiments.
