@@ -6,32 +6,48 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('index', {
-      path: '/'
-  });
+    this.route('index', {
+        path: '/'
+    });
 
-  this.route('login');
+    this.route('login');
 
-  this.route('errors', function() {
-      this.route('generic');
-  });
+    this.route('errors', function() {
+        this.route('generic');
+    });
 
-  this.route('experiments', function() {
-      this.route('list', {path: '/'});
-      this.route('info', {path: '/:experiment_id'}, function() {
-          this.route('index', {path: '/'});
-          this.route('edit', {path: '/edit/'});
-          this.route('results', {path: '/results/'});
-          this.route('preview', {path: '/preview/'});
+    this.route('experiments', function() {
+        this.route('list', {
+            path: '/'
+        });
+        this.route('info', {
+            path: '/:experiment_id'
+        }, function() {
+            this.route('index', {
+                path: '/'
+            });
+            this.route('edit', {
+                path: '/edit/'
+            });
+            this.route('results', {
+                path: '/results/'
+            });
+            this.route('preview', {
+                path: '/preview/'
+            });
 
-      });
-  });
+        });
+    });
 
-  this.route('participants', function() {
-      this.route('profile', {path: ':profile_id/'});
-  });
+    this.route('participants', function() {
+        this.route('profile', {
+            path: ':profile_id/'
+        });
+    });
 
-  this.route('project-settings', {path: '/settings'});
+    this.route('project-settings', {
+        path: '/settings'
+    });
 });
 
 export default Router;
