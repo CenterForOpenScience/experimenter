@@ -35,15 +35,17 @@ export default Ember.Component.extend({
         this.set('value', this.editor.getSession().getValue());
     },
     _onChangeAnnotation(e, session) {
-        if (session.getValue().length < 1)
-            return this.set('isValidSyntax', false);
+        if (session.getValue().length < 1) {
+            this.set('isValidSyntax', false);
+        }
 
         let annotations = session.getAnnotations();
 
-        for(var i = 0; i < annotations.length; i++)
-            if (annotations[i].type === 'error')
-                return this.set('isValidSyntax', false);
-
+        for(var i = 0; i < annotations.length; i++) {
+            if (annotations[i].type === 'error') {
+                this.set('isValidSyntax', false);
+            }
+        }
         this.set('isValidSyntax', true);
     },
     valueChanged: function() {

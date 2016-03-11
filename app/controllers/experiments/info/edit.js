@@ -34,24 +34,30 @@ function createSchema(container, sequence, frames) {
     let framePattern = new RegExp(/^exp(?:-\w+)+$/);
 
     function _parse(frame) {
-        if (framePattern.test(frame.kind))
+        if (framePattern.test(frame.kind)) {
             props[`^${j}\\-${escapeRegExp(sequence[i])}$`] = container.lookup(`component:${frame.kind}`).meta.data;
-        else if(frame.kind === 'block')
+        }
+        else if(frame.kind === 'block') {
             frame.options.forEach(f => _parse(f));
-        else if(frame.kind === 'choice' && (frame.sampler || 'random') === 'random')
+        }
+        else if(frame.kind === 'choice' && (frame.sampler || 'random') === 'random') {
             props[`^${j}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
                 $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
             };
-        else if(frame.kind === 'choice' && frame.sampler === 'shuffle')
+        }
+        else if(frame.kind === 'choice' && frame.sampler === 'shuffle') {
             props[`^${regexRange(j, j+=(frame.options.length-1))}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
                 $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
             };
-        else if(frame.kind === 'choice' && frame.sampler === 'rotate')
+        }
+        else if(frame.kind === 'choice' && frame.sampler === 'rotate') {
             props[`^${regexRange(j, j+=(frame.options.length-1))}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
                 $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
             };
-        else
+        }
+        else {
             throw `Experiment definition specifies an unknown kind of frame: ${frame.kind}`;
+        }
     }
 
     for(; i < sequence.length; i++, j++)

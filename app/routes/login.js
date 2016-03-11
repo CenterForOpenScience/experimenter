@@ -13,14 +13,14 @@ export default Em.Route.extend(UnauthenticatedRouteMixin, {
             return null;
         }
         return this.get('session').authenticate('authenticator:jam-osf-jwt', hash.access_token, hash.expires_in)
-            .then(data => this.transitionTo('experiments'))
-            .catch((reason) => {
+            .then(() => this.transitionTo('experiments'))
+            .catch((/*reason*/) => {
                 // TODO: Pick failure reason off the response for custom messages
                 this.set('errorMessage', 'User does not have permissions on the domain');
             });
     },
 
-    setupController(controller, model) {
+    setupController(controller) {
         this._super(...arguments);
         controller.set('errorMessage', this.get('errorMessage'));
     }
