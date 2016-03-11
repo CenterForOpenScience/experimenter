@@ -25,9 +25,9 @@
     "ace-builds": "^1.2.3"
   },
   "resolutions": {
-    "bootstrap": ">= 2.3.2",
-    "moment": ">=2.9.0",
-    "ace-builds": "1.1.7",
+    "bootstrap": ">= 3.3.5",
+    "moment": ">=2.11.1",
+    "ace-builds": "1.2.3",
     "jquery": "1.11.3"
   }
 }
