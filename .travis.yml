@@ -20,4 +20,5 @@ install:
   - bower install
 
 script:
+  - npm build
   - npm test
