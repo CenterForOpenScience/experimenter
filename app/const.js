@@ -8,10 +8,6 @@ export const SESSIONSCHEMA = {
                 'type': 'string',
                 'pattern': '\\w+\\.\\w+'
             },
-            'profileVersion': {
-                'id': 'profileVersion',
-                'type': 'string'
-            },
             'experimentId': {
                 'id': 'experimentId',
                 'type': 'string',
@@ -27,10 +23,6 @@ export const SESSIONSCHEMA = {
                 'items': {
                     'type': 'string'
                 }
-            },
-            'softwareVersion': {
-                'id': 'softwareVersion',
-                'type': 'string'
             },
             'expData': {
                 'id': 'expData',
@@ -63,11 +55,9 @@ export const SESSIONSCHEMA = {
         },
         'required': [
             'profileId',
-            'profileVersion',
             'experimentId',
             'experimentVersion',
             'sequence',
-            'softwareVersion',
             'expData'
         ]
     }

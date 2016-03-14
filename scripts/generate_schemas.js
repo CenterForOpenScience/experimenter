@@ -104,10 +104,6 @@ var SESSION = {
                 "type": "string",
                 "pattern": PROFILE_ID_PATTERN
             },
-            "profileVersion": {
-                "id": "profileVersion",
-                "type": "string"
-            },
             "experimentId": {  // TODO: In the new collection-per-experiment sessions model, this field may be redundant
                 "id": "experimentId",
                 "type": "string",
@@ -124,10 +120,6 @@ var SESSION = {
                     "type": "string"
                 }
             },
-            "softwareVersion": {
-                "id": "softwareVersion",
-                "type": "string"  // TODO pattern? semver?
-            },
             "expData": {
                 "id": "expData",
                 "type": "object"
@@ -142,11 +134,8 @@ var SESSION = {
             }
         },
         "required": [
-            "profileId", "profileVersion",
-            "experimentId", "experimentVersion",
-            "completed",
-            "sequence", "softwareVersion",
-            "expData"
+            "profileId", "experimentId", "experimentVersion",
+            "completed", "sequence", "expData"
         ]
         // "additionalProperties": false
     }
