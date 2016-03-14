@@ -1,3 +1,4 @@
+var rimraf = require('rimraf');
 var path = require('path');
 var fs = require('fs');
 
@@ -195,9 +196,10 @@ var ACCOUNT = {
 
 // TODO RE-add account
 module.exports = function main() {
+    var base = path.dirname(__filename);
+    rimraf.sync(`${base}/../schemas/*`);
     [CONFIG, EXPERIMENT, SESSION].forEach(function(schema) {
         var schemaData = JSON.stringify(schema, null, 4);
-        var base = path.dirname(__filename);
         var filename = schema.schema.id;
         fs.writeFile(`${base}/../schemas/${filename}.json`, schemaData);
     });

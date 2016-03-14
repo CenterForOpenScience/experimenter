@@ -1,3 +1,5 @@
+//jam create experimenter sys && jam update experimenter -p "jam-experimenter:sys-root ADMIN" && jam userify experimenter sys && echo '{"password":"$2b$12$iujjM4DtPMWVL1B2roWjBeHzjzxaNEP8HbXxdZwRha/j5Pc8E1n2G"}' | jam create experimenter sys root
+
 var fs = require('fs');
 
 var Promise = require('bluebird');
@@ -46,27 +48,6 @@ function authorize(password) {
         });
 }
 
-function loadExamples(collection, examples) {
-    if (!Array.isArray(examples) || examples.length < 1) {
-        return console.log(`No example data for ${collection}`);
-    }
-
-    return Promise.map(examples, function(example) {
-        return collection.create(example.id, example)
-            .then(_ => {
-                if (collection._name === 'experiments')
-                    return collection._namespace.getOrCreate(`session${example.id}s`)
-                        .then(col => col.update([{
-                            op: 'add', path: '/permissions/jam-experimenter:accounts-*', value: 'CREATE'
-                        }]));
-            }).catch(e => {
-                if (e.statusCode === 409) return;
-                console.log(e.error);
-                console.log();
-            });
-    });
-}
-
 function bootstrapCollection(namespace, name) {
     var ops = [];
 
@@ -78,14 +59,6 @@ function bootstrapCollection(namespace, name) {
         });
     } catch (e) {
         console.log(`No schema found for collection ${name}, skipping`);
-    }
-
-    var examples = null;
-    try {
-        examples = require(`./data/${name}.json`);
-    } catch (e) {
-        examples = [];
-        console.log(`No example data for ${name}, because of error`, e);
     }
 
     if (Array.isArray(permissions[name])) {
@@ -102,8 +75,7 @@ function bootstrapCollection(namespace, name) {
     }
 
     return namespace.getOrCreate(name + 's')
-        .then(collection => collection.update(ops)
-            .then(loadExamples.bind(this, collection, examples)));
+        .then(collection => collection.update(ops));
 }
 
 
