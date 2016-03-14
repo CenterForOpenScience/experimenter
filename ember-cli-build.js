@@ -4,22 +4,29 @@ require('dotenv').config();
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
-      'ember-bootstrap': {
-          'importBootstrapTheme': true
-      },
-      sassOptions: {
-        includePaths: [
-            'app/styles'
-        ]
-      },
-      emberWowza: {
-          // Config for video recorder config
-          asp: JSON.parse(process.env.WOWZA_ASP),
-          // Config for actual video recording
-          php: JSON.parse(process.env.WOWZA_PHP)
-      }
-  });
+    var app = new EmberApp(defaults, {
+        sourcemaps: {enabled: true},
+        minifyJS: {
+            enabled: EmberApp.env() !== 'development'
+        },
+        minifyCSS: {
+            enabled: EmberApp.env() !== 'development'
+        },
+        'ember-bootstrap': {
+            'importBootstrapTheme': true
+        },
+        sassOptions: {
+            includePaths: [
+                'app/styles'
+            ]
+        },
+        emberWowza: {
+            // Config for video recorder config
+            asp: JSON.parse(process.env.WOWZA_ASP),
+            // Config for actual video recording
+            php: JSON.parse(process.env.WOWZA_PHP)
+        }
+    });
 
   app.import('bower_components/ace-builds/src/ace.js');
   app.import('bower_components/ace-builds/src/mode-json.js');
