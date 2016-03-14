@@ -9,7 +9,7 @@
     <tbody>
       {{#each sortedSessions as |session|}}
         <tr class="clickable-row" {{action 'updateData' session}}>
-          <td>{{session.profileId}}</td>
+          <td>{{session.anonProfileId}}</td>
           <td>{{moment-format session.createdOn 'MM/DD/YYYY'}}</td>
         </tr>
       {{/each}}
