@@ -20,7 +20,9 @@
     "bcryptjs": "^2.3.0",
     "file-saver.js": "^1.20150507.2",
     "fontawesome": "~4.5.0",
-    "ace-builds": "^1.2.3"
+    "ace-builds": "^1.2.3",
+    "jquery": ">= 1.7.0 < 2.2.0",
+    "swfobject": "*"
   },
   "resolutions": {
     "bootstrap": ">= 3.3.5",
