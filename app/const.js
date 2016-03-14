@@ -3,6 +3,9 @@ export const SESSIONSCHEMA = {
     'schema': {
         'type': 'object',
         'properties': {
+            'completed': {
+                'type': 'boolean'
+            },
             'profileId': {
                 'id': 'profileId',
                 'type': 'string',
@@ -57,6 +60,7 @@ export const SESSIONSCHEMA = {
             'profileId',
             'experimentId',
             'experimentVersion',
+            'completed',
             'sequence',
             'expData'
         ]

@@ -131,11 +131,27 @@ var SESSION = {
             "hasReadFeedback": {
                 "id": "hasReadFeedback",
                 "type": "boolean"
+            },
+            'earlyExit': {
+                'id': 'earlyExit',
+                'type': ['object', 'null'],
+                'properties': {
+                    'reason': {
+                        'type': ['string', 'null']
+                    },
+                    'privacy': {
+                        'type': 'string'
+                    }
+                }
             }
         },
         "required": [
-            "profileId", "experimentId", "experimentVersion",
-            "completed", "sequence", "expData"
+            "profileId",
+            "experimentId",
+            "experimentVersion",
+            "completed",
+            "sequence",
+            "expData"
         ]
         // "additionalProperties": false
     }
