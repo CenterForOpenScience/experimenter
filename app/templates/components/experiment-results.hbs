@@ -1,7 +1,6 @@
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#participantData">Participant Data</a></li>
   <li><a data-toggle="tab" href="#allData">All Data</a></li>
-  <li><a data-toggle="tab" href="#allAttachments">All Attachments</a></li>
 </ul>
 
 <div class="tab-content">
@@ -12,8 +11,5 @@
   <div id="allData" class="tab-pane fade">
     <h3>All Data</h3>
     {{export-tool data=sessions fieldWhitelist=serializeFields}}
-  </div>
-  <div id="allAttachments" class="tab-pane fade">
-    {{all-attachments sessions=sessions}}
   </div>
 </div>
