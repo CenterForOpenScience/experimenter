@@ -3,9 +3,6 @@
 var fs = require('fs');
 
 require('dotenv').config();
-if(fs.existsSync('./.env-local')) {
-    require('dotenv').config({path: '.env-local'});
-}
 
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
@@ -32,9 +29,6 @@ module.exports = function(defaults) {
             asp: JSON.parse(process.env.WOWZA_ASP),
             // Config for actual video recording
             php: JSON.parse(process.env.WOWZA_PHP)
-        },
-        dotEnv: {
-            path: '.env-local'
         }
     });
 
