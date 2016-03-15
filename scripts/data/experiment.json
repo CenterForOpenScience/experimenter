@@ -180,7 +180,7 @@
     "duration": "Ten minutes",
     "purpose": "How children track and use information about reliability.",
     "exitUrl": "http://localhost:4200",
-    "thumbnailId": "experimenter.thumbnails.demo-thumb",
+    "thumbnailId": "demo-thumb",
     "structure": {
         "frames": {
             "video-config": {
@@ -306,7 +306,7 @@
     "duration": "Ten minutes",
     "purpose": "We want to see how children respond to \"expected\" and \"unexpected\" events.",
     "exitUrl": "http://localhost:4201",
-    "thumbnailId": "experimenter.thumbnails.test0-thumb",
+    "thumbnailId": "test0-thumb",
     "structure": {
         "frames": {
             "video-config": {

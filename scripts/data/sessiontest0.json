@@ -1,7 +1,7 @@
 [{
     "id": "session1a",
     "profileId": "tester1.prof1",
-    "experimentId": "experimenter.experiments.test0",
+    "experimentId": "test0",
     "experimentVersion": "qwertyuiop",
     "completed": true,
     "sequence": [],
@@ -11,7 +11,7 @@
 }, {
     "id": "session1b",
     "profileId": "tester1.prof1",
-    "experimentId": "experimenter.experiments.test0",
+    "experimentId": "test0",
     "experimentVersion": "qwertyuiop",
     "completed": true,
     "sequence": [],
@@ -20,8 +20,8 @@
     "hasReadFeedback": false
 }, {
     "id": "session2a",
-    "profileId": "tester1.prof2",
-    "experimentId": "experimenter.experiments.test0",
+    "profileId": "tester1.prof1",
+    "experimentId": "test0",
     "experimentVersion": "qwertyuiop",
     "completed": true,
     "sequence": [],
@@ -31,7 +31,7 @@
 }, {
     "id": "session2b",
     "profileId": "tester1.prof2",
-    "experimentId": "experimenter.experiments.test0",
+    "experimentId": "test0",
     "experimentVersion": "qwertyuiop",
     "completed": false,
     "sequence": [],
