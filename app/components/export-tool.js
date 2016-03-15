@@ -1,20 +1,6 @@
 import Ember from 'ember';
 
-function rawValue(value) {
-    return value;
-}
-
-function flatten(obj) {
-    var ret = [];
-    Ember.$.each(Object.keys(obj), (_, key) => {
-        ret.push([key, obj[key]]);
-    });
-    return ret;
-}
-
 function squash(obj, prefix) {
-    prefix = prefix || '';
-
     var ret = {};
     if (obj.serialize) {
         var serialized = obj.serialize();
@@ -49,7 +35,7 @@ export default Ember.Component.extend({
             if (data.toArray) {
                 data = data.toArray();
             }
-            var dataArray = Ember.$.map(data, (item) => squash(item));
+            var dataArray = data.map(squash.bind(this));
 
             var dataFormat = this.get('dataFormat');
             var mappingFunction = this.get('mappingFunction') || ((x) => x);
@@ -71,8 +57,7 @@ export default Ember.Component.extend({
             var fields = Object.keys(array[0]);
             var tsv = [fields.join('\t')];
             Ember.$.each(array, function(_, item) {
-                var line = [];
-                Ember.$.each(fields, function(_, field) {
+                var line = fields.map(function(field) {
                     line.push(item[field]);
                 });
                 tsv.push(line.join('\t'));
@@ -85,9 +70,9 @@ export default Ember.Component.extend({
     },
     actions: {
         downloadFile: function () {
-            var blob = new Blob([this.get('processedData')], {type: 'text/plain;charset=utf-8'});
+            var blob = new window.Blob([this.get('processedData')], {type: 'text/plain;charset=utf-8'});
             var extension = this.get('dataFormat').toLowerCase();
-            saveAs(blob, 'data.' + extension);
+            window.saveAs(blob, 'data.' + extension);
         },
         selectDataFormat: function(dataFormat) {
           this.set('dataFormat', dataFormat);
