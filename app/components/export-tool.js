@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     fieldWhitelist: null, // Optionally provide a whitelist of either ["fieldname"] or [{field: name, transform: function}] objects to control individual field serialization
 
     defaultMappingFunction: function (model) {
-        var data = model._internalModel._data;
+        var data = model._internalModel._data;  // Note: will not include results of computed properties
         var whitelist = this.get('fieldWhitelist');
         if (!whitelist) {
             return data;
