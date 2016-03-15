@@ -5,7 +5,7 @@ const { getOwner } = Ember;
 
 //https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
 function escapeRegExp(str) {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 }
 
 function regexRange(lo, hi) {

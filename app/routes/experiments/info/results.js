@@ -18,7 +18,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 'sequence',
                 'expData',
                 'experimentVersion',
-                'softwareVersion',
                 'createdOn',
                 'modifiedOn'
             ]);

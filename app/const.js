@@ -1,59 +1,55 @@
+// TODO: This is duplicated from generate_schemas and both files must be changed when schema or patterns are updated
+var JAM_ID_PATTERN = '\\w+\\.\\w+\\.\\w+';
+var PROFILE_ID_PATTERN = '\\w+\\.\\w+';
+
 export const SESSIONSCHEMA = {
     'type': 'jsonschema',
     'schema': {
         'type': 'object',
         'properties': {
-            'profileId': {
-                'id': 'profileId',
-                'type': 'string',
-                'pattern': '\\w+\\.\\w+'
+            'completed': {
+                'type': 'boolean'
             },
-            'profileVersion': {
-                'id': 'profileVersion',
-                'type': 'string'
+            'profileId': {
+                'type': 'string',
+                'pattern': PROFILE_ID_PATTERN
             },
             'experimentId': {
-                'id': 'experimentId',
                 'type': 'string',
-                'pattern': '\\w+\\.\\w+\\.\\w+'
+                'pattern': JAM_ID_PATTERN
             },
             'experimentVersion': {
-                'id': 'experimentVersion',
                 'type': 'string'
             },
             'sequence': {
-                'id': 'sequence',
                 'type': 'array',
                 'items': {
                     'type': 'string'
                 }
             },
-            'softwareVersion': {
-                'id': 'softwareVersion',
-                'type': 'string'
-            },
             'expData': {
-                'id': 'expData',
                 'type': 'object'
             },
             'feedback': {
                 '$oneOf': [{
-                    'id': 'feedback',
                     'type': 'string'
                 }, null]
             },
             'hasReadFeedback': {
                 '$oneOf': [{
-                    'id': 'hasReadFeedback',
                     'type': 'boolean'
                 }, null]
             },
             'earlyExit': {
-                'id': 'earlyExit',
-                'type': ['object', 'null'],
+                '$oneOf': [{
+                    'type': 'object'
+                }, null],
                 'properties': {
                     'reason': {
-                        'type': ['string', 'null']
+                        '$oneOf': [{
+                            'type': 'string'
+                        }, null]
+
                     },
                     'privacy': {
                         'type': 'string'
@@ -63,11 +59,10 @@ export const SESSIONSCHEMA = {
         },
         'required': [
             'profileId',
-            'profileVersion',
             'experimentId',
             'experimentVersion',
+            'completed',
             'sequence',
-            'softwareVersion',
             'expData'
         ]
     }

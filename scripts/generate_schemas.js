@@ -100,52 +100,58 @@ var SESSION = {
                 "type": "boolean"
             },
             "profileId": {
-                "id": "profileId",
                 "type": "string",
                 "pattern": PROFILE_ID_PATTERN
             },
-            "profileVersion": {
-                "id": "profileVersion",
-                "type": "string"
-            },
             "experimentId": {  // TODO: In the new collection-per-experiment sessions model, this field may be redundant
-                "id": "experimentId",
                 "type": "string",
                 "pattern": JAM_ID_PATTERN
             },
             "experimentVersion": {
-                "id": "experimentVersion",
                 "type": "string"
             },
             "sequence": {
-                "id": "sequence",
                 "type": "array",
                 "items": {
                     "type": "string"
                 }
             },
-            "softwareVersion": {
-                "id": "softwareVersion",
-                "type": "string"  // TODO pattern? semver?
-            },
             "expData": {
-                "id": "expData",
                 "type": "object"
             },
-            feedback: {
-                "id": "feedback",
-                "type": "string"
+            "feedback": {
+                "$oneOf": [{
+                    "type": "string"
+                }, null]
             },
             "hasReadFeedback": {
-                "id": "hasReadFeedback",
-                "type": "boolean"
+                "$oneOf": [{
+                    "type": "boolean"
+                }, null]
+            },
+            "earlyExit": {
+                "$oneOf": [{
+                    "type": "object"
+                }, null],
+                "properties": {
+                    "reason": {
+                        "$oneOf": [{
+                            "type": "string"
+                        }, null]
+
+                    },
+                    "privacy": {
+                        "type": "string"
+                    }
+                }
             }
         },
         "required": [
-            "profileId", "profileVersion",
-            "experimentId", "experimentVersion",
+            "profileId",
+            "experimentId",
+            "experimentVersion",
             "completed",
-            "sequence", "softwareVersion",
+            "sequence",
             "expData"
         ]
         // "additionalProperties": false
