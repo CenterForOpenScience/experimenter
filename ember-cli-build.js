@@ -32,6 +32,9 @@ module.exports = function(defaults) {
             asp: JSON.parse(process.env.WOWZA_ASP),
             // Config for actual video recording
             php: JSON.parse(process.env.WOWZA_PHP)
+        },
+        dotEnv: {
+            path: '.env-local'
         }
     });
 
