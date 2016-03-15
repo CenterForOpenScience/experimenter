@@ -1,5 +1,5 @@
 // TODO: This is duplicated from generate_schemas and both files must be changed when schema or patterns are updated
-var JAM_ID_PATTERN = '\\w+\\.\\w+\\.\\w+';
+var JAM_ID_PATTERN = '\\w+';
 var PROFILE_ID_PATTERN = '\\w+\\.\\w+';
 
 export const SESSIONSCHEMA = {
