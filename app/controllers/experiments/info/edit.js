@@ -71,9 +71,9 @@ export default Ember.Controller.extend({
     breadCrumb: 'Edit',
     toast: Ember.inject.service('toast'),
 
-    experimentJson: function() {
+    experimentJson: Ember.computed('model', function () {
         return JSON.stringify(this.get('model.structure'), null, 4);
-    }.property('model'),
+    }),
 
     actions: {
         submit(editor) {
@@ -86,7 +86,7 @@ export default Ember.Controller.extend({
                     patternProperties: createSchema(getOwner(this), parsed.sequence, parsed.frames),
                     additionalProperties: false
                 };
-            } catch(e) {
+            } catch (e) {
                 this.toast.error('Error Parsing Experiment: ' + e);
                 return;
             }
@@ -97,7 +97,9 @@ export default Ember.Controller.extend({
             //But calling get returns the value returned by set....
             this.get('model.schema', schema).then(() => this.get('model').save())
                 .then(() => this.toast.success('Experiment updated'))
-                .catch(() => this.toast.error('The server refused to save the data, likely due to a schema error'));
+                .catch(() => this.toast.error('The server refused to save the data, likely due to a schema error'))
+                .then(() => this.transitionToRoute('experiments.info.index', this.get('model.id')))
+                .catch(() => this.toast.error('Error: could not find the summary page for this experiment'));
         }
     }
 });
