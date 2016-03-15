@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "0.12"
+  - "4.3.2"
 
 sudo: false
 
@@ -16,8 +16,9 @@ before_install:
 
 install:
   - npm install -g bower
+  - npm install -g ember-cli
   - npm install
   - bower install
 
 script:
-  - npm build
+  - ember build
