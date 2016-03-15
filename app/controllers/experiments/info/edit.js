@@ -77,7 +77,15 @@ export default Ember.Controller.extend({
 
     actions: {
         submit(editor) {
-            let parsed = JSON.parse(editor.getValue());
+            let parsed;
+            try {
+                parsed = JSON.parse(editor.getValue());
+            } catch (e) {
+                console.log('Syntax error in JSON payload: ', e);
+                this.toast.error('Please check the experiment for syntax errors before saving');
+                return;
+            }
+
             let schema = Object.assign({}, SESSIONSCHEMA);
 
             try {
@@ -87,7 +95,7 @@ export default Ember.Controller.extend({
                     additionalProperties: false
                 };
             } catch (e) {
-                this.toast.error('Error Parsing Experiment: ' + e);
+                this.toast.error('Could not understand this experiment definition: ' + e);
                 return;
             }
 
