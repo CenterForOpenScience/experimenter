@@ -7,7 +7,7 @@
 <div class="tab-content">
   <div id="participantData" class="tab-pane fade in active">
     <h3>Participant Data</h3>
-    {{participant-data sessions=model}}
+    {{participant-data sessions=model mappingFunction=sanitizeProfileId}}
   </div>
   <div id="allData" class="tab-pane fade">
     <h3>All Data</h3>
