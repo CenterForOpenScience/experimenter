@@ -8,13 +8,13 @@ export default Ember.Component.extend({
     _initValue: null,
     isValidSyntax: true,
 
-    ctx: function() {
+    ctx: Ember.computed('isValidSyntax', function () {
         return {
             submit: this.get('actions.onClick').bind(this),
             validSyntax: this.get('isValidSyntax'),
             notValidSyntax: !this.get('isValidSyntax')
         };
-    }.property('isValidSyntax'),
+    }),
 
     didInsertElement() {
         this.set('_initValue', this.get('value') || '{}');
@@ -34,6 +34,7 @@ export default Ember.Component.extend({
     _onChange(e, session) {
         this.set('value', this.editor.getSession().getValue());
     },
+
     _onChangeAnnotation(e, session) {
         if (session.getValue().length < 1) {
             this.set('isValidSyntax', false);
@@ -41,20 +42,22 @@ export default Ember.Component.extend({
 
         let annotations = session.getAnnotations();
 
-        for(var i = 0; i < annotations.length; i++) {
+        for (var i = 0; i < annotations.length; i++) {
             if (annotations[i].type === 'error') {
                 this.set('isValidSyntax', false);
             }
         }
         this.set('isValidSyntax', true);
     },
-    valueChanged: function() {
+
+    valueChanged: Ember.observer('value', function () {
         if (!this.get('value')) {
             this.editor.getSession().setValue('');
         } else if (this.editor.getSession().getValue() !== this.get('value')) {
             this.editor.getSession().setValue(this.get('value'));
         }
-    }.observes('value'),
+    }),
+
     actions: {
         onClick() {
             this.sendAction('submit', this.get('editor'));

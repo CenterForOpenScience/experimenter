@@ -71,13 +71,21 @@ export default Ember.Controller.extend({
     breadCrumb: 'Edit',
     toast: Ember.inject.service('toast'),
 
-    experimentJson: function() {
+    experimentJson: Ember.computed('model', function () {
         return JSON.stringify(this.get('model.structure'), null, 4);
-    }.property('model'),
+    }),
 
     actions: {
         submit(editor) {
-            let parsed = JSON.parse(editor.getValue());
+            let parsed;
+            try {
+                parsed = JSON.parse(editor.getValue());
+            } catch (e) {
+                console.log('Syntax error in JSON payload: ', e);
+                this.toast.error('Please check the experiment for syntax errors before saving');
+                return;
+            }
+
             let schema = Object.assign({}, SESSIONSCHEMA);
 
             try {
@@ -86,8 +94,9 @@ export default Ember.Controller.extend({
                     patternProperties: createSchema(getOwner(this), parsed.sequence, parsed.frames),
                     additionalProperties: false
                 };
-            } catch(e) {
-                this.toast.error('Error Parsing Experiment: ' + e);
+            } catch (e) {
+                console.log('Could not validate incomplete or incorrect experiment definition: ', e);
+                this.toast.error('Please check experiment definition for missing or incomplete fields before saving');
                 return;
             }
 
@@ -97,7 +106,9 @@ export default Ember.Controller.extend({
             //But calling get returns the value returned by set....
             this.get('model.schema', schema).then(() => this.get('model').save())
                 .then(() => this.toast.success('Experiment updated'))
-                .catch(() => this.toast.error('The server refused to save the data, likely due to a schema error'));
+                .catch(() => this.toast.error('The server refused to save the data, likely due to a schema error'))
+                .then(() => this.transitionToRoute('experiments.info.index', this.get('model.id')))
+                .catch(() => this.toast.error('Error: could not find the summary page for this experiment'));
         }
     }
 });
