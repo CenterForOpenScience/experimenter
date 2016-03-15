@@ -95,7 +95,8 @@ export default Ember.Controller.extend({
                     additionalProperties: false
                 };
             } catch (e) {
-                this.toast.error('Could not understand this experiment definition: ' + e);
+                console.log('Could not validate incomplete or incorrect experiment definition: ', e);
+                this.toast.error('Please check experiment definition for missing or incomplete fields before saving');
                 return;
             }
 
