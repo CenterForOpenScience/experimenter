@@ -1,6 +1,13 @@
 /*jshint node:true*/
 /* global require, module */
+var fs = require('fs');
+
 require('dotenv').config();
+if(fs.existsSync('./.env-local')) {
+    require('dotenv').config({path: '.env-local'});
+}
+
+
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
