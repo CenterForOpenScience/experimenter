@@ -1,2 +1,16 @@
 <h2>Responses</h2>
-{{experiment-results sessions=model serializeFields=serializeFields}}
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#participantData">Participant Data</a></li>
+  <li><a data-toggle="tab" href="#allData">All Data</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="participantData" class="tab-pane fade in active">
+    <h3>Participant Data</h3>
+    {{participant-data sessions=model}}
+  </div>
+  <div id="allData" class="tab-pane fade">
+    <h3>All Data</h3>
+    {{export-tool data=model mappingFunction=sanitizeProfileId}}
+  </div>
+</div>
