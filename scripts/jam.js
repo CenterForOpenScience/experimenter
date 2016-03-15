@@ -1,7 +1,6 @@
 var Promise = require('bluebird');
 var request = require('request-promise');
 
-var JAM_URL = 'http://localhost:1212';
 var CONTENT_TYPE = 'application/vnd.api+json';
 var PATCH_CONTENT_TYPE = 'application/vnd.api+json ext="jsonpatch";';
 
@@ -27,7 +26,7 @@ function Collection(namespace, name) {
     self._name = name;
     self._namespace = namespace;
     self._token = namespace._token;
-    self._url = `${JAM_URL}/v1/id/collections/${self._namespace._name}.${self._name}`;
+    self._url = `${module.exports.JAM_URL}/v1/id/collections/${self._namespace._name}.${self._name}`;
 
     self.get = function(id) {
         return request.get({
@@ -91,7 +90,7 @@ function Namespace(name, token) {
 
     self._name = name;
     self._token = token;
-    self._url = `${JAM_URL}/v1/id/namespaces/${name}`;
+    self._url = `${module.exports.JAM_URL}/v1/id/namespaces/${name}`;
 
     self.get = function(collection) {
         return new Collection(self, collection);
@@ -146,7 +145,7 @@ function Namespace(name, token) {
         return request({
             method: 'DELETE',
             json: true,
-            url: `${JAM_URL}/v1/id/collections/${name}`,
+            url: `${module.exports.JAM_URL}/v1/id/collections/${name}`,
             headers: {Authorization: self._token},
         });
     }
@@ -159,5 +158,6 @@ function Namespace(name, token) {
 }
 
 module.exports = {
+    JAM_URL: 'http://localhost:1212',
     Namespace: Namespace
 };
