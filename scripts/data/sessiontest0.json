@@ -6,7 +6,7 @@
     "completed": true,
     "sequence": [],
     "expData": {},
-    "feedback": "OMG, so cute",
+    "feedback": "",
     "hasReadFeedback": true
 }, {
     "id": "session1b",
@@ -16,7 +16,7 @@
     "completed": true,
     "sequence": [],
     "expData": {},
-    "feedback": "OMG, so cute",
+    "feedback": "feedback on second",
     "hasReadFeedback": false
 }, {
     "id": "session2a",
@@ -26,7 +26,7 @@
     "completed": true,
     "sequence": [],
     "expData": {},
-    "feedback": "OMG, so cute",
+    "feedback": "feedback on third",
     "hasReadFeedback": true
 }, {
     "id": "session2b",
