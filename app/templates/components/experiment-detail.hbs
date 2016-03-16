@@ -105,7 +105,23 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <button class="btn btn-danger" disabled={{experiment.isActive}} {{action 'delete' }}> Delete this Experiment</button>  {{#if experiment.isActive }}&nbsp;&nbsp;You can't delete active experiments {{/if}}
+      <button class="btn btn-danger" disabled={{experiment.isActive}} {{action 'toggleDeleteWarning' }}> Delete this Experiment</button>  {{#if experiment.isActive }}&nbsp;&nbsp;You can't delete active experiments {{/if}}
     </div>
   </div>
 </div>
+
+{{#bs-modal open=showDeleteWarning title="Are you sure?" footer=false}}
+{{#bs-modal-body}}
+  Deleting this experiment will remove it from your list of experiments and is irreversible.
+{{/bs-modal-body}}
+{{#bs-modal-footer as |footer|}}
+<div class="row pull-right">
+  <div class="col-xs-4">
+    {{#bs-button action=(action "close" target=footer) type="default"}}Cancel{{/bs-button}}
+  </div>
+  <div class="col-xs-4">
+    {{#bs-button buttonType="submit" type="danger" action=(action 'delete')}}Delete now{{/bs-button}}
+  </div>
+</div>
+{{/bs-modal-footer}}
+{{/bs-modal}}
