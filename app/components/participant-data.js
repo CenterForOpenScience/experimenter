@@ -5,6 +5,7 @@ export default Ember.Component.extend({
     participantSession: '',
     sortBy: 'profileId',
     reverse: false,
+    mappingFunction: null,
     sortedSessions: Ember.computed('sortBy', 'reverse', {
         get() {
             var reverse = this.get('reverse');

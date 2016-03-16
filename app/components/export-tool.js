@@ -1,7 +1,25 @@
 import Ember from 'ember';
 
-function rawValue(value) {
-    return value;
+function squash(obj, prefix) {
+    var ret = {};
+    if (obj.serialize) {
+        var serialized = obj.serialize();
+        obj = serialized.data.attributes;
+    }
+    Ember.$.each(Object.keys(obj), (_, key) => {
+        var value = Ember.get(obj, key);
+        if (value && value.toJSON) {
+            value = value.toJSON();
+        }
+
+        if (Ember.$.isPlainObject(value)) {
+            ret = Ember.$.extend({}, ret, squash(value, prefix ? `${prefix}.${key}` : key));
+        }
+        else {
+            ret[prefix ? `${prefix}.${key}` : key] = value;
+        }
+    });
+    return ret;
 }
 
 export default Ember.Component.extend({
@@ -9,76 +27,52 @@ export default Ember.Component.extend({
     dataFormat: 'JSON',
     dataFormats: [
         'JSON',
-        'CSV'
+        'TSV'
     ],
-
-    fieldWhitelist: null, // Optionally provide a whitelist of either ["fieldname"] or [{field: name, transform: function}] objects to control individual field serialization
-
-    defaultMappingFunction: function (model) {
-        var data = model._internalModel._data;  // Note: will not include results of computed properties
-        var whitelist = this.get('fieldWhitelist');
-        if (!whitelist) {
-            return data;
-        } else {  // Transform the passed-in fields according to a field whitelist
-            var transformed = {};
-            whitelist.forEach(function(item) {
-                var transformFunc = item.transform || rawValue;
-                var fieldName = item.field || item;
-                transformed[fieldName] = transformFunc(data[fieldName]);
-            });
-            return transformed;
-        }
-    },
-    processedData: Ember.computed( 'data', 'mappingFunction', 'dataFormat', {
+    processedData: Ember.computed('data', 'dataFormat', {
         get() {
-            var dataArray = this.get('data');
+            var data = this.get('data') || [];
+            if (data.toArray) {
+                data = data.toArray();
+            }
+            var dataArray = data.map(squash.bind(this));
+
             var dataFormat = this.get('dataFormat');
-            var mappingFunction = this.get('mappingFunction');
+            var mappingFunction = this.get('mappingFunction') || ((x) => x);
             var mapped;
-            if (Ember.isPresent(dataArray) && Ember.isPresent(mappingFunction)) {
+            if (Ember.isPresent(dataArray)) {
                 mapped = dataArray.map(mappingFunction.bind(this));
-                return this.convertToFormat(mapped, dataFormat);
-            } else if (Ember.isPresent(dataArray)) {
-                mapped = dataArray.map(this.get('defaultMappingFunction').bind(this));
                 return this.convertToFormat(mapped, dataFormat);
             } else {
                 return null;
             }
-        },
-        set(_, value) {
-            this.set('processedData', value);
-            return value;
         }
     }),
     convertToFormat: function (dataArray, format) {
         if (format === 'JSON') {
             return JSON.stringify(dataArray, undefined, 4);
-        } else if (format==='CSV') {
+        } else if (format==='TSV') {
             var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
-            var str = '';
 
-            for (var i = 0; i < array.length; i++) {
-                var line = '';
-                if (typeof array[i] === 'object') {
-                    for (var index in array[i]) {
-                        if (line !== '') {line += ',';}
-                        line += array[i][index];
-                    }
-                } else {
-                    line += array[i];
-                }
-                str += line + '\r\n';
-            }
-            return str;
+            var fields = Object.keys(array[0]);
+            var tsv = [fields.join('\t')];
+            Ember.$.each(array, function(_, item) {
+                var line = fields.map(function(field) {
+                    line.push(item[field]);
+                });
+                tsv.push(line.join('\t'));
+            });
+            tsv = tsv.join('\r\n');
+            return tsv;
         } else {
             throw 'Unrecognized file format specified';
         }
     },
     actions: {
         downloadFile: function () {
-            var blob = new Blob([this.get('processedData')], {type: 'text/plain;charset=utf-8'});
+            var blob = new window.Blob([this.get('processedData')], {type: 'text/plain;charset=utf-8'});
             var extension = this.get('dataFormat').toLowerCase();
-            saveAs(blob, 'data.' + extension);
+            window.saveAs(blob, 'data.' + extension);
         },
         selectDataFormat: function(dataFormat) {
           this.set('dataFormat', dataFormat);
