@@ -14,6 +14,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
     },
     _getSession(params, experiment) {
         return this._super(params, experiment).then((session) => {
+            var route = this;
+
             session.setProperties({
                 id: 'PREVIEW_DATA_DISREGARD'
             });
@@ -23,9 +25,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
                     // TODO add UI for researcher to see data
                     console.log('Preview Data Save:', this.toJSON());
                     if (this.get('completed')) {
-                        return Ember.getOwner(this).lookup('controller:experiments.info.preview').showPreviewData(this).then(() => {
-                            return this.transitionTo('experiments.info');
+                        var controller = Ember.getOwner(this).lookup('controller:experiments.info.preview');
+                        controller.showPreviewData(this).then(() => {
+                            // Override the WarnOnExitMixin's behavior
+                            controller.set('forceExit', true);
+                            return route.transitionTo('experiments.info');
                         });
+                        return Ember.RSVP.reject();
                     }
                     else {
                         return Ember.RSVP.resolve(this);
@@ -33,17 +39,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
                 }
             });
         });
-    },
-    actions: {
-        willTransition: function(transition) {
-            // FIXME: This won't prevent back button or manual URL change. See https://guides.emberjs.com/v2.3.0/routing/preventing-and-retrying-transitions/#toc_preventing-transitions-via-code-willtransition-code
-            if (this.controller.isDirty() && !confirm('Are you sure you want to exit the experiment?')) {
-                transition.abort();
-                return false;
-            } else {
-                // Bubble this action to parent routes
-                return true;
-            }
-        }
     }
 });

@@ -9,6 +9,7 @@ export default Ember.Component.extend({
     editing: false,
     toast: Ember.inject.service(),
     store: Ember.inject.service(),
+    showDeleteWarning: false,
     actions: {
         toggleEditing: function() {
             this.toggleProperty('editing');
@@ -55,6 +56,8 @@ export default Ember.Component.extend({
             expData.state = exp.DRAFT;
             var thumbnailId = expData.thumbnailId;
             delete expData.thumbnailId;
+            delete expData.beginDate;
+            delete expData.endDate;
 
             var finish = () => {
                 var clone = this.get('store').createRecord('experiment', expData);
@@ -80,6 +83,9 @@ export default Ember.Component.extend({
             exp.save().then(() => {
                 this.toast.info('Thumbnail updated successfully.');
             });
+        },
+        toggleDeleteWarning() {
+            this.toggleProperty('showDeleteWarning');
         }
     }
 });
