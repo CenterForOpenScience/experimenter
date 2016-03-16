@@ -5,23 +5,15 @@
   pastSessions=pastSessions
 }}
 {{exit-warning warn=showWarning onConfirm=(action 'onConfirmExit') onReject=(action 'onRejectExit')}}
-{{#if showData }}
-  {{#modal-dialog
-    close=toggleData
-    targetAttachment="center"
-    translucentOverlay=true
-    container-class="col-xs-8"}}
-    <p>
-      Data collected during this preview session:
-    </p>
-    <pre class="preview-data">
-      {{previewData}}
-    </pre>
-    <hr>
-    <p>
-      <strong> Note: </strong>
-      This dialog will not appear to participants when they complete a study.
-    </p>
-    <button class="pull-right btn btn-default" onclick={{action 'toggleData'}}>Done</button>
-  {{/modal-dialog}}
-{{/if}}
+{{#bs-modal open=showData title="Data collected during this preview session" closeAction=(action 'toggleData')}}
+  {{#bs-modal-body}}
+  <pre class="preview-data">
+    {{previewData}}
+  </pre>
+  <hr>
+  <p>
+    <strong> Note: </strong>
+    This dialog will not appear to participants when they complete a study.
+  </p>
+  {{/bs-modal-body}}
+{{/bs-modal}}

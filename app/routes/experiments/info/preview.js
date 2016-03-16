@@ -14,6 +14,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
     },
     _getSession(params, experiment) {
         return this._super(params, experiment).then((session) => {
+            var route = this;
+
             session.setProperties({
                 id: 'PREVIEW_DATA_DISREGARD'
             });
@@ -23,9 +25,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
                     // TODO add UI for researcher to see data
                     console.log('Preview Data Save:', this.toJSON());
                     if (this.get('completed')) {
-                        return Ember.getOwner(this).lookup('controller:experiments.info.preview').showPreviewData(this).then(() => {
-                            return this.transitionTo('experiments.info');
+                        Ember.getOwner(this).lookup('controller:experiments.info.preview').showPreviewData(this).then(() => {
+                            return route.transitionTo('experiments.info');
                         });
+                        return Ember.RSVP.reject();
                     }
                     else {
                         return Ember.RSVP.resolve(this);
