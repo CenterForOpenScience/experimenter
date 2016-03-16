@@ -12,7 +12,8 @@
     "bootstrap": "./scripts/bootstrap.sh && node ./scripts/bootstrap.js",
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test",
+    "lint": "jshint ./app && jshint ./lib/exp-player/addon && jshint ./lib/exp-models/addon"
   },
   "repository": "",
   "engines": {
