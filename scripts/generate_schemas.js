@@ -38,57 +38,98 @@ var EXPERIMENT = {
         "properties": {
             "title": {
                 "id": "title",
-                "type": "string"
+                "type": "string",
+                "description": "A title for the experiment."
             },
             "description": {
                 "id": "description",
-                "type": "string"
+                "type": "string",
+                "description": "A high-level overview of the experiment."
             },
             "state": {
                 "id": "state",
                 "type": "string",
-                "enum": ["Draft", "Active", "Archived", "Deleted"]
+                "enum": [
+                    "Draft",
+                    "Active",
+                    "Archived",
+                    "Deleted"
+                ],
+                "description": "Flags for filtering experiemnts. 'Draft' implies the experiment is being desiged but has never been run. 'Active' implies that the experiment is currrently being run. 'Archived' implies the experiment has been run but was stopped. 'Deleted' implies that the experiment should no longer be visible anywhere in the UI."
             },
             "beginDate": {
                 "id": "beginDate",
                 "format": "date-time",
-                "type": ["string", "null"]
+                "$oneOf": [
+                    "string",
+                    null
+                ],
+                "description": "When the experiment was last made 'Active'."
             },
             "endDate": {
                 "id": "endDate",
                 "format": "date-time",
-                "type": ["string", "null"]
+                "$oneOf": [
+                    "string",
+                    null
+                ],
+                "description": "When the experiment was last made inactive."
             },
             "structure": {
                 "id": "structure",
-                "type": "object"
+                "type": "object",
+                "properties": {
+                    "frames": {
+                        "type": "object",
+                        "description": "TODO"
+                    },
+                    "sequence": {
+                        "type": "array",
+                        "items": "string",
+                        "description": "TODO"
+                    }
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
-                "type": ["string", "null"]
+                "$oneOf": [
+                    "string",
+                    null
+                ],
+                "description": "A description of who is eligible for this experiment."
             },
             "displayFullscreen": {
                 "type": "boolean",
-                "default": false
+                "default": false,
+                "description": "Whether or not the experiment should attempt to render in fullscreen."
             },
             "exitUrl": {
-                "type": "string"
-                //"pattern": URL_PATTERN
+                "type": "string",
+                "default": "/",
+                "description": "A URL to redirect participants to upon completion of an experiment."
             },
             "duration": {
-                "type": ["string", "null"]
+                "$oneOf": [
+                    "string",
+                    null
+                ],
+                "descripion": "An approximation of how long the experiment will take to complete."
             },
             "purpose": {
-                "type": ["string", "null"]
+                "$oneOf": [
+                    "string",
+                    null
+                ],
+                "description": "A description of the value gained from participation in the experiment."
             }
         },
-        "required": [
+            "required": [
             "structure",
             "state"
-        ]
-        // "additionalProperties": false // TODO re-enable
+            ]
+        }
     }
 };
+
 
 var SESSION = {
     "type": "jsonschema",
