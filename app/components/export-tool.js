@@ -35,7 +35,10 @@ export default Ember.Component.extend({
             if (data.toArray) {
                 data = data.toArray();
             }
-            var dataArray = data.map(squash.bind(this));
+            var dataArray = [];
+            data.forEach((item /*, index, array*/) => { // Ensure that mapping function doesn't treat *index* as the optional recursive *prefix* parameter
+                dataArray.push(squash.apply(this, [item]));
+            });
 
             var dataFormat = this.get('dataFormat');
             var mappingFunction = this.get('mappingFunction') || ((x) => x);
