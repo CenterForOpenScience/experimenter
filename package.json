@@ -54,7 +54,6 @@
     "ember-getowner-polyfill": "1.0.0",
     "ember-jsoneditor": "0.1.1",
     "ember-load-initializers": "^0.5.1",
-    "ember-modal-dialog": "0.8.3",
     "ember-models-table": "1.5.0",
     "ember-moment": "6.0.0",
     "ember-resolver": "^2.0.3",
