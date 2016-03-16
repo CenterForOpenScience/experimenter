@@ -105,10 +105,7 @@ export default Ember.Controller.extend({
             //HACK set just returns the value passed in, not the value returned by the underlying set
             //But calling get returns the value returned by set....
             this.get('model.schema', schema).then(() => this.get('model').save())
-                .then(() => {
-                    this.toast.success('Experiment updated');
-                    return this.transitionToRoute('experiments.info.index', this.get('model.id'));
-                })
+                .then(() => this.toast.success('Experiment updated'))
                 .catch(() => this.toast.error('The server refused to save the data, likely due to a schema error'));
 
         }

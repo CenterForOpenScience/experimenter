@@ -1,9 +1,6 @@
 /*jshint node:true*/
 /* global require, module */
-var fs = require('fs');
-
 require('dotenv').config();
-
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
