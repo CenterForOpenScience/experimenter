@@ -55,6 +55,8 @@ export default Ember.Component.extend({
             expData.state = exp.DRAFT;
             var thumbnailId = expData.thumbnailId;
             delete expData.thumbnailId;
+            delete expData.beginDate;
+            delete expData.endDate;
 
             var finish = () => {
                 var clone = this.get('store').createRecord('experiment', expData);
