@@ -25,7 +25,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
                     // TODO add UI for researcher to see data
                     console.log('Preview Data Save:', this.toJSON());
                     if (this.get('completed')) {
-                        Ember.getOwner(this).lookup('controller:experiments.info.preview').showPreviewData(this).then(() => {
+                        var controller = Ember.getOwner(this).lookup('controller:experiments.info.preview');
+                        controller.showPreviewData(this).then(() => {
+                            // Override the WarnOnExitMixin's behavior
+                            controller.set('forceExit', true);
                             return route.transitionTo('experiments.info');
                         });
                         return Ember.RSVP.reject();
