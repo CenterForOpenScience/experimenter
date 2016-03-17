@@ -1,16 +1,21 @@
 <div id="loginContainer">
-<div id="login" class="text-center pagination-centered">
-    <div>
-        <button {{action "authenticate"}} class="btn btn-primary">
-            Login via OSF to Begin
-        </button>
-    </div>
-
-    {{#if errorMessage}}
-        <p class="alert alert-danger">
+  <div id="login" class="text-center pagination-centered">
+    <div class="row">
+      <div class="col-md-12">
+        {{#if errorMessage}}
+          <p class="alert alert-danger">
             {{errorMessage}}
-        </p>
-    {{/if}}
-
-</div>
+          </p>
+        {{/if}}
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-xs-12">
+        <button {{action "authenticate"}} class="btn btn-primary">
+          Login via OSF to Begin
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
