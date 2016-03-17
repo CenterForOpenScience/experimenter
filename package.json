@@ -13,7 +13,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember test",
-    "lint": "jshint ./app && jshint ./lib/exp-player/addon && jshint ./lib/exp-models/addon"
+    "lint": "./node_modules/jshint/bin/jshint ./app && ./node_modules/jshint/bin/jshint ./lib/exp-player/addon && ./node_modules/jshint/bin/jshint ./lib/exp-models/addon"
   },
   "repository": "",
   "engines": {
