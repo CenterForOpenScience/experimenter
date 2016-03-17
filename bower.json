@@ -20,12 +20,14 @@
     "fontawesome": "~4.5.0",
     "ace-builds": "^1.2.3",
     "jquery": "^2.1.4",
-    "swfobject": "*"
+    "swfobject": "*",
+    "lodash": "~4.6.1"
   },
   "resolutions": {
     "bootstrap": ">= 3.3.5",
     "moment": ">=2.11.1",
     "ace-builds": "1.2.3",
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "lodash": "~4.6.1"
   }
 }

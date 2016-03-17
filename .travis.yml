@@ -22,4 +22,6 @@ install:
   - bower install
 
 script:
+  - npm run lint
   - ember build
+  - ember test --path dist
