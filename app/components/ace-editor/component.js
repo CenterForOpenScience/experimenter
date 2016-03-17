@@ -32,7 +32,7 @@ export default Ember.Component.extend({
         this.get('editor').getSession().on('changeAnnotation', this._onChangeAnnotation.bind(this));
     },
 
-    _onChange(e, session) {
+    _onChange() {
         this.set('value', this.editor.getSession().getValue());
     },
 

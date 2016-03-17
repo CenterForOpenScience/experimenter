@@ -60,8 +60,9 @@ function createSchema(container, sequence, frames) {
         }
     }
 
-    for(; i < sequence.length; i++, j++)
+    for(; i < sequence.length; i++, j++) {
         _parse(frames[sequence[i]]);
+    }
 
     return props;
 }
