@@ -2,6 +2,7 @@ import Em from 'ember';
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
 export default Em.Route.extend(UnauthenticatedRouteMixin, {
+    error: null,
     beforeModel() {
         // Acquire an OSF access token, then exchange it for a Jam token
         this._super(...arguments);
@@ -16,12 +17,7 @@ export default Em.Route.extend(UnauthenticatedRouteMixin, {
             .then(() => this.transitionTo('experiments'))
             .catch((/*reason*/) => {
                 // TODO: Pick failure reason off the response for custom messages
-                this.set('errorMessage', 'User does not have permissions on the domain');
+                this.set('error', 'no_permissions');
             });
-    },
-
-    setupController(controller) {
-        this._super(...arguments);
-        controller.set('errorMessage', this.get('errorMessage'));
     }
 });
