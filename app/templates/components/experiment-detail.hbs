@@ -28,7 +28,12 @@
   {{#if editing }}
     <div class="form">
       <div class="row">
-        {{input class="increase-4" value=experiment.title}}  <button class="btn btn-success pull-right" {{action 'toggleEditing'}}><i class="fa fa-save"></i> Save Details</button>
+          <div class="col-xs-8">
+            {{input class="increase-4 form-control" value=experiment.title}}
+        </div>
+          <div class="col-xs-4">
+            <button class="btn btn-success pull-right" {{action 'toggleEditing'}}><i class="fa fa-save"></i> Save Details</button>
+        </div>
       </div>
       <br >
       <div class="row">
@@ -36,21 +41,21 @@
       </div>
       <br>
       <div class="row">
-        <p> {{textarea value=experiment.description class="experiment-textarea"}} </p>
+        <p> {{textarea value=experiment.description class="experiment-textarea form-control"}} </p>
       </div>
       <div class="row">
         <label>Purpose: </label>
-        <p> {{textarea value=experiment.purpose class="experiment-textarea"}} </p>
+        <p> {{textarea value=experiment.purpose class="experiment-textarea form-control"}} </p>
       </div>
 
       <div class="row">
-        <label>Duration: </label> {{input value=experiment.duration class="experiment-detail-wide"}}
+        <label>Duration: </label> {{input value=experiment.duration class="experiment-detail-wide form-control"}}
       </div>
       <div class="row">
-        <label>Exit URL: </label> {{input value=experiment.exitUrl class="experiment-detail-wide"}}
+        <label>Exit URL: </label> {{input value=experiment.exitUrl class="experiment-detail-wide form-control"}}
       </div>
       <div class="row">
-        <label>Participant Eligibility: </label> {{input value=experiment.eligibilityString class="experiment-detail-wide"}}
+        <label>Participant Eligibility: </label> {{input value=experiment.eligibilityString class="experiment-detail-wide form-control"}}
       </div>
     </div>
   {{/if}}
