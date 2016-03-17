@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import * as ace from 'ace/ace';
 
 export default Ember.Component.extend({
     height: '300px',
