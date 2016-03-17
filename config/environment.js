@@ -38,7 +38,11 @@ module.exports = function(environment) {
         };
     }
     else if (environment === 'test') {
-        // TODO uodateme
+        ENV.JAMDB = {
+            url: '',
+            namespace: 'test',
+            authorizer: 'osf-jwt'
+        };
 
         // Testem prefers this...
         ENV.baseURL = '/';

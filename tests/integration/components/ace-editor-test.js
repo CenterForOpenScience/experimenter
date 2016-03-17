@@ -1,24 +1,22 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import {
+    moduleForComponent, test
+}
+from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('ace-editor', 'Integration | Component | ace editor', {
-  integration: true
+    integration: true
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });"
+    var value = JSON.stringify({
+        foo: 'bar'
+    });
+    this.set('value', value);
 
-  this.render(hbs`{{ace-editor}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:"
-  this.render(hbs`
-    {{#ace-editor}}
-      template block text
-    {{/ace-editor}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+    this.render(hbs `{{ace-editor value=value}}`);
+    assert.equal(
+        this.$('#editor').hasClass('ace_editor'),
+        true
+    );
 });
