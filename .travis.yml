@@ -22,4 +22,7 @@ install:
   - bower install
 
 script:
-  - npm run lint && npm run test && npm run build
+  - npm run lint && npm run build
+  - ember test --path dist
+  - cd lib/exp-models && ember test
+  - cd ../exp-player && ember test
