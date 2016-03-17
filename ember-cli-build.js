@@ -36,9 +36,6 @@ module.exports = function(defaults) {
   app.import('bower_components/moment/moment.js');
   app.import('bower_components/file-saver.js/FileSaver.js');
 
-  app.import('bower_components/bootstrap/dist/js/bootstrap.js');
-  app.import('bower_components/bootstrap/dist/css/bootstrap.css');
-
   app.import('bower_components/font-awesome/css/font-awesome.css');
   app.import('bower_components/font-awesome/fonts/fontawesome-webfont.eot', {destDir: 'fonts'});
   app.import('bower_components/font-awesome/fonts/fontawesome-webfont.svg', {destDir: 'fonts'});
