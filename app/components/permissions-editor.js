@@ -53,7 +53,15 @@ let PermissionsEditor = Ember.Component.extend({
             delete permissions[selector];
             this.sendAction('onchange', permissions);
             this.set('permissions', permissions);
-            this.rerender();
+
+            var currentUserId = this.get('session.data.authenticated.id');
+            if (userId === currentUserId) {
+                this.get('session').invalidate();
+                window.location.reload();
+            }
+            else {
+                this.rerender();
+            }
         }
     }
 });
