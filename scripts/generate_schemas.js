@@ -202,6 +202,12 @@ var ACCOUNT = {
                 "type": "string"
                 // # "pattern": commonregex.email.pattern
             },
+            "name": {
+                "$oneOf": [
+                    "string",
+                    null
+                ]
+            },
             "password": {
                 "id": "password",
                 "type": "string",
