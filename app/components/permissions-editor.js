@@ -4,8 +4,12 @@ import {adminPattern} from  '../utils/patterns';
 // FIXME: Known bug in original- if the server save request fails, the value will appear to have been added until page reloaded.
 //  (need to catch and handle errors)
 let PermissionsEditor = Ember.Component.extend({
+    session:  Ember.inject.service(),
     tagName: 'table',
     classNames: ['table'],
+
+    warn: false,
+    removeTarget: null,
 
     newPermissionLevel: 'ADMIN',
     newPermissionSelector: '',
@@ -28,10 +32,21 @@ let PermissionsEditor = Ember.Component.extend({
             this.sendAction('onchange', permissions);
             this.set('permissions', permissions);
             this.rerender();
-
         },
 
         removePermission(userId) {
+            var currentUserId = this.get('session.data.authenticated.id');
+            if (userId === currentUserId) {
+                this.set('warn', true);
+                this.set('removeTarget', userId);
+            }
+            else {
+                this.send('_removePermission', userId);
+            }
+        },
+        _removePermission(userId) {
+            userId = userId || this.get('removeTarget');
+
             var selector = `user-osf-${userId}`;
             var permissions = Ember.copy(this.get('permissions'));
 
