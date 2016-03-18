@@ -1,3 +1,7 @@
+/* globals require */
+/* jshint quotemark: true */
+
+
 var rimraf = require('rimraf');
 var path = require('path');
 var fs = require('fs');
@@ -5,14 +9,13 @@ var fs = require('fs');
 // h/t: https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s07.html
 var ISO_DATE_PATTERN = '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$';
 
-var URL_PATTERN = '(http|https)://[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&amp;:/~+#-]*[\\w@?^=%&amp;/~+#-])?';
+// var URL_PATTERN = '(http|https)://[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&amp;:/~+#-]*[\\w@?^=%&amp;/~+#-])?';
 
 var JAM_ID_PATTERN = '\\w+';
 var PROFILE_ID_PATTERN = '\\w+\\.\\w+';
 
 
 var CONFIG = {
-    "type": "jsonschema",
     "schema": {
         "id": "config",
         "type": "object",
@@ -27,24 +30,22 @@ var CONFIG = {
             }
         },
         "additionalProperties": true
-    }
+    },
+    "type": "jsonschema"
 };
 
 var EXPERIMENT = {
-    "type": "jsonschema",
     "schema": {
         "id": "experiment",
         "type": "object",
         "properties": {
             "title": {
                 "id": "title",
-                "type": "string",
-                "description": "A title for the experiment."
+                "type": "string"
             },
-            "description": {
+             "description": {
                 "id": "description",
-                "type": "string",
-                "description": "A high-level overview of the experiment."
+                "type": "string"
             },
             "state": {
                 "id": "state",
@@ -54,8 +55,7 @@ var EXPERIMENT = {
                     "Active",
                     "Archived",
                     "Deleted"
-                ],
-                "description": "Flags for filtering experiemnts. 'Draft' implies the experiment is being desiged but has never been run. 'Active' implies that the experiment is currrently being run. 'Archived' implies the experiment has been run but was stopped. 'Deleted' implies that the experiment should no longer be visible anywhere in the UI."
+                ]
             },
             "beginDate": {
                 "id": "beginDate",
@@ -63,8 +63,7 @@ var EXPERIMENT = {
                 "$oneOf": [
                     "string",
                     null
-                ],
-                "description": "When the experiment was last made 'Active'."
+                ]
             },
             "endDate": {
                 "id": "endDate",
@@ -72,67 +71,61 @@ var EXPERIMENT = {
                 "$oneOf": [
                     "string",
                     null
-                ],
-                "description": "When the experiment was last made inactive."
+                ]
             },
             "structure": {
                 "id": "structure",
                 "type": "object",
                 "properties": {
                     "frames": {
-                        "type": "object",
-                        "description": "TODO"
+                        "type": "object"
                     },
                     "sequence": {
                         "type": "array",
-                        "items": "string",
-                        "description": "TODO"
+                        "items": {
+                            "type": "string"
+                        }
                     }
+                }
             },
             "eligibilityCriteria": {
                 "id": "eligibilityCriteria",
                 "$oneOf": [
                     "string",
                     null
-                ],
-                "description": "A description of who is eligible for this experiment."
+                ]
             },
             "displayFullscreen": {
                 "type": "boolean",
-                "default": false,
-                "description": "Whether or not the experiment should attempt to render in fullscreen."
+                "default": false
             },
             "exitUrl": {
                 "type": "string",
-                "default": "/",
-                "description": "A URL to redirect participants to upon completion of an experiment."
+                "default": "/"
             },
             "duration": {
                 "$oneOf": [
                     "string",
                     null
-                ],
-                "descripion": "An approximation of how long the experiment will take to complete."
+                ]
             },
             "purpose": {
                 "$oneOf": [
                     "string",
                     null
-                ],
-                "description": "A description of the value gained from participation in the experiment."
+                ]
             }
         },
-            "required": [
+        "required": [
             "structure",
             "state"
-            ]
-        }
-    }
+        ]
+    },
+    "type": "jsonschema"
 };
 
 
 var SESSION = {
-    "type": "jsonschema",
     "schema": {
         "id": "sessiontest0",  // Script creates one particular session collection associated with one single experiment
         "type": "object",
@@ -196,11 +189,11 @@ var SESSION = {
             "expData"
         ]
         // "additionalProperties": false
-    }
+    },
+    "type": "jsonschema"
 };
 
 var ACCOUNT = {
-    "type": "jsonschema",
     "schema": {
         "id": "account",
         "type": "object",
@@ -238,14 +231,15 @@ var ACCOUNT = {
         },
         "required": ["username", "password"]
         // "additionalProperties": false
-    }
+    },
+    "type": "jsonschema"
 };
 
 // TODO RE-add account
 module.exports = function main() {
     var base = path.dirname(__filename);
     rimraf.sync(`${base}/../schemas/*`);
-    [CONFIG, EXPERIMENT, SESSION].forEach(function(schema) {
+    [EXPERIMENT, SESSION, ACCOUNT].forEach(function(schema) {
         var schemaData = JSON.stringify(schema, null, 4);
         var filename = schema.schema.id;
         fs.writeFile(`${base}/../schemas/${filename}.json`, schemaData);
