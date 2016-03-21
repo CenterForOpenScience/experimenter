@@ -83,7 +83,7 @@ export default Ember.Controller.extend({
             this.set('sortOrder', ASC);
         },
         updateSearch: function(value) {
-            this.set('match', `${value}*`);
+            this.set('match', `${value}`);
             this.set('sortProperty', null);
         },
         toggleModal: function() {

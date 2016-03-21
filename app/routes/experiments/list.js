@@ -33,7 +33,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             query.sort = params.sort;
         }
         if (isPresent(params.match)) {
-            query.q.push(params.match);
+            query.q.push(`title:*${params.match}* OR description:*${params.match}*`);
         }
 
         return this.store.query('experiment', query);
