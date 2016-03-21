@@ -108,10 +108,10 @@ export default Ember.Controller.extend({
             });
             var onCreateSessionCollection = () => {
                 this.send('toggleModal');
+                this.set('newTitle', null);
                 this.transitionToRoute('experiments.info', newExperiment.id);
             };
             newExperiment.on('didCreate', () => {
-
                 if (newExperiment.get('_sessionCollection.isNew')) {
                     newExperiment.get('_sessionCollection').on('didCreate', onCreateSessionCollection);
                 }
