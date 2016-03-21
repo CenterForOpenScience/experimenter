@@ -2,11 +2,14 @@
 
 {{#bs-modal open=isShowingModal title="Name Your New Experiment" body=false footer=false}}
     {{#bs-modal-body}}
-        {{#bs-form action=(action "createExperiment") model=this}}
-            {{bs-form-element controlType="text" label="Name" property="name" autofocus=true value=newTitle}}
-        {{/bs-form}}
+      <div class="form">
+        {{bs-form-element controlType="text" label="Name" property="name" autofocus=true value=newTitle}}
+      </div>
     {{/bs-modal-body}}
-    {{bs-modal-footer closeTitle="Cancel" submitTitle="Create"}}
+   {{#bs-modal-footer as |footer| }}
+      {{#bs-button click=(action 'close' target=footer)}}Cancel{{/bs-button}}
+      {{#bs-button click=(action 'createExperiment') type="success" disabled=(if (eq (trim newTitle) '') true false) }}Create experiment{{/bs-button}}
+    {{/bs-modal-footer}}
 {{/bs-modal}}
 
 <div class="row text-center">
