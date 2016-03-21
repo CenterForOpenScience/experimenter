@@ -229,6 +229,10 @@ var ACCOUNT = {
                         "birthday": {
                             "type": "string",
                             "pattern": ISO_DATE_PATTERN
+                        },
+                        "deleted": {
+                            "type": "boolean",
+                            "default": false
                         }
                     },
                     "required": ["firstName", "birthday"]
