@@ -117,7 +117,7 @@
 
 {{#bs-modal open=showDeleteWarning title="Are you sure?" footer=false}}
 {{#bs-modal-body}}
-  Deleting this experiment will remove it from your list of experiments and is irreversible.
+  Deleting this experiment will remove it from your list of experiments. This action is irreversible.
 {{/bs-modal-body}}
 {{#bs-modal-footer as |footer|}}
 <div class="row pull-right">
@@ -130,3 +130,5 @@
 </div>
 {{/bs-modal-footer}}
 {{/bs-modal}}
+
+{{#bs-modal open=deleting footer=false closeButton=false title="Please wait"}}Deleting experiment...{{/bs-modal}}
