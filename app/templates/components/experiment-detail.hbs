@@ -9,11 +9,11 @@
     </div>
     <br >
     <div class="row">
-      <p> {{experiment.description}} </p>
+      <p> {{if experiment.description experiment.description 'No description'}} </p>
     </div>
     <div class="row">
       <label>Purpose:</label>
-      <p> {{experiment.purpose}} </p>
+      <p> {{if experiment.purpose experiment.purpose 'None specified'}} </p>
     </div>
     <div class="row">
       <label>Duration:</label> {{if experiment.duration experiment.duration 'Not specified'}}
@@ -41,11 +41,11 @@
       </div>
       <br>
       <div class="row">
-        <p> {{textarea value=experiment.description class="experiment-textarea form-control"}} </p>
+        <p> {{textarea value=experiment.description class="experiment-textarea form-control" placeholder="Give your experiment a description here..."}} </p>
       </div>
       <div class="row">
         <label>Purpose: </label>
-        <p> {{textarea value=experiment.purpose class="experiment-textarea form-control"}} </p>
+        <p> {{textarea value=experiment.purpose class="experiment-textarea form-control" placeholder="Explain the purpose of your experiment here..."}} </p>
       </div>
 
       <div class="row">

@@ -1,5 +1,5 @@
 /* globals require */
-/* jshint quotemark: true */
+/* jshint quotmark: true */
 
 
 var rimraf = require('rimraf');
@@ -43,9 +43,12 @@ var EXPERIMENT = {
                 "id": "title",
                 "type": "string"
             },
-             "description": {
+            "description": {
                 "id": "description",
-                "type": "string"
+                "$oneOf": [
+                    "string",
+                    null
+                ]
             },
             "state": {
                 "id": "state",

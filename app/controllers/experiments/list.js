@@ -95,10 +95,8 @@ export default Ember.Controller.extend({
                 // should work after split bug is fixed and schema validation handles null values
                 // for structure, beginDate, endDate, and eligibilityCriteria
                 title: this.get('newTitle'),
-                description: 'Give your experiment a description here...',  // TODO: Hardcoded parameter
                 state: 'Draft',
                 lastEdited: new Date(),
-                purpose: 'Explain the purpose of your experiment here...',
                 duration: 'Not specified',
                 exitUrl: '',
                 structure: {
