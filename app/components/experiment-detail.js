@@ -9,6 +9,7 @@ export default Ember.Component.extend({
     editing: false,
     toast: Ember.inject.service(),
     store: Ember.inject.service(),
+    deleting: false,
     showDeleteWarning: false,
     actions: {
         toggleEditing: function() {
@@ -40,13 +41,16 @@ export default Ember.Component.extend({
             });
         },
         delete: function() {
+            this.toggleProperty('showDeleteWarning');
+            this.set('deleting', true);
+
             var exp = this.get('experiment');
             exp.set('state', exp.DELETED);
             exp.save().then(() => {
                 return this.get('store').findRecord('collection', exp.get('sessionCollectionId')).then((collection) => {
                     collection.set('permissions', {});
                     return collection.save();
-                }).then(() => this.sendAction('onDelete'));
+                }).then(() => this.sendAction('onDelete', exp));
             });
         },
         clone: function() {

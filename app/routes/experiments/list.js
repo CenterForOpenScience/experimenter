@@ -6,6 +6,7 @@ const {
 } = Ember;
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+    store: Ember.inject.service(),
     queryParams: {
         state: {
             refreshModel: true
@@ -20,8 +21,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             refreshModel: true
         }
     },
-    model() {
-        let params = this.paramsFor('experiments.list');
+    model(params) {
+        params = params || this.paramsFor('experiments.list');
 
         var query = {
             q: ['state:(-Deleted)']
