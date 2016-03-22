@@ -1,12 +1,12 @@
 <h3>Experiment editor</h3>
 
 <div class="row">
-    <div class="col-xs-12">
-        {{#ace-editor submit=(action 'submit') height='500px' value=experimentJson as |ctx|}}
-            <br>
-            {{#link-to "experiments.info" tagName="button" class="btn btn-danger btn-sm" }}Discard changes{{/link-to}}
-            <button class="btn btn-default" disabled={{ctx.notValidSyntax}} onclick={{ctx.submit}}>Save</button>
-            {{#link-to "experiments.info.preview" model.id tagName="button" class="btn btn-info btn-sm pull-right" }}Try experiment{{/link-to}}
-        {{/ace-editor}}
-    </div>
+  <div class="col-xs-12">
+    {{#ace-editor submit=(action 'submit') height='500px' value=experimentJson as |ctx|}}
+    <br>
+    {{#link-to "experiments.info" tagName="button" class="btn btn-danger btn-sm" }}Discard changes{{/link-to}}
+    <button class="btn btn-default" disabled={{ctx.notValidSyntax}} onclick={{ctx.submit}}>Save</button>
+    {{#link-to "experiments.info.preview" model.id tagName="button" class="btn btn-info btn-sm pull-right" }}Try experiment{{/link-to}}
+    {{/ace-editor}}
+  </div>
 </div>
