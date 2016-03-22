@@ -10,7 +10,11 @@ export default Ember.Controller.extend({
             this.transitionToRoute('experiments.info.edit', this.get('model'));
         },
         onDelete: function() {
-            this.transitionToRoute('experiments');
+            // A hack: ES may take up to a second to refresh its contents. Give it
+            // a fair head start.
+            window.setTimeout(() => {
+                this.transitionToRoute('experiments.list');
+            }, 500);
         },
         onClone: function(exp) {
             this.transitionToRoute('experiments.info', exp.get('id'));
