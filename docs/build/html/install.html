@@ -1,0 +1,278 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Install &mdash; Experimenter 0.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Experimenter 0.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Experiments" href="experiments.html"/>
+        <link rel="prev" title="Prerequisites" href="prerequisites.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Experimenter
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Install</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#exp-addons-submodule">exp-addons Submodule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#javascript-dependencies">Javascript Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-a-env-file">Add a .env file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-ember-server">Run the Ember server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Experiments</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Experimenter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Install</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/install.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install">
+<span id="install"></span><h1>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
+<p>First:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> experimenter
+</pre></div>
+</div>
+<div class="section" id="exp-addons-submodule">
+<span id="exp-addons-submodule"></span><h2>exp-addons Submodule<a class="headerlink" href="#exp-addons-submodule" title="Permalink to this headline">¶</a></h2>
+<p>The exp-addons submodule allows for sharing some of the core Ember code for Experimenter&#8217;s frontend between different apps. In particular it contains:</p>
+<ul class="simple">
+<li>exp-player: The build-in rendering engine for Experimenter</li>
+<li>exp-models: The ember-data models, adapters, serializers, authorizers, and authenticators used by Experimenter</li>
+</ul>
+<p>To pull in the submodule, run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git submodule init
+git submodule update
+</pre></div>
+</div>
+</div>
+<div class="section" id="javascript-dependencies">
+<span id="javascript-dependencies"></span><h2>Javascript Dependencies<a class="headerlink" href="#javascript-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>To install, run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>npm install
+bower install
+
+<span class="nb">cd</span> lib/exp-player
+npm install
+bower install
+
+<span class="nb">cd</span> ../exp-models
+npm install
+bower install
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-env-file">
+<span id="add-a-env-file"></span><h2>Add a .env file<a class="headerlink" href="#add-a-env-file" title="Permalink to this headline">¶</a></h2>
+<p>This project needs a file named &#8216;.env&#8217; in its root directory. This contains settings that are not suitable for publishing to GitHub. Your .env should look like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">OSF_CLIENT_ID</span><span class="o">=</span>&lt;client_id&gt;
+<span class="nv">OSF_SCOPE</span><span class="o">=</span>osf.users.all_read
+<span class="nv">OSF_URL</span><span class="o">=</span>https://staging-accounts.osf.io
+
+<span class="nv">JAMDB_URL</span><span class="o">=</span>https://staging-metadata.osf.io
+
+<span class="nv">WOWZA_PHP</span><span class="o">=</span><span class="s1">&#39;{}&#39;</span>
+<span class="nv">WOWZA_ASP</span><span class="o">=</span><span class="s1">&#39;{}&#39;</span>
+</pre></div>
+</div>
+<p>These variables correspond with:</p>
+<ul class="simple">
+<li><strong>OSF_CLIENT_ID</strong>: The client ID of a developer app created on the OSF. For development purposes please use: <a class="reference external" href="https://staging.osf.io/settings/applications/">https://staging.osf.io/settings/applications/</a>.</li>
+<li><strong>OSF_SCOPE</strong>: The scope of the OAuth token that users will need when logging in to Experimenter. We reccomend that you don&#8217;t change this default unless you know what you&#8217;re doing.</li>
+<li><strong>OSF_URL</strong>: The URL of the OSF authentication server you wish to use. For development purposes please leave this pointed at the staging-accounts server.</li>
+<li><strong>JAMDB_URL</strong>: JamDB is the backend for Experimenter, and this URL determines which instance of the app your copy of Experimenter will use. For development purposes, please use the staging-metadata server.</li>
+<li><strong>WOWZA_PHP/ASP</strong>: These settings configure how the app will connect to a Wowza server (for streaming video uploads). Most devlopers will not need this feature, and if you believe you do please open an issue on our GitHub page: <a class="reference external" href="https://github.com/CenterForOpenScience/experimenter/issues">https://github.com/CenterForOpenScience/experimenter/issues</a>.</li>
+</ul>
+</div>
+<div class="section" id="run-the-ember-server">
+<span id="run-the-ember-server"></span><h2>Run the Ember server<a class="headerlink" href="#run-the-ember-server" title="Permalink to this headline">¶</a></h2>
+<p>Run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>ember server
+</pre></div>
+</div>
+<p>to fire up Ember&#8217;s built in server to test the app locally.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="experiments.html" class="btn btn-neutral float-right" title="Experiments" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="prerequisites.html" class="btn btn-neutral" title="Prerequisites" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Center for Open Science.
+      Last updated on Mar 22, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

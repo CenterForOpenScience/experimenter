@@ -23,3 +23,6 @@ __pycache__/
 
 schemas/*
 public/VideoRecorder.swf
+
+
+docs/_build
