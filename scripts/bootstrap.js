@@ -15,13 +15,19 @@ var COLLECTION = 'sys';
 var PASSWORD = 'password';
 var NAMESPACE = 'experimenter';
 
-ADMIN_OSF_IDS = [
+var ADMIN_OSF_IDS = [
     'x2zau', '7yrzb',  // Brian "The Food Geek" Geiger
     'x679r', 'beu32',  // Sam "The Banjo Man" Chrisinger
     '92jdq', // Lauren "Nickname to be determined" Barker
     '7bauz', // Andy Boughton
     'rkaye'  // Chris "Ostriches" Seto
 ];
+try {
+    ADMIN_OSF_IDS = ADMIN_OSF_IDS.concat(JSON.parse(fs.readFileSync(__dirname + '/admins.json')));
+}
+catch (e) {
+    console.log(e);
+}
 
 function authorize(password) {
     return request

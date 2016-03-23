@@ -1,0 +1,419 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Development: Custom Frames &mdash; Experimenter 0.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Experimenter 0.0.0 documentation" href="index.html"/>
+        <link rel="prev" title="Development: Installation" href="development.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Experimenter
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development: Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Development: Custom Frames</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-simple-example">A Simple Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-out-the-example">Building out the Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-out-the-example">Testing out the Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Experimenter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Development: Custom Frames</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/frames.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="development-custom-frames">
+<span id="development-custom-frames"></span><h1>Development: Custom Frames<a class="headerlink" href="#development-custom-frames" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<span id="overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>You may find you have a need for some experimental component is not included in Experimenter already. The goal of this section is to walk through extending the base functionality with your own code.</p>
+<p>We use the term &#8216;frame&#8217; to describe the combination of JavaScript file and Handlebars HTML template that compose a <strong>block</strong> of an experiment.</p>
+<p>Experimenter is composed of three main modules:</p>
+<ul class="simple">
+<li><strong>experimenter</strong>: the main Experimenter GUI</li>
+<li><strong>lib/exp-models</strong>: the data models used by <strong>experimenter</strong> and other applications</li>
+<li><strong>exp-player</strong>: the built-in rendering engine for experiments built in Experimenter</li>
+</ul>
+<p>Generally, all &#8216;frame&#8217; development will happen in the exp-player module. By nature of the way the Experimenter respository is structured, this will mean making changes in the <code class="docutils literal"><span class="pre">experimenter/lib/exp-player</span></code> directory. These changes can be committed as part of the <a class="reference external" href="https://github.com/CenterForOpenScience/exp-addons">exp-addons</a> git submodule (installed under <code class="docutils literal"><span class="pre">experimenter/lib</span></code>)</p>
+</div>
+<div class="section" id="getting-started">
+<span id="getting-started"></span><h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>One of the features of <a class="reference external" href="http://www.ember-cli.com/">Ember CLI</a> is the abilty to provide &#8216;blueprints&#8217; for code. These are basically just templates of all of the basic boilerplate needed to create a certain piece of code. To begin developing your own frame:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> experimenter/lib/exp-player
+ember generate exp-frame exp-&lt;your_name&gt;
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">&lt;your_name&gt;</span></code> corresponds with the name of your choice.</p>
+<div class="section" id="a-simple-example">
+<span id="a-simple-example"></span><h3>A Simple Example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s walk though a basic example of &#8216;exp-consent-form&#8217;:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ember generate exp-frame
+installing exp-frame
+  create addon/components/exp-consent-form/component.js
+  create addon/components/exp-consent-form/template.hbs
+  create app/components/exp-consent-form.js
+</pre></div>
+</div>
+<p>Notice this created three new files:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">addon/components/exp-consent-form/component.js</span></code>: the JS file for your &#8216;frame&#8217;</li>
+<li><code class="docutils literal"><span class="pre">addon/components/exp-consent-form/template.hbs</span></code>: the Handlebars template for your &#8216;frame&#8217;</li>
+<li><code class="docutils literal"><span class="pre">app/components/exp-consent-form.js</span></code>: a boilerplate file that exposes the new frame to the Ember app&#8211; don&#8217;t modify this file unless you know what you&#8217;re doing</li>
+</ul>
+<p>Let&#8217;s take a deeper look at the <code class="docutils literal"><span class="pre">component.js</span></code> file:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="nx">ExpFrameBaseComponent</span> <span class="nx">from</span> <span class="s1">&#39;exp-player/components/exp-frame-base&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">layout</span> <span class="nx">from</span> <span class="s1">&#39;./template&#39;</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">ExpFrameBaseComponent</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;exp-consent-form&#39;</span><span class="p">,</span>
+    <span class="nx">layout</span><span class="o">:</span> <span class="nx">layout</span><span class="p">,</span>
+    <span class="nx">meta</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;ExpConsentForm&#39;</span><span class="p">,</span>
+        <span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;TODO: a description of this frame goes here.&#39;</span><span class="p">,</span>
+        <span class="nx">parameters</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+            <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span>
+                <span class="c1">// define parameters here</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+            <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span>
+                <span class="c1">// define data structure here</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The first section:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="nx">ExpFrameBaseComponent</span> <span class="nx">from</span> <span class="s1">&#39;exp-player/components/exp-frame-base&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">layout</span> <span class="nx">from</span> <span class="s1">&#39;./template&#39;</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">ExpFrameBaseComponent</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;exp-consent-form&#39;</span><span class="p">,</span>
+    <span class="nx">layout</span><span class="o">:</span> <span class="nx">layout</span><span class="p">,</span>
+<span class="p">...</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>does a couple things:</p>
+<ul class="simple">
+<li>imports the <code class="docutils literal"><span class="pre">ExpFrameBaseComponent</span></code>: this is the superclass that all &#8216;frames&#8217; must extend</li>
+<li>imports the <code class="docutils literal"><span class="pre">layout</span></code>: this tells Ember what template to use</li>
+<li>extends <code class="docutils literal"><span class="pre">ExpFrameBaseComponent</span></code> and specifies <code class="docutils literal"><span class="pre">layout:</span> <span class="pre">layout</span></code></li>
+</ul>
+<p>Next is the &#8216;meta&#8217; section:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">...</span>
+    <span class="nx">meta</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;ExpConsentForm&#39;</span><span class="p">,</span>
+        <span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;TODO: a description of this frame goes here.&#39;</span><span class="p">,</span>
+        <span class="nx">parameters</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+            <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span>
+                <span class="c1">// define parameters here</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+            <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span>
+                <span class="c1">// define data structure here</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>which is comprised of:</p>
+<ul class="simple">
+<li>name (optional): A human readable name for this &#8216;frame&#8217;</li>
+<li>description (optional): A human readable descripion for this &#8216;frame&#8217;</li>
+<li>parameters: JSON Schema defining what parameters this &#8216;frame&#8217; accepts</li>
+<li>data: JSON Schema defining what data this &#8216;frame&#8217; outputs</li>
+</ul>
+</div>
+<div class="section" id="building-out-the-example">
+<span id="building-out-the-example"></span><h3>Building out the Example<a class="headerlink" href="#building-out-the-example" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s add some basic functionality to this &#8216;frame&#8217;. First define some of the expected parameters:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">...</span>
+    <span class="nx">meta</span><span class="o">:</span> <span class="p">{</span>
+        <span class="p">...,</span>
+        <span class="nx">parameters</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+            <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">title</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                    <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;Notice of Consent&#39;</span>
+                <span class="p">},</span>
+                <span class="nx">body</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                    <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;Do you consent to participate in this study?&#39;</span>
+                <span class="p">},</span>
+                <span class="nx">consentLabel</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                    <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;I agree&#39;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>And also the output data:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">...,</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+            <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">consentGranted</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+                    <span class="k">default</span><span class="o">:</span> <span class="kc">false</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Since we indicated above that this &#8216;frame&#8217; has a <code class="docutils literal"><span class="pre">consentGranted</span></code> property, let&#8217;s add it to the &#8216;frame&#8217; definition:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">export</span> <span class="k">default</span> <span class="nx">ExpFrameBaseComponent</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="p">...,</span>
+    <span class="nx">consentGranted</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">meta</span><span class="o">:</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Next let&#8217;s update <code class="docutils literal"><span class="pre">template.hbs</span></code> to look more like a consent form:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span>&lt;div class=&quot;well&quot;&gt;
+  &lt;h1&gt;{{ title }}&lt;/h1&gt;
+  &lt;hr&gt;
+  &lt;p&gt; {{ body }}&lt;/p&gt;
+  &lt;hr &gt;
+  &lt;div class=&quot;input-group&quot;&gt;
+    &lt;span&gt;
+      {{ consentLabel }}
+    &lt;/span&gt;
+    {{input type=&quot;checkbox&quot; checked=consentGranted}}
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;row exp-controls&quot;&gt;
+  &lt;!-- Next/Last/Previous controls. Modify as appropriate --&gt;
+  &lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button class=&quot;btn btn-default&quot; {{ action &#39;previous&#39; }} &gt; Previous &lt;/button&gt;
+    &lt;button class=&quot;btn btn-default pull-right&quot; {{ action &#39;next&#39; }} &gt; Next &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre></div>
+</div>
+<p>We don&#8217;t want to let the participant navigate backwards or to continue unless they&#8217;ve checked the box, so let&#8217;s change the footer to:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span>&lt;div class=&quot;row exp-controls&quot;&gt;
+  &lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button class=&quot;btn btn-default pull-right&quot; disabled={{ consentNotGranted }} {{ action &#39;next&#39; }} &gt; Next &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre></div>
+</div>
+<p>Notice the new property <code class="docutils literal"><span class="pre">consentNotGranted</span></code>; this will require a new computed field in our JS file:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span>    <span class="nx">meta</span><span class="o">:</span> <span class="p">{</span>
+        <span class="p">...</span>
+    <span class="p">},</span>
+    <span class="nx">consentNotGranted</span><span class="o">:</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">computed</span><span class="p">.</span><span class="nx">not</span><span class="p">(</span><span class="s1">&#39;consentGranted&#39;</span><span class="p">)</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-out-the-example">
+<span id="testing-out-the-example"></span><h3>Testing out the Example<a class="headerlink" href="#testing-out-the-example" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="development.html" class="btn btn-neutral" title="Development: Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Center for Open Science.
+      Last updated on Mar 23, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
