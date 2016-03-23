@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Install &mdash; Experimenter 0.0.0 documentation</title>
+  <title>Development: Installation &mdash; Experimenter 0.0.0 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
 
   
     <link rel="top" title="Experimenter 0.0.0 documentation" href="index.html"/>
-        <link rel="next" title="Experiments" href="experiments.html"/>
-        <link rel="prev" title="Development Prerequisites" href="prerequisites.html"/> 
+        <link rel="next" title="Development: Custom Frames" href="frames.html"/>
+        <link rel="prev" title="Architecture" href="architecture.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -86,15 +86,22 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Development Prerequisites</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Install</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#exp-addons-submodule">exp-addons Submodule</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#javascript-dependencies">Javascript Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#add-a-env-file">Add a .env file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-the-ember-server">Run the Ember server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Development: Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ember-dependencies">Ember Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-dependencies">Other Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exp-addons-submodule">exp-addons Submodule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javascript-dependencies">Javascript Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-a-env-file">Add a .env file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-ember-server">Run the Ember server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bootstrapping-in-example-data">Bootstrapping in Example Data</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="experiments.html">Experiments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="frames.html">Development: Custom Frames</a></li>
 </ul>
 
             
@@ -125,11 +132,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Install</li>
+    <li>Development: Installation</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/install.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/development.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -139,14 +146,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="install">
-<span id="install"></span><h1>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="development-installation">
+<span id="development-installation"></span><h1>Development: Installation<a class="headerlink" href="#development-installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ember-dependencies">
+<span id="ember-dependencies"></span><h2>Ember Dependencies<a class="headerlink" href="#ember-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>You will need the following things properly installed on your computer.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://git-scm.com/">Git</a></li>
+<li><a class="reference external" href="http://nodejs.org/">Node.js</a> (with NPM)</li>
+<li><a class="reference external" href="http://bower.io/">Bower</a></li>
+<li><a class="reference external" href="http://www.ember-cli.com/">Ember CLI</a></li>
+<li><a class="reference external" href="http://phantomjs.org/">PhantomJS</a></li>
+</ul>
+</div>
+<div class="section" id="other-dependencies">
+<span id="other-dependencies"></span><h2>Other Dependencies<a class="headerlink" href="#other-dependencies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://jamdb.readthedocs.org/en/latest/install.html">JamDB</a>: note this requires Python 3.5.X</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>First:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> experimenter
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/CenterForOpenScience/experimenter.git
+<span class="nb">cd</span> experimenter
 </pre></div>
 </div>
 <div class="section" id="exp-addons-submodule">
-<span id="exp-addons-submodule"></span><h2>exp-addons Submodule<a class="headerlink" href="#exp-addons-submodule" title="Permalink to this headline">¶</a></h2>
+<span id="exp-addons-submodule"></span><h3>exp-addons Submodule<a class="headerlink" href="#exp-addons-submodule" title="Permalink to this headline">¶</a></h3>
 <p>The exp-addons submodule allows for sharing some of the core Ember code for Experimenter&#8217;s frontend between different apps. In particular it contains:</p>
 <ul class="simple">
 <li>exp-player: The build-in rendering engine for Experimenter</li>
@@ -159,7 +186,7 @@ git submodule update
 </div>
 </div>
 <div class="section" id="javascript-dependencies">
-<span id="javascript-dependencies"></span><h2>Javascript Dependencies<a class="headerlink" href="#javascript-dependencies" title="Permalink to this headline">¶</a></h2>
+<span id="javascript-dependencies"></span><h3>Javascript Dependencies<a class="headerlink" href="#javascript-dependencies" title="Permalink to this headline">¶</a></h3>
 <p>To install, run:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>npm install
 bower install
@@ -175,7 +202,7 @@ bower install
 </div>
 </div>
 <div class="section" id="add-a-env-file">
-<span id="add-a-env-file"></span><h2>Add a .env file<a class="headerlink" href="#add-a-env-file" title="Permalink to this headline">¶</a></h2>
+<span id="add-a-env-file"></span><h3>Add a .env file<a class="headerlink" href="#add-a-env-file" title="Permalink to this headline">¶</a></h3>
 <p>This project needs a file named &#8216;.env&#8217; in its root directory. This contains settings that are not suitable for publishing to GitHub. Your .env should look like:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">OSF_CLIENT_ID</span><span class="o">=</span>&lt;client_id&gt;
 <span class="nv">OSF_SCOPE</span><span class="o">=</span>osf.users.all_read
@@ -197,12 +224,33 @@ bower install
 </ul>
 </div>
 <div class="section" id="run-the-ember-server">
-<span id="run-the-ember-server"></span><h2>Run the Ember server<a class="headerlink" href="#run-the-ember-server" title="Permalink to this headline">¶</a></h2>
+<span id="run-the-ember-server"></span><h3>Run the Ember server<a class="headerlink" href="#run-the-ember-server" title="Permalink to this headline">¶</a></h3>
 <p>Run:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>ember server
 </pre></div>
 </div>
 <p>to fire up Ember&#8217;s built in server to test the app locally.</p>
+</div>
+<div class="section" id="bootstrapping-in-example-data">
+<span id="bootstrapping-in-example-data"></span><h3>Bootstrapping in Example Data<a class="headerlink" href="#bootstrapping-in-example-data" title="Permalink to this headline">¶</a></h3>
+<p>First, create a file <code class="docutils literal"><span class="pre">admins.json</span></code> in <code class="docutils literal"><span class="pre">experimenter/scripts/</span></code>:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="s2">&quot;&lt;your_osf_id&gt;&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">&lt;your_osf_id&gt;</span></code> is the user id of your <a class="reference external" href="https://staging.osf.io/">staging OSF Account</a>.</p>
+<p>Next, run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>npm run boostrap
+</pre></div>
+</div>
+<p><strong>Note</strong>: this command will only work if you have successfully installed JamDB in a virtualenv named &#8216;jam&#8217;</p>
+<p>Which will create:</p>
+<ul class="simple">
+<li>an &#8216;experimenter&#8217; namespace</li>
+<li>all of the collections needed for Experimenter to work</li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -213,10 +261,10 @@ bower install
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="experiments.html" class="btn btn-neutral float-right" title="Experiments" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="frames.html" class="btn btn-neutral float-right" title="Development: Custom Frames" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="prerequisites.html" class="btn btn-neutral" title="Development Prerequisites" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="architecture.html" class="btn btn-neutral" title="Architecture" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -226,7 +274,7 @@ bower install
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Center for Open Science.
-      Last updated on Mar 22, 2016.
+      Last updated on Mar 23, 2016.
 
     </p>
   </div>

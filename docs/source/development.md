@@ -1,7 +1,24 @@
-# Install
+# Development: Installation
+
+## Ember Dependencies
+
+You will need the following things properly installed on your computer.
+
+* [Git](http://git-scm.com/)
+* [Node.js](http://nodejs.org/) (with NPM)
+* [Bower](http://bower.io/)
+* [Ember CLI](http://www.ember-cli.com/)
+* [PhantomJS](http://phantomjs.org/)
+
+## Other Dependencies
+
+* [JamDB](http://jamdb.readthedocs.org/en/latest/install.html): note this requires Python 3.5.X
+
+## Installation
 
 First:
 ```bash
+git clone https://github.com/CenterForOpenScience/experimenter.git
 cd experimenter
 ```
 
@@ -65,3 +82,26 @@ ember server
 ```
 
 to fire up Ember's built in server to test the app locally.
+
+### Bootstrapping in Example Data
+
+First, create a file `admins.json` in `experimenter/scripts/`:
+
+```json
+[
+    "<your_osf_id>"
+]
+```
+
+Where `<your_osf_id>` is the user id of your [staging OSF Account](https://staging.osf.io/).
+
+Next, run:
+```bash
+npm run boostrap
+```
+
+**Note**: this command will only work if you have successfully installed JamDB in a virtualenv named 'jam'
+
+Which will create:
+- an 'experimenter' namespace
+- all of the collections needed for Experimenter to work

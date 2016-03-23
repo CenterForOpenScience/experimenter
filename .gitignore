@@ -24,5 +24,8 @@ __pycache__/
 schemas/*
 public/VideoRecorder.swf
 
+scripts/admins.json
+
 
 docs/_build
+docs/build

@@ -15,11 +15,11 @@ Contents:
 .. toctree::
    :maxdepth: 15
 
-   prerequisites
-   install
+   overview
    experiments
-   experiments_dev
-   jamdb
+   architecture
+   development
+   frames
 
 Indices and tables
 ==================
