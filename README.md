@@ -10,6 +10,8 @@
 
 > A platform to create and administer experiments.
 
+Documentation available [here](http://experimenter.readthedocs.org/en/latest/)
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.

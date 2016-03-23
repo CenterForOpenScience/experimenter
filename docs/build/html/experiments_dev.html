@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; Experimenter 0.0.0 documentation</title>
+  <title>Developing Experimenter ‘Frames’ &mdash; Experimenter 0.0.0 documentation</title>
   
 
   
@@ -34,7 +34,9 @@
   
 
   
-    <link rel="top" title="Experimenter 0.0.0 documentation" href="index.html"/> 
+    <link rel="top" title="Experimenter 0.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Backend Overview" href="jamdb.html"/>
+        <link rel="prev" title="Experiments Overview" href="experiments.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -69,7 +71,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -83,11 +85,14 @@
           
             
             
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Development Prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiments.html">Experiments Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="experiments_dev.html">Developing Experimenter &#8216;Frames&#8217;</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Developing Experimenter &#8216;Frames&#8217;</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="jamdb.html">Backend Overview</a></li>
 </ul>
 
@@ -111,7 +116,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -119,8 +124,12 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li></li>
+    <li>Developing Experimenter &#8216;Frames&#8217;</li>
       <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/experiments_dev.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
@@ -129,23 +138,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="developing-experimenter-frames">
+<span id="developing-experimenter-frames"></span><h1>Developing Experimenter &#8216;Frames&#8217;<a class="headerlink" href="#developing-experimenter-frames" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<span id="overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Experimenter&#8217;s frontend is built using <a class="reference external" href="http://emberjs.com/">Ember.js</a>, and was designed with extensibiliy in mind. When a researcher or team of researchers needs behavior outside of the scope</p>
+</div>
+</div>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="jamdb.html" class="btn btn-neutral float-right" title="Backend Overview" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="experiments.html" class="btn btn-neutral" title="Experiments Overview" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -184,7 +197,6 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="_static/searchtools.js"></script>
 
   
 
@@ -200,14 +212,7 @@
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>

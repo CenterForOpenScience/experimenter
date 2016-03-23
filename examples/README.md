@@ -1,4 +1,9 @@
 # API Access to Experimenter Data
 
-TODO
+### Install
 
+`npm install`
+
+### Running
+
+`node index.js <password>`

@@ -5,6 +5,9 @@
 
 Welcome to Experimenter's documentation!
 =================================
+
+**NOTE: This documentation is a work in progress**
+
 Experimenter is a platform for designing and administering experiments. It is built on top of `JamDB <https://github.com/CenterForOpenScience/jamdb/>`_ and `Ember.js <http://emberjs.com/>`_, and is developed by the `Center for Open Science <https://cos.io/>`_.
 
 Contents:
@@ -15,6 +18,8 @@ Contents:
    prerequisites
    install
    experiments
+   experiments_dev
+   jamdb
 
 Indices and tables
 ==================

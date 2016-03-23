@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; Experimenter 0.0.0 documentation</title>
+  <title>Backend Overview &mdash; Experimenter 0.0.0 documentation</title>
   
 
   
@@ -34,7 +34,8 @@
   
 
   
-    <link rel="top" title="Experimenter 0.0.0 documentation" href="index.html"/> 
+    <link rel="top" title="Experimenter 0.0.0 documentation" href="index.html"/>
+        <link rel="prev" title="Developing Experimenter ‘Frames’" href="experiments_dev.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -69,7 +70,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -83,12 +84,15 @@
           
             
             
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Development Prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiments.html">Experiments Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiments_dev.html">Developing Experimenter &#8216;Frames&#8217;</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jamdb.html">Backend Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Backend Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jamdb-as-a-backend">JamDB as a Backend</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -111,7 +115,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -119,8 +123,12 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li></li>
+    <li>Backend Overview</li>
       <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/jamdb.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
@@ -129,23 +137,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="backend-overview">
+<span id="backend-overview"></span><h1>Backend Overview<a class="headerlink" href="#backend-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="jamdb-as-a-backend">
+<span id="jamdb-as-a-backend"></span><h2>JamDB as a Backend<a class="headerlink" href="#jamdb-as-a-backend" title="Permalink to this headline">¶</a></h2>
+<p>Experimenter&#8217;s backend is driven by <a class="reference external" href="https://jamdb.readthedocs.org/en/latest/">JamDB</a>, which provides a performant API over a document store. It offers <a class="reference external" href="http://json-schema.org/">JSON Schema</a> validation of submitted documents and a versioned history of all documents. This goal of this section of the documentation is to give a breif overview of the JamDB API in its relation to Experimenter.</p>
+<p>For now, the best resource on learning more about this is reading the code here: <a class="reference external" href="https://github.com/CenterForOpenScience/experimenter/tree/develop/examples">https://github.com/CenterForOpenScience/experimenter/tree/develop/examples</a>.</p>
+</div>
+</div>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="experiments_dev.html" class="btn btn-neutral" title="Developing Experimenter ‘Frames’" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -184,7 +195,6 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="_static/searchtools.js"></script>
 
   
 
@@ -200,14 +210,7 @@
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>
