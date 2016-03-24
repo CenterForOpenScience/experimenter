@@ -15,7 +15,6 @@ Contents:
 .. toctree::
    :maxdepth: 15
 
-   overview
    experiments
    architecture
    experiments
