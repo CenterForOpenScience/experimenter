@@ -18,5 +18,7 @@ Contents:
    overview
    experiments
    architecture
+   experiments
+   experiments_ref
    development
    frames
