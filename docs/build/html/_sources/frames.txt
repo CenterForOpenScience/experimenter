@@ -220,6 +220,3 @@ Notice the new property `consentNotGranted`; this will require a new computed fi
     consentNotGranted: Ember.computed.not('consentGranted')
 });
 ```
-
-#### Testing out the Example
-

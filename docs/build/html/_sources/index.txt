@@ -18,12 +18,7 @@ Contents:
    overview
    experiments
    architecture
+   experiments
+   experiments_ref
    development
    frames
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

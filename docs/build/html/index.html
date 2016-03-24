@@ -86,7 +86,10 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Building an Experiment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Building an Experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments_ref.html">Glossary of Experimental Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development: Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="frames.html">Development: Custom Frames</a></li>
 </ul>
@@ -141,8 +144,91 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Building an Experiment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#experiment-structure">Experiment structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#experiment-data">Experiment data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments.html#sessions-and-expdata-in-detail">Sessions and <code class="docutils literal"><span class="pre">expData</span></code> in detail</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="architecture.html#jamdb-as-a-backend">JamDB as a Backend</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Building an Experiment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#experiment-structure">Experiment structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#experiment-data">Experiment data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments.html#sessions-and-expdata-in-detail">Sessions and <code class="docutils literal"><span class="pre">expData</span></code> in detail</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experiments_ref.html">Glossary of Experimental Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-audioplayer">exp-audioplayer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#example">example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-consent">exp-consent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#example">example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-lookit-overview">exp-lookit-overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-mood-questionnaire">exp-mood-questionnaire</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-physics-info">exp-physics-info</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-physics-pre-video">exp-physics-pre-video</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-survey">exp-survey</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-video-config">exp-video-config</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-video-consent">exp-video-consent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-video-preview">exp-video-preview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-video-record">exp-video-record</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiments_ref.html#exp-video-setup">exp-video-setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#parameters">parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments_ref.html#data">data</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development: Installation</a><ul>
@@ -163,21 +249,12 @@
 <li class="toctree-l2"><a class="reference internal" href="frames.html#getting-started">Getting Started</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="frames.html#a-simple-example">A Simple Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="frames.html#building-out-the-example">Building out the Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="frames.html#testing-out-the-example">Testing out the Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
-</ul>
 </div>
 
 
@@ -198,7 +275,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Center for Open Science.
-      Last updated on Mar 23, 2016.
+      Last updated on Mar 24, 2016.
 
     </p>
   </div>
