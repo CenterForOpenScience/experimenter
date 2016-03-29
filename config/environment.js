@@ -5,7 +5,8 @@ module.exports = function(environment) {
         OSF: {
             clientId: process.env.OSF_CLIENT_ID,
             scope: process.env.OSF_SCOPE,
-            url: process.env.OSF_URL
+            authUrl: process.env.OSF_AUTH_URL,
+            url: process.env.OSF_URLg
         },
         modulePrefix: 'experimenter',
         environment: environment,
