@@ -31,9 +31,12 @@ and
 
 ### exp-audioplayer
 
+> Play some audio for the participant. Optionally some some images while the audio is playing.
+
 [view source code](https://github.com/CenterForOpenScience/exp-addons/blob/develop/exp-player/addon/components/exp-audioplayer.js)
 
 ##### example
+
 ![example](_static/img/exp-audioplayer.png)
 
 ```json
@@ -65,7 +68,7 @@ and
 - **fullControls**: whether to use the full player controls. If false, display a single button to play audio from the start.
   - type: true/false
   - default: true
-- **mustPlay**: should the user be forced to play the clip before leaving the page?
+- **mustPlay**: should the participant be forced to play the clip before leaving the page?
   - type: true/false
   - default: true
 - **sources**: list of objects specifying audio src and type
@@ -80,7 +83,7 @@ and
 - **images**: a list of objects specifying image src, alt, and title
   - type: list
   - default: empty
-- **prompts**: text of any header/prompt pararaphs to show the user.
+- **prompts**: text of any header/prompt pararaphs to show the participant
   - type: list of text-blocks
   - default: empty
 
@@ -92,6 +95,8 @@ and
 - - -
 
 ### exp-consent
+
+> A simple consent form. Forces the participant to accept before continuing.
 
 [view source code](https://github.com/CenterForOpenScience/exp-addons/blob/develop/exp-player/addon/components/exp-consent.js)
 
@@ -122,12 +127,14 @@ and
 
 ##### data
 
-- **consentGranted**: did the user grant consent?
+- **consentGranted**: did the participant grant consent?
   - type: true/false
 
 - - -
 
 ### exp-info
+
+> Show some text instructions to the participant.
 
 [view source code](https://github.com/CenterForOpenScience/exp-addons/blob/develop/exp-player/addon/components/exp-info/component.js)
 
@@ -166,6 +173,45 @@ None
 
 ### exp-survey
 
+> Presents the participant with a survey.
+
+[view source code](https://github.com/CenterForOpenScience/exp-addons/blob/develop/exp-player/addon/components/exp-survey/component.js)
+
+##### example
+
+![example](_static/img/exp-survey.png)
+
+```json
+{
+    "kind": "exp-survey",
+    "formSchema": {
+        "schema": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "What is your name?"
+                },
+                "favColor": {
+                    "type": "string",
+                    "enum": [
+                        "red",
+                        "orange",
+                        "yellow",
+                        "green",
+                        "blue",
+                        "indigo",
+                        "violet"
+                    ],
+                    "title": "What is your favorite color?"
+                }
+            },
+            "title": "Survey One"
+        }
+    }
+}
+```
+
 ##### parameters
 
 - **formSchema**: a JSON Schema defining a form; uses [Alpaca Forms](http://www.alpacajs.org/)
@@ -181,43 +227,97 @@ None
 
 ### exp-video-config
 
+> Help guide the participant through setting up her webcam.
+
+[view source code](https://github.com/CenterForOpenScience/exp-addons/blob/develop/exp-player/addon/components/exp-video-config.js)
+
+##### example
+
+![example](_static/img/exp-video-config.png)
+
+```json
+{
+    "kind": "exp-video-config",
+    "instructions": "Please make sure your webcam and microphone are functioning correctly."
+}
+```
+
 ##### parameters
 
-- a
-- b
+- **instructions**: some instructions to show the participant
+  - type: text
+  - default: 'Configure your video camera for the upcoming sections. Press next when you are finished.'
 
 ##### data
 
-- a
-- b
+None
 
 - - -
 
 ### exp-video-consent
 
+> presen the participant with a written consent document then capture her spoken consent
+
+[view source code](https://github.com/CenterForOpenScience/exp-addons/blob/develop/exp-player/addon/components/exp-video-consent.js)
+
+##### example
+
+![example](_static/img/exp-video-consent-1.png)
+![example](_static/img/exp-video-consent-2.png)
+
+```json
+{
+    "kind": "exp-video-consent",
+    "prompt": "I give my consent to participate in this study",
+    "blocks": [{
+        "text": "The purpose of this study is to learn about ...",
+        "title": "Introduction"
+    }, {
+        "text": "We will not share your personal information with anyone.",
+        "title": "Privacy"
+    }],
+    "title": "Notice of consent"
+}
+```
+
 ##### parameters
 
-- a
-- b
+- **title**:  title of written consent
+  - type: text
+  - default: 'Notice of Consent'
+- **blocks**: text-blocks of written consent
+  - type: list of text-blocks
+  - default: []
+- **prompt**: a prompt to show for spoken consent
+  - type: text
+  - default: 'I consent to participate in this study'
 
 ##### data
 
-- a
-- b
+- **videoId**: this unique id of the captured video
+  - type: text
 
 - - -
 
 ### exp-video-preview
 
 ##### parameters
-
-- a
-- b
+- **index**: the zero-based index of the first video to show
+  - type: number
+  - default: 0
+- **videos**: a list of videos to preview
+  - type: list of objects with a src and type property
+  - default: []
+- prompt: Require a button press before showing the videos
+  - type: text
+  - default: empty
+- text: Text to display to the user
+ - type: text-block
+ - default: Empty
 
 ##### data
 
-- a
-- b
+None
 
 - - -
 
