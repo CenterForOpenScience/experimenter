@@ -96,7 +96,7 @@ export default Ember.Controller.extend({
                 // for structure, beginDate, endDate, and eligibilityCriteria
                 title: this.get('newTitle'),
                 state: 'Draft',
-                lastEdited: new Date(),
+                description: '',
                 duration: 'Not specified',
                 exitUrl: '',
                 structure: {
