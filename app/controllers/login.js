@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
         authenticate() {
             this.set('error', null);
             this.transitionToRoute('login').then(() => {
-                window.location = `${ENV.OSF.url}/oauth2/authorize?response_type=token&scope=${ENV.OSF.scope}&client_id=${ENV.OSF.clientId}&redirect_uri=${encodeURI(window.location)}`;
+                window.location = `${ENV.OSF.authUrl}/oauth2/authorize?response_type=token&scope=${ENV.OSF.scope}&client_id=${ENV.OSF.clientId}&redirect_uri=${encodeURI(window.location)}`;
             });
         }
     }
