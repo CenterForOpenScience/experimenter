@@ -68,7 +68,8 @@ WOWZA_ASP='{}'
 
 These variables correspond with:
 
-- **OSF_CLIENT_ID**: The client ID of a developer app created on the OSF. For development purposes please use: [https://staging.osf.io/settings/applications/](https://staging.osf.io/settings/applications/).
+- **OSF_CLIENT_ID**: The client ID of a developer app created on the OSF. For development purposes please use: [https://staging.osf.io/settings/applications/](https://staging.osf.io/settings/applications/). Configure your app like:
+![example](_static/img/dev-app.png)
 - **OSF_SCOPE**: The scope of the OAuth token that users will need when logging in to Experimenter. We reccomend that you don't change this default unless you know what you're doing.
 - **OSF_URL**: The URL of the OSF server you want to refer to. For develop please use our staging server.
 - **OSF_AUTH_URL**: The URL of the OSF authentication server you wish to use. For development purposes please leave this pointed at the staging-accounts server.

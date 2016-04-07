@@ -90,7 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiments.html">Building an Experiment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiments_ref.html">Glossary of Experimental Components</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Development: Installation</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development: Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#ember-dependencies">Ember Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#other-dependencies">Other Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
@@ -208,7 +208,8 @@ bower install
 <p>This project needs a file named &#8216;.env&#8217; in its root directory. This contains settings that are not suitable for publishing to GitHub. Your .env should look like:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">OSF_CLIENT_ID</span><span class="o">=</span>&lt;client_id&gt;
 <span class="nv">OSF_SCOPE</span><span class="o">=</span>osf.users.all_read
-<span class="nv">OSF_URL</span><span class="o">=</span>https://staging-accounts.osf.io
+<span class="nv">OSF_URL</span><span class="o">=</span>https://staging.osf.io  
+<span class="nv">OSF_AUTH_URL</span><span class="o">=</span>https://staging-accounts.osf.io
 
 <span class="nv">JAMDB_URL</span><span class="o">=</span>https://staging-metadata.osf.io
 
@@ -218,9 +219,11 @@ bower install
 </div>
 <p>These variables correspond with:</p>
 <ul class="simple">
-<li><strong>OSF_CLIENT_ID</strong>: The client ID of a developer app created on the OSF. For development purposes please use: <a class="reference external" href="https://staging.osf.io/settings/applications/">https://staging.osf.io/settings/applications/</a>.</li>
+<li><strong>OSF_CLIENT_ID</strong>: The client ID of a developer app created on the OSF. For development purposes please use: <a class="reference external" href="https://staging.osf.io/settings/applications/">https://staging.osf.io/settings/applications/</a>. Configure your app like:
+<img alt="example" src="_images/dev-app.png" /></li>
 <li><strong>OSF_SCOPE</strong>: The scope of the OAuth token that users will need when logging in to Experimenter. We reccomend that you don&#8217;t change this default unless you know what you&#8217;re doing.</li>
-<li><strong>OSF_URL</strong>: The URL of the OSF authentication server you wish to use. For development purposes please leave this pointed at the staging-accounts server.</li>
+<li><strong>OSF_URL</strong>: The URL of the OSF server you want to refer to. For develop please use our staging server.</li>
+<li><strong>OSF_AUTH_URL</strong>: The URL of the OSF authentication server you wish to use. For development purposes please leave this pointed at the staging-accounts server.</li>
 <li><strong>JAMDB_URL</strong>: JamDB is the backend for Experimenter, and this URL determines which instance of the app your copy of Experimenter will use. For development purposes, please use the staging-metadata server.</li>
 <li><strong>WOWZA_PHP/ASP</strong>: These settings configure how the app will connect to a Wowza server (for streaming video uploads). Most devlopers will not need this feature, and if you believe you do please open an issue on our GitHub page: <a class="reference external" href="https://github.com/CenterForOpenScience/experimenter/issues">https://github.com/CenterForOpenScience/experimenter/issues</a>.</li>
 </ul>
@@ -276,7 +279,7 @@ bower install
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Center for Open Science.
-      Last updated on Mar 24, 2016.
+      Last updated on Apr 07, 2016.
 
     </p>
   </div>
