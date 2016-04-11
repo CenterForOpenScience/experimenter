@@ -88,11 +88,12 @@ ExperimenterClient.prototype.getExperimentSessions = function(experiment) {
     //All documents, or sessions in this case, may be accessed at either
     // /v1/id/collections/experimenter.session{experiment short id}s/documents Or
     // /v1/namespaces/experimenter/collections/session{experiment short id}s/documents
-    var sessionId = this.namespace + '.session' + experiment.attributes.id + 's';
+    var sessionId = this.namespace + '.session' + experiment.id.split('.').pop() + 's';
     var url = this.jamUrl + ['/v1/id', 'collections', sessionId, 'documents'].join('/');
     return this.getAll(url);
 };
 ExperimenterClient.prototype.getSessionInfo = function(sessionId) {
+    var self = this;
     return request
         .get({
             url: this.jamUrl + ['/v1/id', 'documents', sessionId].join('/'),

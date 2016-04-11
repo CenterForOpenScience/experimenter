@@ -9,7 +9,7 @@ if (!argv.password) {
     client
         .authorize(argv.password)
         .then(function() {
-            return client.getExperiments();
+	    return client.getExperiments();
         })
         .then(function(experiments) {
             experiments.forEach(function(experiment) {
