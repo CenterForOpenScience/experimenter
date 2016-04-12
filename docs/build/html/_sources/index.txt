@@ -21,3 +21,4 @@ Contents:
    experiments_ref
    development
    frames
+   random
