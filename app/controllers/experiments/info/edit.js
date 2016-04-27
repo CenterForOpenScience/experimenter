@@ -45,15 +45,15 @@ function createSchema(container, sequence, frames) {
                 $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
             };
         }
-        else if(frame.kind === 'choice' && frame.sampler === 'shuffle') {
-            props[`^${regexRange(j, j+=(frame.options.length-1))}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
-                $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
-            };
-        }
-        else if(frame.kind === 'choice' && frame.sampler === 'rotate') {
-            props[`^${regexRange(j, j+=(frame.options.length-1))}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
-                $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
-            };
+        else if(frame.kind === 'choice') {
+	    if (frame.options) {
+		props[`^${regexRange(j, j+=(frame.options.length-1))}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
+                    $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
+		};
+	    }
+	    else {
+		// TODO?
+	    }
         }
         else {
             throw `Experiment definition specifies an unknown kind of frame: ${frame.kind}`;
