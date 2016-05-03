@@ -35,7 +35,7 @@ function createSchema(container, sequence, frames) {
 
     function _parse(frame) {
         if (framePattern.test(frame.kind)) {
-            props[`^${j}\\-${escapeRegExp(sequence[i])}$`] = container.lookup(`component:${frame.kind}`).meta.data;
+            props[`^${j}\\-${escapeRegExp(sequence[i])}(\\-\\d+)?$`] = container.lookup(`component:${frame.kind}`).meta.data;
         }
         else if(frame.kind === 'block') {
             frame.options.forEach(f => _parse(f));
