@@ -60,8 +60,9 @@ export default Ember.Component.extend({
             var fields = Object.keys(array[0]);
             var tsv = [fields.join('\t')];
             Ember.$.each(array, function(_, item) {
-                var line = fields.map(function(field) {
-                    line.push(item[field]);
+		var line = [];
+		fields.forEach(function(field) {
+                    line.push(JSON.stringify(item[field]));
                 });
                 tsv.push(line.join('\t'));
             });
