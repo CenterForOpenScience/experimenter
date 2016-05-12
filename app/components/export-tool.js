@@ -14,8 +14,7 @@ function squash(obj, prefix) {
 
         if (Ember.$.isPlainObject(value)) {
             ret = Ember.$.extend({}, ret, squash(value, prefix ? `${prefix}.${key}` : key));
-        }
-        else {
+        } else {
             ret[prefix ? `${prefix}.${key}` : key] = value;
         }
     });
@@ -36,7 +35,7 @@ export default Ember.Component.extend({
                 data = data.toArray();
             }
             var dataArray = [];
-            data.forEach((item /*, index, array*/) => { // Ensure that mapping function doesn't treat *index* as the optional recursive *prefix* parameter
+            data.forEach((item /*, index, array*/ ) => { // Ensure that mapping function doesn't treat *index* as the optional recursive *prefix* parameter
                 dataArray.push(squash.apply(this, [item]));
             });
 
@@ -51,17 +50,17 @@ export default Ember.Component.extend({
             }
         }
     }),
-    convertToFormat: function (dataArray, format) {
+    convertToFormat: function(dataArray, format) {
         if (format === 'JSON') {
             return JSON.stringify(dataArray, undefined, 4);
-        } else if (format==='TSV') {
+        } else if (format === 'TSV') {
             var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
 
             var fields = Object.keys(array[0]);
             var tsv = [fields.join('\t')];
             Ember.$.each(array, function(_, item) {
-		var line = [];
-		fields.forEach(function(field) {
+                var line = [];
+                fields.forEach(function(field) {
                     line.push(JSON.stringify(item[field]));
                 });
                 tsv.push(line.join('\t'));
@@ -73,13 +72,15 @@ export default Ember.Component.extend({
         }
     },
     actions: {
-        downloadFile: function () {
-            var blob = new window.Blob([this.get('processedData')], {type: 'text/plain;charset=utf-8'});
+        downloadFile: function() {
+            var blob = new window.Blob([this.get('processedData')], {
+                type: 'text/plain;charset=utf-8'
+            });
             var extension = this.get('dataFormat').toLowerCase();
             window.saveAs(blob, 'data.' + extension);
         },
         selectDataFormat: function(dataFormat) {
-          this.set('dataFormat', dataFormat);
+            this.set('dataFormat', dataFormat);
         }
     }
 

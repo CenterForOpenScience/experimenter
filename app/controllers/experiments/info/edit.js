@@ -1,34 +1,36 @@
 import Ember from 'ember';
-import { SESSIONSCHEMA } from 'experimenter/const';
+import {
+    SESSIONSCHEMA
+} from 'experimenter/const';
 
-const { getOwner } = Ember;
+const {
+    getOwner
+} = Ember;
 
 //https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
 function escapeRegExp(str) {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 }
 
 function createSchema(container, sequence, frames) {
     var setProperty = function(schema, frameId, frame) {
-	var component = container.lookup(`component:${frame.kind}`);
-	schema[`^(?:\\d\\-)+${escapeRegExp(frameId)}(\\-\\d+)?$`] = component.meta.data;
+        var component = container.lookup(`component:${frame.kind}`);
+        schema[`^(?:\\d\\-)+${escapeRegExp(frameId)}(\\-\\d+)?$`] = component.meta.data;
     };
     var schema = {};
     Object.keys(frames).forEach(frameId => {
-	var frame = frames[frameId];
-	if (frame.kind === 'choice' || frame.kind === 'block') {
-	    if (frame.options) {
-		frame.options.forEach(opt => {
-		    setProperty(schema, opt, frames[opt]);
-		});
-	    }
-	    else {
-		// TODO
-	    }
-	}
-	else {
-	    setProperty(schema, frameId, frame);
-	}
+        var frame = frames[frameId];
+        if (frame.kind === 'choice' || frame.kind === 'block') {
+            if (frame.options) {
+                frame.options.forEach(opt => {
+                    setProperty(schema, opt, frames[opt]);
+                });
+            } else {
+                // TODO
+            }
+        } else {
+            setProperty(schema, frameId, frame);
+        }
     });
 
     return schema;
@@ -40,12 +42,12 @@ export default Ember.Controller.extend({
     toast: Ember.inject.service('toast'),
 
     experimentJson: Ember.computed('model', {
-	get: function () {
+        get: function() {
             return JSON.stringify(this.get('model.structure'), null, 4);
-	},
-	set: function () {
-	    return JSON.stringify(this.get('model.structure'), null, 4);
-	}
+        },
+        set: function() {
+            return JSON.stringify(this.get('model.structure'), null, 4);
+        }
     }),
 
     actions: {
@@ -82,10 +84,10 @@ export default Ember.Controller.extend({
                 .catch(() => this.toast.error('The server refused to save the data, likely due to a schema error'));
 
         },
-	discard() {
-	    this.get('model').rollbackAttributes();
-	    this.set('experimentJson', null);
-	    this.transitionToRoute('experiments.info');
-	}
+        discard() {
+            this.get('model').rollbackAttributes();
+            this.set('experimentJson', null);
+            this.transitionToRoute('experiments.info');
+        }
     }
 });
