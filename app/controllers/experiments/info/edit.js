@@ -8,63 +8,30 @@ function escapeRegExp(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 }
 
-function regexRange(lo, hi) {
-    let re = [];
-    hi = hi.toString();
-    lo = lo.toString();
-    while (hi.length > lo.length) {
-        re.push(hi.split('').reduce((acc, c) => {
-            return acc + `[${acc.length === 0 ? 1 : 0}-${c}]`;
-        }, ''));
-        hi = '9'.repeat(hi.length - 1);
-    }
-    let i = 0;
-    re.push(lo.split('').reduce((acc, c) => {
-        return acc + `[${c}-${hi[i++]||c}]`;
-    }, ''));
-
-    return `(?:${re.map(s => `(?:${s})`).join('|')})`;
-}
-
-
 function createSchema(container, sequence, frames) {
-    let i = 0;
-    let j = 0;
-    let props = {};
-    let framePattern = new RegExp(/^exp(?:-\w+)+$/);
-
-    function _parse(frame) {
-        if (framePattern.test(frame.kind)) {
-            props[`^${j}\\-${escapeRegExp(sequence[i])}(\\-\\d+)?$`] = container.lookup(`component:${frame.kind}`).meta.data;
-        }
-        else if(frame.kind === 'block') {
-            frame.options.forEach(f => _parse(f));
-        }
-        else if(frame.kind === 'choice' && (frame.sampler || 'random') === 'random') {
-            props[`^${j}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
-                $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
-            };
-        }
-        else if(frame.kind === 'choice') {
+    var setProperty = function(schema, frameId, frame) {
+	var component = container.lookup(`component:${frame.kind}`);
+	schema[`^(?:\\d\\-)+${escapeRegExp(frameId)}(\\-\\d+)?$`] = component.meta.data;
+    };
+    var schema = {};
+    Object.keys(frames).forEach(frameId => {
+	var frame = frames[frameId];
+	if (frame.kind === 'choice' || frame.kind === 'block') {
 	    if (frame.options) {
-		props[`^${regexRange(j, j+=(frame.options.length-1))}\\-(?:${frame.options.map(id => `(?:${escapeRegExp(id)})`).join('|')})$`] = {
-                    $oneOf: frame.options.map(f => container.lookup(`component:${frames[f].kind}`).meta.data)
-		};
+		frame.options.forEach(opt => {
+		    setProperty(schema, opt, frames[opt]);
+		});
 	    }
 	    else {
-		// TODO?
+		// TODO
 	    }
-        }
-        else {
-            throw `Experiment definition specifies an unknown kind of frame: ${frame.kind}`;
-        }
-    }
+	}
+	else {
+	    setProperty(schema, frameId, frame);
+	}
+    });
 
-    for(; i < sequence.length; i++, j++) {
-        _parse(frames[sequence[i]]);
-    }
-
-    return props;
+    return schema;
 }
 
 
@@ -72,8 +39,13 @@ export default Ember.Controller.extend({
     breadCrumb: 'Edit',
     toast: Ember.inject.service('toast'),
 
-    experimentJson: Ember.computed('model', function () {
-        return JSON.stringify(this.get('model.structure'), null, 4);
+    experimentJson: Ember.computed('model', {
+	get: function () {
+            return JSON.stringify(this.get('model.structure'), null, 4);
+	},
+	set: function () {
+	    return JSON.stringify(this.get('model.structure'), null, 4);
+	}
     }),
 
     actions: {
@@ -109,6 +81,11 @@ export default Ember.Controller.extend({
                 .then(() => this.toast.success('Experiment updated'))
                 .catch(() => this.toast.error('The server refused to save the data, likely due to a schema error'));
 
-        }
+        },
+	discard() {
+	    this.get('model').rollbackAttributes();
+	    this.set('experimentJson', null);
+	    this.transitionToRoute('experiments.info');
+	}
     }
 });
