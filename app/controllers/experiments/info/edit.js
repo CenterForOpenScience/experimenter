@@ -13,9 +13,16 @@ function escapeRegExp(str) {
 }
 
 function createSchema(container, sequence, frames) {
-    var setProperty = function(schema, frameId, frame) {
-        var component = container.lookup(`component:${frame.kind}`);
-        schema[`^(?:\\d\\-)+${escapeRegExp(frameId)}(\\-\\d+)?$`] = component.meta.data;
+    var setProperty = function(schema, frameId, frame, dataSchema) {
+	var match;
+	if(!dataSchema) {
+            var component = container.lookup(`component:${frame.kind}`);
+	    match = component.meta.data;
+	}
+	else {
+	    match = dataSchema;
+	}
+	schema[`^(?:\\d+\\-)+${escapeRegExp(frameId)}(\\-\\d+)?$`] = match;
     };
     var schema = {};
     Object.keys(frames).forEach(frameId => {
@@ -26,8 +33,16 @@ function createSchema(container, sequence, frames) {
                     setProperty(schema, opt, frames[opt]);
                 });
             } else {
-                // TODO
+                setProperty(schema, frameId, null, {
+		    '$oneOf': [
+			'object',
+			'string',
+			'number',
+			'array'
+		    ]
+		});
             }
+
         } else {
             setProperty(schema, frameId, frame);
         }
