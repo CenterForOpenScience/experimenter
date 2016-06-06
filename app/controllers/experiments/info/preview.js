@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
-import WarnOnExitControllerMixin from 'exp-player/mixins/warn-on-exit-controller';
-
-export default Ember.Controller.extend(WarnOnExitControllerMixin, {
+export default Ember.Controller.extend({
     breadCrumb: 'Preview',
     experiment: null,
     session: null,
