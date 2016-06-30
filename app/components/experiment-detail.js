@@ -1,14 +1,12 @@
 import Ember from 'ember';
 
-import {permissionCreateForAccounts} from 'exp-models/utils/constants';
-
-
 export default Ember.Component.extend({
     experiment: null,
     sessions: null,
     editing: false,
     toast: Ember.inject.service(),
     store: Ember.inject.service(),
+    namespaceConfig: Ember.inject.service(),
     deleting: false,
     showDeleteWarning: false,
     actions: {
@@ -35,7 +33,9 @@ export default Ember.Component.extend({
             exp.set('state', exp.ACTIVE);
             exp.save().then(() => {
                 return this.get('store').findRecord('collection', exp.get('sessionCollectionId')).then((collection) => {
-                    collection.set('permissions', permissionCreateForAccounts);
+                    collection.set('permissions', {
+			[`jam-${this.get('namespaceConfig').get('namespace')}:accounts-*`] : 'CREATE'
+		    });
                     return collection.save();
                 }).then(() => this.get('toast.info')('Experiment started successfully.'));
             });
