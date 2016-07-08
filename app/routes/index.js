@@ -3,6 +3,6 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Em.Route.extend(AuthenticatedRouteMixin, {
     beforeModel() {
-	this.transitionTo('experiments');
+        this.transitionTo('experiments');
     }
 });

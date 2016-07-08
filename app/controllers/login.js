@@ -12,9 +12,9 @@ export default Ember.Controller.extend({
             });
         },
         selectNamespace() {
-	    var ns = this.get('selectedNamespace');
-	    this.get('namespaceConfig').set('namespace', ns);
-	    this.transitionToRoute('experiments');
+            var ns = this.get('selectedNamespace');
+            this.get('namespaceConfig').set('namespace', ns);
+            this.transitionToRoute('experiments');
         }
     }
 });

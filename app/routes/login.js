@@ -16,6 +16,6 @@ export default Em.Route.extend(UnauthenticatedRouteMixin, {
         return this.get('session').authenticate('authenticator:jam-osf-jwt', hash.access_token, hash.expires_in);
     },
     model() {
-	return this.store.findAll('namespace');
+        return this.store.findAll('namespace');
     }
 });
