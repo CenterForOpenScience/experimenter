@@ -6,9 +6,11 @@
         {{bs-form-element controlType="text" label="Name" property="name" autofocus=true value=newTitle}}
       </div>
     {{/bs-modal-body}}
-   {{#bs-modal-footer as |footer| }}
-      {{#bs-button click=(action 'close' target=footer)}}Cancel{{/bs-button}}
-      {{#bs-button click=(action 'createExperiment') type="success" disabled=(if (eq (trim newTitle) '') true false) }}Create experiment{{/bs-button}}
+    {{#bs-modal-footer as |footer| }}
+	<div class="btn-group">
+	    {{#bs-button click=(action 'close' target=footer)}}Cancel{{/bs-button}}
+	    {{#bs-button click=(action 'createExperiment') type="success" disabled=(if (eq (trim newTitle) '') true false) }}Create experiment{{/bs-button}}
+	</div>
     {{/bs-modal-footer}}
 {{/bs-modal}}
 
