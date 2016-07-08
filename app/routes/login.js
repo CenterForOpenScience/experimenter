@@ -13,11 +13,9 @@ export default Em.Route.extend(UnauthenticatedRouteMixin, {
         if (!hash.access_token) {
             return null;
         }
-        return this.get('session').authenticate('authenticator:jam-osf-jwt', hash.access_token, hash.expires_in)
-            .then(() => this.transitionTo('experiments'))
-            .catch((/*reason*/) => {
-                // TODO: Pick failure reason off the response for custom messages
-                this.set('error', 'no_permissions');
-            });
+        return this.get('session').authenticate('authenticator:jam-osf-jwt', hash.access_token, hash.expires_in);
+    },
+    model() {
+        return this.store.findAll('namespace');
     }
 });

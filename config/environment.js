@@ -26,19 +26,17 @@ module.exports = function(environment) {
 
     if (environment === 'development') {
         ENV.JAMDB = {
-            url: process.env.JAMDB_URL  || 'http://localhost:1212',
-            namespace: 'experimenter',
+            url: process.env.JAMDB_URL || 'http://localhost:1212',
+            namespace: process.env.JAMDB_NAMESPACE,
             authorizer: 'osf-jwt'
         };
-    }
-    else if (environment === 'staging' || environment === 'production') {
+    } else if (environment === 'staging' || environment === 'production') {
         ENV.JAMDB = {
             url: process.env.JAMDB_URL,
             namespace: process.env.JAMDB_NAMESPACE,
             authorizer: 'osf-jwt'
         };
-    }
-    else if (environment === 'test') {
+    } else if (environment === 'test') {
         ENV.JAMDB = {
             url: '',
             namespace: 'test',
