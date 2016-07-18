@@ -1,10 +1,9 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-import ENV from 'experimenter/config/environment';
-
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+    namespaceConfig: Ember.inject.service(),
     model() {
-        return this.store.find('namespace', ENV.JAMDB.namespace);
+        return this.store.find('namespace', this.get('namespaceConfig').get('namespace'));
     }
 });
