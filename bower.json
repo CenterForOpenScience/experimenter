@@ -18,7 +18,7 @@
     "bcryptjs": "^2.3.0",
     "file-saver.js": "^1.20150507.2",
     "fontawesome": "~4.5.0",
-    "ace-builds": "^1.2.3",
+    "ace-builds": "1.1.7",
     "jquery": "^2.1.4",
     "swfobject": "*",
     "lodash": "~4.6.1"
@@ -26,7 +26,6 @@
   "resolutions": {
     "bootstrap": ">= 3.3.5",
     "moment": ">=2.11.1",
-    "ace-builds": "1.2.3",
     "jquery": "^2.1.4",
     "lodash": "~4.6.1"
   }
