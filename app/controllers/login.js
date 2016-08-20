@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
         },
         selectNamespace() {
             var ns = this.get('selectedNamespace');
-            this.get('namespaceConfig').set('namespace', ns);
+            this.get('namespaceConfig').setNamespace(ns);
             this.transitionToRoute('experiments');
         }
     }
