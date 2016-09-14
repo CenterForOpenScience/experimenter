@@ -30,7 +30,11 @@ export default Ember.Component.extend({
     },
 
     _generate(batchSize, tag) {
-        return Array(batchSize).fill().map(() => `${makeId(5)}${tag ? `-${tag}` : ''}`);
+        var ret = [];
+        for (let i = 0; i < batchSize; i++) {
+            ret.push(`${makeId(5)}${tag ? `-${tag}` : ''}`);
+        }
+        return ret;
     },
     generatedParticipants: Ember.computed('batchSize', 'tag', function() {
         var tag = this.get('tag');
