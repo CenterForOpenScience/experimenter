@@ -5,14 +5,19 @@ import Ember from 'ember';
  * @submodule components
   */
 
-// Flatten a nested object into a single level, with dotted paths for keys
-function squash(obj, prefix) {
-    var ret = {};
+// Make sure that ember-data objects are serialized to a JS object
+function serializeItem(obj) {
     if (obj.serialize) {
         var serialized = obj.serialize();
         obj = serialized.data.attributes;
     }
-    Ember.$.each(Object.keys(obj), (_, key) => {
+    return obj;
+}
+
+// Flatten a nested object into a single level, with dotted paths for keys
+function squash(obj, prefix) {
+    var ret = {};
+    Object.keys(obj).forEach((key) => {
         var value = Ember.get(obj, key);
         if (value && value.toJSON) {
             value = value.toJSON();
@@ -40,11 +45,13 @@ export default Ember.Component.extend({
 
     /**
      * Mapping function to transform a given (squashed) record. Should accept a single argument,
-     *  a flattened object of {dotted.key: value} pairs.
+     *  a (possibly nested) JS object of fields
      * @property {function} mappingFunction
-     * @default noop
+     * @default Return the item unchanged
      */
-    mappingFunction: null,
+    mappingFunction(item) {
+        return item;
+    },
 
     dataFormat: 'JSON',
     // Recognized data formats. Hash of form {displayValue: Extension} items
@@ -59,16 +66,13 @@ export default Ember.Component.extend({
         if (data.toArray) {
             data = data.toArray();
         }
-        var dataArray = [];
-        data.forEach((item /*, index, array*/ ) => { // Ensure that mapping function doesn't treat *index* as the optional recursive *prefix* parameter
-            dataArray.push(squash.apply(this, [item]));
-        });
+        let dataArray = data.map(serializeItem);
 
         var dataFormat = this.get('dataFormat');
-        var mappingFunction = this.get('mappingFunction') || ((x) => x);
-        var mapped;
+        var mappingFunction = this.get('mappingFunction');
+
         if (Ember.isPresent(dataArray)) {
-            mapped = dataArray.map(mappingFunction.bind(this));
+            let mapped = dataArray.map(mappingFunction);
             return this.convertToFormat(mapped, dataFormat);
         } else {
             return null;
@@ -80,10 +84,13 @@ export default Ember.Component.extend({
     },
     _convertToTSV(dataArray) {
         var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
+        // Flatten the dictionary keys for readable column headers
+        let squashed = dataArray.map((item => squash(item)));
 
-        var fields = Object.keys(array[0]);
+        var fields = Object.keys(squashed[0]);
         var tsv = [fields.join('\t')];
-        Ember.$.each(array, function(_, item) {
+
+        squashed.forEach((item) => {
             var line = [];
             fields.forEach(function(field) {
                 line.push(JSON.stringify(item[field]));
@@ -96,6 +103,10 @@ export default Ember.Component.extend({
     _convertToISP(dataArray) {
         // ISP-specific TSV file format
 
+        // First custom field mapping...
+
+        // Then serialize to TSV
+        return this._convertToTSV(dataArray);
     },
     convertToFormat(dataArray, format) {
         if (format === 'JSON') {
