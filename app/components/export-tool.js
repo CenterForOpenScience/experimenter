@@ -47,10 +47,13 @@ export default Ember.Component.extend({
     mappingFunction: null,
 
     dataFormat: 'JSON',
-    dataFormats: [
-        'JSON',
-        'TSV'
-    ],
+    // Recognized data formats. Hash of form {displayValue: Extension} items
+    dataFormats: {
+        JSON: 'JSON',
+        TSV: 'TSV',
+        'TSV (for ISP)': 'TSV',
+    },
+
     processedData: Ember.computed('data', 'dataFormat', function() {
         var data = this.get('data') || [];
         if (data.toArray) {
@@ -90,26 +93,32 @@ export default Ember.Component.extend({
         tsv = tsv.join('\r\n');
         return tsv;
     },
+    _convertToISP(dataArray) {
+        // ISP-specific TSV file format
+
+    },
     convertToFormat(dataArray, format) {
         if (format === 'JSON') {
-            return _convertToJSON(dataArray);
+            return this._convertToJSON(dataArray);
         } else if (format === 'TSV') {
-            return _convertToTSV(dataArray);
+            return this._convertToTSV(dataArray);
+        } else if (format === 'TSV (for ISP)') {
+            return this._convertToISP(dataArray);
         } else {
             throw 'Unrecognized file format specified';
         }
     },
     actions: {
         downloadFile() {
-            var blob = new window.Blob([this.get('processedData')], {
+            let blob = new window.Blob([this.get('processedData')], {
                 type: 'text/plain;charset=utf-8'
             });
-            var extension = this.get('dataFormat').toLowerCase();
+            let format = this.get('dataFormat');
+            let extension = this.get('dataFormats')[format].toLowerCase();
             window.saveAs(blob, `data.${extension}`);
         },
         selectDataFormat(dataFormat) {
             this.set('dataFormat', dataFormat);
         }
     }
-
 });
