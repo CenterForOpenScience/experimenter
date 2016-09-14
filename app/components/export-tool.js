@@ -1,5 +1,11 @@
 import Ember from 'ember';
 
+/**
+ * @module experimenter
+ * @submodule components
+  */
+
+// Flatten a nested object into a single level, with dotted paths for keys
 function squash(obj, prefix) {
     var ret = {};
     if (obj.serialize) {
@@ -21,33 +27,48 @@ function squash(obj, prefix) {
     return ret;
 }
 
+
+/**
+ * Export tool component: serializes records into one of a number of possible output formats
+ * @class export-tool
+ */
 export default Ember.Component.extend({
-    attributeBindings: ['data', 'mappingFunction'],
+    /**
+     * @property data The data to be serialized
+     */
+    data: null,
+
+    /**
+     * Mapping function to transform a given (squashed) record. Should accept a single argument,
+     *  a flattened object of {dotted.key: value} pairs.
+     * @property {function} mappingFunction
+     * @default noop
+     */
+    mappingFunction: null,
+
     dataFormat: 'JSON',
     dataFormats: [
         'JSON',
         'TSV'
     ],
-    processedData: Ember.computed('data', 'dataFormat', {
-        get() {
-            var data = this.get('data') || [];
-            if (data.toArray) {
-                data = data.toArray();
-            }
-            var dataArray = [];
-            data.forEach((item /*, index, array*/ ) => { // Ensure that mapping function doesn't treat *index* as the optional recursive *prefix* parameter
-                dataArray.push(squash.apply(this, [item]));
-            });
+    processedData: Ember.computed('data', 'dataFormat', function() {
+        var data = this.get('data') || [];
+        if (data.toArray) {
+            data = data.toArray();
+        }
+        var dataArray = [];
+        data.forEach((item /*, index, array*/ ) => { // Ensure that mapping function doesn't treat *index* as the optional recursive *prefix* parameter
+            dataArray.push(squash.apply(this, [item]));
+        });
 
-            var dataFormat = this.get('dataFormat');
-            var mappingFunction = this.get('mappingFunction') || ((x) => x);
-            var mapped;
-            if (Ember.isPresent(dataArray)) {
-                mapped = dataArray.map(mappingFunction.bind(this));
-                return this.convertToFormat(mapped, dataFormat);
-            } else {
-                return null;
-            }
+        var dataFormat = this.get('dataFormat');
+        var mappingFunction = this.get('mappingFunction') || ((x) => x);
+        var mapped;
+        if (Ember.isPresent(dataArray)) {
+            mapped = dataArray.map(mappingFunction.bind(this));
+            return this.convertToFormat(mapped, dataFormat);
+        } else {
+            return null;
         }
     }),
     convertToFormat: function(dataArray, format) {
@@ -72,14 +93,14 @@ export default Ember.Component.extend({
         }
     },
     actions: {
-        downloadFile: function() {
+        downloadFile() {
             var blob = new window.Blob([this.get('processedData')], {
                 type: 'text/plain;charset=utf-8'
             });
             var extension = this.get('dataFormat').toLowerCase();
-            window.saveAs(blob, 'data.' + extension);
+            window.saveAs(blob, `data.${extension}`);
         },
-        selectDataFormat: function(dataFormat) {
+        selectDataFormat(dataFormat) {
             this.set('dataFormat', dataFormat);
         }
     }
