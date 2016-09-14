@@ -1,6 +1,5 @@
 import Ember from 'ember';
 
-
 // h/t: http://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
 function makeId(len) {
     var text = '';
@@ -22,6 +21,7 @@ export default Ember.Component.extend({
     useAsPassword: null,
 
     creating: false,
+    createdCount: 0,
     _creatingPromise: null,
 
     init() {
@@ -39,10 +39,15 @@ export default Ember.Component.extend({
     }),
     actions: {
         createParticipants() {
+            Ember.run(() => {
+                console.log('creating...');
+                this.set('creating', true);
+                this.set('createdCount', 0);
+            });
+
             var tag = this.get('tag');
             var batchSize = parseInt(this.get('batchSize')) || 0;
             var accounts = this._generate(batchSize, tag);
-            this.set('creating', true);
             var store = this.get('store');
 
             var extra = this.get('extra');
@@ -53,19 +58,30 @@ export default Ember.Component.extend({
                 if (item) {
                     password = Ember.get(item, 'value');
                 }
+            } else {
+                password = makeId(10);
             }
-
-            this.set('_creatingPromise', Ember.RSVP.allSettled(
-                accounts.map((a) => {
-                    var attrs = {
-                        id: a,
-                        password: password
-                    };
-                    Ember.merge(attrs, extra);
-                    var acc = store.createRecord('account', attrs);
-                    return acc.save();
-                })
-            ));
+            Ember.run.later(this, () => {
+                this.set('_creatingPromise', Ember.RSVP.allSettled(
+                    accounts.map((aId) => {
+                        var attrs = {
+                            id: aId,
+                            password: password
+                        };
+                        Ember.merge(attrs, extra);
+                        var acc = store.createRecord('account', attrs);
+                        console.log(`Saving ${acc.get('id')}`);
+                        return acc.save().then(() => {
+                            this.incrementProperty('createdCount');
+                            console.log(`Saved ${acc.get('id')}`);
+                        });
+                    })
+                ).then(() => {
+                    Ember.run.later(this, () => {
+                        this.set('creating', false);
+                    }, 100);
+                }));
+            }, 50);
         },
         addExtraField() {
             var next = this.get('nextExtra');

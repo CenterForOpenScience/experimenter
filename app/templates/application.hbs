@@ -14,13 +14,12 @@
                 </div>
                 <br>
                 <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
-                    {{#link-to 'participants' class="fa fa-user increase sub-navigation"}} {{if isExpanded 'Participants'}}{{/link-to}}
-                </div>
-                <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
                     {{#if session.isAuthenticated}}
-                        <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
-                        <br>
                         {{#link-to 'project-settings' class="fa fa-cogs increase sub-navigation"}} {{if isExpanded ' Project Settings'}}{{/link-to}}
+                        <br>
+                            {{#link-to 'participants' class="fa fa-user increase sub-navigation"}} {{if isExpanded 'Participants'}}{{/link-to}}
+                        <br>
+                        <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
                     {{/if}}
                 </div>
             </div>
