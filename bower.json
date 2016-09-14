@@ -1,7 +1,7 @@
 {
   "name": "experimenter",
   "dependencies": {
-    "bootstrap": "3.3.2",
+    "bootstrap": "3.1.1",
     "ember": "2.3.0",
     "ember-cli-shims": "0.1.0",
     "ember-cli-test-loader": "0.2.2",
@@ -24,8 +24,10 @@
     "alpaca": "ade59b36bebb0f2de04aa34a05c44e23281ea17a"
   },
   "resolutions": {
-    "moment": "2.9.0",
     "lodash": "~4.6.1",
-    "handlebars": "3.0.3"
+    "handlebars": "3.0.3",
+    "jquery": "1.11.3",
+    "moment": "2.9.0",
+    "bootstrap": "3.3.2"
   }
 }
