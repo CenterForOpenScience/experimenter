@@ -71,23 +71,30 @@ export default Ember.Component.extend({
             return null;
         }
     }),
-    convertToFormat: function(dataArray, format) {
-        if (format === 'JSON') {
-            return JSON.stringify(dataArray, undefined, 4);
-        } else if (format === 'TSV') {
-            var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
 
-            var fields = Object.keys(array[0]);
-            var tsv = [fields.join('\t')];
-            Ember.$.each(array, function(_, item) {
-                var line = [];
-                fields.forEach(function(field) {
-                    line.push(JSON.stringify(item[field]));
-                });
-                tsv.push(line.join('\t'));
+    _convertToJSON(dataArray) {
+        return JSON.stringify(dataArray, null, 4);
+    },
+    _convertToTSV(dataArray) {
+        var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
+
+        var fields = Object.keys(array[0]);
+        var tsv = [fields.join('\t')];
+        Ember.$.each(array, function(_, item) {
+            var line = [];
+            fields.forEach(function(field) {
+                line.push(JSON.stringify(item[field]));
             });
-            tsv = tsv.join('\r\n');
-            return tsv;
+            tsv.push(line.join('\t'));
+        });
+        tsv = tsv.join('\r\n');
+        return tsv;
+    },
+    convertToFormat(dataArray, format) {
+        if (format === 'JSON') {
+            return _convertToJSON(dataArray);
+        } else if (format === 'TSV') {
+            return _convertToTSV(dataArray);
         } else {
             throw 'Unrecognized file format specified';
         }
