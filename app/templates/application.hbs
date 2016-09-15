@@ -1,38 +1,35 @@
 <div class="container-fluid">
-  {{#if isNotLogin}}
-    <div class="row">
-        <div id="sidebar" class="{{if isExpanded 'menu-expanded col-md-2' 'menu-collapsed col-xs-1'}}">
-          <div class="{{unless isExpanded 'row text-center logo-divider'}}">
-            <a class="fa fa-angle-{{if isExpanded 'left fa-pull-right' 'right'}} fa-2x sub-navigation hidden-sm hidden-xs" {{action "toggleMenu"}}></a>
-          </div>
-          <div class="row text-center {{if isExpanded 'logo-title title-divider' 'logo-divider'}}">
-            <div class="fa fa-flask {{if isExpanded 'fa-2x logo' 'logo-title'}}"></div>
-            {{if isExpanded 'Experimenter'}}
-          </div>
-          <div class="row main-navigation {{unless isExpanded 'text-center'}} {{if (route-matches currentRouteName 'experiments') 'selected'}}">
-            {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}}{{if isExpanded ' Experiments'}} {{/link-to}}
-          </div>
-         <br >
-          <!--
-          <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
-            {{#link-to 'settings' class="fa fa-user increase sub-navigation"}} {{if isExpanded ' My Profile'}}{{/link-to}}
-          </div>
-          -->
-          <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
-            {{#if session.isAuthenticated}}
-              <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
-              <br>
-             {{#link-to 'project-settings' class="fa fa-cogs increase sub-navigation"}} {{if isExpanded ' Project Settings'}}{{/link-to}}
-            {{/if}}
-          </div>
+    {{#if isNotLogin}}
+        <div class="row">
+            <div id="sidebar" class="{{if isExpanded 'menu-expanded col-md-2' 'menu-collapsed col-xs-1'}}">
+                <div class="{{unless isExpanded 'row text-center logo-divider'}}">
+                    <a class="fa fa-angle-{{if isExpanded 'left fa-pull-right' 'right'}} fa-2x sub-navigation hidden-sm hidden-xs" {{action "toggleMenu"}}></a>
+                </div>
+                <div class="row text-center {{if isExpanded 'logo-title title-divider' 'logo-divider'}}">
+                    <div class="fa fa-flask {{if isExpanded 'fa-2x logo' 'logo-title'}}"></div>
+                    {{if isExpanded 'Experimenter'}}
+                </div>
+                <div class="row main-navigation {{unless isExpanded 'text-center'}} {{if (route-matches currentRouteName 'experiments') 'selected'}}">
+                    {{#link-to 'experiments' class="fa fa-th-list increase main-navigation clickable"}}{{if isExpanded ' Experiments'}} {{/link-to}}
+                </div>
+                <br>
+                <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
+                    {{#if session.isAuthenticated}}
+                        {{#link-to 'project-settings' class="fa fa-cogs increase sub-navigation"}} {{if isExpanded ' Project Settings'}}{{/link-to}}
+                        <br>
+                            {{#link-to 'participants' class="fa fa-user increase sub-navigation"}} {{if isExpanded 'Participants'}}{{/link-to}}
+                        <br>
+                        <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="{{if isExpanded 'col-md-10 col-md-offset-2' 'col-xs-11 col-xs-offset-1'}} app-content">
+                <br>
+                <div>{{ bread-crumbs }}</div>
+                {{outlet}}
+            </div>
         </div>
-        <div class="{{if isExpanded 'col-md-10 col-md-offset-2' 'col-xs-11 col-xs-offset-1'}} app-content">
-          <br>
-          <div>{{ bread-crumbs }}</div>
-          {{outlet}}
-        </div>
-    </div>
-  {{else}}
-    {{outlet}}
-  {{/if}}
+    {{else}}
+        {{outlet}}
+    {{/if}}
 </div>

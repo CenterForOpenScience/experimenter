@@ -1,7 +1,7 @@
 {
   "name": "experimenter",
   "dependencies": {
-    "bootstrap": "3.1.1",
+    "bootstrap": "3.3.2",
     "ember": "2.3.0",
     "ember-cli-shims": "0.1.0",
     "ember-cli-test-loader": "0.2.2",
@@ -12,22 +12,21 @@
     "moment": "2.11.1",
     "qunit": "~1.20.0",
     "uri-templates": "~0.1.9",
-    "handlebars": "3.0.3",
     "toastr": "^2.1.2",
     "bcryptjs": "^2.3.0",
     "file-saver.js": "^1.20150507.2",
     "fontawesome": "~4.5.0",
     "ace-builds": "1.1.7",
-    "jquery": "1.11.3",
+    "jquery": ">=1.11.3",
     "swfobject": "*",
     "lodash": "~4.6.1",
-    "alpaca": "ade59b36bebb0f2de04aa34a05c44e23281ea17a"
+    "alpaca": "ade59b36bebb0f2de04aa34a05c44e23281ea17a",
+    "es5-shim": "^4.5.8"
   },
   "resolutions": {
     "lodash": "~4.6.1",
-    "handlebars": "3.0.3",
     "jquery": "1.11.3",
-    "bootstrap": "3.1.1",
+    "bootstrap": "3.3.2",
     "moment": "2.11.1"
   }
 }

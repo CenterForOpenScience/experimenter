@@ -1,0 +1,122 @@
+<div class="row participant-creator">
+    <div class="{{if creating 'block-ui' 'block-ui-hidden'}}">
+        <span class="block-ui-message">
+            Created {{createdCount}} out of {{batchSize}}
+        </span>
+    </div>
+    <div class="col-md-6">
+        <div class="form">
+            <div class="form-group">
+                <label>
+                    Batch size:
+                    <small class="text-muted">
+                        how many participants to create
+                    </small>
+                </label>
+                {{input value=batchSize type="number" class="form-control"}}
+            </div>
+            <div class="form-group">
+                <label>
+                    Tag:
+                </label>
+                <small class="text-muted">
+                    a common tag for this batch of participants
+                </small>
+                {{input value=tag type="text" class="form-control"}}
+            </div>
+            <div class="form-group offset-2">
+                <label>
+                    Additional fields:
+                </label>
+                <small class="text-muted">
+                    extra information for this batch of participants
+                </small>
+                <div class="form-inline">
+                    {{#each extra as |item|}}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label>
+                                        {{item.key}}:
+                                    </label>
+                                    {{input value=item.value placehodler="value"}}
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="text-muted">
+                                        Use as password?
+                                    </label>
+                                    <input name="useAsPassword" onchange={{action (action 'useAsPassword' item.key) value="target.checked"}} type="radio" />
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-sm btn-warning" {{action 'removeExtraField' item.key}}>X</button>
+                                </div>
+                            </div>
+                        </div>
+                    {{else}}
+                        <div class="form-group">
+                            None
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label> Add a field: </label>
+                        {{input value=nextExtra}}
+                    </div>
+                    <button disabled={{if (not nextExtra) true false}} class="btn btn-sm btn-default" {{action 'addExtraField'}}>Add</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <button disabled={{if (not batchSize) true false}} class="btn btn-primary" {{action 'createParticipants'}}>
+                    Create accounts
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <p>
+            <strong>
+                Preview:
+            </strong>
+            <small class="text-muted">
+                showing up to the first ten
+            </small>
+        </p>
+        <div class="preview-table-wrapper">
+            <table class="table table-string preview-table">
+                <thead>
+                    <tr>
+                        <td>
+                            #
+                        </td>
+                        <td>
+                            Participant id
+                        </td>
+                        {{#each extra as |item|}}
+                            <td>
+                                {{item.key}}
+                            </td>
+                        {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each generatedParticipants as |id index|}}
+                        <tr>
+                            <td>
+                                {{index}}
+                            </td>
+                            <td>
+                                {{id}}
+                            </td>
+                            {{#each extra as |item|}}
+                                <td>
+                                    {{item.value}}
+                                </td>
+                            {{/each}}
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
