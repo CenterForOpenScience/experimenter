@@ -17,16 +17,10 @@
     "file-saver.js": "^1.20150507.2",
     "fontawesome": "~4.5.0",
     "ace-builds": "1.1.7",
-    "jquery": "1.11.3",
     "swfobject": "*",
-    "lodash": "~4.6.1",
-    "alpaca": "ade59b36bebb0f2de04aa34a05c44e23281ea17a",
     "es5-shim": "^4.5.8"
   },
   "resolutions": {
-    "lodash": "~4.6.1",
-    "jquery": "1.11.3",
-    "bootstrap": "3.3.2",
     "moment": "2.9.0"
   }
 }
