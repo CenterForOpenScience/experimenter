@@ -106,6 +106,13 @@ export default Ember.Component.extend({
         // First custom field mapping...
 
         // Then serialize to TSV
+        dataArray = dataArray.map((record) => {
+            let newRecord = {};
+            for (let frameId of Object.keys(record.expData)) {
+                newRecord[frameId] = record.expData[frameId].responses || {};
+            }
+            return newRecord;
+        });
         return this._convertToTSV(dataArray);
     },
     convertToFormat(dataArray, format) {
