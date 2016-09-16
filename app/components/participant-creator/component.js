@@ -21,7 +21,7 @@ export default Ember.Component.extend({
     useAsPassword: null,
 
     creating: false,
-    createdCount: 0,
+    createdAccounts: [],
     _creatingPromise: null,
 
     init() {
@@ -41,12 +41,20 @@ export default Ember.Component.extend({
         var batchSize = Math.min(parseInt(this.get('batchSize')) || 0, 10);
         return this._generate(batchSize, tag);
     }),
+
+    createdAccountsCSV: Ember.computed('createdAccounts', function() {
+        var keys = ['id'].concat(this.get('extra').map(e => `extra.${e.key}`));
+        return keys.join(',') + '\n' + this.get('createdAccounts').map((a) => {
+            var props = a.getProperties(keys);
+            return keys.map(k => props[k]).join(',');
+        }).join('\n');
+    }),
     actions: {
         createParticipants() {
             Ember.run(() => {
                 console.log('creating...');
                 this.set('creating', true);
-                this.set('createdCount', 0);
+                this.set('createdAccounts', []);
             });
 
             var tag = this.get('tag');
@@ -54,15 +62,16 @@ export default Ember.Component.extend({
             var accounts = this._generate(batchSize, tag);
             var store = this.get('store');
 
-            var extra = this.get('extra');
+            var extra = {};
             var useAsPassword = this.get('useAsPassword');
             var password = '';
-            if (useAsPassword) {
-                var item = extra.filter((a) => a.key === useAsPassword)[0];
-                if (item) {
+            this.get('extra').forEach(item => {
+                if (item.key === useAsPassword) {
                     password = Ember.get(item, 'value');
                 }
-            } else {
+                extra[item.key] = item.value;
+            });
+            if (!useAsPassword) {
                 password = makeId(10);
             }
             Ember.run.later(this, () => {
@@ -70,19 +79,20 @@ export default Ember.Component.extend({
                     accounts.map((aId) => {
                         var attrs = {
                             id: aId,
-                            password: password
+                            password: password,
+                            extra: extra
                         };
-                        Ember.merge(attrs, extra);
                         var acc = store.createRecord('account', attrs);
                         console.log(`Saving ${acc.get('id')}`);
                         return acc.save().then(() => {
-                            this.incrementProperty('createdCount');
+                            this.get('createdAccounts').pushObject(acc);
                             console.log(`Saved ${acc.get('id')}`);
                         });
                     })
                 ).then(() => {
                     Ember.run.later(this, () => {
                         this.set('creating', false);
+                        this.send('downloadCSV');
                     }, 100);
                 }));
             }, 50);
@@ -101,10 +111,16 @@ export default Ember.Component.extend({
         },
         useAsPassword(field, checked) {
             if (checked) {
-                this.set('useAsPassword', checked);
+                this.set('useAsPassword', field);
             } else {
                 this.set('useAsPassword', null);
             }
+        },
+        downloadCSV: function() {
+            var blob = new window.Blob([this.get('createdAccountsCSV')], {
+                type: 'text/plain;charset=utf-8'
+            });
+            window.saveAs(blob, 'participants.csv');
         }
     }
 });
