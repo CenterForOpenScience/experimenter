@@ -1,11 +1,5 @@
 import Ember from 'ember';
-import {
-    SESSIONSCHEMA
-} from 'experimenter/const';
-
-const {
-    getOwner
-} = Ember;
+import { SESSIONSCHEMA } from 'experimenter/const';
 
 //https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
 function escapeRegExp(str) {
@@ -13,16 +7,15 @@ function escapeRegExp(str) {
 }
 
 function createSchema(container, sequence, frames) {
-    var setProperty = function(schema, frameId, frame, dataSchema) {
-	var match;
-	if(!dataSchema) {
+    var setProperty = function (schema, frameId, frame, dataSchema) {
+        var match;
+        if (!dataSchema) {
             var component = container.lookup(`component:${frame.kind}`);
-	    match = component.meta.data;
-	}
-	else {
-	    match = dataSchema;
-	}
-	schema[`^(?:\\d+\\-)+${escapeRegExp(frameId)}(\\-\\d+)?$`] = match;
+            match = component.meta.data;
+        } else {
+            match = dataSchema;
+        }
+        schema[`^(?:\\d+\\-)+${escapeRegExp(frameId)}(\\-\\d+)?$`] = match;
     };
     var schema = {};
     Object.keys(frames).forEach(frameId => {
@@ -34,15 +27,14 @@ function createSchema(container, sequence, frames) {
                 });
             } else {
                 setProperty(schema, frameId, null, {
-		    '$oneOf': [
-			'object',
-			'string',
-			'number',
-			'array'
-		    ]
-		});
+                    '$oneOf': [
+                        'object',
+                        'string',
+                        'number',
+                        'array'
+                    ]
+                });
             }
-
         } else {
             setProperty(schema, frameId, frame);
         }
@@ -57,10 +49,10 @@ export default Ember.Controller.extend({
     toast: Ember.inject.service('toast'),
 
     experimentJson: Ember.computed('model', {
-        get: function() {
+        get: function () {
             return JSON.stringify(this.get('model.structure'), null, 4);
         },
-        set: function() {
+        set: function () {
             return JSON.stringify(this.get('model.structure'), null, 4);
         }
     }),
@@ -81,7 +73,7 @@ export default Ember.Controller.extend({
             try {
                 schema.schema.properties.expData = {
                     type: 'object',
-                    patternProperties: createSchema(getOwner(this), parsed.sequence, parsed.frames),
+                    patternProperties: createSchema(Ember.getOwner(this), parsed.sequence, parsed.frames),
                     additionalProperties: false
                 };
             } catch (e) {
