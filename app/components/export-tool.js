@@ -83,7 +83,6 @@ export default Ember.Component.extend({
         return JSON.stringify(dataArray, null, 4);
     },
     _convertToTSV(dataArray) {
-        var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
         // Flatten the dictionary keys for readable column headers
         let squashed = dataArray.map((item => squash(item)));
 
