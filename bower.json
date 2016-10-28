@@ -18,7 +18,8 @@
     "fontawesome": "~4.5.0",
     "ace-builds": "1.1.7",
     "swfobject": "*",
-    "es5-shim": "^4.5.8"
+    "es5-shim": "^4.5.8",
+    "raven-js": "~3.3"
   },
   "resolutions": {
     "moment": "2.9.0"

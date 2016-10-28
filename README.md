@@ -50,9 +50,12 @@ and push the changes like usual.
 To login via OSF:
 * create .env file in top directory
 * in .env file include:
-  * OSF_CLIENT_ID="\<client ID for staging account\>"
-  * OSF_SCOPE="osf.users.all_read"
-  * OSF_URL="https://staging-accounts.osf.io"
+```bash
+OSF_CLIENT_ID="\<client ID for staging account\>"
+OSF_SCOPE="osf.users.all_read"
+OSF_URL="https://staging-accounts.osf.io"
+SENTRY_DSN=""
+```
 
 First:
 * make sure jamdb is running, see: https://github.com/CenterForOpenScience/jamdb
