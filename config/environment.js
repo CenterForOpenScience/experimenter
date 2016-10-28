@@ -22,6 +22,12 @@ module.exports = function(environment) {
         'ember-simple-auth': {
             authenticationRoute: 'login'
         },
+
+        sentry: {
+            dsn: process.env.SENTRY_DSN || '',
+            cdn: 'https://cdn.ravenjs.com/3.5.1/ember/raven.min.js'
+        },
+
         APP: {}
     };
 
