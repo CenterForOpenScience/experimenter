@@ -1,7 +1,7 @@
 /* jshint node: true */
 require('dotenv').config();
 
-module.exports = function(environment) {
+module.exports = function (environment) {
     var ENV = {
         OSF: {
             clientId: process.env.OSF_CLIENT_ID,
@@ -11,7 +11,7 @@ module.exports = function(environment) {
         },
         modulePrefix: 'experimenter',
         environment: environment,
-        baseURL: '/',
+        rootURL: '/',
         locationType: 'auto',
         EmberENV: {
             FEATURES: {
@@ -22,6 +22,12 @@ module.exports = function(environment) {
         'ember-simple-auth': {
             authenticationRoute: 'login'
         },
+
+        sentry: {
+            dsn: process.env.SENTRY_DSN || '',
+            cdn: 'https://cdn.ravenjs.com/3.5.1/ember/raven.min.js'
+        },
+
         APP: {}
     };
 
@@ -45,7 +51,6 @@ module.exports = function(environment) {
         };
 
         // Testem prefers this...
-        ENV.baseURL = '/';
         ENV.locationType = 'none';
 
         // keep test console output quieter
@@ -53,6 +58,10 @@ module.exports = function(environment) {
         ENV.APP.LOG_VIEW_LOOKUPS = false;
 
         ENV.APP.rootElement = '#ember-testing';
+    }
+
+    if (environment === 'production') {
+
     }
 
     return ENV;
