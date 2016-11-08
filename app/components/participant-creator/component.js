@@ -38,10 +38,9 @@ export default Ember.Component.extend({
         }
         return ret;
     },
-    generatedParticipants: Ember.computed('batchSize', 'tag', function() {
+    exampleId: Ember.computed('tag', function() {
         var tag = this.get('tag');
-        var batchSize = Math.min(parseInt(this.get('batchSize')) || 0, 10);
-        return this._generate(batchSize, tag);
+        return `12345${tag ? `-${tag}` : ''}`
     }),
 
     createdAccountsCSV: Ember.computed('createdAccounts', function() {

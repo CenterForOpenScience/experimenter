@@ -70,19 +70,13 @@
     <div class="col-md-4">
         <p>
             <strong>
-                Preview:
+                Example:
             </strong>
-            <small class="text-muted">
-                showing up to the first ten
-            </small>
         </p>
-        <div class="preview-table-wrapper">
+        <div>
             <table class="table table-string preview-table">
                 <thead>
                     <tr>
-                        <td>
-                            #
-                        </td>
                         <td>
                             Participant ID
                         </td>
@@ -97,24 +91,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each generatedParticipants as |id index|}}
-                        <tr>
+                    <tr>
+                        <td>
+                            {{exampleId}}
+                        </td>
+                        <td>
+                            {{studyId}}
+                        </td>
+                        {{#each extra as |item|}}
                             <td>
-                                {{index}}
+                                {{item.value}}
                             </td>
-                            <td>
-                                {{id}}
-                            </td>
-                            <td>
-                                {{studyId}}
-                            </td>
-                            {{#each extra as |item|}}
-                                <td>
-                                    {{item.value}}
-                                </td>
-                            {{/each}}
-                        </tr>
-                    {{/each}}
+                        {{/each}}
+                    </tr>
                 </tbody>
             </table>
         </div>
