@@ -16,9 +16,9 @@ export default Ember.Component.extend({
 
     batchSize: 1,
     tag: null,
+    studyId: null,
     extra: null,
     nextExtra: '',
-    useAsPassword: null,
 
     creating: false,
     createdAccounts: [],
@@ -43,7 +43,7 @@ export default Ember.Component.extend({
     }),
 
     createdAccountsCSV: Ember.computed('createdAccounts', function() {
-        var keys = ['id'].concat(this.get('extra').map(e => `extra.${e.key}`));
+        var keys = ['id', 'extra.studyId'].concat(this.get('extra').map(e => `extra.${e.key}`));
         return keys.join(',') + '\n' + this.get('createdAccounts').map((a) => {
             var props = a.getProperties(keys);
             return keys.map(k => props[k]).join(',');
@@ -63,23 +63,17 @@ export default Ember.Component.extend({
             var store = this.get('store');
 
             var extra = {};
-            var useAsPassword = this.get('useAsPassword');
-            var password = '';
+            extra['studyId'] = this.get('studyId');
             this.get('extra').forEach(item => {
-                if (item.key === useAsPassword) {
-                    password = Ember.get(item, 'value');
-                }
                 extra[item.key] = item.value;
             });
-            if (!useAsPassword) {
-                password = makeId(10);
-            }
+
             Ember.run.later(this, () => {
                 this.set('_creatingPromise', Ember.RSVP.allSettled(
                     accounts.map((aId) => {
                         var attrs = {
                             id: aId,
-                            password: password,
+                            password: this.get('studyId'),
                             extra: extra
                         };
                         var acc = store.createRecord('account', attrs);
@@ -108,13 +102,6 @@ export default Ember.Component.extend({
         removeExtraField(field) {
             var extra = this.get('extra');
             this.set('extra', extra.filter((item) => item.key !== field));
-        },
-        useAsPassword(field, checked) {
-            if (checked) {
-                this.set('useAsPassword', field);
-            } else {
-                this.set('useAsPassword', null);
-            }
         },
         downloadCSV: function() {
             var blob = new window.Blob([this.get('createdAccountsCSV')], {

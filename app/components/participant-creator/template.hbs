@@ -24,6 +24,12 @@
                 </small>
                 {{input value=tag type="text" class="form-control"}}
             </div>
+            <div class="form-group">
+                <label>
+                    Study Id:
+                </label>
+                {{input value=studyId type="text" class="form-control"}}
+            </div>
             <div class="form-group offset-2">
                 <label>
                     Additional fields:
@@ -31,39 +37,27 @@
                 <small class="text-muted">
                     extra information for this batch of participants
                 </small>
-                <div class="form-inline">
                     {{#each extra as |item|}}
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-11">
                                     <label>
                                         {{item.key}}:
                                     </label>
                                     {{input value=item.value placehodler="value"}}
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="text-muted">
-                                        Use as password?
-                                    </label>
-                                    <input name="useAsPassword" onchange={{action (action 'useAsPassword' item.key) value="target.checked"}} type="radio" />
-                                </div>
                                 <div class="col-md-1">
-                                    <button class="btn btn-sm btn-warning" {{action 'removeExtraField' item.key}}>X</button>
+                                    <button class="btn btn-sm btn-danger" {{action 'removeExtraField' item.key}}>X</button>
                                 </div>
                             </div>
                         </div>
-                    {{else}}
-                        <div class="form-group">
-                            None
-                        </div>
                     {{/each}}
-                </div>
                 <div class="form-inline">
                     <div class="form-group">
                         <label> Add a field: </label>
                         {{input value=nextExtra}}
                     </div>
-                    <button disabled={{if (not nextExtra) true false}} class="btn btn-sm btn-default" {{action 'addExtraField'}}>Add</button>
+                    <button disabled={{if (not nextExtra) true false}} class="btn btn-sm btn-success" {{action 'addExtraField'}}>Add</button>
                 </div>
             </div>
             <div class="form-group">
@@ -92,6 +86,9 @@
                         <td>
                             Participant id
                         </td>
+                        <td>
+                            Study id
+                        </td>
                         {{#each extra as |item|}}
                             <td>
                                 {{item.key}}
@@ -107,6 +104,9 @@
                             </td>
                             <td>
                                 {{id}}
+                            </td>
+                            <td>
+                                {{studyId}}
                             </td>
                             {{#each extra as |item|}}
                                 <td>
