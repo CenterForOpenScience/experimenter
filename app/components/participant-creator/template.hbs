@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label>
-                    Study Id:
+                    Study ID:
                 </label>
                 {{input value=studyId type="text" class="form-control"}}
             </div>
@@ -84,10 +84,10 @@
                             #
                         </td>
                         <td>
-                            Participant id
+                            Participant ID
                         </td>
                         <td>
-                            Study id
+                            Study ID
                         </td>
                         {{#each extra as |item|}}
                             <td>
@@ -120,3 +120,9 @@
         </div>
     </div>
 </div>
+
+{{#if invalidStudyId}}
+  {{#bs-modal title="Study ID Required" closedAction=(action 'toggleInvalidStudyId')}}
+    {{#bs-modal-body}}Please enter a Study ID for this batch of participants.{{/bs-modal-body}}
+  {{/bs-modal}}
+{{/if}}

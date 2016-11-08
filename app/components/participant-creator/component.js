@@ -19,6 +19,7 @@ export default Ember.Component.extend({
     studyId: null,
     extra: null,
     nextExtra: '',
+    invalidStudyId: false,
 
     creating: false,
     createdAccounts: [],
@@ -63,7 +64,13 @@ export default Ember.Component.extend({
             var store = this.get('store');
 
             var extra = {};
-            extra['studyId'] = this.get('studyId');
+            var studyId = this.get('studyId');
+            if (!studyId || !studyId.trim()) {
+                this.set('invalidStudyId', true);
+                this.set('creating', false);
+                return;
+            }
+            extra['studyId'] = studyId;
             this.get('extra').forEach(item => {
                 extra[item.key] = item.value;
             });
@@ -73,7 +80,7 @@ export default Ember.Component.extend({
                     accounts.map((aId) => {
                         var attrs = {
                             id: aId,
-                            password: this.get('studyId'),
+                            password: studyId,
                             extra: extra
                         };
                         var acc = store.createRecord('account', attrs);
@@ -108,6 +115,9 @@ export default Ember.Component.extend({
                 type: 'text/plain;charset=utf-8'
             });
             window.saveAs(blob, 'participants.csv');
+        },
+        toggleInvalidStudyId: function() {
+            this.toggleProperty('invalidStudyId');
         }
     }
 });
