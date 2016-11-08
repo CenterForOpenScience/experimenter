@@ -44,7 +44,7 @@
                                     <label>
                                         {{item.key}}:
                                     </label>
-                                    {{input value=item.value placehodler="value"}}
+                                    {{input class="form-control" value=item.value placehodler="value"}}
                                 </div>
                                 <div class="col-md-1">
                                     <button class="btn btn-sm btn-danger" {{action 'removeExtraField' item.key}}>X</button>
@@ -55,7 +55,7 @@
                 <div class="form-inline">
                     <div class="form-group">
                         <label> Add a field: </label>
-                        {{input value=nextExtra}}
+                        {{input class="form-control" value=nextExtra}}
                     </div>
                     <button disabled={{if (not nextExtra) true false}} class="btn btn-sm btn-success" {{action 'addExtraField'}}>Add</button>
                 </div>
@@ -124,5 +124,11 @@
 {{#if invalidStudyId}}
   {{#bs-modal title="Study ID Required" closedAction=(action 'toggleInvalidStudyId')}}
     {{#bs-modal-body}}Please enter a Study ID for this batch of participants.{{/bs-modal-body}}
+  {{/bs-modal}}
+{{/if}}
+
+{{#if invalidFieldName}}
+  {{#bs-modal title="Invalid Field Name" closedAction=(action 'toggleInvalidFieldName')}}
+    {{#bs-modal-body}}A field with this name already exists.{{/bs-modal-body}}
   {{/bs-modal}}
 {{/if}}

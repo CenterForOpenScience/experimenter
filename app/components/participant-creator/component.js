@@ -20,6 +20,7 @@ export default Ember.Component.extend({
     extra: null,
     nextExtra: '',
     invalidStudyId: false,
+    invalidFieldName: false,
 
     creating: false,
     createdAccounts: [],
@@ -100,10 +101,21 @@ export default Ember.Component.extend({
         },
         addExtraField() {
             var next = this.get('nextExtra');
-            this.get('extra').pushObject({
-                key: next,
-                value: null
-            });
+            var fieldExists = false;
+            for (var item of this.get('extra')) {
+                if (item.key === next) {
+                    fieldExists = true;
+                    break;
+                }
+            }
+            if (fieldExists) {
+                this.set('invalidFieldName', true);
+            } else {
+                this.get('extra').pushObject({
+                    key: next,
+                    value: null
+                });
+            }
             this.set('nextExtra', null);
         },
         removeExtraField(field) {
@@ -118,6 +130,9 @@ export default Ember.Component.extend({
         },
         toggleInvalidStudyId: function() {
             this.toggleProperty('invalidStudyId');
+        },
+        toggleInvalidFieldName: function() {
+            this.toggleProperty('invalidFieldName');
         }
     }
 });
