@@ -40,7 +40,7 @@ export default Ember.Component.extend({
     },
     exampleId: Ember.computed('tag', function() {
         var tag = this.get('tag');
-        return `12345${tag ? `-${tag}` : ''}`
+        return `12345${tag ? `-${tag}` : ''}`;
     }),
 
     createdAccountsCSV: Ember.computed('createdAccounts', function() {
