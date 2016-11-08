@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { validator, buildValidations } from 'ember-cp-validations';
 
 // h/t: http://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
 function makeId(len) {
@@ -11,7 +12,16 @@ function makeId(len) {
     return text;
 }
 
-export default Ember.Component.extend({
+const Validations = buildValidations({
+    batchSize: validator('number', {
+        gt: 0,
+        lte: 100,
+        integer: true,
+        allowString: true
+    })
+});
+
+export default Ember.Component.extend(Validations, {
     store: Ember.inject.service(),
 
     batchSize: 1,

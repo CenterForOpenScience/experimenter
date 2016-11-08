@@ -6,14 +6,17 @@
     </div>
     <div class="col-md-6">
         <div class="form">
-            <div class="form-group">
+            <div class="form-group {{if (v-get this 'batchSize' 'isInvalid') 'has-error' }}">
                 <label>
                     Batch size:
                     <small class="text-muted">
                         how many participants to create
                     </small>
                 </label>
-                {{input value=batchSize type="number" class="form-control"}}
+                {{input value=batchSize type="number" min=0 max=100 class="form-control"}}
+                <span class="text-danger">
+                    {{v-get this 'batchSize' 'message'}}
+                </span>
             </div>
             <div class="form-group">
                 <label>
@@ -67,7 +70,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button disabled={{if (not batchSize) true false}} class="btn btn-primary" {{action 'createParticipants'}}>
+                <button disabled={{validations.isInvalid}} class="btn btn-primary" {{action 'createParticipants'}}>
                     Create accounts
                 </button>
             </div>
