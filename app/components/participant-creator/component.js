@@ -52,6 +52,13 @@ export default Ember.Component.extend({
     }),
     actions: {
         createParticipants() {
+            var studyId = this.get('studyId');
+            if (!studyId || !studyId.trim()) {
+                this.set('invalidStudyId', true);
+                this.set('creating', false);
+                return;
+            }
+
             Ember.run(() => {
                 console.log('creating...');
                 this.set('creating', true);
@@ -64,12 +71,6 @@ export default Ember.Component.extend({
             var store = this.get('store');
 
             var extra = {};
-            var studyId = this.get('studyId');
-            if (!studyId || !studyId.trim()) {
-                this.set('invalidStudyId', true);
-                this.set('creating', false);
-                return;
-            }
             extra['studyId'] = studyId;
             this.get('extra').forEach(item => {
                 extra[item.key] = item.value;
