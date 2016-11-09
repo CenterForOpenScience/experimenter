@@ -101,6 +101,10 @@ export default Ember.Component.extend({
         addExtraField() {
             var next = this.get('nextExtra');
             var fieldExists = false;
+            // Do not allow users to add duplicate studyId field
+            if (next === 'studyId') {
+                fieldExists = true;
+            }
             for (var item of this.get('extra')) {
                 if (item.key === next) {
                     fieldExists = true;
