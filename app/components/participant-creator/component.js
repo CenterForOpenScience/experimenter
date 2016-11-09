@@ -100,9 +100,9 @@ export default Ember.Component.extend(Validations, {
         }).join('\n');
     }),
     actions: {
-        createParticipants() {
+        createParticipants(batchSize) {
             var tag = this.get('tag');
-            var batchSize = parseInt(this.get('batchSize')) || 0;
+            batchSize = parseInt(batchSize) || 0;
             var accountIDs = this._generate(batchSize, tag);
 
             var extra = {};
@@ -127,8 +127,24 @@ export default Ember.Component.extend(Validations, {
             // TODO: Add correctly saved records into the field used to generate the CSV, and notify user on success
             this.set('creating', true);
             this._sendBulkRequest('account', accounts)
-                .then(() => this.send('downloadCSV'))
-                .catch(() => this.get('toast').error('Could not create records; please try again later'))
+                .then((res) => {
+                    // JamDB bulk responses can include placeholder null values in the data array, if the corresponding
+                    //  request array item failed. Filter error dummies out before reporting the records created.
+                    // TODO: Simplify the CSV serializer later; it's now being passed objects instead of record instances but that should be fine
+                    const data = (res.data || []).filter(item => !!item);
+                    if (data.length > 0) {
+                        this.get('createdAccounts').push(...data);
+                        // This may sometimes be smaller than batchSize, in the rare event that a single record appears
+                        // in errors instead, eg because ID was already in use
+                        this.toast.info(`Successfully created ${data.length} accounts!`);
+                        this.send('downloadCSV');
+                    } else {
+                        // Likely, every ID in this request failed to create for some horrible reason (data.length=0
+                        // and errors.length=batchSize after filtering out spurious null entries)
+                        this.get('toast').error('Could not create new account(s). If this error persists, please contact support.');
+                    }
+                })
+                .catch(() => this.get('toast').error('Could not create new accounts. Please try again later.'))
                 .finally(() => this.set('creating', false));
         },
         addExtraField() {
