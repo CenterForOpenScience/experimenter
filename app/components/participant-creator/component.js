@@ -1,6 +1,11 @@
 import Ember from 'ember';
 import { validator, buildValidations } from 'ember-cp-validations';
 
+/**
+ * @module experimenter
+ * @submodule components
+ */
+
 // h/t: http://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
 function makeId(len) {
     var text = '';
@@ -21,8 +26,18 @@ const Validations = buildValidations({
     })
 });
 
+/**
+ * Participant creator page in component form.
+ *
+ * Sample usage:
+ * ```handlebars
+ *  {{participant-creator}}
+ * ```
+ * @class participant-creator
+ */
 export default Ember.Component.extend(Validations, {
     store: Ember.inject.service(),
+    toast: Ember.inject.service(),
 
     batchSize: 1,
     tag: null,
@@ -31,14 +46,20 @@ export default Ember.Component.extend(Validations, {
     useAsPassword: null,
 
     creating: false,
-    createdAccounts: [],
-    _creatingPromise: null,
+    createdAccounts: null,
 
     init() {
         this._super(...arguments);
         this.set('extra', Ember.A());
+        this.set('createdAccounts', []);
     },
-
+    /**
+     * Generate an array of ID strings
+     * @param batchSize
+     * @param tag
+     * @returns {String[]}
+     * @private
+     */
     _generate(batchSize, tag) {
         var ret = [];
         for (let i = 0; i < batchSize; i++) {
@@ -46,6 +67,25 @@ export default Ember.Component.extend(Validations, {
         }
         return ret;
     },
+
+    /**
+     * @method _sendBulkRequest Send a single (bulk) ajax request and return a promise
+     * @param {String} modelName The name of the record type to create (eg
+     * @param {Object[]} attributes An array of attributes objects, as would be passed to `createRecord` for the corresponding model name
+     * @private
+     */
+    _sendBulkRequest(modelName, attributes) {
+        // Serialize the attributes as though creating a new record
+        const records = attributes.map(obj => this.get('store').createRecord(modelName, obj));
+        const payload = records.map(rec => rec.serialize({includeId: true}).data);
+        const adapter = this.get('store').adapterFor(modelName);
+        const url = adapter.buildURL(modelName, null, null, 'createRecord');  // url templates bypass urlfor<x> methods
+        return adapter.ajax(url, 'POST', {
+            data: { data: payload },
+            isBulk: true
+        });
+    },
+
     generatedParticipants: Ember.computed('batchSize', 'tag', function() {
         var tag = this.get('tag');
         var batchSize = Math.min(parseInt(this.get('batchSize')) || 0, 10);
@@ -61,16 +101,9 @@ export default Ember.Component.extend(Validations, {
     }),
     actions: {
         createParticipants() {
-            Ember.run(() => {
-                console.log('creating...');
-                this.set('creating', true);
-                this.set('createdAccounts', []);
-            });
-
             var tag = this.get('tag');
             var batchSize = parseInt(this.get('batchSize')) || 0;
-            var accounts = this._generate(batchSize, tag);
-            var store = this.get('store');
+            var accountIDs = this._generate(batchSize, tag);
 
             var extra = {};
             var useAsPassword = this.get('useAsPassword');
@@ -84,28 +117,19 @@ export default Ember.Component.extend(Validations, {
             if (!useAsPassword) {
                 password = makeId(10);
             }
-            Ember.run.later(this, () => {
-                this.set('_creatingPromise', Ember.RSVP.allSettled(
-                    accounts.map((aId) => {
-                        var attrs = {
-                            id: aId,
-                            password: password,
-                            extra: extra
-                        };
-                        var acc = store.createRecord('account', attrs);
-                        console.log(`Saving ${acc.get('id')}`);
-                        return acc.save().then(() => {
-                            this.get('createdAccounts').pushObject(acc);
-                            console.log(`Saved ${acc.get('id')}`);
-                        });
-                    })
-                ).then(() => {
-                    Ember.run.later(this, () => {
-                        this.set('creating', false);
-                        this.send('downloadCSV');
-                    }, 100);
-                }));
-            }, 50);
+
+            const accounts = accountIDs.map(id => ({id, password}));
+
+
+            // TODO: Use the server response errors field to identify any IDs that might already be in use:
+            // this does not implement any record collision detection as written
+
+            // TODO: Add correctly saved records into the field used to generate the CSV, and notify user on success
+            this.set('creating', true);
+            this._sendBulkRequest('account', accounts)
+                .then(() => this.send('downloadCSV'))
+                .catch(() => this.get('toast').error('Could not create records; please try again later'))
+                .finally(() => this.set('creating', false));
         },
         addExtraField() {
             var next = this.get('nextExtra');
