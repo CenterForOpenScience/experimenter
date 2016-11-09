@@ -93,9 +93,9 @@ export default Ember.Component.extend(Validations, {
     }),
 
     createdAccountsCSV: Ember.computed('createdAccounts', function() {
-        var keys = ['id'].concat(this.get('extra').map(e => `extra.${e.key}`));
+        var keys = ['id'].concat(this.get('extra').map(e => `attributes.extra.${e.key}`));
         return keys.join(',') + '\n' + this.get('createdAccounts').map((a) => {
-            var props = a.getProperties(keys);
+            var props = Ember.getProperties(a, keys);
             return keys.map(k => props[k]).join(',');
         }).join('\n');
     }),
@@ -118,19 +118,14 @@ export default Ember.Component.extend(Validations, {
                 password = makeId(10);
             }
 
-            const accounts = accountIDs.map(id => ({id, password}));
-
-
+            const accounts = accountIDs.map(id => ({id, password, extra}));
             // TODO: Use the server response errors field to identify any IDs that might already be in use:
-            // this does not implement any record collision detection as written
-
-            // TODO: Add correctly saved records into the field used to generate the CSV, and notify user on success
+            // as written, we don't retry to create those. If 3 of 100 requested items fail, we just create 97 items and call it a day.
             this.set('creating', true);
             this._sendBulkRequest('account', accounts)
                 .then((res) => {
                     // JamDB bulk responses can include placeholder null values in the data array, if the corresponding
                     //  request array item failed. Filter error dummies out before reporting the records created.
-                    // TODO: Simplify the CSV serializer later; it's now being passed objects instead of record instances but that should be fine
                     const data = (res.data || []).filter(item => !!item);
                     if (data.length > 0) {
                         this.get('createdAccounts').push(...data);
