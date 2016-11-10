@@ -98,7 +98,7 @@ export default Ember.Component.extend(Validations, {
             var props = Ember.getProperties(a, keys);
             return keys.map(k => props[k]).join(',');
         }).join('\n');
-    }),
+    }).volatile(),
     actions: {
         createParticipants(batchSize) {
             var tag = this.get('tag');
@@ -125,12 +125,15 @@ export default Ember.Component.extend(Validations, {
             this._sendBulkRequest('account', accounts)
                 .then((res) => {
                     // JamDB bulk responses can include placeholder null values in the data array, if the corresponding
-                    //  request array item failed. Filter error dummies out before reporting the records created.
+                    //  request array item failed. Filter these error placeholders out to get just records created.
                     const data = (res.data || []).filter(item => !!item);
                     if (data.length > 0) {
+                        // Store all the records that were successfully created,
+                        // adding them to all records from previous requests while on this page.
+                        // Eg, a combined CSV could be generated with 200 records.
                         this.get('createdAccounts').push(...data);
                         // This may sometimes be smaller than batchSize, in the rare event that a single record appears
-                        // in errors instead, eg because ID was already in use
+                        // in res.errors instead, eg because ID was already in use
                         this.toast.info(`Successfully created ${data.length} accounts!`);
                         this.send('downloadCSV');
                     } else {
