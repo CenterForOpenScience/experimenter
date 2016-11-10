@@ -16,9 +16,11 @@ export default Ember.Component.extend({
 
     batchSize: 1,
     tag: null,
+    studyId: null,
     extra: null,
     nextExtra: '',
-    useAsPassword: null,
+    invalidStudyId: false,
+    invalidFieldName: false,
 
     creating: false,
     createdAccounts: [],
@@ -36,14 +38,13 @@ export default Ember.Component.extend({
         }
         return ret;
     },
-    generatedParticipants: Ember.computed('batchSize', 'tag', function() {
+    exampleId: Ember.computed('tag', function() {
         var tag = this.get('tag');
-        var batchSize = Math.min(parseInt(this.get('batchSize')) || 0, 10);
-        return this._generate(batchSize, tag);
+        return `12345${tag ? `-${tag}` : ''}`;
     }),
 
     createdAccountsCSV: Ember.computed('createdAccounts', function() {
-        var keys = ['id'].concat(this.get('extra').map(e => `extra.${e.key}`));
+        var keys = ['id', 'extra.studyId'].concat(this.get('extra').map(e => `extra.${e.key}`));
         return keys.join(',') + '\n' + this.get('createdAccounts').map((a) => {
             var props = a.getProperties(keys);
             return keys.map(k => props[k]).join(',');
@@ -51,6 +52,13 @@ export default Ember.Component.extend({
     }),
     actions: {
         createParticipants() {
+            var studyId = this.get('studyId');
+            if (!studyId || !studyId.trim()) {
+                this.set('invalidStudyId', true);
+                this.set('creating', false);
+                return;
+            }
+
             Ember.run(() => {
                 console.log('creating...');
                 this.set('creating', true);
@@ -63,23 +71,17 @@ export default Ember.Component.extend({
             var store = this.get('store');
 
             var extra = {};
-            var useAsPassword = this.get('useAsPassword');
-            var password = '';
+            extra['studyId'] = studyId;
             this.get('extra').forEach(item => {
-                if (item.key === useAsPassword) {
-                    password = Ember.get(item, 'value');
-                }
                 extra[item.key] = item.value;
             });
-            if (!useAsPassword) {
-                password = makeId(10);
-            }
+
             Ember.run.later(this, () => {
                 this.set('_creatingPromise', Ember.RSVP.allSettled(
                     accounts.map((aId) => {
                         var attrs = {
                             id: aId,
-                            password: password,
+                            password: studyId,
                             extra: extra
                         };
                         var acc = store.createRecord('account', attrs);
@@ -99,28 +101,42 @@ export default Ember.Component.extend({
         },
         addExtraField() {
             var next = this.get('nextExtra');
-            this.get('extra').pushObject({
-                key: next,
-                value: null
-            });
+            var fieldExists = false;
+            // Do not allow users to add duplicate studyId field
+            if (next === 'studyId') {
+                fieldExists = true;
+            }
+            for (var item of this.get('extra')) {
+                if (item.key === next) {
+                    fieldExists = true;
+                    break;
+                }
+            }
+            if (fieldExists) {
+                this.set('invalidFieldName', true);
+            } else {
+                this.get('extra').pushObject({
+                    key: next,
+                    value: null
+                });
+            }
             this.set('nextExtra', null);
         },
         removeExtraField(field) {
             var extra = this.get('extra');
             this.set('extra', extra.filter((item) => item.key !== field));
         },
-        useAsPassword(field, checked) {
-            if (checked) {
-                this.set('useAsPassword', field);
-            } else {
-                this.set('useAsPassword', null);
-            }
-        },
         downloadCSV: function() {
             var blob = new window.Blob([this.get('createdAccountsCSV')], {
                 type: 'text/plain;charset=utf-8'
             });
             window.saveAs(blob, 'participants.csv');
+        },
+        toggleInvalidStudyId: function() {
+            this.toggleProperty('invalidStudyId');
+        },
+        toggleInvalidFieldName: function() {
+            this.toggleProperty('invalidFieldName');
         }
     }
 });
