@@ -23,6 +23,10 @@ const Validations = buildValidations({
         lte: 100,
         integer: true,
         allowString: true
+    }),
+    studyId: validator('presence', {
+        presence: true,
+        ignoreBlank: true
     })
 });
 
@@ -44,11 +48,11 @@ export default Ember.Component.extend(Validations, {
     studyId: null,
     extra: null,
     nextExtra: '',
-    invalidStudyId: false,
     invalidFieldName: false,
 
     creating: false,
     createdAccounts: null,
+    showErrors: false,
 
     init() {
         this._super(...arguments);
@@ -102,12 +106,13 @@ export default Ember.Component.extend(Validations, {
     }).volatile(),
     actions: {
         createParticipants(batchSize) {
-            var studyId = this.get('studyId');
-            if (!studyId || !studyId.trim()) {
-                this.set('invalidStudyId', true);
-                this.set('creating', false);
+            // Only show messages after first attempt to submit form
+            this.set('showErrors', true);
+            if (!this.get('validations.isValid')) {
                 return;
             }
+
+            var studyId = this.get('studyId');
 
             var tag = this.get('tag');
             batchSize = parseInt(batchSize) || 0;
@@ -177,9 +182,6 @@ export default Ember.Component.extend(Validations, {
                 type: 'text/plain;charset=utf-8'
             });
             window.saveAs(blob, 'participants.csv');
-        },
-        toggleInvalidStudyId: function() {
-            this.toggleProperty('invalidStudyId');
         },
         toggleInvalidFieldName: function() {
             this.toggleProperty('invalidFieldName');
