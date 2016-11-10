@@ -24,13 +24,11 @@ Router.map(function () {
         this.route('info', {
             path: '/:experiment_id'
         }, function () {
-            this.route('index', {
-                path: '/'
-            });
             this.route('edit');
-            this.route('results');
+            this.route('results', function() {
+              this.route('all');
+            });
             this.route('preview');
-
         });
     });
 

@@ -1,9 +1,12 @@
 <h2>Responses</h2>
-{{#bs-tab}}
-  {{#bs-tab-pane title="Participant Data"}}
-      {{participant-data sessions=model mappingFunction=sanitizeProfileId}}
-  {{/bs-tab-pane}}
-  {{#bs-tab-pane title="All Data"}}
-      {{export-tool data=model mappingFunction=sanitizeProfileId}}
-  {{/bs-tab-pane}}
-{{/bs-tab}}
+
+<ul class="nav nav-tabs">
+    {{#link-to "experiments.info.results.index" tagName="li"}}
+        <a href="#">Suggested Studies</a>
+    {{/link-to}}
+    {{#link-to "experiments.info.results.all" tagName="li"}}
+        <a href="#">Past Studies</a>
+    {{/link-to}}
+</ul>
+
+{{outlet}}
