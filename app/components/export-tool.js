@@ -109,7 +109,16 @@ export default Ember.Component.extend({
         dataArray = dataArray.map((record) => {
             let newRecord = {};
             for (let frameId of Object.keys(record.expData)) {
-                newRecord[frameId] = record.expData[frameId].responses || {};
+                let responses = record.expData[frameId].responses || {};
+                for (let question of Object.keys(responses)) {
+                    if (frameId === '3-3-rating-form') {
+                        for (let item of Object.keys(responses[question])) {
+                            newRecord[item] = responses[question][item];
+                        }
+                    } else {
+                        newRecord[question] = responses[question];
+                    }
+                }
             }
             return newRecord;
         });
