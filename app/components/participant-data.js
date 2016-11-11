@@ -6,19 +6,13 @@ export default Ember.Component.extend({
     sortBy: 'profileId',
     reverse: false,
     mappingFunction: null,
-    sortedSessions: Ember.computed('sortBy', 'reverse', {
-        get() {
-            var reverse = this.get('reverse');
-            var sortBy = this.get('sortBy');
-            if (reverse) {
-                return this.get('sessions').sortBy(sortBy).reverse();
-            }
-            return this.get('sessions').sortBy(sortBy);
-        },
-        set(_, value) {
-            this.set('sortedSessions', value);
-            return value;
+    sortedSessions: Ember.computed('sortBy', 'reverse', 'sessions', function() {
+        var reverse = this.get('reverse');
+        var sortBy = this.get('sortBy');
+        if (reverse) {
+            return this.get('sessions').sortBy(sortBy).reverse();
         }
+        return this.get('sessions').sortBy(sortBy);
     }),
     actions: {
         updateData: function(session) {
