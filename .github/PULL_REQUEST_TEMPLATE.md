@@ -1,5 +1,4 @@
 Refs: https://openscience.atlassian.net/browse/LEI-
-Companion to: 
 
 ## Purpose
 

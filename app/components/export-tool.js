@@ -1,12 +1,23 @@
 import Ember from 'ember';
 
-function squash(obj, prefix) {
-    var ret = {};
+/**
+ * @module experimenter
+ * @submodule components
+  */
+
+// Make sure that ember-data objects are serialized to a JS object
+function serializeItem(obj) {
     if (obj.serialize) {
         var serialized = obj.serialize();
         obj = serialized.data.attributes;
     }
-    Ember.$.each(Object.keys(obj), (_, key) => {
+    return obj;
+}
+
+// Flatten a nested object into a single level, with dotted paths for keys
+function squash(obj, prefix) {
+    var ret = {};
+    Object.keys(obj).forEach((key) => {
         var value = Ember.get(obj, key);
         if (value && value.toJSON) {
             value = value.toJSON();
@@ -21,67 +32,110 @@ function squash(obj, prefix) {
     return ret;
 }
 
-export default Ember.Component.extend({
-    attributeBindings: ['data', 'mappingFunction'],
-    dataFormat: 'JSON',
-    dataFormats: [
-        'JSON',
-        'TSV'
-    ],
-    processedData: Ember.computed('data', 'dataFormat', {
-        get() {
-            var data = this.get('data') || [];
-            if (data.toArray) {
-                data = data.toArray();
-            }
-            var dataArray = [];
-            data.forEach((item /*, index, array*/ ) => { // Ensure that mapping function doesn't treat *index* as the optional recursive *prefix* parameter
-                dataArray.push(squash.apply(this, [item]));
-            });
 
-            var dataFormat = this.get('dataFormat');
-            var mappingFunction = this.get('mappingFunction') || ((x) => x);
-            var mapped;
-            if (Ember.isPresent(dataArray)) {
-                mapped = dataArray.map(mappingFunction.bind(this));
-                return this.convertToFormat(mapped, dataFormat);
-            } else {
-                return null;
-            }
+/**
+ * Export tool component: serializes records into one of a number of possible output formats
+ * @class export-tool
+ */
+export default Ember.Component.extend({
+    /**
+     * @property data The data to be serialized
+     */
+    data: null,
+
+    /**
+     * Mapping function to transform a given (squashed) record. Should accept a single argument,
+     *  a (possibly nested) JS object of fields
+     * @property {function} mappingFunction
+     * @default Return the item unchanged
+     */
+    mappingFunction(item) {
+        return item;
+    },
+
+    dataFormat: 'JSON',
+    // Recognized data formats. Hash of form {displayValue: Extension} items
+    dataFormats: {
+        JSON: 'JSON',
+        TSV: 'TSV',
+        'TSV (for ISP)': 'TSV',
+    },
+
+    processedData: Ember.computed('data', 'dataFormat', function() {
+        var data = this.get('data') || [];
+        if (data.toArray) {
+            data = data.toArray();
+        }
+        let dataArray = data.map(serializeItem);
+
+        var dataFormat = this.get('dataFormat');
+        var mappingFunction = this.get('mappingFunction');
+
+        if (Ember.isPresent(dataArray)) {
+            let mapped = dataArray.map(mappingFunction);
+            return this.convertToFormat(mapped, dataFormat);
+        } else {
+            return null;
         }
     }),
-    convertToFormat: function(dataArray, format) {
-        if (format === 'JSON') {
-            return JSON.stringify(dataArray, undefined, 4);
-        } else if (format === 'TSV') {
-            var array = typeof dataArray !== 'object' ? JSON.parse(dataArray) : dataArray;
 
-            var fields = Object.keys(array[0]);
-            var tsv = [fields.join('\t')];
-            Ember.$.each(array, function(_, item) {
-                var line = [];
-                fields.forEach(function(field) {
-                    line.push(JSON.stringify(item[field]));
-                });
-                tsv.push(line.join('\t'));
+    _convertToJSON(dataArray) {
+        return JSON.stringify(dataArray, null, 4);
+    },
+    _convertToTSV(dataArray) {
+        // Flatten the dictionary keys for readable column headers
+        let squashed = dataArray.map((item => squash(item)));
+
+        var fields = Object.keys(squashed[0]);
+        var tsv = [fields.join('\t')];
+
+        squashed.forEach((item) => {
+            var line = [];
+            fields.forEach(function(field) {
+                line.push(JSON.stringify(item[field]));
             });
-            tsv = tsv.join('\r\n');
-            return tsv;
+            tsv.push(line.join('\t'));
+        });
+        tsv = tsv.join('\r\n');
+        return tsv;
+    },
+    _convertToISP(dataArray) {
+        // ISP-specific TSV file format
+
+        // First custom field mapping...
+
+        // Then serialize to TSV
+        dataArray = dataArray.map((record) => {
+            let newRecord = {};
+            for (let frameId of Object.keys(record.expData)) {
+                newRecord[frameId] = record.expData[frameId].responses || {};
+            }
+            return newRecord;
+        });
+        return this._convertToTSV(dataArray);
+    },
+    convertToFormat(dataArray, format) {
+        if (format === 'JSON') {
+            return this._convertToJSON(dataArray);
+        } else if (format === 'TSV') {
+            return this._convertToTSV(dataArray);
+        } else if (format === 'TSV (for ISP)') {
+            return this._convertToISP(dataArray);
         } else {
             throw 'Unrecognized file format specified';
         }
     },
     actions: {
-        downloadFile: function() {
-            var blob = new window.Blob([this.get('processedData')], {
+        downloadFile() {
+            let blob = new window.Blob([this.get('processedData')], {
                 type: 'text/plain;charset=utf-8'
             });
-            var extension = this.get('dataFormat').toLowerCase();
-            window.saveAs(blob, 'data.' + extension);
+            let format = this.get('dataFormat');
+            let extension = this.get('dataFormats')[format].toLowerCase();
+            window.saveAs(blob, `data.${extension}`);
         },
-        selectDataFormat: function(dataFormat) {
+        selectDataFormat(dataFormat) {
             this.set('dataFormat', dataFormat);
         }
     }
-
 });

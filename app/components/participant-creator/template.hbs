@@ -1,0 +1,123 @@
+<div class="row participant-creator">
+    <div class="{{if creating 'block-ui' 'block-ui-hidden'}}">
+        <span class="block-ui-message">
+            Created {{createdAccounts.length}} out of {{batchSize}}
+        </span>
+    </div>
+    <div class="col-md-6">
+        <div class="form">
+            <div class="form-group">
+                <label>
+                    Batch size:
+                    <small class="text-muted">
+                        how many participants to create
+                    </small>
+                </label>
+                {{input value=batchSize type="number" class="form-control"}}
+            </div>
+            <div class="form-group">
+                <label>
+                    Tag:
+                </label>
+                <small class="text-muted">
+                    a common tag for this batch of participants
+                </small>
+                {{input value=tag type="text" class="form-control"}}
+            </div>
+            <div class="form-group">
+                <label>
+                    Study ID:
+                </label>
+                {{input value=studyId type="text" class="form-control"}}
+            </div>
+            <div class="form-group offset-2">
+                <label>
+                    Additional fields:
+                </label>
+                <small class="text-muted">
+                    extra information for this batch of participants
+                </small>
+                    {{#each extra as |item|}}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <label>
+                                        {{item.key}}:
+                                    </label>
+                                    {{input class="form-control" value=item.value placehodler="value"}}
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-sm btn-danger" {{action 'removeExtraField' item.key}}>X</button>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label> Add a field: </label>
+                        {{input class="form-control" value=nextExtra}}
+                    </div>
+                    <button disabled={{if (not nextExtra) true false}} class="btn btn-sm btn-success" {{action 'addExtraField'}}>Add</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <button disabled={{if (not batchSize) true false}} class="btn btn-primary" {{action 'createParticipants'}}>
+                    Create accounts
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <p>
+            <strong>
+                Example:
+            </strong>
+        </p>
+        <div>
+            <table class="table table-string preview-table">
+                <thead>
+                    <tr>
+                        <td>
+                            Participant ID
+                        </td>
+                        <td>
+                            Study ID
+                        </td>
+                        {{#each extra as |item|}}
+                            <td>
+                                {{item.key}}
+                            </td>
+                        {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{exampleId}}
+                        </td>
+                        <td>
+                            {{studyId}}
+                        </td>
+                        {{#each extra as |item|}}
+                            <td>
+                                {{item.value}}
+                            </td>
+                        {{/each}}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{{#if invalidStudyId}}
+  {{#bs-modal title="Study ID Required" closedAction=(action 'toggleInvalidStudyId')}}
+    {{#bs-modal-body}}Please enter a Study ID for this batch of participants.{{/bs-modal-body}}
+  {{/bs-modal}}
+{{/if}}
+
+{{#if invalidFieldName}}
+  {{#bs-modal title="Invalid Field Name" closedAction=(action 'toggleInvalidFieldName')}}
+    {{#bs-modal-body}}A field with this name already exists.{{/bs-modal-body}}
+  {{/bs-modal}}
+{{/if}}
