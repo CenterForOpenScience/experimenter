@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-6">
         <div class="form">
-            <div class="form-group {{if (v-get this 'batchSize' 'isInvalid') 'has-error'}}">
+            <div class="form-group {{if (and showErrors (v-get this 'batchSize' 'isInvalid')) 'has-error'}}">
                 <label>
                     Batch size:
                     <small class="text-muted">
@@ -27,7 +27,7 @@
                 </small>
                 {{input value=tag type="text" class="form-control"}}
             </div>
-            <div class="form-group {{if (v-get this 'batchSize' 'isInvalid') 'has-error'}}">
+            <div class="form-group {{if (and showErrors (v-get this 'studyId' 'isInvalid')) 'has-error'}}">
                 <label>
                     Study ID:
                 </label>
