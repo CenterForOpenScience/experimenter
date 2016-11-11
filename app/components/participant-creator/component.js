@@ -92,18 +92,19 @@ export default Ember.Component.extend(Validations, {
         });
     },
 
-    exampleId: Ember.computed('tag', function() {
-        var tag = this.get('tag');
-        return `12345${tag ? `-${tag}` : ''}`;
-    }),
-
-    createdAccountsCSV: Ember.computed('createdAccounts', function() {
+    accountsToCSV() {
         var keys = ['id', 'attributes.extra.studyId'].concat(this.get('extra').map(e => `attributes.extra.${e.key}`));
         return keys.join(',') + '\n' + this.get('createdAccounts').map((a) => {
             var props = Ember.getProperties(a, keys);
             return keys.map(k => props[k]).join(',');
         }).join('\n');
-    }).volatile(),
+    },
+
+    exampleId: Ember.computed('tag', function() {
+        var tag = this.get('tag');
+        return `12345${tag ? `-${tag}` : ''}`;
+    }),
+
     actions: {
         createParticipants(batchSize) {
             // Only show messages after first attempt to submit form
@@ -111,6 +112,9 @@ export default Ember.Component.extend(Validations, {
             if (!this.get('validations.isValid')) {
                 return;
             }
+
+            // Each new batch of contributors creates a new CSV file with no records from the previous batch
+            this.set('createdAccounts', []);
 
             var studyId = this.get('studyId');
 
@@ -178,7 +182,8 @@ export default Ember.Component.extend(Validations, {
             this.set('extra', extra.filter((item) => item.key !== field));
         },
         downloadCSV: function() {
-            var blob = new window.Blob([this.get('createdAccountsCSV')], {
+            const content = this.accountsToCSV();
+            var blob = new window.Blob([content], {
                 type: 'text/plain;charset=utf-8'
             });
             window.saveAs(blob, 'participants.csv');
