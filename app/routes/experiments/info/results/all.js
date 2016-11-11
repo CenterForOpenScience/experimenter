@@ -7,7 +7,7 @@ export default Ember.Route.extend({
         return this.store.query(experiment.get('sessionCollectionId'),
             {
                 'filter[completed]': 1,
-                'page[size]': 20
+                'page[size]': 100
             });
     },
 

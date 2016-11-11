@@ -1,13 +1,13 @@
 import Ember from 'ember';
+import PaginatedRouteMixin from '../../../../mixins/paginated-route';
 
-export default Ember.Route.extend({
-    model() {
+
+export default Ember.Route.extend(PaginatedRouteMixin, {
+    model(params) {
         const experiment = this.modelFor('experiments.info');
-        return this.store.query(experiment.get('sessionCollectionId'),
-            {
-                'filter[completed]': 1,
-                'page[size]': 20
-            });
+        return this.queryForPage(experiment.get('sessionCollectionId'), params, {
+            'filter[completed]': 1,
+        });
     },
 
     setupController(controller) {
