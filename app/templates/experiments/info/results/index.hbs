@@ -1,6 +1,13 @@
 <p>
     There are {{model.meta.total}} total completed responses. Viewing page {{page}} of {{totalPages}}
 </p>
-{{participant-data sessions=model mappingFunction=sanitizeProfileId}}
+<div class="row">
+    {{participant-data sessions=model mappingFunction=sanitizeProfileId}}
+</div>
 
-{{pagination-pager current=page count=totalPages}}
+<div class="row">
+    <div class="col-md-12">
+        {{pagination-pager current=page count=totalPages}}
+    </div>
+</div>
+
