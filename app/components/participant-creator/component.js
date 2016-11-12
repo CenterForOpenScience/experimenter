@@ -78,6 +78,7 @@ export default Ember.Component.extend(Validations, {
      * @method _sendBulkRequest Send a single (bulk) ajax request and return a promise
      * @param {String} modelName The name of the record type to create (eg
      * @param {Object[]} attributes An array of attributes objects, as would be passed to `createRecord` for the corresponding model name
+     * @returns {Promise} A promise that resolves to the array of new, quasi-unsaved ember model objects
      * @private
      */
     _sendBulkRequest(modelName, attributes) {
@@ -89,13 +90,50 @@ export default Ember.Component.extend(Validations, {
         return adapter.ajax(url, 'POST', {
             data: { data: payload },
             isBulk: true
+        }).then((res) => {
+            // JamDB bulk responses can include placeholder null values in the data array, if the corresponding
+            //  request array item failed. Filter these error placeholders out to get just records created, and map
+            // them from long Jam IDs to the short ones used here
+            const createdIDs = new Set((res.data || []).filter(item => !!item).map(item => item.id.split('.').pop()));
+            // Return the records that actually got created on the server, and clean up the remainder that errored
+            // This is an ugly side effect of the various ways that we are bypassing the ember data store
+            const createdRecords = [];
+            const erroredRecords = [];
+            records.forEach(item => {
+                if (createdIDs.has(item.id)) {
+                    createdRecords.push(item);
+                } else {
+                    erroredRecords.push(item);
+                }
+            });
+            this._clearAccounts(erroredRecords, false);
+            return createdRecords;
         });
     },
 
+    /**
+     * Clear temporary and quasi-unsaved account objects from the store
+     * @method _clearAccounts
+     * @parameter A list of records to unload
+     * @parameter {Boolean} clear Whether to clear the entire list of created accounts stored locally
+     * @private
+     */
+    _clearAccounts(accounts, clear=true) {
+        accounts = accounts || this.get('createdAccounts');
+        if (accounts) {
+            accounts.forEach(item => {
+                this.get('store').deleteRecord(item);
+            });
+        }
+        if (clear) {
+            this.set('createdAccounts', []);
+        }
+    },
+
     accountsToCSV() {
-        var keys = ['id', 'attributes.extra.studyId'].concat(this.get('extra').map(e => `attributes.extra.${e.key}`));
+        var keys = ['id', 'extra.studyId'].concat(this.get('extra').map(e => `extra.${e.key}`));
         return keys.join(',') + '\n' + this.get('createdAccounts').map((a) => {
-            var props = Ember.getProperties(a, keys);
+            var props = a.getProperties(keys);
             return keys.map(k => props[k]).join(',');
         }).join('\n');
     },
@@ -114,7 +152,7 @@ export default Ember.Component.extend(Validations, {
             }
 
             // Each new batch of contributors creates a new CSV file with no records from the previous batch
-            this.set('createdAccounts', []);
+            this._clearAccounts();
 
             var studyId = this.get('studyId');
 
@@ -133,17 +171,14 @@ export default Ember.Component.extend(Validations, {
             this.set('creating', true);
             this._sendBulkRequest('account', accounts)
                 .then((res) => {
-                    // JamDB bulk responses can include placeholder null values in the data array, if the corresponding
-                    //  request array item failed. Filter these error placeholders out to get just records created.
-                    const data = (res.data || []).filter(item => !!item);
-                    if (data.length > 0) {
+                    if (res.length > 0) {
                         // Store all the records that were successfully created,
                         // adding them to all records from previous requests while on this page.
                         // Eg, a combined CSV could be generated with 200 records.
-                        this.get('createdAccounts').push(...data);
+                        this.get('createdAccounts').push(...res);
                         // This may sometimes be smaller than batchSize, in the rare event that a single record appears
                         // in res.errors instead, eg because ID was already in use
-                        this.toast.info(`Successfully created ${data.length} accounts!`);
+                        this.toast.info(`Successfully created ${res.length} accounts!`);
                         this.send('downloadCSV');
                     } else {
                         // Likely, every ID in this request failed to create for some horrible reason (data.length=0
@@ -181,7 +216,7 @@ export default Ember.Component.extend(Validations, {
             var extra = this.get('extra');
             this.set('extra', extra.filter((item) => item.key !== field));
         },
-        downloadCSV: function() {
+        downloadCSV() {
             const content = this.accountsToCSV();
             var blob = new window.Blob([content], {
                 type: 'text/plain;charset=utf-8'
@@ -191,5 +226,8 @@ export default Ember.Component.extend(Validations, {
         toggleInvalidFieldName: function() {
             this.toggleProperty('invalidFieldName');
         }
+    },
+    willDestroy() {
+        this._clearAccounts();
     }
 });
