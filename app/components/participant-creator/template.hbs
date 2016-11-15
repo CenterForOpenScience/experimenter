@@ -1,19 +1,22 @@
 <div class="row participant-creator">
     <div class="{{if creating 'block-ui' 'block-ui-hidden'}}">
         <span class="block-ui-message">
-            Created {{createdAccounts.length}} out of {{batchSize}}
+            Creating new records; please wait
         </span>
     </div>
     <div class="col-md-6">
         <div class="form">
-            <div class="form-group">
+            <div class="form-group {{if (and showErrors (v-get this 'batchSize' 'isInvalid')) 'has-error'}}">
                 <label>
                     Batch size:
                     <small class="text-muted">
                         how many participants to create
                     </small>
                 </label>
-                {{input value=batchSize type="number" class="form-control"}}
+                {{input value=batchSize type="number" min=0 max=100 class="form-control"}}
+                <span class="text-danger {{unless showErrors 'hidden'}}">
+                    {{v-get this 'batchSize' 'message'}}
+                </span>
             </div>
             <div class="form-group">
                 <label>
@@ -24,11 +27,14 @@
                 </small>
                 {{input value=tag type="text" class="form-control"}}
             </div>
-            <div class="form-group">
+            <div class="form-group {{if (and showErrors (v-get this 'studyId' 'isInvalid')) 'has-error'}}">
                 <label>
                     Study ID:
                 </label>
                 {{input value=studyId type="text" class="form-control"}}
+                <span class="text-danger {{unless showErrors 'hidden'}}">
+                    {{v-get this 'studyId' 'message'}}
+                </span>
             </div>
             <div class="form-group offset-2">
                 <label>
@@ -44,7 +50,7 @@
                                     <label>
                                         {{item.key}}:
                                     </label>
-                                    {{input class="form-control" value=item.value placehodler="value"}}
+                                    {{input class="form-control" value=item.value}}
                                 </div>
                                 <div class="col-md-1">
                                     <button class="btn btn-sm btn-danger" {{action 'removeExtraField' item.key}}>X</button>
@@ -57,11 +63,11 @@
                         <label> Add a field: </label>
                         {{input class="form-control" value=nextExtra}}
                     </div>
-                    <button disabled={{if (not nextExtra) true false}} class="btn btn-sm btn-success" {{action 'addExtraField'}}>Add</button>
+                    <button disabled={{if (not nextExtra) true false}} class="btn btn-sm btn-primary" {{action 'addExtraField'}}>Add</button>
                 </div>
             </div>
             <div class="form-group">
-                <button disabled={{if (not batchSize) true false}} class="btn btn-primary" {{action 'createParticipants'}}>
+                <button class="btn btn-success" {{action 'createParticipants' batchSize}}>
                     Create accounts
                 </button>
             </div>
@@ -109,12 +115,6 @@
         </div>
     </div>
 </div>
-
-{{#if invalidStudyId}}
-  {{#bs-modal title="Study ID Required" closedAction=(action 'toggleInvalidStudyId')}}
-    {{#bs-modal-body}}Please enter a Study ID for this batch of participants.{{/bs-modal-body}}
-  {{/bs-modal}}
-{{/if}}
 
 {{#if invalidFieldName}}
   {{#bs-modal title="Invalid Field Name" closedAction=(action 'toggleInvalidFieldName')}}
