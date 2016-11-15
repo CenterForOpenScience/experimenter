@@ -3,6 +3,12 @@ import PaginatedRouteMixin from '../../../../mixins/paginated-route';
 
 
 export default Ember.Route.extend(PaginatedRouteMixin, {
+    queryParams: {
+        sort: {
+            refreshModel: true
+        }
+    },
+
     model(params) {
         const experiment = this.modelFor('experiments.info');
         return this.queryForPage(experiment.get('sessionCollectionId'), params, {
