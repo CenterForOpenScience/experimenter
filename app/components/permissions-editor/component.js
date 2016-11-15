@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {adminPattern} from  '../utils/patterns';
+import {adminPattern} from  '../../utils/patterns';
 
 // FIXME: Known bug in original- if the server save request fails, the value will appear to have been added until page reloaded.
 //  (need to catch and handle errors)
