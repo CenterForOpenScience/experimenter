@@ -15,18 +15,16 @@ export default Ember.Controller.extend({
             var sort = this.get('sort');
             if (sort) {
                 return sort.replace(DESC, '');
-            }
-            else {
+            } else {
                 return null;
             }
         },
-        set (_, value) {
+        set(_, value) {
             var sort = this.get('sort');
             if (sort) {
                 var sign = sort.indexOf(DESC) === 0 ? DESC : ASC;
                 this.set('sort', `${sign}${value}`);
-            }
-            else {
+            } else {
                 this.set('sort', `${ASC}${value}`);
             }
             return value;
@@ -37,24 +35,22 @@ export default Ember.Controller.extend({
             var sort = this.get('sort');
             if (sort) {
                 return sort.indexOf(DESC) === 0 ? DESC : ASC;
-            }
-            else {
+            } else {
                 return null;
             }
         },
-        set (_, value) {
+        set(_, value) {
             var sort = this.get('sort');
             if (sort) {
                 var prop = sort.replace(DESC, '');
                 this.set('sort', `${value}${prop}`);
-            }
-            else {
+            } else {
                 this.set('sort', `${value}title`);
             }
             return value;
         }
     }),
-    toggleOrder: function(order) {
+    toggleOrder: function (order) {
         if (order === ASC) {
             this.set('sortOrder', DESC);
         } else {
@@ -63,12 +59,12 @@ export default Ember.Controller.extend({
     },
     activeButtons: ['Active', 'Draft', 'Archived', 'All'],
     actions: {
-        selectStatusFilter: function(status) {
+        selectStatusFilter: function (status) {
             this.set('state', status);
             this.set('sortProperty', 'title');
             this.set('sortOrder', ASC);
         },
-        sortingMethod: function(sortProperty) {
+        sortingMethod: function (sortProperty) {
             if (Ember.isEqual(this.get('sortProperty'), sortProperty)) {
                 this.toggleOrder(this.get('sortOrder'));
             } else {
@@ -76,21 +72,21 @@ export default Ember.Controller.extend({
             }
             this.set('sortProperty', sortProperty);
         },
-        resetParams: function() {
+        resetParams: function () {
             this.set('state', null);
             this.set('match', null);
             this.set('sortProperty', 'title');
             this.set('sortOrder', ASC);
         },
-        updateSearch: function(value) {
+        updateSearch: function (value) {
             this.set('match', `${value}`);
             this.set('sortProperty', null);
         },
-        toggleModal: function() {
+        toggleModal: function () {
             this.set('newTitle', '');
             this.toggleProperty('isShowingModal');
         },
-        createExperiment: function() {
+        createExperiment: function () {
             var newExperiment = this.store.createRecord('experiment', {
                 // should work after split bug is fixed and schema validation handles null values
                 // for structure, beginDate, endDate, and eligibilityCriteria
@@ -112,8 +108,7 @@ export default Ember.Controller.extend({
             newExperiment.on('didCreate', () => {
                 if (newExperiment.get('_sessionCollection.isNew')) {
                     newExperiment.get('_sessionCollection').on('didCreate', onCreateSessionCollection);
-                }
-                else {
+                } else {
                     onCreateSessionCollection();
                 }
             });

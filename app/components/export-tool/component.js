@@ -32,7 +32,6 @@ function squash(obj, prefix) {
     return ret;
 }
 
-
 /**
  * Export tool component: serializes records into one of a number of possible output formats
  * @class export-tool

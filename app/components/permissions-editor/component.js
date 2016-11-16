@@ -18,9 +18,7 @@ let PermissionsEditor = Ember.Component.extend({
         var permissions = this.get('permissions');
 
         // Assumption: all properties passed into this page will match admin pattern
-        return Object.getOwnPropertyNames(permissions).map(function(key){
-            return adminPattern.exec(key)[1];
-        });
+        return Object.getOwnPropertyNames(permissions).map((key) => adminPattern.exec(key)[1]);
     }),
 
     actions: {
@@ -39,8 +37,7 @@ let PermissionsEditor = Ember.Component.extend({
             if (userId === currentUserId) {
                 this.set('warn', true);
                 this.set('removeTarget', userId);
-            }
-            else {
+            } else {
                 this.send('_removePermission', userId);
             }
         },
@@ -58,8 +55,7 @@ let PermissionsEditor = Ember.Component.extend({
             if (userId === currentUserId) {
                 this.get('session').invalidate();
                 window.location.reload();
-            }
-            else {
+            } else {
                 this.rerender();
             }
         }
@@ -69,6 +65,5 @@ let PermissionsEditor = Ember.Component.extend({
 PermissionsEditor.reopenClass({
     positionalParams: ['permissions']
 });
-
 
 export default PermissionsEditor;

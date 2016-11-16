@@ -14,7 +14,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
     },
     _getSession(params, experiment) {
         return this._super(params, experiment).then((session) => {
-            var route = this;
+            var _this = this;
 
             session.setProperties({
                 id: 'PREVIEW_DATA_DISREGARD'
@@ -29,11 +29,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, WarnOnExitRouteMixin,
                         controller.showPreviewData(this).then(() => {
                             // Override the WarnOnExitMixin's behavior
                             controller.set('forceExit', true);
-                            return route.transitionTo('experiments.info');
+                            return _this.transitionTo('experiments.info');
                         });
                         return Ember.RSVP.reject();
-                    }
-                    else {
+                    } else {
                         return Ember.RSVP.resolve(this);
                     }
                 }
