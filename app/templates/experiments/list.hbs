@@ -2,9 +2,12 @@
 
 {{#bs-modal open=isShowingModal title="Name Your New Experiment" body=false footer=false}}
     {{#bs-modal-body}}
-      <div class="form">
-        {{bs-form-element controlType="text" label="Name" property="name" autofocus=true value=newTitle}}
-      </div>
+        <div class="form">
+          <div class="form-group">
+            <label>Name</label>
+            {{input autofocus=true value=newTitle}}
+          </div>
+        </div>
     {{/bs-modal-body}}
     {{#bs-modal-footer as |footer| }}
 	<div class="btn-group">

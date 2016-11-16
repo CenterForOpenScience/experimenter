@@ -59,12 +59,12 @@ export default Ember.Controller.extend({
     },
     activeButtons: ['Active', 'Draft', 'Archived', 'All'],
     actions: {
-        selectStatusFilter: function (status) {
+        selectStatusFilter(status) {
             this.set('state', status);
             this.set('sortProperty', 'title');
             this.set('sortOrder', ASC);
         },
-        sortingMethod: function (sortProperty) {
+        sortingMethod(sortProperty) {
             if (Ember.isEqual(this.get('sortProperty'), sortProperty)) {
                 this.toggleOrder(this.get('sortOrder'));
             } else {
@@ -72,21 +72,21 @@ export default Ember.Controller.extend({
             }
             this.set('sortProperty', sortProperty);
         },
-        resetParams: function () {
+        resetParams() {
             this.set('state', null);
             this.set('match', null);
             this.set('sortProperty', 'title');
             this.set('sortOrder', ASC);
         },
-        updateSearch: function (value) {
+        updateSearch(value) {
             this.set('match', `${value}`);
             this.set('sortProperty', null);
         },
-        toggleModal: function () {
+        toggleModal() {
             this.set('newTitle', '');
             this.toggleProperty('isShowingModal');
         },
-        createExperiment: function () {
+        createExperiment() {
             var newExperiment = this.store.createRecord('experiment', {
                 // should work after split bug is fixed and schema validation handles null values
                 // for structure, beginDate, endDate, and eligibilityCriteria
