@@ -2,45 +2,37 @@ import Ember from 'ember';
 import config from './config/environment';
 
 const Router = Ember.Router.extend({
-  location: config.locationType,
-  rootURL: config.rootURL
+    location: config.locationType,
+    rootURL: config.rootURL
 });
 
-Router.map(function() {
+Router.map(function () {
     this.route('index', {
         path: '/'
     });
 
     this.route('login');
 
-    this.route('errors', function() {
+    this.route('errors', function () {
         this.route('generic');
     });
 
-    this.route('experiments', function() {
+    this.route('experiments', function () {
         this.route('list', {
             path: '/'
         });
         this.route('info', {
             path: '/:experiment_id'
-        }, function() {
-            this.route('index', {
-                path: '/'
+        }, function () {
+            this.route('edit');
+            this.route('results', function() {
+              this.route('all');
             });
-            this.route('edit', {
-                path: '/edit/'
-            });
-            this.route('results', {
-                path: '/results/'
-            });
-            this.route('preview', {
-                path: '/preview/'
-            });
-
+            this.route('preview');
         });
     });
 
-    this.route('participants', function() {
+    this.route('participants', function () {
         this.route('profile', {
             path: ':profile_id/'
         });

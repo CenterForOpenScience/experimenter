@@ -3,14 +3,14 @@
     <thead>
       <tr>
         <th>Participant ID<i class="fa fa-sort btn" {{action "updateSortBy" "profileId"}}></i></th>
-        <th>Date<i class="fa fa-sort btn" {{action "updateSortBy" "createdOn"}}></i></th>
+        <th>Date<i class="fa fa-sort btn" {{action "updateSortBy" "modifiedOn"}}></i></th>
       </tr>
     </thead>
     <tbody>
-      {{#each sortedSessions as |session|}}
+      {{#each sessions as |session|}}
         <tr class="clickable-row" {{action 'updateData' session}}>
           <td>{{session.anonProfileId}}</td>
-          <td>{{moment-format session.createdOn 'MM/DD/YYYY'}}</td>
+          <td>{{moment-format session.modifiedOn 'MM/DD/YYYY'}}</td>
         </tr>
       {{/each}}
     </tbody>
