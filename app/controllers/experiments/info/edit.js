@@ -27,7 +27,7 @@ function createSchema(container, sequence, frames) {
                 });
             } else {
                 setProperty(schema, frameId, null, {
-                    '$oneOf': [
+                    $oneOf: [
                         'object',
                         'string',
                         'number',
@@ -42,7 +42,6 @@ function createSchema(container, sequence, frames) {
 
     return schema;
 }
-
 
 export default Ember.Controller.extend({
     breadCrumb: 'Edit',

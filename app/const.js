@@ -3,61 +3,61 @@ var JAM_ID_PATTERN = '\\w+';
 var PROFILE_ID_PATTERN = '\\w+\\.\\w+';
 
 export const SESSIONSCHEMA = {
-    'type': 'jsonschema',
-    'schema': {
-        'type': 'object',
-        'properties': {
-            'completed': {
-                'type': 'boolean'
+    type: 'jsonschema',
+    schema: {
+        type: 'object',
+        properties: {
+            completed: {
+                type: 'boolean'
             },
-            'profileId': {
-                'type': 'string',
-                'pattern': PROFILE_ID_PATTERN
+            profileId: {
+                type: 'string',
+                pattern: PROFILE_ID_PATTERN
             },
-            'experimentId': {
-                'type': 'string',
-                'pattern': JAM_ID_PATTERN
+            experimentId: {
+                type: 'string',
+                pattern: JAM_ID_PATTERN
             },
-            'experimentVersion': {
-                'type': 'string'
+            experimentVersion: {
+                type: 'string'
             },
-            'sequence': {
-                'type': 'array',
-                'items': {
-                    'type': 'string'
+            sequence: {
+                type: 'array',
+                items: {
+                    type: 'string'
                 }
             },
-            'expData': {
-                'type': 'object'
+            expData: {
+                type: 'object'
             },
-            'feedback': {
-                '$oneOf': [{
-                    'type': 'string'
+            feedback: {
+                $oneOf: [{
+                    type: 'string'
                 }, null]
             },
-            'hasReadFeedback': {
-                '$oneOf': [{
-                    'type': 'boolean'
+            hasReadFeedback: {
+                $oneOf: [{
+                    type: 'boolean'
                 }, null]
             },
-            'earlyExit': {
-                '$oneOf': [{
-                    'type': 'object'
+            earlyExit: {
+                $oneOf: [{
+                    type: 'object'
                 }, null],
-                'properties': {
-                    'reason': {
-                        '$oneOf': [{
-                            'type': 'string'
+                properties: {
+                    reason: {
+                        $oneOf: [{
+                            type: 'string'
                         }, null]
 
                     },
-                    'privacy': {
-                        'type': 'string'
+                    privacy: {
+                        type: 'string'
                     }
                 }
             }
         },
-        'required': [
+        required: [
             'profileId',
             'experimentId',
             'experimentVersion',

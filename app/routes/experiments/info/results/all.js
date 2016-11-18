@@ -11,15 +11,15 @@ export default Ember.Route.extend({
      */
     _fetchResults(collectionName, dest, page) {
         const options = {
-                'filter[completed]': 1,
-                'page[size]': 100,
-                'page': page
+            'filter[completed]': 1,
+            'page[size]': 100,
+            page: page
         };
         return this.store.query(collectionName, options).then(res => {
             const theseResults = res.toArray();
             dest.push(...theseResults);
             // TODO: This is an imperfect means of identifying the last page, but JamDB doesn't tell us directly
-            if (theseResults.length !== 0 && dest.length <  res.get('meta.total')) {
+            if (theseResults.length !== 0 && dest.length < res.get('meta.total')) {
                 return this._fetchResults(collectionName, dest, page + 1);
             } else {
                 return dest;

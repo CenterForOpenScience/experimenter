@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import PaginatedRouteMixin from '../../../../mixins/paginated-route';
 
-
 export default Ember.Route.extend(PaginatedRouteMixin, {
     queryParams: {
         sort: {

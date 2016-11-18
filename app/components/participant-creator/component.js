@@ -161,7 +161,7 @@ export default Ember.Component.extend(Validations, {
             var accountIDs = this._generate(batchSize, tag);
 
             var extra = {};
-            extra['studyId'] = studyId;
+            extra.studyId = studyId;
             this.get('extra').forEach(item => {
                 extra[item.key] = item.value;
             });

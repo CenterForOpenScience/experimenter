@@ -25,8 +25,8 @@ Router.map(function () {
             path: '/:experiment_id'
         }, function () {
             this.route('edit');
-            this.route('results', function() {
-              this.route('all');
+            this.route('results', function () {
+                this.route('all');
             });
             this.route('preview');
         });

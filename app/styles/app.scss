@@ -3,13 +3,13 @@ $small-width: 400px;
 $background-dark: #606060;
 $background-light: rgba(96, 96, 96, 0.15);
 
+@import "components/ace-editor";
 @import "components/experiment-detail";
 @import "components/export-tool";
-@import "components/multi-toggle";
 @import "components/img-selector";
-@import "components/ace-editor";
-@import "components/permissions-editor";
+@import "components/multi-toggle";
 @import "components/participant-creator";
+@import "components/permissions-editor";
 
 @import "routes/experiments";
 @import "routes/login";
