@@ -92,7 +92,12 @@ export default Ember.Component.extend({
         squashed.forEach((item) => {
             var line = [];
             fields.forEach(function(field) {
-                var value = JSON.stringify(item[field]).replace(/\\"/g, '""');
+                var value = JSON.stringify(item[field]);
+                if (value) {
+                    value = value.replace(/\\"/g, '""');
+                } else {
+                    value = '';
+                }
                 line.push(value);
             });
             csv.push(line.join(','));
