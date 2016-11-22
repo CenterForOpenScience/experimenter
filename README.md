@@ -58,9 +58,11 @@ To login via OSF:
 * in .env file include:
 ```bash
 OSF_CLIENT_ID="\<client ID for staging account\>"
-OSF_SCOPE="osf.users.all_read"
+OSF_SCOPE="osf.users.profile_read"
 OSF_URL="https://staging-accounts.osf.io"
 SENTRY_DSN=""
+WOWZA_PHP='{}'
+WOWZA_ASP='{}'
 ```
 
 First:
