@@ -8,10 +8,10 @@ import { validator, buildValidations } from 'ember-cp-validations';
 
 // h/t: http://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
 function makeId(len) {
-    var text = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let text = '';
+    const possible = '0123456789';
 
-    for (var i = 0; i < len; i++) {
+    for (let i = 0; i < len; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
@@ -69,7 +69,7 @@ export default Ember.Component.extend(Validations, {
     _generate(batchSize, tag) {
         var ret = [];
         for (let i = 0; i < batchSize; i++) {
-            ret.push(`${makeId(5)}${tag ? `-${tag}` : ''}`);
+            ret.push(`${makeId(10)}${tag ? `-${tag}` : ''}`);
         }
         return ret;
     },
