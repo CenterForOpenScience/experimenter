@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {adminPattern} from  '../../utils/patterns';
+import {adminPattern, makeUserPattern} from  '../../utils/patterns';
 
 // FIXME: Known bug in original- if the server save request fails, the value will appear to have been added until page reloaded.
 //  (need to catch and handle errors)
@@ -14,11 +14,22 @@ let PermissionsEditor = Ember.Component.extend({
     newPermissionLevel: 'ADMIN',
     newPermissionSelector: '',
 
+    /**
+     * @property {String} displayFilterPattern Filter the list of known permissions to only those that match the
+     * specified pattern. Can be used to restrict to OSF users, Jam users associated with a collection, etc.
+     *
+     */
+    displayFilterPattern: adminPattern,
+
     usersList: Ember.computed('permissions', function() {
         var permissions = this.get('permissions');
 
         // Assumption: all properties passed into this page will match admin pattern
-        return Object.getOwnPropertyNames(permissions).map((key) => adminPattern.exec(key)[1]);
+        const pattern = makeUserPattern(this.get('displayFilterPattern'));
+        return Object.keys(permissions).map((key) => {
+            const match = pattern.exec(key);
+            return match ? match[1] : null;
+        }).filter(match => !!match);
     }),
 
     actions: {
@@ -27,7 +38,7 @@ let PermissionsEditor = Ember.Component.extend({
             var permissions = Ember.copy(this.get('permissions'));
             permissions[`user-osf-${userId}`] = this.get('newPermissionLevel');
             this.set('newUserId', '');
-            this.sendAction('onchange', permissions);
+            this.sendAction('changePermissions', permissions);
             this.set('permissions', permissions);
             this.rerender();
         },
@@ -48,7 +59,7 @@ let PermissionsEditor = Ember.Component.extend({
             var permissions = Ember.copy(this.get('permissions'));
 
             delete permissions[selector];
-            this.sendAction('onchange', permissions);
+            this.sendAction('changePermissions', permissions);
             this.set('permissions', permissions);
 
             var currentUserId = this.get('session.data.authenticated.id');

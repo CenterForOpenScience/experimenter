@@ -22,8 +22,23 @@
 <div class="row">
     <div class="col-md-10">
         <p><em>Enter the permissions string for the desired user, one per line.</em></p>
-        {{permissions-editor userPermissions onchange=(action 'permissionsUpdated')}}
+        {{permissions-editor
+            userPermissions
+            displayFilter=adminPattern
+            changePermissions=(action 'permissionsUpdated')}}
     </div>
 </div>
+
+<h2>Grant permissions to see the accounts collection</h2>
+<div class="row">
+    <div class="col=md-10">
+        <p><em>Enter the user IDs of Jam users allowed to see the accounts collection</em></p>
+        {{permissions-editor
+            userPermissions
+            displayFilterPattern=accountPattern
+            changePermissions=(action 'permissionsUpdated')}}
+    </div>
+</div>
+
 
 {{outlet}}

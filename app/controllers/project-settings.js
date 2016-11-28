@@ -1,20 +1,35 @@
 import Ember from 'ember';
-import {adminPattern} from  '../utils/patterns';
+import {adminPattern, makeUserPattern} from  '../utils/patterns';
 
 import config from 'ember-get-config';
 
 export default Ember.Controller.extend({
+    namespaceConfig: Ember.inject.service(),
+
     breadCrumb: 'Project configuration',
 
     osfURL: config.OSF.url,
 
-    filteredPermissions: Ember.computed('model', function() {
+    adminPattern: adminPattern,
+    accountPattern: Ember.computed('namespaceConfig.namespace', function() {
+        return `jam-${this.get('namespaceConfig.namespace')}:accounts`;
+    }),
+
+    userPatterns: Ember.computed('accountPattern', function() {
+        return [adminPattern, this.get('accountPattern')];
+    }),
+
+    filteredPermissions: Ember.computed('model', 'userPatterns', function() {
         var permissions = this.get('model.permissions');
         var users = {};
         var system = {};
-        for (let k of Object.getOwnPropertyNames(permissions)) {
-            var dest = adminPattern.test(k) ? users : system;
-            dest[k] = permissions[k];
+
+        for (let k of Object.keys(permissions)) {
+            this.get('userPatterns').forEach(item => {
+                const pattern = makeUserPattern(item);
+                var dest = pattern.test(k) ? users : system;
+                dest[k] = permissions[k];
+            });
         }
         return [users, system];
     }),
