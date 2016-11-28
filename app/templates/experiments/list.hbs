@@ -1,19 +1,24 @@
-<h2> Experiments <button class="btn btn-primary pull-right" {{action "toggleModal"}}>New Experiment</button> </h2>
+<h2>
+    Experiments
+    <button class="btn btn-primary pull-right" {{action "toggleModal"}}>New Experiment</button>
+</h2>
 
 {{#bs-modal open=isShowingModal title="Name Your New Experiment" body=false footer=false}}
     {{#bs-modal-body}}
         <div class="form">
-          <div class="form-group">
-            <label>Name</label>
-            {{input autofocus=true value=newTitle}}
-          </div>
+            <div class="form-group">
+                <label>Name</label>
+                {{input autofocus=true value=newTitle}}
+            </div>
         </div>
     {{/bs-modal-body}}
     {{#bs-modal-footer as |footer| }}
-	<div class="btn-group">
-	    {{#bs-button click=(action 'close' target=footer)}}Cancel{{/bs-button}}
-	    {{#bs-button click=(action 'createExperiment') type="success" disabled=(if (eq (trim newTitle) '') true false) }}Create experiment{{/bs-button}}
-	</div>
+        <div class="btn-group">
+            {{#bs-button click=(action 'close' target=footer)}}Cancel{{/bs-button}}
+            {{#bs-button click=(action 'createExperiment') type="success" disabled=(if (eq (trim newTitle) '') true false) }}
+                Create experiment
+            {{/bs-button}}
+        </div>
     {{/bs-modal-footer}}
 {{/bs-modal}}
 
@@ -23,26 +28,26 @@
     </div>
 </div>
 <div class="row text-center button-block">
-  {{multi-toggle buttons=activeButtons activeButton=state onSelect=(action 'selectStatusFilter')}}
+    {{multi-toggle buttons=activeButtons activeButton=state onSelect=(action 'selectStatusFilter')}}
 </div>
 <div class="row">
-  <div class="col-xs-8">
-    <strong>Title </strong><i class="fa fa-sort btn" {{action "sortingMethod" "title"}}></i>
-  </div>
-  <div class="col-xs-2 text-center">
-      <strong>Begin Date </strong><i class="fa fa-sort btn" {{action "sortingMethod" "beginDate"}}></i>
+    <div class="col-xs-8">
+        <strong>Title </strong><i class="fa fa-sort btn" role="button" {{action "sortingMethod" "title"}}></i>
     </div>
-  <div class="col-xs-2 text-center">
-      <strong>End Date </strong><i class="fa fa-sort btn" {{action "sortingMethod" "endDate"}}></i>
+    <div class="col-xs-2 text-center">
+        <strong>Begin Date </strong><i class="fa fa-sort btn" role="button" {{action "sortingMethod" "beginDate"}}></i>
+    </div>
+    <div class="col-xs-2 text-center">
+        <strong>End Date </strong><i class="fa fa-sort btn" role="button" {{action "sortingMethod" "endDate"}}></i>
     </div>
 </div>
 <hr>
 <div class="row results">
-  {{#unless model.isPending}}
-    {{#each model as |experiment|}}
-      {{experiment-summary experiment=experiment}}
-    {{/each}}
-  {{else}}
-    LOADING
-  {{/unless}}
+    {{#unless model.isPending}}
+        {{#each model as |experiment|}}
+            {{experiment-summary experiment=experiment}}
+        {{/each}}
+    {{else}}
+        LOADING
+    {{/unless}}
 </div>

@@ -1,23 +1,29 @@
 <h1>Project Settings</h1>
-<!--TODO: Add permissions widget that shows permission and optionally updates entire list -->
+{{!--TODO: Add permissions widget that shows permission and optionally updates entire list --}}
 
 <h2>Add administrator to project</h2>
 <div class="row">
-  <div class="col-md-10">
-    <p>
-      This interface allows you to specify which OSF accounts are allowed to access this site. To get the id for an OSF user, visit <a target="_blank" href={{concat osfURL '/search/'}}>the OSF search page</a>, search for the user you are looking for by name, and click the link that corresponds with that person. From that page, look in the URL and grab the 5-6 character id from that url; e.g. for {{concat osfURL '/ab34rt/'}} the user id is 'ab34rt'.
-      <br>
-      <br>
-      Alternatively, ask that user to log into the OSF and visit his or her <a target="_blank" href={{concat osfURL '/profile/'}}> profile page</a> and to copy the user id from the 'Public Profile' link.
-    </p>
-  </div>
+    <div class="col-md-10">
+        <p>
+            This interface allows you to specify which OSF accounts are allowed to access this site. To get the id for
+            an OSF user, visit <a target="_blank" rel="noopener" href={{concat osfURL '/search/'}}>the OSF search page</a>,
+            search for the user you are looking for by name, and click the link that corresponds with that person.
+            From that page, look in the URL and grab the 5-6 character id from that url; e.g. for
+            {{concat osfURL '/ab34rt/'}} the user id is 'ab34rt'.
+            <br>
+            <br>
+            Alternatively, ask that user to log into the OSF and visit his or her
+            <a target="_blank" rel="noopener" href={{concat osfURL '/profile/'}}> profile page</a>
+            and to copy the user id from the 'Public Profile' link.
+        </p>
+    </div>
 </div>
 <br>
 <div class="row">
-  <div class="col-md-10">
-    <p><em>Enter the permissions string for the desired user, one per line.</em></p>
-    {{permissions-editor userPermissions onchange=(action 'permissionsUpdated')}}
-  </div>
+    <div class="col-md-10">
+        <p><em>Enter the permissions string for the desired user, one per line.</em></p>
+        {{permissions-editor userPermissions onchange=(action 'permissionsUpdated')}}
+    </div>
 </div>
 
 {{outlet}}
