@@ -15,9 +15,9 @@
                 <br>
                 <div class="row sub-navigation {{unless isExpanded 'text-center'}}">
                     {{#if session.isAuthenticated}}
-                        {{#link-to 'project-settings' class="fa fa-cogs increase sub-navigation"}} {{if isExpanded ' Project Settings'}}{{/link-to}}
+                        {{#link-to 'project-settings' class="fa fa-cogs increase sub-navigation"}} {{if isExpanded 'Project Settings'}}{{/link-to}}
                         <br>
-                            {{#link-to 'participants' class="fa fa-user increase sub-navigation"}} {{if isExpanded 'Participants'}}{{/link-to}}
+                            {{#link-to 'participants' class="fa fa-user increase sub-navigation"}} {{if isExpanded 'Create users'}}{{/link-to}}
                         <br>
                         <a class="fa fa-sign-out increase sub-navigation" {{action 'invalidateSession'}}> {{if isExpanded ' Logout'}}</a>
                     {{/if}}
