@@ -3,13 +3,35 @@ import {adminPattern, makeUserPattern} from  '../../utils/patterns';
 
 // FIXME: Known bug in original- if the server save request fails, the value will appear to have been added until page reloaded.
 //  (need to catch and handle errors)
+
+/**
+ * Display all users that match a provided user type, and allow adding/removing of new user IDs
+ *
+ * Sample usage:
+ * ```handlebars
+ * {{permissions-editor
+ *   userPermissions
+ *   displayFilterPattern=accountPattern
+ *   changePermissions=(action 'changePermissions')}}
+ * ```
+ *
+ * @class permissions-editor
+ */
 let PermissionsEditor = Ember.Component.extend({
     session:  Ember.inject.service(),
+    store: Ember.inject.service(),
+
     tagName: 'table',
     classNames: ['table'],
 
     warn: false,
     removeTarget: null,
+
+    /**
+     * If a valid string is provided, then this will attempt to set permissions on a collection instead of a namespace
+     * @property {String} collectionTarget
+     */
+    collectionTarget: null,
 
     newPermissionLevel: 'ADMIN',
     newPermissionSelector: '',
@@ -21,8 +43,31 @@ let PermissionsEditor = Ember.Component.extend({
      */
     displayFilterPattern: adminPattern,
 
+
+    /**
+     * Get a record
+     * @method getOrPeek
+     * @param {String} recordName The ID of the specific item, eg the name of the desired collection
+     * @param {String} modelName (optional) What kind of record to fetch- collection, namespace, or one record ID
+     * @returns {DS.Model|null} A promise that resolves to a model or a null value
+     */
+    getOrPeek(modelName, recordName) {
+        const store = this.get('store');
+        if (!recordName) {
+            return Ember.RSVP.resolve(null);
+        }
+        return store.peekRecord(modelName, recordName) || store.findRecord(modelName, recordName);
+    },
+
+    /**
+     * If a target collection is specified, use that model
+     */
+    _collectionTargetModel: Ember.computed('collectionTarget', function() {
+        return this.getOrPeek('collection', this.get('collectionTarget'));
+    }),
+
     usersList: Ember.computed('permissions', function() {
-        var permissions = this.get('permissions');
+        const permissions = this.get('permissions');
 
         // Assumption: all properties passed into this page will match admin pattern
         const pattern = makeUserPattern(this.get('displayFilterPattern'));
@@ -34,17 +79,21 @@ let PermissionsEditor = Ember.Component.extend({
 
     actions: {
         addPermission() {
-            var userId = this.get('newUserId');
-            var permissions = Ember.copy(this.get('permissions'));
-            permissions[`user-osf-${userId}`] = this.get('newPermissionLevel');
+            const userId = this.get('newUserId');
+            let permissions = Ember.copy(this.get('permissions'));
+            permissions[`${this.get('displayFilterPattern')}-${userId}`] = this.get('newPermissionLevel');
             this.set('newUserId', '');
-            this.sendAction('changePermissions', permissions);
-            this.set('permissions', permissions);
-            this.rerender();
+
+            this.get('_collectionTargetModel').then(model => {
+                this.sendAction('changePermissions', permissions, model);
+                this.set('permissions', permissions);
+                this.rerender();
+            });
+
         },
 
         removePermission(userId) {
-            var currentUserId = this.get('session.data.authenticated.id');
+            const currentUserId = this.get('session.data.authenticated.id');
             if (userId === currentUserId) {
                 this.set('warn', true);
                 this.set('removeTarget', userId);
@@ -55,20 +104,21 @@ let PermissionsEditor = Ember.Component.extend({
         _removePermission(userId) {
             userId = userId || this.get('removeTarget');
 
-            var selector = `user-osf-${userId}`;
-            var permissions = Ember.copy(this.get('permissions'));
+            const selector = `${this.get('displayFilterPattern')}-${userId}`;
+            const permissions = Ember.copy(this.get('permissions'));
 
             delete permissions[selector];
-            this.sendAction('changePermissions', permissions);
-            this.set('permissions', permissions);
-
-            var currentUserId = this.get('session.data.authenticated.id');
-            if (userId === currentUserId) {
-                this.get('session').invalidate();
-                window.location.reload();
-            } else {
-                this.rerender();
-            }
+            this.get('_collectionTargetModel').then(model => {
+                this.sendAction('changePermissions', permissions, model);
+                this.set('permissions', permissions);
+                const currentUserId = this.get('session.data.authenticated.id');
+                if (userId === currentUserId) {
+                    this.get('session').invalidate();
+                    window.location.reload();
+                } else {
+                    this.rerender();
+                }
+            });
         }
     }
 });

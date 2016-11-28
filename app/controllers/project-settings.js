@@ -48,12 +48,13 @@ export default Ember.Controller.extend({
     }),
 
     actions: {
-        permissionsUpdated(permissions) {
+        changePermissions(permissions, model) {
             // Save updated permissions, and avoid overwriting system-level permissions not displayed to the user
+            model = model || this.get('model');
 
             var payload = Object.assign({}, permissions, this.get('systemPermissions'));
-            this.set('model.permissions', payload);
-            this.get('model').save();
+            model.set('permissions', payload);
+            model.save();
         }
     }
 });
