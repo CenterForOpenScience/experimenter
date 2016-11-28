@@ -24,13 +24,13 @@ export default Ember.Controller.extend({
         var users = {};
         var system = {};
 
-        for (let k of Object.keys(permissions)) {
-            this.get('userPatterns').forEach(item => {
-                const pattern = makeUserPattern(item);
+        this.get('userPatterns').forEach(item => {
+            const pattern = makeUserPattern(item);
+            for (let k of Object.keys(permissions)) {
                 var dest = pattern.test(k) ? users : system;
                 dest[k] = permissions[k];
-            });
-        }
+            }
+        });
         return [users, system];
     }),
 

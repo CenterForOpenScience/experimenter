@@ -14,7 +14,7 @@ const adminPattern = 'user-osf';
  */
 function makeUserPattern(prefix) {
     return new RegExp(`^${prefix}-(\\w\+|\\*)$`);
-};
+}
 
 export {adminPattern, makeUserPattern};
 
