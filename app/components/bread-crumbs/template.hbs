@@ -1,25 +1,26 @@
+{{! template-lint-disable block-indentation }}{{!-- linter seems to be having trouble parsing nested blocks --}}
 <ol class="breadcrumb">
-  {{#each breadCrumbs as |crumb|}}
-    {{#if crumb.isCurrent}}
-      <li class="active">
-        {{crumb.label}}
-      </li>
-    {{else}}
-      <li>
-        {{#if crumb.linkable}}
-          {{#if crumb.model}}{{! to avoid null/undefined model in link-to }}
-            {{#link-to crumb.path crumb.model}}
-              {{crumb.label}}
-            {{/link-to}}
-          {{else}}
-            {{#link-to crumb.path}}
-              {{crumb.label}}
-            {{/link-to}}
-          {{/if}}
+    {{#each breadCrumbs as |crumb|}}
+        {{#if crumb.isCurrent}}
+            <li class="active">
+                {{crumb.label}}
+            </li>
         {{else}}
-          {{crumb.label}}
+            <li>
+                {{#if crumb.linkable}}
+                    {{#if crumb.model}}{{! to avoid null/undefined model in link-to }}
+                        {{#link-to crumb.path crumb.model}}
+                            {{crumb.label}}
+                        {{/link-to}}
+                    {{else}}
+                        {{#link-to crumb.path}}
+                            {{crumb.label}}
+                        {{/link-to}}
+                    {{/if}}
+                {{else}}
+                    {{crumb.label}}
+                {{/if}}
+            </li>
         {{/if}}
-      </li>
-    {{/if}}
-  {{/each}}
+    {{/each}}
 </ol>

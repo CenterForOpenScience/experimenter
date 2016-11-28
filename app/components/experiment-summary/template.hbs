@@ -1,37 +1,37 @@
 <div class="col-md-12 well">
-  <div class="row table-block">
-    <div class="col-xs-8">
-      <strong>{{experiment.title}}</strong>
+    <div class="row table-block">
+        <div class="col-xs-8">
+            <strong>{{experiment.title}}</strong>
+        </div>
+        <div class="col-xs-2 text-center">
+            {{#if experiment.beginDate}}
+                <strong>{{moment-format experiment.beginDate 'MMMM D, YYYY'}}</strong>
+            {{else}}
+                n/a
+            {{/if}}
+        </div>
+        <div class="col-xs-2 text-center">
+            {{#if experiment.endDate}}
+                <strong>{{moment-format experiment.endDate 'MMMM D, YYYY'}}</strong>
+            {{else}}
+                n/a
+            {{/if}}
+        </div>
     </div>
-    <div class="col-xs-2 text-center">
-      {{#if experiment.beginDate}}
-        <strong>{{moment-format experiment.beginDate 'MMMM D, YYYY'}}</strong>
-      {{else}}
-        n/a
-      {{/if}}
+    <div class="row table-block">
+        <div class="col-xs-12">
+            {{experiment.description}}
+        </div>
     </div>
-    <div class="col-xs-2 text-center">
-      {{#if experiment.endDate}}
-        <strong>{{moment-format experiment.endDate 'MMMM D, YYYY'}}</strong>
-      {{else}}
-        n/a
-      {{/if}}
+    <div class="row table-block">
+        <div class="col-xs-2">
+            <strong>Status: </strong>{{experiment.state}}
+        </div>
+        <div class="col-xs-3">
+            <strong>Last Edited: </strong>{{moment-format experiment.modifiedOn 'M/D/YYYY'}}
+        </div>
+        <div class="col-xs-2 pull-right">
+            {{#link-to "experiments.info" experiment.id class="btn btn-default" }}Details{{/link-to}}
+        </div>
     </div>
-  </div>
-  <div class="row table-block">
-    <div class="col-xs-12">
-      {{experiment.description}}
-    </div>
-  </div>
-  <div class="row table-block">
-    <div class="col-xs-2">
-      <strong>Status: </strong>{{experiment.state}}
-    </div>
-    <div class="col-xs-3">
-      <strong>Last Edited: </strong>{{moment-format experiment.modifiedOn 'M/D/YYYY'}}
-    </div>
-    <div class="col-xs-2 pull-right">
-      {{#link-to "experiments.info" experiment.id class="btn btn-default" }}Details{{/link-to}}
-    </div>
-  </div>
 </div>
