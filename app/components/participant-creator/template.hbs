@@ -43,27 +43,29 @@
                 <small class="text-muted">
                     extra information for this batch of participants
                 </small>
-                    {{#each extra as |item|}}
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <label>
-                                        {{item.key}}:
-                                    </label>
-                                    {{input class="form-control" value=item.value}}
-                                </div>
-                                <div class="col-md-1">
-                                    <button class="btn btn-sm btn-danger" {{action 'removeExtraField' item.key}}>X</button>
-                                </div>
+                {{#each extra as |item|}}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <label>
+                                    {{item.key}}:
+                                </label>
+                                {{input class="form-control" value=item.value}}
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-sm btn-danger" {{action 'removeExtraField' item.key}}>X</button>
                             </div>
                         </div>
-                    {{/each}}
+                    </div>
+                {{/each}}
                 <div class="form-inline">
                     <div class="form-group">
                         <label> Add a field: </label>
                         {{input class="form-control" value=nextExtra}}
                     </div>
-                    <button disabled={{if (not nextExtra) true false}} class="btn btn-sm btn-primary" {{action 'addExtraField'}}>Add</button>
+                    <button disabled={{if (not nextExtra) true false}} class="btn btn-sm btn-primary" {{action 'addExtraField'}}>
+                        Add
+                    </button>
                 </div>
             </div>
             <div class="form-group">
@@ -117,7 +119,7 @@
 </div>
 
 {{#if invalidFieldName}}
-  {{#bs-modal title="Invalid Field Name" closedAction=(action 'toggleInvalidFieldName')}}
-    {{#bs-modal-body}}A field with this name already exists.{{/bs-modal-body}}
-  {{/bs-modal}}
+    {{#bs-modal title="Invalid Field Name" closedAction=(action 'toggleInvalidFieldName')}}
+        {{#bs-modal-body}}A field with this name already exists.{{/bs-modal-body}}
+    {{/bs-modal}}
 {{/if}}
