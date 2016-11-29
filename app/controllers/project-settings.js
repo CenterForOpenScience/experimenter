@@ -4,35 +4,53 @@ import {adminPattern, makeUserPattern} from  '../utils/patterns';
 import config from 'ember-get-config';
 
 export default Ember.Controller.extend({
+
+    queryParams: ['collection'],
+    collection: '',
+
     namespaceConfig: Ember.inject.service(),
+    namespace: Ember.computed.alias('namespaceConfig.namespace'),
 
     breadCrumb: 'Project configuration',
 
     osfURL: config.OSF.url,
 
-    adminPattern: adminPattern,
-    accountPattern: Ember.computed('namespaceConfig.namespace', function() {
-        return `jam-${this.get('namespaceConfig.namespace')}:accounts`;
+    // List of collection names for which we will allow the user to add read-only Jam-authenticated users
+    availableCollections: ['accounts'],
+
+    // Define the username format, eg Jam-authenticated users vs OSF provider
+    userPattern: Ember.computed('namespace', 'collection', function () {
+        const collection = this.get('collection');
+        if (collection) {
+            return `jam-${this.get('namespace')}:accounts`;
+        }
+        return adminPattern;
     }),
 
-    userPatterns: Ember.computed('accountPattern', function() {
-        return [adminPattern, this.get('accountPattern')];
+    // For now, we will only let users add ADMINS to the namespace (must be OSF users), and only grant READ-ONLY access
+    //   to collections (where the new users will be Jam authenticated users)
+    permissionsLevel: Ember.computed('collection', function () {
+        if (this.get('collection')) {
+            return 'READ';
+        }
+        return 'ADMIN';
     }),
 
-    filteredPermissions: Ember.computed('model', 'userPatterns', function() {
+    // TODO: Can we rip all of this out and let only the selector widget control display logic?
+    filteredPermissions: Ember.computed('model', 'userPattern', function() {
         const permissions = this.get('model.permissions');
         let users = {};
         let system = {};
 
-        let patterns = this.get('userPatterns').map(item => makeUserPattern(item));
+        let pattern = makeUserPattern(this.get('userPattern'));
         for (let k of Object.keys(permissions)) {
-            const dest = patterns.some(item => item.test(k)) ? users : system;
+            const dest = pattern.test(k) ? users : system;
             dest[k] = permissions[k];
-        };
+        }
         return [users, system];
     }),
 
-    /* Return permissions strings that correspond to admin users (those who log in via OSF) */
+    // Return permissions strings that correspond to recognized user types
     _userPermissions:  Ember.computed('filteredPermissions', function() {
         let filtered = this.get('filteredPermissions');
         return filtered[0];
@@ -46,11 +64,9 @@ export default Ember.Controller.extend({
     }),
 
     actions: {
-        changePermissions(permissions, model) {
+        changePermissions(permissions) {
             // Save updated permissions, and avoid overwriting system-level permissions not displayed to the user
-            // Defaults to setting permissions on the namespace; can be overridden if a model is explicitly passed in
-            model = model || this.get('model');
-
+            let model = this.get('model');
             let payload = Object.assign({}, permissions, this.get('systemPermissions'));
             model.set('permissions', payload);
             model.save();

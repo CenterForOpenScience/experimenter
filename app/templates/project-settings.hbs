@@ -1,6 +1,17 @@
 <h1>Project Settings</h1>
 {{!--TODO: Add permissions widget that shows permission and optionally updates entire list --}}
 
+
+<h2>Add user access</h2>
+
+<select onchange={{action (mut collection) value="target.value"}}>
+    <option value="">Admin for: {{namespace}}</option>
+    {{#each availableCollections as |name|}}
+        <option value="{{name}}">Read collection: {{name}}</option>
+    {{/each}}
+</select>
+
+
 <h2>Add administrator to project</h2>
 <div class="row">
     <div class="col-md-10">
