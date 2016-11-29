@@ -12,6 +12,7 @@ import {adminPattern, makeUserPattern} from  '../../utils/patterns';
  * {{permissions-editor
  *   userPermissions
  *   displayFilterPattern=accountPattern
+ *   newPermissionLevel=permissionsLevel
  *   changePermissions=(action 'changePermissions')}}
  * ```
  *
@@ -19,54 +20,23 @@ import {adminPattern, makeUserPattern} from  '../../utils/patterns';
  */
 let PermissionsEditor = Ember.Component.extend({
     session:  Ember.inject.service(),
-    store: Ember.inject.service(),
-
     tagName: 'table',
     classNames: ['table'],
 
     warn: false,
     removeTarget: null,
 
-    /**
-     * If a valid string is provided, then this will attempt to set permissions on a specific collection
-     * @property {String} collectionTarget The name of the collection on which to set permissions
-     */
-    collectionTarget: null,
-
     newPermissionLevel: 'ADMIN',
-    newPermissionSelector: '',
 
     /**
      * @property {String} displayFilterPattern Filter the list of known permissions to only those that match the
-     * specified pattern. Can be used to restrict to OSF users, Jam users associated with a collection, etc.
+     *   specified pattern. Can be used to restrict to OSF users, Jam users associated with a collection, etc.
+     *   This pattern is also used to *add* new users with the specified permissions level.
      *
      */
     displayFilterPattern: adminPattern,
 
-
-    /**
-     * Get a record
-     * @method getOrPeek
-     * @param {String} recordName The ID of the specific item, eg the name of the desired collection
-     * @param {String} modelName (optional) What kind of record to fetch- collection, namespace, or one record ID
-     * @returns {DS.Model|null} A promise that resolves to a model or a null value
-     */
-    getOrPeek(modelName, recordName) {
-        const store = this.get('store');
-        if (!recordName) {
-            return Ember.RSVP.resolve(null);
-        }
-        return store.peekRecord(modelName, recordName) || store.findRecord(modelName, recordName);
-    },
-
-    /**
-     * If a target collection is specified, use that model
-     */
-    _collectionTargetModel: Ember.computed('collectionTarget', function() {
-        return this.getOrPeek('collection', this.get('collectionTarget'));
-    }),
-
-    usersList: Ember.computed('permissions', function() {
+    usersList: Ember.computed('displayFilterPattern', 'permissions', function() {
         const permissions = this.get('permissions');
 
         // Assumption: all properties passed into this page will match admin pattern
@@ -74,24 +44,20 @@ let PermissionsEditor = Ember.Component.extend({
         return Object.keys(permissions).map((key) => {
             const match = pattern.exec(key);
             return match ? match[1] : null;
-        }).filter(match => !!match);
+        }).filter(match => !!match
+        ).sort();
     }),
 
     actions: {
         addPermission() {
             const userId = this.get('newUserId');
-            let permissions = Ember.copy(this.get('permissions'));
+            let permissions = Ember.copy(this.get('permissions'), true);
             permissions[`${this.get('displayFilterPattern')}-${userId}`] = this.get('newPermissionLevel');
             this.set('newUserId', '');
 
-            this.get('_collectionTargetModel').then(model => {
-                // If no collection is specified, then the (null) target model will be ignored by this action and
-                //   it will use the default, eg namespace.
-                this.sendAction('changePermissions', permissions, model);
-                this.set('permissions', permissions);
-                this.rerender();
-            });
-
+            this.sendAction('changePermissions', permissions);
+            this.set('permissions', permissions);
+            this.rerender();
         },
 
         removePermission(userId) {
@@ -110,17 +76,16 @@ let PermissionsEditor = Ember.Component.extend({
             const permissions = Ember.copy(this.get('permissions'));
 
             delete permissions[selector];
-            this.get('_collectionTargetModel').then(model => {
-                this.sendAction('changePermissions', permissions, model);
-                this.set('permissions', permissions);
-                const currentUserId = this.get('session.data.authenticated.id');
-                if (userId === currentUserId) {
-                    this.get('session').invalidate();
-                    window.location.reload();
-                } else {
-                    this.rerender();
-                }
-            });
+            this.sendAction('changePermissions', permissions);
+            this.set('permissions', permissions);
+            const currentUserId = this.get('session.data.authenticated.id');
+            if (userId === currentUserId) {
+                this.get('session').invalidate();
+                window.location.reload();
+            } else {
+                // TODO: Is rerender necessary?
+                this.rerender();
+            }
         }
     }
 });
