@@ -1,0 +1,165 @@
+<div class="col-md-12">
+    {{#if (not editing) }}
+        <div class="row">
+            <h3> {{experiment.title}}</h3>
+            <button class="btn btn-default pull-right" {{ action 'toggleEditing' }}>
+                <i class="fa fa-pencil-square-o"></i> Edit Details
+            </button>
+            <br>
+        </div>
+        <div class="row">
+            {{img-selector thumbnail=experiment.thumbnail.raw edit=false}}
+        </div>
+        <br>
+        <div class="row">
+            <p> {{if experiment.description experiment.description 'No description'}} </p>
+        </div>
+        <div class="row">
+            <label>Purpose:</label>
+            <p> {{if experiment.purpose experiment.purpose 'None specified'}} </p>
+        </div>
+        <div class="row">
+            <label>Duration:</label> {{if experiment.duration experiment.duration 'Not specified'}}
+        </div>
+        <div class="row">
+            <label>Exit URL:</label> {{if experiment.exitUrl experiment.exitUrl 'Not specified'}}
+        </div>
+        <div class="row">
+            <label>Participant Eligibility: </label> {{experiment.eligibilityString}}
+        </div>
+        <div class="row">
+            <label>Minimum Age: </label> {{experiment.eligibilityMinAge}}
+        </div>
+        <div class="row">
+            <label>Maximum Age: </label> {{experiment.eligibilityMaxAge}}
+        </div>
+    {{/if}}
+    {{#if editing }}
+        <div class="form">
+            <div class="row">
+                <div class="col-xs-8">
+                    {{input class="increase-4 form-control" value=experiment.title}}
+                </div>
+                <div class="col-xs-4">
+                    <button class="btn btn-success pull-right" {{action 'toggleEditing'}}>
+                        <i class="fa fa-save"></i> Save Details
+                    </button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                {{img-selector thumbnail=experiment.thumbnail.raw edit=true onSetImage=(action 'onSetImage')}}
+            </div>
+            <br>
+            <div class="row">
+                <p>
+                    {{textarea value=experiment.description class="experiment-textarea form-control"
+                               placeholder="Give your experiment a description here..."}}
+                </p>
+            </div>
+            <div class="row">
+                <label>Purpose: </label>
+                <p>
+                    {{textarea value=experiment.purpose class="experiment-textarea form-control"
+                               placeholder="Explain the purpose of your experiment here..."}}
+                </p>
+            </div>
+
+            <div class="row">
+                <label>Duration: </label> {{input value=experiment.duration
+                                                  class="experiment-detail-wide form-control"}}
+            </div>
+            <div class="row">
+                <label>Exit URL: </label> {{input value=experiment.exitUrl class="experiment-detail-wide form-control"}}
+            </div>
+            <div class="row">
+                <label>Participant Eligibility: </label> {{input value=experiment.eligibilityString
+                                                                 class="experiment-detail-wide form-control"}}
+            </div>
+            <div class="row">
+                <label>Minimum age: </label> {{input value=experiment.eligibilityMinAge
+                                                     class="experiment-detail-wide form-control"
+                                                     placeholder="9 months"}}
+            </div>
+            <div class="row">
+                <label>Maximum age: </label> {{input value=experiment.eligibilityMaxAge
+                                                     class="experiment-detail-wide form-control" placeholder="2 years"}}
+            </div>
+        </div>
+    {{/if}}
+    <div class="row">
+        <label>Last Edited: </label> {{moment-format experiment.lastEdited 'MMMM D, YYYY'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>
+        <br>
+    </div>
+    <div class="row">
+        <label>Status:</label>  {{experiment.state}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{#if (eq experiment.state 'Active')}}
+            <button class="btn btn-danger" {{ action 'stop' }}> Stop Experiment Now</button>
+        {{/if}}
+        {{#if (eq experiment.state 'Draft') }}
+            <button class="btn btn-success" {{ action 'start' }}> Start Experiment Now</button>
+        {{/if}}
+        {{#if (eq experiment.state 'Archived') }}
+            <button class="btn btn-primary" {{ action 'start' }}> Re-run Experiment Now</button>
+        {{/if}}
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="row">
+        {{#link-to 'experiments.info.edit' tagName='div' class="btn col-md-4"}}
+            <div class="well">
+                <center>
+                    <p><i class="increase-4 fa fa-list"></i></p>
+                    <h4> Build Experiment </h4>
+                    <p> Add/Modify experiment components </p>
+                </center>
+            </div>
+        {{/link-to}}
+        {{#link-to 'experiments.info.results' tagName='div' class="btn col-md-4"}}
+            <div class="well">
+                <center>
+                    <p><i class="increase-4 fa fa-file-text-o"></i></p>
+                    <h4> View <strong>{{sessions.length}}</strong> Responses </h4>
+                    <p> Inspect responses from studies </p>
+                </center>
+            </div>
+        {{/link-to}}
+        <div class="btn col-md-4" role="button" {{action 'clone'}}>
+            <div class="well">
+                <center>
+                    <p><i class="increase-4 fa fa-files-o"></i></p>
+                    <h4> Clone Experiment </h4>
+                    <p> Copy experiment structure and details </p>
+                </center>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-danger" disabled={{experiment.isActive}} {{action 'toggleDeleteWarning' }}>
+                Delete this Experiment
+            </button>
+            {{#if experiment.isActive }}&nbsp;&nbsp;You can't delete active experiments {{/if}}
+        </div>
+    </div>
+</div>
+
+{{#bs-modal open=showDeleteWarning title="Are you sure?" footer=false}}
+    {{#bs-modal-body}}
+        Deleting this experiment will remove it from your list of experiments. This action is irreversible.
+    {{/bs-modal-body}}
+    {{#bs-modal-footer as |footer|}}
+        <div class="row pull-right">
+            <div class="col-xs-4">
+                {{#bs-button action=(action "close" target=footer) type="default"}}Cancel{{/bs-button}}
+            </div>
+            <div class="col-xs-4">
+                {{#bs-button action=(action "delete") type="danger"}}Delete now{{/bs-button}}
+            </div>
+        </div>
+    {{/bs-modal-footer}}
+{{/bs-modal}}
+
+{{#bs-modal open=deleting footer=false closeButton=false title="Please wait"}}Deleting experiment...{{/bs-modal}}

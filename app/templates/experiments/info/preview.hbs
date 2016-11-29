@@ -1,18 +1,17 @@
-{{
-  exp-player
-  session=session
-  experiment=experiment
-  pastSessions=pastSessions
+{{exp-player
+    session=session
+    experiment=experiment
+    pastSessions=pastSessions
 }}
 {{#bs-modal open=showData title="Data collected during this preview session" closeAction=(action 'toggleData')}}
-  {{#bs-modal-body}}
-  <pre class="preview-data">
-    {{previewData}}
-  </pre>
-  <hr>
-  <p>
-    <strong> Note: </strong>
-    This dialog will not appear to participants when they complete a study.
-  </p>
-  {{/bs-modal-body}}
+    {{#bs-modal-body}}
+        <pre class="preview-data">
+            {{previewData}}
+        </pre>
+        <hr>
+        <p>
+            <strong> Note: </strong>
+            This dialog will not appear to participants when they complete a study.
+        </p>
+    {{/bs-modal-body}}
 {{/bs-modal}}
