@@ -20,39 +20,38 @@ export default Ember.Controller.extend({
     }),
 
     filteredPermissions: Ember.computed('model', 'userPatterns', function() {
-        var permissions = this.get('model.permissions');
-        var users = {};
-        var system = {};
+        const permissions = this.get('model.permissions');
+        let users = {};
+        let system = {};
 
-        this.get('userPatterns').forEach(item => {
-            const pattern = makeUserPattern(item);
-            for (let k of Object.keys(permissions)) {
-                var dest = pattern.test(k) ? users : system;
-                dest[k] = permissions[k];
-            }
-        });
+        let patterns = this.get('userPatterns').map(item => makeUserPattern(item));
+        for (let k of Object.keys(permissions)) {
+            const dest = patterns.some(item => item.test(k)) ? users : system;
+            dest[k] = permissions[k];
+        };
         return [users, system];
     }),
 
     /* Return permissions strings that correspond to admin users (those who log in via OSF) */
     _userPermissions:  Ember.computed('filteredPermissions', function() {
-        var filtered = this.get('filteredPermissions');
+        let filtered = this.get('filteredPermissions');
         return filtered[0];
     }),
     userPermissions: Ember.computed.readOnly('_userPermissions'), // TODO: is this necessary?
 
     /* Return permissions strings that do not match OSF users */
     systemPermissions:  Ember.computed('filteredPermissions', function() {
-        var filtered = this.get('filteredPermissions');
+        let filtered = this.get('filteredPermissions');
         return filtered[1];
     }),
 
     actions: {
         changePermissions(permissions, model) {
             // Save updated permissions, and avoid overwriting system-level permissions not displayed to the user
+            // Defaults to setting permissions on the namespace; can be overridden if a model is explicitly passed in
             model = model || this.get('model');
 
-            var payload = Object.assign({}, permissions, this.get('systemPermissions'));
+            let payload = Object.assign({}, permissions, this.get('systemPermissions'));
             model.set('permissions', payload);
             model.save();
         }

@@ -28,8 +28,8 @@ let PermissionsEditor = Ember.Component.extend({
     removeTarget: null,
 
     /**
-     * If a valid string is provided, then this will attempt to set permissions on a collection instead of a namespace
-     * @property {String} collectionTarget
+     * If a valid string is provided, then this will attempt to set permissions on a specific collection
+     * @property {String} collectionTarget The name of the collection on which to set permissions
      */
     collectionTarget: null,
 
@@ -85,6 +85,8 @@ let PermissionsEditor = Ember.Component.extend({
             this.set('newUserId', '');
 
             this.get('_collectionTargetModel').then(model => {
+                // If no collection is specified, then the (null) target model will be ignored by this action and
+                //   it will use the default, eg namespace.
                 this.sendAction('changePermissions', permissions, model);
                 this.set('permissions', permissions);
                 this.rerender();
