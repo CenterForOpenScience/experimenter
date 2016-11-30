@@ -31,15 +31,14 @@ let PermissionsEditor = Ember.Component.extend({
     /**
      * @property {String} displayFilterPattern Filter the list of known permissions to only those that match the
      *   specified pattern. Can be used to restrict to OSF users, Jam users associated with a collection, etc.
-     *   This pattern is also used to *add* new users with the specified permissions level.
+     *   This pattern is also used to *add* new users of the specified type.
      *
      */
     displayFilterPattern: adminPattern,
 
+    // Filter permissions to those that match the provided pattern, and extract usernames for display
     usersList: Ember.computed('displayFilterPattern', 'permissions', function() {
         const permissions = this.get('permissions');
-
-        // Assumption: all properties passed into this page will match admin pattern
         const pattern = makeUserPattern(this.get('displayFilterPattern'));
         return Object.keys(permissions).map((key) => {
             const match = pattern.exec(key);
