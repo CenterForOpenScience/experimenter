@@ -4,41 +4,47 @@ import {adminPattern} from  '../utils/patterns';
 import config from 'ember-get-config';
 
 export default Ember.Controller.extend({
+
+    queryParams: ['collection'],
+    collection: '',
+
+    namespaceConfig: Ember.inject.service(),
+    namespace: Ember.computed.alias('namespaceConfig.namespace'),
+
     breadCrumb: 'Project configuration',
 
     osfURL: config.OSF.url,
 
-    filteredPermissions: Ember.computed('model', function() {
-        var permissions = this.get('model.permissions');
-        var users = {};
-        var system = {};
-        for (let k of Object.getOwnPropertyNames(permissions)) {
-            var dest = adminPattern.test(k) ? users : system;
-            dest[k] = permissions[k];
+    // List of collection names for which we will allow the user to add read-only Jam-authenticated users
+    availableCollections: ['accounts'],
+
+    // Define the username format, eg Jam-authenticated users vs OSF provider
+    userPattern: Ember.computed('namespace', 'collection', function () {
+        const collection = this.get('collection');
+        if (collection) {
+            return `jam-${this.get('namespace')}:accounts`;
         }
-        return [users, system];
+        return adminPattern;
     }),
 
-    /* Return permissions strings that correspond to admin users (those who log in via OSF) */
-    _userPermissions:  Ember.computed('filteredPermissions', function() {
-        var filtered = this.get('filteredPermissions');
-        return filtered[0];
+    // For now, we will only let users add ADMINS to the namespace (must be OSF users), and only grant READ-ONLY access
+    //   to collections (where the new users will be Jam authenticated users)
+    permissionsLevel: Ember.computed('collection', function () {
+        if (this.get('collection')) {
+            return 'READ';
+        }
+        return 'ADMIN';
     }),
-    userPermissions: Ember.computed.readOnly('_userPermissions'), // TODO: is this necessary?
 
-    /* Return permissions strings that do not match OSF users */
-    systemPermissions:  Ember.computed('filteredPermissions', function() {
-        var filtered = this.get('filteredPermissions');
-        return filtered[1];
-    }),
+    permissions: Ember.computed.readOnly('model.permissions'),
 
     actions: {
-        permissionsUpdated(permissions) {
+        changePermissions(permissions) {
             // Save updated permissions, and avoid overwriting system-level permissions not displayed to the user
-
-            var payload = Object.assign({}, permissions, this.get('systemPermissions'));
-            this.set('model.permissions', payload);
-            this.get('model').save();
+            let model = this.get('model');
+            let payload = Ember.copy(permissions, true);
+            model.set('permissions', payload);
+            model.save();
         }
     }
 });

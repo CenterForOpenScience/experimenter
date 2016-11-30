@@ -3,7 +3,23 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     namespaceConfig: Ember.inject.service(),
-    model() {
-        return this.store.find('namespace', this.get('namespaceConfig').get('namespace'));
+
+    queryParams: {
+        collection: {
+            refreshModel: true
+        }
+    },
+
+    model(params) {
+        if (params.collection) {
+            return this.store.findRecord('collection', params.collection);
+        }
+        return this.store.findRecord('namespace', this.get('namespaceConfig').get('namespace'));
+    },
+
+    resetController(controller, isExiting) {
+        if (isExiting) {
+            controller.set('collection', '');
+        }
     }
 });
