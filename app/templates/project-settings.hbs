@@ -6,7 +6,7 @@
 <p>
     Add user to:
     <select onchange={{action (mut collection) value="target.value"}}>
-        <option value="" selected={{eq collection ''}}>Admin access for project: {{namespace}}</option>
+        <option value="" selected={{eq collection ''}}>Admin access for project: {{namespaceId}}</option>
         {{#each availableCollections as |name|}}
             <option value="{{name}}" selected={{eq collection name}}>Read access to collection: {{name}}</option>
         {{/each}}
