@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
     collection: '',
 
     namespaceConfig: Ember.inject.service(),
-    namespace: Ember.computed.alias('namespaceConfig.namespace'),
+    namespaceId: Ember.computed.alias('namespaceConfig.namespace'),  // Namespace is apparently a reserved word.
 
     breadCrumb: 'Project configuration',
 
@@ -19,10 +19,10 @@ export default Ember.Controller.extend({
     availableCollections: ['accounts'],
 
     // Define the username format, eg Jam-authenticated users vs OSF provider
-    userPattern: Ember.computed('namespace', 'collection', function () {
+    userPattern: Ember.computed('namespaceId', 'collection', function () {
         const collection = this.get('collection');
         if (collection) {
-            return `jam-${this.get('namespace')}:accounts`;
+            return `jam-${this.get('namespaceId')}:accounts`;
         }
         return adminPattern;
     }),
