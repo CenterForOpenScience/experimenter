@@ -169,25 +169,35 @@ export default Ember.Component.extend(Validations, {
             // TODO: Use the server response errors field to identify any IDs that might already be in use:
             // as written, we don't retry to create those. If 3 of 100 requested items fail, we just create 97 items and call it a day.
             this.set('creating', true);
-            this._sendBulkRequest('account', accounts)
-                .then((res) => {
-                    if (res.length > 0) {
-                        // Store all the records that were successfully created,
-                        // adding them to all records from previous requests while on this page.
-                        // Eg, a combined CSV could be generated with 200 records.
-                        this.get('createdAccounts').push(...res);
-                        // This may sometimes be smaller than batchSize, in the rare event that a single record appears
-                        // in res.errors instead, eg because ID was already in use
-                        this.toast.info(`Successfully created ${res.length} accounts!`);
-                        this.send('downloadCSV');
-                    } else {
-                        // Likely, every ID in this request failed to create for some horrible reason (data.length=0
-                        // and errors.length=batchSize after filtering out spurious null entries)
-                        this.get('toast').error('Could not create new account(s). If this error persists, please contact support.');
-                    }
-                })
-                .catch(() => this.get('toast').error('Could not create new accounts. Please try again later.'))
-                .finally(() => this.set('creating', false));
+
+
+            // This step is very slow because each password has to be bcrypted- on the front end (jamdb implementation detail).
+            //   Do that in a separate run loop so that UI status indicator can render while we wait; otherwise
+            //   rerender blocks until after the server request has been sent.
+            this.rerender();
+            Ember.run.next(() => {
+                this._sendBulkRequest('account', accounts)
+                    .then((res) => {
+                        if (res.length > 0) {
+                            // Store all the records that were successfully created,
+                            // adding them to all records from previous requests while on this page.
+                            // Eg, a combined CSV could be generated with 200 records.
+                            this.get('createdAccounts').push(...res);
+                            // This may sometimes be smaller than batchSize, in the rare event that a single record appears
+                            // in res.errors instead, eg because ID was already in use
+                            this.toast.info(`Successfully created ${res.length} accounts!`);
+                            this.send('downloadCSV');
+                        } else {
+                            // Likely, every ID in this request failed to create for some horrible reason (data.length=0
+                            // and errors.length=batchSize after filtering out spurious null entries)
+                            this.get('toast').error('Could not create new account(s). If this error persists, please contact support.');
+                        }
+                    })
+                    .catch(() => this.get('toast').error('Could not create new accounts. Please try again later.'))
+                    .finally(() => this.set('creating', false));
+
+            });
+
         },
         addExtraField() {
             var next = this.get('nextExtra');
