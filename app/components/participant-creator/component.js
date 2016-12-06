@@ -170,7 +170,6 @@ export default Ember.Component.extend(Validations, {
             // as written, we don't retry to create those. If 3 of 100 requested items fail, we just create 97 items and call it a day.
             this.set('creating', true);
 
-
             // This step is very slow because each password has to be bcrypted- on the front end (jamdb implementation detail).
             //   Do that in a separate run loop so that UI status indicator can render while we wait; otherwise
             //   rerender blocks until after the server request has been sent.
@@ -195,9 +194,7 @@ export default Ember.Component.extend(Validations, {
                     })
                     .catch(() => this.get('toast').error('Could not create new accounts. Please try again later.'))
                     .finally(() => this.set('creating', false));
-
             });
-
         },
         addExtraField() {
             var next = this.get('nextExtra');
