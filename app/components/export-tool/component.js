@@ -21,8 +21,8 @@ function serializeItem(obj) {
 /**
  * Flatten a nested object into a single level, with dotted paths for keys
  *
- * @param obj
- * @param prefix
+ * @param obj - The object to flatten
+ * @param prefix - The prefix for the keys
  * @returns {Object}
  */
 function squash(obj, prefix) {
