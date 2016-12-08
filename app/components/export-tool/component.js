@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { writeCSV, squash, uniqueFields } from 'exp-models/utils/csv-writer';
 
 /**
  * @module experimenter
@@ -16,50 +17,6 @@ function serializeItem(obj) {
         obj = obj.serialize().data.attributes;
     }
     return obj;
-}
-
-/**
- * Flatten a nested object into a single level, with dotted paths for keys
- *
- * @param obj - The object to flatten
- * @param prefix - The prefix for the keys
- * @returns {Object}
- */
-function squash(obj, prefix) {
-    let ret = {};
-
-    for (const key in obj) {
-        if (!obj.hasOwnProperty(key)) {
-            continue;
-        }
-
-        const newPrefix = prefix ? `${prefix}.${key}` : key;
-
-        let value = Ember.get(obj, key);
-
-        if (value && value.toJSON) {
-            value = value.toJSON();
-        }
-
-        if (Ember.$.isPlainObject(value)) {
-            Object.assign(ret, squash(value, newPrefix));
-        } else {
-            ret[newPrefix] = value;
-        }
-    }
-
-    return ret;
-}
-
-/**
- * Makes a value safe for a CSV
- *
- * @param val {boolean|null|number|undefined|string} - The value to serialize
- * @returns {string}
- */
-function csvSafe(val) {
-    const value = JSON.stringify(val);
-    return value ? value.replace(/\\"/g, '""') : '';
 }
 
 /**
@@ -87,7 +44,7 @@ export default Ember.Component.extend({
     /**
      * Recognized data formats. Hash of form `{displayValue: Extension}` items
      *
-     * @enum {string}
+     * @property {Object.String}
      */
     dataFormats: {
         JSON: 'JSON',
@@ -100,11 +57,12 @@ export default Ember.Component.extend({
      */
     processedData: Ember.computed('data', 'dataFormat', 'mappingFunction', function() {
         let data = this.get('data') || [];
+
         if (data.toArray) {
             data = data.toArray();
         }
-        let dataArray = data.map(serializeItem);
 
+        const dataArray = data.map(serializeItem);
         const dataFormat = this.get('dataFormat');
         const mappingFunction = this.get('mappingFunction');
 
@@ -119,7 +77,7 @@ export default Ember.Component.extend({
     /**
      * Converts an array to a JSON string
      *
-     * @param dataArray {!Array<Object>} - The rows of the CSV
+     * @param {Array<Object>} dataArray An array of objects
      * @private
      * @returns {string}
      */
@@ -130,34 +88,20 @@ export default Ember.Component.extend({
     /**
      * Converts an array to a standard CSV file
      *
-     * @param dataArray {!Array<Object>} - The rows of the CSV
+     * @param {Array<Object>} dataArray The rows of the CSV
      * @private
      * @returns {string}
      */
     _convertToCSV(dataArray) {
-        // Flatten the dictionary keys for readable column headers
-        const squashed = dataArray.map(item => squash(item));
-
-        const fields = Object.keys(squashed[0]);
-        const csv = [fields.join()];
-
-        for (const item of squashed) {
-            const line = [];
-
-            for (const field of fields) {
-                line.push(csvSafe(item[field]));
-            }
-
-            csv.push(line.join());
-        }
-
-        return csv.join('\r\n');
+        const data = dataArray.map(squash);
+        const fields = uniqueFields(data);
+        return writeCSV(data, fields);
     },
 
     /**
      * Converts an array to a standard CSV file
      *
-     * @param dataArray {!Array<Object>} - The rows of the CSV
+     * @param {Array<Object>} dataArray The rows of the CSV
      * @private
      * @returns {string}
      */
@@ -192,8 +136,8 @@ export default Ember.Component.extend({
     /**
      * Converts an array to the specified format
      *
-     * @param dataArray {!Array<Object>} - The rows
-     * @param format {!dataFormats} - The conversion output format
+     * @param {Array<Object>} dataArray An array of objects
+     * @param {dataFormats} format The conversion output format
      * @returns {string}
      */
     convertToFormat(dataArray, format) {
@@ -227,7 +171,7 @@ export default Ember.Component.extend({
         /**
          * Sets the current data format
          *
-         * @param dataFormat {dataFormats}
+         * @param {dataFormats} dataFormat
          */
         selectDataFormat(dataFormat) {
             this.set('dataFormat', dataFormat);

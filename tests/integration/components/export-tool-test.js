@@ -22,8 +22,8 @@ function quote(value) {
 /**
  * A legible way to define a *SV file in js
  *
- * @param arr {!Array<(Array<String>|String)>} - An array of rows
- * @param columnSeparator - The column separator (defaults to ',')
+ * @param {Array<(Array<String>|String)>} arr An array of rows
+ * @param {String} columnSeparator The column separator (defaults to ',')
  * @returns string
  */
 function svJoin(arr, columnSeparator) {
@@ -37,13 +37,13 @@ function svJoin(arr, columnSeparator) {
 }
 
 /**
- * Runs the export tool component and compares the output
+ * Runs the export tool component for a CSV and compares the output
  *
- * @param data {Array<Object>} - An array of objects to serialize into the CSV File
- * @param csv {Array<(Array<String>|String)>|String} - The CSV data
+ * @param {Array<Object>} data An array of objects to serialize into the CSV File
+ * @param {Array<(Array<String>|String)>|String} csv The CSV data
  * @returns {Function}
  */
-function runExportTool(data, csv) {
+function runExportToolCSV(data, csv) {
     return function(assert) {
         this.set('sanitizeProfileId', sanitizeProfileId);
         this.set('data', data);
@@ -79,101 +79,36 @@ test('JSON format', function(assert) {
     assert.strictEqual(this.$('.export-tool-textarea').val(), JSON.stringify(DATA, null, 4));
 });
 
-test('CSV format', runExportTool(
+test('CSV format', runExportToolCSV(
     DATA,
     'age,profileId\n35,"test"'
 ));
 
-test('CSV format handles commas', runExportTool(
-    [{
-        response: 'running, swimming, biking',
-        profileId: 'test.test'
-    }],
-    'response,profileId\n"running, swimming, biking","test"'
-));
-
-test('CSV format handles double quotes', runExportTool(
-    [{
-        response: 'This is a "quote"',
-        profileId: 'test.test'
-    }],
+test('CSV format handles non-english characters', runExportToolCSV(
     [
-        ['response', 'profileId'],
-        ['This is a ""quote""', 'test']
-    ]
-));
-
-test('CSV format handles new lines', runExportTool(
-    [{
-        response: 'One line\nAnother line',
-        profileId: 'test.test'
-    }],
-    'response,profileId\n"One line\\nAnother line","test"'
-));
-
-test('CSV format handles non-english characters', runExportTool(
-    [{
-        spanish: 'áéíñóúü¿¡',
-        french: 'àâæçèëïîôœùûüÿ€',
-        russian: 'дфяшйж',
-        hindi: 'हिंदी',
-        arabic: 'العربية',
-        profileId: 'test.test'
-    }],
+        {
+            spanish: 'áéíñóúü¿¡',
+            french: 'àâæçèëïîôœùûüÿ€',
+            russian: 'дфяшйж',
+            hindi: 'हिंदी',
+            arabic: 'العربية',
+            profileId: 'test.test'
+        }
+    ],
     [
         ['spanish', 'french', 'russian', 'hindi', 'arabic', 'profileId'],
         ['áéíñóúü¿¡', 'àâæçèëïîôœùûüÿ€', 'дфяшйж', 'हिंदी', 'العربية', 'test']
     ]
 ));
 
-test('CSV format handles deeply nested object with dot notation', runExportTool(
-    [{
-        alpha: 'one',
-        bravo: 'two',
-        charlie: {
-            delta: 'three'
-        },
-        echo: {
-            foxtrot: {
-                golf: 'four'
-            }
-        },
-        hotel: {
-            india: 'five',
-            juliet: {
-                kilo: 'six'
-            }
-        },
-        lima: {
-            mike: {
-                november: {
-                    oscar: {
-                        papa: {
-                            quebec: 'seven'
-                        }
-                    }
-                }
-            }
-        }
-    }],
+test('CSV format for The Pile of Poo Test™', runExportToolCSV(
     [
-        [
-            'alpha',
-            'bravo',
-            'charlie.delta',
-            'echo.foxtrot.golf',
-            'hotel.india',
-            'hotel.juliet.kilo',
-            'lima.mike.november.oscar.papa.quebec'
-        ],
-        [
-            'one',
-            'two',
-            'three',
-            'four',
-            'five',
-            'six',
-            'seven'
-        ]
+        {
+            pooTest: 'Iñtërnâtiônàlizætiøn☃💩'
+        }
+    ],
+    [
+        'pooTest',
+        '"Iñtërnâtiônàlizætiøn☃💩"'
     ]
 ));
