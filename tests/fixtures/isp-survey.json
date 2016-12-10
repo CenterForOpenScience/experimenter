@@ -456,6 +456,8 @@
         "completed": true,
         "feedback": "",
         "hasReadFeedback": false,
-        "permissions": "ADMIN"
+        "permissions": "ADMIN",
+        "studyID": "someString",
+        "locale": "en-US"
     }
 ]

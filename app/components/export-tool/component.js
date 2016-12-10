@@ -112,9 +112,15 @@ export default Ember.Component.extend({
 
         // Then serialize to CSV
         dataArray = dataArray.map((record) => {
-            let newRecord = {};
+            console.log(record);
 
-            for (let frameId of Object.keys(record.expData)) {
+            const newRecord = {
+                PID: record.profileId,
+                SID: record.studyID,
+                locale: record.locale
+            };
+
+            for (const frameId of Object.keys(record.expData)) {
                 let responses = record.expData[frameId].responses || {};
 
                 for (let question of Object.keys(responses)) {
