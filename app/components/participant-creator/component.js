@@ -69,7 +69,7 @@ export default Ember.Component.extend(Validations, {
     _generate(batchSize, tag) {
         var ret = [];
         for (let i = 0; i < batchSize; i++) {
-            ret.push(`${makeId(10)}${tag ? `-${tag}` : ''}`);
+            ret.push(`${makeId(10)}${tag ? `_${tag}` : ''}`);
         }
         return ret;
     },
@@ -140,7 +140,7 @@ export default Ember.Component.extend(Validations, {
 
     exampleId: Ember.computed('tag', function() {
         var tag = this.get('tag');
-        return `12345${tag ? `-${tag}` : ''}`;
+        return `12345${tag ? `_${tag}` : ''}`;
     }),
 
     actions: {
