@@ -12,7 +12,7 @@ const adminPattern = 'user-osf';
  * @return {RegExp} A new regex object that matches `prefix-abc`, `prefix.*`, or similar.
  */
 function makeUserPattern(prefix) {
-    return new RegExp(`^${prefix}-(\\w\+|\\*)$`);
+    return new RegExp(`^${prefix}-([\\d\\w\-]{3,64}|\\*)$`);
 }
 
 export {adminPattern, makeUserPattern};
