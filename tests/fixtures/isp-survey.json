@@ -457,7 +457,9 @@
         "feedback": "",
         "hasReadFeedback": false,
         "permissions": "ADMIN",
-        "studyID": "someString",
-        "locale": "en-US"
+        "extra": {
+            "studyId": "someString",
+            "locale": "en-US"
+        }
     }
 ]

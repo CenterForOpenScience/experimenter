@@ -118,8 +118,10 @@ test('CSV for ISP - Partial', function(assert) {
     this.set('sanitizeProfileId', sanitizeProfileId);
     this.set('data', [{
         profileId: 'test-profile',
-        studyID: 'ABC',
-        locale: 'ab-CD',
+        extra: {
+            studyId: 'ABC',
+            locale: 'ab-CD',
+        },
         expData: {
             '0-0-overview': {
                 responses: {
@@ -155,8 +157,10 @@ test('CSV for ISP - Partial, Special case 3-3-response form', function(assert) {
     this.set('sanitizeProfileId', sanitizeProfileId);
     this.set('data', [{
         profileId: 'test-profile',
-        studyID: 'ABC',
-        locale: 'ab-CD',
+        extra: {
+            studyId: 'ABC',
+            locale: 'ab-CD',
+        },
         expData: {
             '3-3-rating-form': {
                 responses: {

@@ -25,7 +25,7 @@ function serializeItem(obj) {
  */
 export default Ember.Component.extend({
     /**
-     * @property {null|Array<Object>} data The data to be serialized
+     * @property {null|Object[]} data The data to be serialized
      */
     data: null,
 
@@ -77,7 +77,7 @@ export default Ember.Component.extend({
     /**
      * Converts an array to a JSON string
      *
-     * @param {Array<Object>} dataArray An array of objects
+     * @param {Object[]} dataArray An array of objects
      * @private
      * @returns {string}
      */
@@ -88,7 +88,7 @@ export default Ember.Component.extend({
     /**
      * Converts an array to a standard CSV file
      *
-     * @param {Array<Object>} dataArray The rows of the CSV
+     * @param {Object[]} dataArray The rows of the CSV
      * @private
      * @returns {string}
      */
@@ -101,7 +101,7 @@ export default Ember.Component.extend({
     /**
      * Converts an array to a standard CSV file
      *
-     * @param {Array<Object>} dataArray The rows of the CSV
+     * @param {Object[]} dataArray The rows of the CSV
      * @private
      * @returns {string}
      */
@@ -112,12 +112,11 @@ export default Ember.Component.extend({
 
         // Then serialize to CSV
         dataArray = dataArray.map((record) => {
-            console.log(record);
-
+            // Rename a few fields to match the spec'ed output
             const newRecord = {
                 PID: record.profileId,
-                SID: record.studyID,
-                locale: record.locale
+                SID: record.extra.studyId,
+                locale: record.extra.locale
             };
 
             for (const frameId of Object.keys(record.expData)) {
@@ -142,7 +141,7 @@ export default Ember.Component.extend({
     /**
      * Converts an array to the specified format
      *
-     * @param {Array<Object>} dataArray An array of objects
+     * @param {Object[]} dataArray An array of objects
      * @param {dataFormats} format The conversion output format
      * @returns {string}
      */
