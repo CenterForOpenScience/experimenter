@@ -28,7 +28,11 @@ module.exports = function(defaults) {
         },
         'ember-bootstrap': {
             importBootstrapFont: false
-        }
+        },
+        babel: {
+            optional: ['es6.spec.symbols'],
+            includePolyfill: true
+        },
     });
 
     app.import('bower_components/ace-builds/src/ace.js');
