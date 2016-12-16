@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { writeCSV, squash, uniqueFields } from 'exp-models/utils/csv-writer';
+import ispFields from './isp-fields';
 
 /**
  * @module experimenter
@@ -107,35 +108,43 @@ export default Ember.Component.extend({
      */
     _convertToISP(dataArray) {
         // ISP-specific CSV file format
+        const normalizedArray = dataArray
+            .map(record => {
+                // Rename a few fields to match the spec'ed output
+                const newRecord = {
+                    PID: record.profileId,
+                    SID: record.extra.studyId,
+                    locale: record.extra.locale
+                };
 
-        // First custom field mapping...
+                for (const frameId of Object.keys(record.expData)) {
+                    let responses = record.expData[frameId].responses || {};
 
-        // Then serialize to CSV
-        dataArray = dataArray.map((record) => {
-            // Rename a few fields to match the spec'ed output
-            const newRecord = {
-                PID: record.profileId,
-                SID: record.extra.studyId,
-                locale: record.extra.locale
-            };
-
-            for (const frameId of Object.keys(record.expData)) {
-                let responses = record.expData[frameId].responses || {};
-
-                for (let question of Object.keys(responses)) {
-                    if (frameId === '3-3-rating-form') {
-                        for (let item of Object.keys(responses[question])) {
-                            newRecord[item] = responses[question][item];
+                    for (let question of Object.keys(responses)) {
+                        if (frameId === '3-3-rating-form') {
+                            for (let item of Object.keys(responses[question])) {
+                                newRecord[item] = responses[question][item];
+                            }
+                        } else {
+                            newRecord[question] = responses[question];
                         }
-                    } else {
-                        newRecord[question] = responses[question];
                     }
                 }
-            }
 
-            return newRecord;
-        });
-        return this._convertToCSV(dataArray);
+                const squashedRecord = squash(newRecord);
+                const keys = Object.keys(squashedRecord);
+
+                for (const key of keys) {
+                    if (key.includes('.')) {
+                        squashedRecord[key.replace('.', '_')] = squashedRecord[key];
+                        delete squashedRecord[key];
+                    }
+                }
+
+                return squashedRecord;
+            });
+
+        return writeCSV(normalizedArray, ispFields);
     },
 
     /**

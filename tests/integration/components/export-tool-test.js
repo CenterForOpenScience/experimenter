@@ -114,100 +114,6 @@ test('CSV format for The Pile of Poo Test™', runExportToolCSV(
     ]
 ));
 
-test('CSV for ISP - Partial', function(assert) {
-    this.set('sanitizeProfileId', sanitizeProfileId);
-    this.set('data', [{
-        profileId: 'test-profile',
-        extra: {
-            studyId: 'ABC',
-            locale: 'ab-CD',
-        },
-        expData: {
-            '0-0-overview': {
-                responses: {
-                    Age: 32,
-                    Ethnicity: 'Special',
-                    SocialStatus: 6,
-                    Religion1to10: 1,
-                    Gender: 1,
-                    BirthCountry: 'The Moon',
-                    ReligionFollow: null,
-                    BirthCity: 'Big Crater',
-                    Residence: 1,
-                    Language: 'Tagalog',
-                    ReligionYesNo: 2
-                }
-            }
-        }
-    }]);
-    this.render(hbs`{{export-tool data=data mappingFunction=sanitizeProfileId}}`);
-    this.$('.export-tool-select').val('CSV (for ISP)');
-    this.$('.export-tool-select').change();
-
-    assert.strictEqual(
-        this.$('.export-tool-textarea').val(),
-        svJoin([
-            'PID,SID,locale,Age,Ethnicity,SocialStatus,Religion1to10,Gender,BirthCountry,ReligionFollow,BirthCity,Residence,Language,ReligionYesNo',
-            '"test-profile","ABC","ab-CD",32,"Special",6,1,1,"The Moon",,"Big Crater",1,"Tagalog",2'
-        ])
-    );
-});
-
-test('CSV for ISP - Partial, Special case 3-3-response form', function(assert) {
-    this.set('sanitizeProfileId', sanitizeProfileId);
-    this.set('data', [{
-        profileId: 'test-profile',
-        extra: {
-            studyId: 'ABC',
-            locale: 'ab-CD',
-        },
-        expData: {
-            '3-3-rating-form': {
-                responses: {
-                    0: {
-                        PosNeg: 6
-                    },
-                    1: {
-                        SitSimilarity: 4
-                    },
-                    2: {
-                        BBI16: 8,
-                        BBI6: 3,
-                        BBI3: 7,
-                        BBI1: 4,
-                        BBI10: 7,
-                        BBI2: 7,
-                        BBI8: 7,
-                        BBI9: 3,
-                        BBI4: 4,
-                        BBI5: 5,
-                        BBI15: 4,
-                        BBI7: 7,
-                        BBI13: 6,
-                        BBI11: 4,
-                        BBI14: 7,
-                        BBI12: 4
-                    },
-                    3: {
-                        Risk: 0
-                    }
-                }
-            }
-        }
-    }]);
-    this.render(hbs`{{export-tool data=data mappingFunction=sanitizeProfileId}}`);
-    this.$('.export-tool-select').val('CSV (for ISP)');
-    this.$('.export-tool-select').change();
-
-    assert.strictEqual(
-        this.$('.export-tool-textarea').val(),
-        svJoin([
-            'PID,SID,locale,PosNeg,SitSimilarity,BBI16,BBI6,BBI3,BBI1,BBI10,BBI2,BBI8,BBI9,BBI4,BBI5,BBI15,BBI7,BBI13,BBI11,BBI14,BBI12,Risk',
-            '"test-profile","ABC","ab-CD",6,4,8,3,7,4,7,7,7,3,4,5,4,7,6,4,7,4,0'
-        ])
-    );
-});
-
 test('CSV for ISP - Full Example', function(assert) {
     this.set('sanitizeProfileId', sanitizeProfileId);
     this.set('data', ispSurvey);
@@ -218,8 +124,8 @@ test('CSV for ISP - Full Example', function(assert) {
     assert.strictEqual(
         this.$('.export-tool-textarea').val(),
         svJoin([
-            'PID,SID,locale,Age,Ethnicity,SocialStatus,Religion1to10,Gender,BirthCountry,ReligionFollow,BirthCity,Residence,Language,ReligionYesNo,WhereResponse,WhatResponse,WhoResponse,EventTime,PosNeg,SitSimilarity,BBI16,BBI6,BBI3,BBI1,BBI10,BBI2,BBI8,BBI9,BBI4,BBI5,BBI15,BBI7,BBI13,BBI11,BBI14,BBI12,Risk,BFI56,BFI17,BFI35,BFI60,BFI40,BFI10,BFI22,BFI20,BFI25,BFI50,BFI37,BFI39,BFI13,BFI34,BFI51,BFI38,BFI41,BFI11,BFI4,BFI21,BFI27,BFI6,BFI8,BFI43,BFI58,BFI42,BFI57,BFI53,BFI47,BFI52,BFI15,BFI12,BFI30,BFI32,BFI26,BFI54,BFI14,BFI45,BFI9,BFI5,BFI24,BFI16,BFI28,BFI49,BFI46,BFI31,BFI1,BFI44,BFI48,BFI18,BFI23,BFI3,BFI7,BFI59,BFI33,BFI19,BFI2,BFI55,BFI36,BFI29,SWB4,SWB3,SWB1,SWB2,IntHapp3,IntHapp8,IntHapp6,IntHapp2,IntHapp1,IntHapp4,IntHapp7,IntHapp9,IntHapp5,Constru4,Constru7,Constru6,Constru2,Constru13,Constru12,Constru10,Constru11,Constru5,Constru1,Constru3,Constru8,Constru9,Tight4,Tight5,Tight1,Tight3,Tight2,Tight6,ChangeYesNo,ChangeDescribe,ChangeSuccess,Trust1,Trust4,Trust2,Trust3,Trust5,LOT5,LOT4,LOT2,LOT1,LOT3,LOT6,Honest5,Honest1,Honest8,Honest3,Honest7,Honest10,Honest9,Honest4,Honest2,Honest6,Micro3,Micro5,Micro4,Micro1,Micro2,Narq1,Narq5,Narq3,Narq2,Narq4,Narq6,ReligionScale9,ReligionScale12,ReligionScale4,ReligionScale16,ReligionScale3,ReligionScale8,ReligionScale2,ReligionScale10,ReligionScale15,ReligionScale13,ReligionScale6,ReligionScale5,ReligionScale14,ReligionScale11,ReligionScale17,ReligionScale1,ReligionScale7,NineCat.rsq31,NineCat.rsq23,NineCat.rsq50,NineCat.rsq4,NineCat.rsq63,NineCat.rsq11,NineCat.rsq30,NineCat.rsq33,NineCat.rsq9,NineCat.rsq67,NineCat.rsq82,NineCat.rsq60,NineCat.rsq22,NineCat.rsq86,NineCat.rsq88,NineCat.rsq85,NineCat.rsq54,NineCat.rsq77,NineCat.rsq35,NineCat.rsq55,NineCat.rsq3,NineCat.rsq59,NineCat.rsq17,NineCat.rsq14,NineCat.rsq64,NineCat.rsq83,NineCat.rsq70,NineCat.rsq73,NineCat.rsq36,NineCat.rsq21,NineCat.rsq52,NineCat.rsq18,NineCat.rsq43,NineCat.rsq37,NineCat.rsq49,NineCat.rsq62,NineCat.rsq84,NineCat.rsq58,NineCat.rsq16,NineCat.rsq45,NineCat.rsq42,NineCat.rsq72,NineCat.rsq41,NineCat.rsq61,NineCat.rsq15,NineCat.rsq71,NineCat.rsq51,NineCat.rsq46,NineCat.rsq48,NineCat.rsq75,NineCat.rsq28,NineCat.rsq65,NineCat.rsq38,NineCat.rsq10,NineCat.rsq13,NineCat.rsq47,NineCat.rsq6,NineCat.rsq90,NineCat.rsq89,NineCat.rsq74,NineCat.rsq24,NineCat.rsq57,NineCat.rsq25,NineCat.rsq79,NineCat.rsq1,NineCat.rsq68,NineCat.rsq40,NineCat.rsq27,NineCat.rsq44,NineCat.rsq56,NineCat.rsq39,NineCat.rsq34,NineCat.rsq87,NineCat.rsq32,NineCat.rsq53,NineCat.rsq81,NineCat.rsq78,NineCat.rsq8,NineCat.rsq29,NineCat.rsq66,NineCat.rsq2,NineCat.rsq19,NineCat.rsq80,NineCat.rsq69,NineCat.rsq76,NineCat.rsq20,NineCat.rsq12,NineCat.rsq26,NineCat.rsq7,NineCat.rsq5,ThreeCat.rsq31,ThreeCat.rsq23,ThreeCat.rsq50,ThreeCat.rsq4,ThreeCat.rsq63,ThreeCat.rsq11,ThreeCat.rsq37,ThreeCat.rsq33,ThreeCat.rsq9,ThreeCat.rsq21,ThreeCat.rsq67,ThreeCat.rsq82,ThreeCat.rsq60,ThreeCat.rsq29,ThreeCat.rsq86,ThreeCat.rsq88,ThreeCat.rsq85,ThreeCat.rsq54,ThreeCat.rsq77,ThreeCat.rsq35,ThreeCat.rsq55,ThreeCat.rsq3,ThreeCat.rsq59,ThreeCat.rsq17,ThreeCat.rsq14,ThreeCat.rsq64,ThreeCat.rsq83,ThreeCat.rsq70,ThreeCat.rsq73,ThreeCat.rsq36,ThreeCat.rsq22,ThreeCat.rsq52,ThreeCat.rsq18,ThreeCat.rsq43,ThreeCat.rsq30,ThreeCat.rsq58,ThreeCat.rsq62,ThreeCat.rsq84,ThreeCat.rsq74,ThreeCat.rsq16,ThreeCat.rsq45,ThreeCat.rsq42,ThreeCat.rsq72,ThreeCat.rsq49,ThreeCat.rsq41,ThreeCat.rsq61,ThreeCat.rsq15,ThreeCat.rsq19,ThreeCat.rsq51,ThreeCat.rsq46,ThreeCat.rsq48,ThreeCat.rsq75,ThreeCat.rsq28,ThreeCat.rsq65,ThreeCat.rsq38,ThreeCat.rsq10,ThreeCat.rsq13,ThreeCat.rsq56,ThreeCat.rsq6,ThreeCat.rsq90,ThreeCat.rsq89,ThreeCat.rsq24,ThreeCat.rsq57,ThreeCat.rsq25,ThreeCat.rsq79,ThreeCat.rsq1,ThreeCat.rsq68,ThreeCat.rsq40,ThreeCat.rsq27,ThreeCat.rsq44,ThreeCat.rsq47,ThreeCat.rsq39,ThreeCat.rsq34,ThreeCat.rsq87,ThreeCat.rsq32,ThreeCat.rsq53,ThreeCat.rsq81,ThreeCat.rsq78,ThreeCat.rsq8,ThreeCat.rsq66,ThreeCat.rsq2,ThreeCat.rsq71,ThreeCat.rsq80,ThreeCat.rsq69,ThreeCat.rsq76,ThreeCat.rsq20,ThreeCat.rsq12,ThreeCat.rsq26,ThreeCat.rsq7,ThreeCat.rsq5',
-            '"5514232571-something","someString","en-US",32,"Special",6,1,1,"The Moon",,"Big Crater",1,"Tagalog",2,"Daydreaming","Eating something","alone","15:00",6,4,8,3,7,4,7,7,7,3,4,5,4,7,6,4,7,4,0,1,5,1,4,1,1,1,1,3,4,2,5,4,1,4,4,5,5,2,5,5,2,2,1,5,5,5,1,1,2,5,2,1,1,2,5,2,1,4,5,4,1,5,5,5,4,2,5,1,2,5,4,5,5,5,4,3,1,1,5,6,7,7,7,1,1,1,4,4,1,1,1,1,2,2,2,1,3,2,2,3,8,1,2,3,2,3,2,4,3,3,4,2,,,5,3,4,3,1,2,4,3,3,3,4,5,1,2,3,4,1,4,2,3,2,3,4,2,4,1,2,3,2,4,3,3,3,2,2,3,2,4,2,2,4,3,2,2,3,4,3,1,3,6,4,5,1,6,6,3,7,5,3,7,6,4,4,5,3,5,4,3,5,5,4,4,3,5,3,5,4,5,7,6,2,5,5,7,3,6,9,7,7,6,5,6,5,8,8,1,4,6,3,8,7,5,6,8,4,7,5,2,5,5,9,1,5,2,2,5,8,2,4,4,7,6,6,2,7,3,6,4,5,6,3,9,4,3,7,4,6,8,4,3,1,2,1,2,2,2,3,2,1,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,3,1,2,2,3,3,2,2,3,1,2,3,2,1,2,3,1,3,3,2,1,3,2,3,2,1,2,3,1,2,1,1,2,3,1,2,1,3,2,2,1,3,1,1,2,2,3,3,2,1,3,2,2,3,2'
+            'PID,SID,locale,Age,Gender,Ethnicity,Language,SocialStatus,BirthCity,BirthCountry,Residence,Religion1to10,ReligionYesNo,ReligionFollow,EventTime,WhatResponse,WhereResponse,WhoResponse,ThreeCat_rsq1,ThreeCat_rsq2,ThreeCat_rsq3,ThreeCat_rsq4,ThreeCat_rsq5,ThreeCat_rsq6,ThreeCat_rsq7,ThreeCat_rsq8,ThreeCat_rsq9,ThreeCat_rsq10,ThreeCat_rsq11,ThreeCat_rsq12,ThreeCat_rsq13,ThreeCat_rsq14,ThreeCat_rsq15,ThreeCat_rsq16,ThreeCat_rsq17,ThreeCat_rsq18,ThreeCat_rsq19,ThreeCat_rsq20,ThreeCat_rsq21,ThreeCat_rsq22,ThreeCat_rsq23,ThreeCat_rsq24,ThreeCat_rsq25,ThreeCat_rsq26,ThreeCat_rsq27,ThreeCat_rsq28,ThreeCat_rsq29,ThreeCat_rsq30,ThreeCat_rsq31,ThreeCat_rsq32,ThreeCat_rsq33,ThreeCat_rsq34,ThreeCat_rsq35,ThreeCat_rsq36,ThreeCat_rsq37,ThreeCat_rsq38,ThreeCat_rsq39,ThreeCat_rsq40,ThreeCat_rsq41,ThreeCat_rsq42,ThreeCat_rsq43,ThreeCat_rsq44,ThreeCat_rsq45,ThreeCat_rsq46,ThreeCat_rsq47,ThreeCat_rsq48,ThreeCat_rsq49,ThreeCat_rsq50,ThreeCat_rsq51,ThreeCat_rsq52,ThreeCat_rsq53,ThreeCat_rsq54,ThreeCat_rsq55,ThreeCat_rsq56,ThreeCat_rsq57,ThreeCat_rsq58,ThreeCat_rsq59,ThreeCat_rsq60,ThreeCat_rsq61,ThreeCat_rsq62,ThreeCat_rsq63,ThreeCat_rsq64,ThreeCat_rsq65,ThreeCat_rsq66,ThreeCat_rsq67,ThreeCat_rsq68,ThreeCat_rsq69,ThreeCat_rsq70,ThreeCat_rsq71,ThreeCat_rsq72,ThreeCat_rsq73,ThreeCat_rsq74,ThreeCat_rsq75,ThreeCat_rsq76,ThreeCat_rsq77,ThreeCat_rsq78,ThreeCat_rsq79,ThreeCat_rsq80,ThreeCat_rsq81,ThreeCat_rsq82,ThreeCat_rsq83,ThreeCat_rsq84,ThreeCat_rsq85,ThreeCat_rsq86,ThreeCat_rsq87,ThreeCat_rsq88,ThreeCat_rsq89,ThreeCat_rsq90,NineCat_rsq1,NineCat_rsq2,NineCat_rsq3,NineCat_rsq4,NineCat_rsq5,NineCat_rsq6,NineCat_rsq7,NineCat_rsq8,NineCat_rsq9,NineCat_rsq10,NineCat_rsq11,NineCat_rsq12,NineCat_rsq13,NineCat_rsq14,NineCat_rsq15,NineCat_rsq16,NineCat_rsq17,NineCat_rsq18,NineCat_rsq19,NineCat_rsq20,NineCat_rsq21,NineCat_rsq22,NineCat_rsq23,NineCat_rsq24,NineCat_rsq25,NineCat_rsq26,NineCat_rsq27,NineCat_rsq28,NineCat_rsq29,NineCat_rsq30,NineCat_rsq31,NineCat_rsq32,NineCat_rsq33,NineCat_rsq34,NineCat_rsq35,NineCat_rsq36,NineCat_rsq37,NineCat_rsq38,NineCat_rsq39,NineCat_rsq40,NineCat_rsq41,NineCat_rsq42,NineCat_rsq43,NineCat_rsq44,NineCat_rsq45,NineCat_rsq46,NineCat_rsq47,NineCat_rsq48,NineCat_rsq49,NineCat_rsq50,NineCat_rsq51,NineCat_rsq52,NineCat_rsq53,NineCat_rsq54,NineCat_rsq55,NineCat_rsq56,NineCat_rsq57,NineCat_rsq58,NineCat_rsq59,NineCat_rsq60,NineCat_rsq61,NineCat_rsq62,NineCat_rsq63,NineCat_rsq64,NineCat_rsq65,NineCat_rsq66,NineCat_rsq67,NineCat_rsq68,NineCat_rsq69,NineCat_rsq70,NineCat_rsq71,NineCat_rsq72,NineCat_rsq73,NineCat_rsq74,NineCat_rsq75,NineCat_rsq76,NineCat_rsq77,NineCat_rsq78,NineCat_rsq79,NineCat_rsq80,NineCat_rsq81,NineCat_rsq82,NineCat_rsq83,NineCat_rsq84,NineCat_rsq85,NineCat_rsq86,NineCat_rsq87,NineCat_rsq88,NineCat_rsq89,NineCat_rsq90,PosNeg,SitSimilarity,BBI1,BBI2,BBI3,BBI4,BBI5,BBI6,BBI7,BBI8,BBI9,BBI10,BBI11,BBI12,BBI13,BBI14,BBI15,BBI16,Risk,BFI1,BFI2,BFI3,BFI4,BFI5,BFI6,BFI7,BFI8,BFI9,BFI10,BFI11,BFI12,BFI13,BFI14,BFI15,BFI16,BFI17,BFI18,BFI19,BFI20,BFI21,BFI22,BFI23,BFI24,BFI25,BFI26,BFI27,BFI28,BFI29,BFI30,BFI31,BFI32,BFI33,BFI34,BFI35,BFI36,BFI37,BFI38,BFI39,BFI40,BFI41,BFI42,BFI43,BFI44,BFI45,BFI46,BFI47,BFI48,BFI49,BFI50,BFI51,BFI52,BFI53,BFI54,BFI55,BFI56,BFI57,BFI58,BFI59,BFI60,SWB1,SWB2,SWB3,SWB4,IntHapp1,IntHapp2,IntHapp3,IntHapp4,IntHapp5,IntHapp6,IntHapp7,IntHapp8,IntHapp9,Constru1,Constru2,Constru3,Constru4,Constru5,Constru6,Constru7,Constru8,Constru9,Constru10,Constru11,Constru12,Constru13,Tight1,Tight2,Tight3,Tight4,Tight5,Tight6,ChangeYesNo,ChangeDescribe,ChangeSuccess,Trust1,Trust2,Trust3,Trust4,Trust5,LOT1,LOT2,LOT3,LOT4,LOT5,LOT6,Honest1,Honest2,Honest3,Honest4,Honest5,Honest6,Honest7,Honest8,Honest9,Honest10,Micro1,Micro2,Micro3,Micro4,Micro5,Micro6,Narq1,Narq2,Narq3,Narq4,Narq5,Narq6,ReligionScale1,ReligionScale2,ReligionScale3,ReligionScale4,ReligionScale5,ReligionScale6,ReligionScale7,ReligionScale8,ReligionScale9,ReligionScale10,ReligionScale11,ReligionScale12,ReligionScale13,ReligionScale14,ReligionScale15,ReligionScale16,ReligionScale17',
+            '"5514232571-something","someString","en-US",32,1,"Special","Tagalog",6,"Big Crater","The Moon",1,1,2,,"15:00","Eating something","Daydreaming","alone",1,2,2,1,2,3,3,1,2,1,2,2,3,2,3,3,2,1,2,3,1,2,1,2,1,2,3,3,2,2,3,2,3,3,2,2,2,2,1,2,1,2,2,1,3,2,2,3,3,2,1,2,1,2,2,2,3,3,2,2,2,1,2,2,3,2,2,1,2,2,3,2,2,2,1,1,2,1,2,3,3,3,1,2,2,2,2,2,1,2,2,6,5,1,4,7,8,6,5,6,6,4,8,3,8,7,4,2,3,7,7,4,4,5,1,6,8,8,4,3,6,6,7,7,3,5,5,5,4,5,6,6,5,2,7,4,4,6,7,5,1,6,2,5,5,4,9,9,4,6,5,3,6,5,7,5,3,2,4,5,8,5,4,5,3,3,4,3,5,9,7,7,3,6,3,4,6,5,2,5,6,4,4,7,7,4,5,3,7,7,3,7,4,4,6,7,4,8,0,2,3,4,2,5,2,5,2,4,1,5,2,4,2,5,1,5,2,4,1,5,1,5,4,3,2,5,5,5,1,4,1,5,1,1,1,2,4,5,1,5,5,1,5,1,5,1,1,5,4,4,2,1,5,1,1,5,5,5,4,7,7,7,6,4,4,1,1,1,1,1,1,1,1,1,2,2,8,2,2,3,2,2,3,2,3,4,3,3,3,2,4,2,,,5,4,3,3,1,3,3,3,4,2,4,1,3,3,2,5,2,4,2,4,1,4,1,3,2,4,,2,4,2,3,3,3,1,2,2,2,2,2,3,4,3,2,4,2,3,3,4,3,3'
         ])
     );
 });
