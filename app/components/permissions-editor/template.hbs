@@ -1,0 +1,43 @@
+<thead>
+    <tr>
+        <th>User Selector</th>
+        <th width="5%">Add / remove</th>
+    </tr>
+</thead>
+<tbody>
+    {{#each usersList as |userId|}}
+        <tr>
+            <td>{{userId}}</td>
+            <td>
+                <button {{action 'removePermission' userId}} class="btn btn-xs btn-danger">
+                    <i class="fa fa-remove"></i>
+                </button>
+            </td>
+        </tr>
+    {{/each}}
+    <tr>
+        <td>
+            {{input value=newUserId type="text" class="form-control"}}
+        </td>
+        <td>
+            <button {{action 'addPermission'}} class="btn btn-xs btn-success">
+                <i class="fa fa-plus"></i>
+            </button>
+        </td>
+    </tr>
+</tbody>
+{{#bs-modal open=warn title='Are you sure?' footer=false}}
+    {{#bs-modal-body}}
+        You are about to remove your own user id from the whitelist. Doing so will immediately log you out and revoke your access to this site. This action is irreversible.
+    {{/bs-modal-body}}
+    {{#bs-modal-footer as |footer|}}
+        <div class="btn-group pull-right">
+            {{#bs-button type="default" action=(action 'close' target=footer) class="permissions-editor-btn"}}
+                Cancel
+            {{/bs-button}}
+            {{#bs-button type="danger" action=(action '_removePermission') class="permissions-editor-btn"}}
+                Confirm
+            {{/bs-button}}
+        </div>
+    {{/bs-modal-footer}}
+{{/bs-modal}}

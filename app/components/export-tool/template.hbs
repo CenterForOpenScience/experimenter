@@ -1,0 +1,17 @@
+<div class="bg-info export-tool-container">
+    <div class="row text-center">
+        <div class="col-xs-4 col-xs-offset-4 form-goup">
+            <select class="form-control export-tool-select" onchange={{action (mut dataFormat) value="target.value"}}>
+                {{#each-in dataFormats as |label|}}
+                    <option value={{label}} selected={{eq dataFormat label}}>{{label}}</option>
+                {{/each-in}}
+            </select>
+        </div>
+    </div>
+    <div class="export-tool-textarea-container">
+        {{textarea value=processedData class="export-tool-textarea"}}
+    </div>
+    <div class="row text-center">
+        <button class="btn btn-primary" {{action "downloadFile"}}>Download</button>
+    </div>
+</div>

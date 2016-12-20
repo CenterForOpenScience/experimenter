@@ -22,6 +22,12 @@ You will need the following things properly installed on your computer.
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
+## Prepare JamDB instance
+Experimenter is designed to talk to a [JamDB](https://github.com/CenterForOpenScience/jamdb) server for all 
+data storage. In most cases you will be provided a remote staging server for development purposes, but for advanced 
+development, [these setup scripts](https://github.com/samchrisinger/jam-setup) can help define a basic skeleton for 
+your project.
+
 ## Installation
 
 * `git clone <repository-url>` this repository
@@ -52,9 +58,11 @@ To login via OSF:
 * in .env file include:
 ```bash
 OSF_CLIENT_ID="\<client ID for staging account\>"
-OSF_SCOPE="osf.users.all_read"
+OSF_SCOPE="osf.users.profile_read"
 OSF_URL="https://staging-accounts.osf.io"
 SENTRY_DSN=""
+WOWZA_PHP='{}'
+WOWZA_ASP='{}'
 ```
 
 First:

@@ -1,0 +1,13 @@
+{{#if thumbnail }}
+    <img src={{thumbnail}} class="img-selector-thumbnail" alt="Thumbnail">
+{{ else }}
+    <div class="img-selector-none">
+        <i class="fa fa-picture-o"></i>
+    </div>
+{{/if}}
+{{#if edit}}
+    <br>
+    <br>
+    <button class="btn btn-default" onclick={{action 'clickInput'}}>Select an image</button>
+    {{input type="file" change=(action 'uploadImage') class="img-selector-input"}}
+{{/if}}

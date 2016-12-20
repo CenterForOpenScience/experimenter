@@ -31,19 +31,7 @@ module.exports = function (environment) {
         APP: {}
     };
 
-    if (environment === 'development') {
-        ENV.JAMDB = {
-            url: process.env.JAMDB_URL || 'http://localhost:1212',
-            namespace: process.env.JAMDB_NAMESPACE,
-            authorizer: 'osf-jwt'
-        };
-    } else if (environment === 'staging' || environment === 'production') {
-        ENV.JAMDB = {
-            url: process.env.JAMDB_URL,
-            namespace: process.env.JAMDB_NAMESPACE,
-            authorizer: 'osf-jwt'
-        };
-    } else if (environment === 'test') {
+    if (environment === 'test') {
         ENV.JAMDB = {
             url: '',
             namespace: 'test',
@@ -58,10 +46,13 @@ module.exports = function (environment) {
         ENV.APP.LOG_VIEW_LOOKUPS = false;
 
         ENV.APP.rootElement = '#ember-testing';
-    }
-
-    if (environment === 'production') {
-
+    } else {
+        // Get environment-specific settings from .env file
+        ENV.JAMDB = {
+            url: process.env.JAMDB_URL,
+            namespace: process.env.JAMDB_NAMESPACE,
+            authorizer: 'osf-jwt'
+        };
     }
 
     return ENV;

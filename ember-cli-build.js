@@ -28,7 +28,11 @@ module.exports = function(defaults) {
         },
         'ember-bootstrap': {
             importBootstrapFont: false
-        }
+        },
+        babel: {
+            optional: ['es6.spec.symbols'],
+            includePolyfill: true
+        },
     });
 
     app.import('bower_components/ace-builds/src/ace.js');
@@ -71,8 +75,5 @@ module.exports = function(defaults) {
     // please specify an object with the list of modules as keys
     // along with the exports of each module as its value.
 
-    if (app.env === 'production') {
-        return require('broccoli-strip-debug')(app.toTree());
-    }
     return app.toTree();
 };
