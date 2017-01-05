@@ -4,16 +4,17 @@
 importScripts('bcryptjs/dist/bcrypt.min.js');
 const bcrypt = dcodeIO.bcrypt;
 
-const bounds = new Set([
+const bounds = [
     [48, 57], // 0-9
     [65, 90], // A-Z
     [95, 95], // _
     [97, 122] // a-z
-]);
+];
 
 const possible = [];
 
-for (const bound of bounds) {
+for (let b = 0; b < bounds.length; b++) {
+    const bound = bounds[b];
     const upperBound = bound[1] + 1;
 
     for (let i = bound[0]; i < upperBound; i++) {
@@ -55,7 +56,7 @@ function makeId(len, enforceAlpha=true) {
 self.onmessage = event => {
     const {batchSize, studyId, extra, tag} = event.data;
     const records = [];
-    const idSet = new Set();
+    const idSet = [];
 
     for (let i = 0; i < batchSize; i++) {
         postMessage({
@@ -65,11 +66,11 @@ self.onmessage = event => {
         let id;
 
         // Check for duplicated IDs. Unlikely, but possible.
-        while (!id || idSet.has(id)) {
+        while (!id || ~idSet.indexOf(id)) {
             id = `${makeId(10, !tag)}${tag ? `-${tag}` : ''}`;
         }
 
-        idSet.add(id);
+        idSet.push(id);
 
         const salt = bcrypt.genSaltSync(12);
         const password = bcrypt.hashSync(studyId, salt).replace('$2a$', '$2b$');

@@ -11,10 +11,14 @@ module.exports = function(defaults) {
     const workerDestDir = '/assets/workers';
 
     const workers = transpiler(
-            new Funnel('app/workers', {
+        new Funnel('app/workers', {
             include: ['*.js'],
             destDir: workerDestDir
-        })
+        }),
+        {
+            comments: false,
+            compact: true
+        }
     );
 
     const workerDeps = new Funnel('bower_components', {
