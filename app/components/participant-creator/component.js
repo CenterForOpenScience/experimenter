@@ -6,17 +6,6 @@ import { validator, buildValidations } from 'ember-cp-validations';
  * @submodule components
  */
 
-// h/t: http://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
-function makeId(len) {
-    let text = '';
-    const possible = '0123456789';
-
-    for (let i = 0; i < len; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-}
-
 const Validations = buildValidations({
     batchSize: validator('number', {
         gt: 0,
@@ -29,6 +18,8 @@ const Validations = buildValidations({
         ignoreBlank: true
     })
 });
+
+const worker = new Worker('assets/workers/account-generator.js');
 
 /**
  * Participant creator page in component form.
@@ -58,20 +49,6 @@ export default Ember.Component.extend(Validations, {
         this._super(...arguments);
         this.set('extra', Ember.A());
         this.set('createdAccounts', []);
-    },
-    /**
-     * Generate an array of ID strings
-     * @param batchSize
-     * @param tag
-     * @returns {String[]}
-     * @private
-     */
-    _generate(batchSize, tag) {
-        var ret = [];
-        for (let i = 0; i < batchSize; i++) {
-            ret.push(`${makeId(10)}${tag ? `-${tag}` : ''}`);
-        }
-        return ret;
     },
 
     /**
@@ -158,16 +135,16 @@ export default Ember.Component.extend(Validations, {
 
             var tag = this.get('tag');
             batchSize = parseInt(batchSize) || 0;
-            var accountIDs = this._generate(batchSize, tag);
 
             var extra = {};
             extra.studyId = studyId;
             this.get('extra').forEach(item => {
                 extra[item.key] = item.value;
             });
-            const accounts = accountIDs.map(id => ({id, password: studyId, extra}));
+
             // TODO: Use the server response errors field to identify any IDs that might already be in use:
             // as written, we don't retry to create those. If 3 of 100 requested items fail, we just create 97 items and call it a day.
+            this.set('currentRecord', 1);
             this.set('creating', true);
 
             // This step is very slow because each password has to be bcrypted- on the front end (jamdb implementation detail).
@@ -175,25 +152,43 @@ export default Ember.Component.extend(Validations, {
             //   rerender blocks until after the server request has been sent.
             this.rerender();
             Ember.run.next(() => {
-                this._sendBulkRequest('account', accounts)
-                    .then((res) => {
-                        if (res.length > 0) {
-                            // Store all the records that were successfully created,
-                            // adding them to all records from previous requests while on this page.
-                            // Eg, a combined CSV could be generated with 200 records.
-                            this.get('createdAccounts').push(...res);
-                            // This may sometimes be smaller than batchSize, in the rare event that a single record appears
-                            // in res.errors instead, eg because ID was already in use
-                            this.toast.info(`Successfully created ${res.length} accounts!`);
-                            this.send('downloadCSV');
-                        } else {
-                            // Likely, every ID in this request failed to create for some horrible reason (data.length=0
-                            // and errors.length=batchSize after filtering out spurious null entries)
-                            this.get('toast').error('Could not create new account(s). If this error persists, please contact support.');
-                        }
-                    })
-                    .catch(() => this.get('toast').error('Could not create new accounts. Please try again later.'))
-                    .finally(() => this.set('creating', false));
+                // Handle the worker callback
+                worker.onmessage = event => {
+                    const {progress, records} = event.data;
+
+                    if (progress !== undefined) {
+                        this.set('currentRecord', progress + 1);
+                        return;
+                    }
+
+                    this._sendBulkRequest('account', records)
+                        .then((res) => {
+                            if (res.length > 0) {
+                                // Store all the records that were successfully created,
+                                // adding them to all records from previous requests while on this page.
+                                // Eg, a combined CSV could be generated with 200 records.
+                                this.get('createdAccounts').push(...res);
+                                // This may sometimes be smaller than batchSize, in the rare event that a single record appears
+                                // in res.errors instead, eg because ID was already in use
+                                this.toast.info(`Successfully created ${res.length} accounts!`);
+                                this.send('downloadCSV');
+                            } else {
+                                // Likely, every ID in this request failed to create for some horrible reason (data.length=0
+                                // and errors.length=batchSize after filtering out spurious null entries)
+                                this.get('toast').error('Could not create new account(s). If this error persists, please contact support.');
+                            }
+                        })
+                        .catch(() => this.get('toast').error('Could not create new accounts. Please try again later.'))
+                        .finally(() => this.set('creating', false));
+                };
+
+                // Call the worker
+                worker.postMessage({
+                    batchSize,
+                    studyId,
+                    tag,
+                    extra
+                });
             });
         },
         addExtraField() {
