@@ -4,15 +4,41 @@
 importScripts('bcryptjs/dist/bcrypt.min.js');
 const bcrypt = dcodeIO.bcrypt;
 
-// h/t: http://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
-function makeId(len) {
+const bounds = new Set([
+    [48, 57], // 0-9
+    [65, 90], // A-Z
+    [95, 95], // _
+    [97, 122] // a-z
+]);
+
+const possible = [];
+
+for (const bound of bounds) {
+    const upperBound = bound[1] + 1;
+
+    for (let i = bound[0]; i < upperBound; i++) {
+        possible.push(String.fromCharCode(i));
+    }
+}
+
+const alphaRegex = /[A-z_]/;
+
+/**
+ * Generates a new ID
+ * @param len {Number} The length of the ID
+ * @param [enforceAlpha=true] {Boolean} Whether or not to enforce alpha characters
+ * @returns {String} The ID
+ */
+function makeId(len, enforceAlpha=true) {
+    const possibleLength = enforceAlpha ? possible.length : 9;
     let text = '';
-    const possible = '0123456789';
 
     for (let i = 0; i < len; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
+        text += possible[Math.floor(Math.random() * possibleLength)];
     }
-    return text;
+
+    // Enforce alpha characters in text if flag is set and recurse if criterion is not met
+    return enforceAlpha && !alphaRegex.test(text) ? makeId(len) : text;
 }
 
 /**
@@ -29,13 +55,22 @@ function makeId(len) {
 self.onmessage = event => {
     const {batchSize, studyId, extra, tag} = event.data;
     const records = [];
+    const idSet = new Set();
 
     for (let i = 0; i < batchSize; i++) {
         postMessage({
             progress: i
         });
 
-        const id = `${makeId(10)}${tag ? `-${tag}` : ''}`;
+        let id;
+
+        // Check for duplicated IDs. Unlikely, but possible.
+        while (!id || idSet.has(id)) {
+            id = `${makeId(10, !tag)}${tag ? `-${tag}` : ''}`;
+        }
+
+        idSet.add(id);
+
         const salt = bcrypt.genSaltSync(12);
         const password = bcrypt.hashSync(studyId, salt).replace('$2a$', '$2b$');
 
