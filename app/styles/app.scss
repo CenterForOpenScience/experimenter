@@ -97,8 +97,11 @@ body,
 }
 
 .main-navigation {
+    color: white;
+}
+
+.main-navigation.active {
     color: $background-dark;
-    background-color: #c0c0c0;
 }
 
 .selected > .fa {
