@@ -5,10 +5,8 @@ importScripts('bcryptjs/dist/bcrypt.min.js');
 const bcrypt = dcodeIO.bcrypt;
 
 const bounds = [
-    [48, 57], // 0-9
+    [49, 57], // 1-9
     [65, 90], // A-Z
-    [95, 95], // _
-    [97, 122] // a-z
 ];
 
 const possible = [];
@@ -22,7 +20,7 @@ for (let b = 0; b < bounds.length; b++) {
     }
 }
 
-const alphaRegex = /[A-z_]/;
+const alphaRegex = /[A-Z]/;
 
 /**
  * Generates a new ID
@@ -67,7 +65,7 @@ self.onmessage = event => {
 
         // Check for duplicated IDs. Unlikely, but possible.
         while (!id || ~idSet.indexOf(id)) {
-            id = `${makeId(10, !tag)}${tag ? `-${tag}` : ''}`;
+            id = `${makeId(7)}${tag ? `-${tag}` : ''}`;
         }
 
         idSet.push(id);
