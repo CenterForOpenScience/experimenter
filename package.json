@@ -19,7 +19,7 @@
     "node": ">=6"
   },
   "author": "",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
     "bluebird": "^3.3.0",
     "broccoli-asset-rev": "^2.4.2",
