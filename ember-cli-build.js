@@ -2,10 +2,31 @@
 /* global require, module */
 require('dotenv').config();
 
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const BroccoliMergeTrees = require('broccoli-merge-trees');
+const transpiler = require('broccoli-babel-transpiler');
+const Funnel = require('broccoli-funnel');
 
 module.exports = function(defaults) {
-    var app = new EmberApp(defaults, {
+    const workerDestDir = '/assets/workers';
+
+    const workers = transpiler(
+        new Funnel('app/workers', {
+            include: ['*.js'],
+            destDir: workerDestDir
+        }),
+        {
+            comments: false,
+            compact: true
+        }
+    );
+
+    const workerDeps = new Funnel('bower_components', {
+        include: ['bcryptjs/dist/bcrypt.min.js'],
+        destDir: workerDestDir
+    });
+
+    const app = new EmberApp(defaults, {
         sourcemaps: {
             enabled: true
         },
@@ -75,5 +96,9 @@ module.exports = function(defaults) {
     // please specify an object with the list of modules as keys
     // along with the exports of each module as its value.
 
-    return app.toTree();
+    return new BroccoliMergeTrees([
+        app.toTree(),
+        workers,
+        workerDeps
+    ]);
 };

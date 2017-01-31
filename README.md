@@ -18,6 +18,7 @@ You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 * [Node.js](http://nodejs.org/) (with NPM)
+* [Yarn](https://yarnpkg.com/en/docs/install) (a package manager like npm)
 * [Bower](http://bower.io/)
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
@@ -32,7 +33,7 @@ your project.
 
 * `git clone <repository-url>` this repository
 * change into the new directory
-* `npm install`
+* `yarn install --pure-lockfile`
 * `bower install`
 
 ### Install submodule dependencies
@@ -67,7 +68,7 @@ WOWZA_ASP='{}'
 
 First:
 * make sure jamdb is running, see: https://github.com/CenterForOpenScience/jamdb
-* then: `npm run bootstrap`
+* then: `yarn run bootstrap`
 
 This:
 - Makes the _experimenter_ namespace in jamdb.
@@ -85,6 +86,17 @@ password=password
 Then:
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
+
+### Adding dependencies on other packages
+Sometimes, you will want to install an additional third-party package. In place of npm, this project uses `yarn`. 
+Most of the [commands](https://yarnpkg.com/en/docs/managing-dependencies) are the same, but this alternative tool 
+provides a way for two developers to guarantee they are using the same versions of underlying code. (by running 
+`yarn install --pure-lockfile`) This can help avoid a situation where things break unexpectedly when run on a different 
+computer.
+
+Whenever you choose to update your dependencies (`yarn add x` or `yarn install`), make sure that code still runs, then
+be sure to [commit](https://yarnpkg.com/en/docs/yarn-lock) the modified `yarn.lock` file, which represents the "current 
+known working state" for your app. 
 
 ### Code Generators
 

@@ -97,8 +97,11 @@ body,
 }
 
 .main-navigation {
+    color: white;
+}
+
+.main-navigation.active {
     color: $background-dark;
-    background-color: #c0c0c0;
 }
 
 .selected > .fa {
@@ -131,11 +134,17 @@ a.sub-navigation {
     color: white;
     text-decoration: none;
     padding: 12px;
+    width: 100%;
 }
 
 a.sub-navigation:visited {
     color: white;
     text-decoration: none;
+}
+
+a.sub-navigation.active {
+    color: $background-dark;
+    background-color: white;
 }
 
 a.sub-navigation:hover {
