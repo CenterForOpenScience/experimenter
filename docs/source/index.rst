@@ -21,4 +21,5 @@ Contents:
    experiments_ref
    development
    frames
+   mixins
    random

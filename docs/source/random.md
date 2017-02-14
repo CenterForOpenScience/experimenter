@@ -35,7 +35,7 @@ run:
 ember generate randomizer <name>
 ```
 
-which will create a new file: `addon/randomizers/<name>.js`. Let walk through an example called 'next. The 'next' 
+which will create a new file: `addon/randomizers/<name>.js`. Let's walk through an example called 'next. The 'next' 
 randomizer simply picks the next frame in a series. (based on previous times that someone participated in an experiment)
 
 ```bash
