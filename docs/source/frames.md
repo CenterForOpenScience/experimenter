@@ -122,9 +122,19 @@ Next is the 'meta' section:
 
 which is comprised of:
 - name (optional): A human readable name for this 'frame'
-- description (optional): A human readable description for this 'frame'
-- parameters: JSON Schema defining what parameters this 'frame' accepts
-- data: JSON Schema defining what data this 'frame' outputs
+- description (optional): A human readable description for this 'frame'. 
+- parameters: JSON Schema defining what configuration parameters this 'frame' accepts. When you define an experiment 
+  that uses the frame, you will be able to specify configuration as part of the experiment definition. Any parameters in 
+  this section will be automatically added as properties of the component, and directly accessible as `propertyName` from 
+  templates or component logic.
+- data: JSON Schema defining what data this 'frame' outputs. Properties defined in this section represent properties of 
+  the component that will get serialized and sent to the server as part of the payload for this experiment. You can get 
+  these values by binding a value to an input box, for example, or you can define a custom computed property by that 
+  name to have more control over how a value is sent to the server.  
+  
+If you want to save the value of a configuration variables, you can reference it in both parameters *and* data. 
+For example, this can be useful if your experiment randomly chooses some frame behavior when it loads for the user, and
+you want to save and track what value was chosen.
 
 #### Building out the Example
 
@@ -229,7 +239,9 @@ Notice the new property `consentNotGranted`; this will require a new computed fi
 });
 ```
 
-### Tips for adding styles
+### Tips and tricks
+
+#### Tips for adding styles
 You will probably want to add custom styles to your frame, in order to control the size, placement, and color of 
 elements. Experimenter uses a common web standard called [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) for
 styles.*
@@ -255,3 +267,25 @@ styles for other things. For example, instead of `some-video-widget`, consider a
 \* You may notice that style files have a special extension `.scss`. That is because styles in experimenter are 
 actually written in [SASS](http://sass-lang.com/). You can still write normal CSS just fine, but SASS provides 
 additional syntax on top of that and can be helpful for power users who want complex things (like variables). 
+
+#### When should I use actions vs functions?
+Actions should be used when you need to trigger a specific piece of functionality via user interaction: eg click a 
+button to make something happen.
+
+Functions (or helper methods on a component/frame) should be used when the logic is shared, or not intended to be 
+accessed directly via user interaction. It is usually most convenient for these methods to be defined as a part of the 
+component, so that they can access data or properties of the component. Since functions can return a value, they are 
+particularly helpful for things like sending data to a server, where you need to act on success or failure in order to 
+display information to the user. (using promises, etc)
+
+Usually, you should use actions only for things that the user directly triggers. Actions and functions are not mutually 
+exclusive! For example, an action called `save` might call an internal method called `this._save` to handle the 
+behavior and message display consistently. 
+ 
+If you find yourself using the same logic over and over, and it does not depend on properties of a particular 
+ component, consider making it a [util](https://ember-cli.com/extending/#detailed-list-of-blueprints-and-their-use)!
+ 
+If you are building extremely complex nested components, you may also benefit from reading about closure actions. They 
+can provide a way to act on success or failure of something, and are useful for :
+- [Ember closure actions have return values](https://alisdair.mcdiarmid.org/ember-closure-actions-have-return-values/)
+- [Ember.js Closure Actions Improve the Former Action Infrastructure](https://spin.atomicobject.com/2016/06/25/emberjs-closure-actions/)
