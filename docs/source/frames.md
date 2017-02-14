@@ -228,3 +228,30 @@ Notice the new property `consentNotGranted`; this will require a new computed fi
     consentNotGranted: Ember.computed.not('consentGranted')
 });
 ```
+
+### Tips for adding styles
+You will probably want to add custom styles to your frame, in order to control the size, placement, and color of 
+elements. Experimenter uses a common web standard called [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) for
+styles.*
+
+To add custom styles for a pre-existing component, you will need to create a file `<component-name.scss>` in the 
+`addon/styles/components` directory of `exp-addons`. Then add a line to the top of `addon/styles/addon.scss`, telling 
+it to use that style. For example,
+ 
+`@import "components/exp-video-physics";`
+
+
+Remember that anything in exp-addons is shared code. Below are a few good tips to help your addon stay isolated and 
+distinct, so that it does not affect other projects.
+
+Here are a few tips for writing good styles:
+- Do not override global styles, or things that are part of another component. For example, `exp-video-physics` should 
+not contain styles for `exp-player`, nor should it 
+   - If you need to style a button specifically inside that component, either add a second style to the element, or 
+     consider using nested [CSS selectors](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Selectors).
+- Give all of the styles in your component a unique common name prefix, so that they don't inadvertently overlap with 
+styles for other things. For example, instead of `some-video-widget`, consider a style name like `exp-myframe-video-widget`. 
+ 
+\* You may notice that style files have a special extension `.scss`. That is because styles in experimenter are 
+actually written in [SASS](http://sass-lang.com/). You can still write normal CSS just fine, but SASS provides 
+additional syntax on top of that and can be helpful for power users who want complex things (like variables). 
