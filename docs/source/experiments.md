@@ -2,19 +2,24 @@
 
 ### Prerequisites
 
-If you are unfamiliar with the JSON format, you may want to spend a couple minutes reading the introduction here: [http://www.json.org/](http://www.json.org/).
+If you are unfamiliar with the JSON format, you may want to spend a couple minutes reading the introduction here: 
+[http://www.json.org/](http://www.json.org/).
 
-Additionally, we use JSON Schema heavily throughout this project. The examples [here](http://json-schema.org/examples.html) are a great place to learn more about this specification.
+Additionally, we use JSON Schema heavily throughout this project. The examples [here](http://json-schema.org/examples.html) 
+are a great place to learn more about this specification.
 
 ### Experiment structure
 
-Experimenter prevides an interface to define the structure of an experiment using a JSON document. This is composed to two segments:
+Experimenter prevides an interface to define the structure of an experiment using a JSON document. This is composed to 
+two segments:
 
-- **structure**: a definition of the **frames** you want to utilize in your experiment. This must take the form of a JSON object, i.e. a set of key/value pairs.
-- **seqeunce**: a list of keys from the **structure** object. These need not be unique, and items from **structure** may be repeated. This determines the order
-that **frames** in your experiment will be shown.
+- **structure**: a definition of the **frames** you want to utilize in your experiment. This must take the form of a 
+  JSON object, i.e. a set of key/value pairs.
+- **sequence**: a list of keys from the **structure** object. These need not be unique, and items from **structure** 
+  may be repeated. This determines the order that **frames** in your experiment will be shown.
 
-> *Note:* the term **frame** refers to a single segment of your experiment. Examples of this might be: a consent form, a survey, or some video stimulus. Hopefully this idea will become increasing clear as you progress through this guide.
+> *Note:* the term **frame** refers to a single segment of your experiment. Examples of this might be: a consent form, 
+a survey, or some video stimulus. Hopefully this idea will become increasing clear as you progress through this guide.
 
 To explain these concepts, let's walk through an example:
 
@@ -75,9 +80,14 @@ To explain these concepts, let's walk through an example:
 
 This JSON document describes a fairly simple experiment. It has three basic parts (see 'sequence'):
 
-1. intro-video: A short video clip that prepares participants for what is to come in the study. Multiple file formats are specified to support a range of web browsers.
-2. survey-randomizer: A **frame** that randomly selects from one of the three 'options', in this case 'survey-1', 'survey-2', or 'survey-3'. The `"sampler": "random"` setting tells Experimenter to simply pick of of the options at random. Other supported options are described here: TODO
-3. exit-survey: A simple post-study survey. Notice for each of the **frames** with `"type": "exp-survey"` there is a `formSchema` property that specifies the URL of another JSON schema to load. This corresponds with the input data expected by [Alpaca Forms](http://www.alpacajs.org/documentation.html). An example of one of these schemas is:
+1. intro-video: A short video clip that prepares participants for what is to come in the study. Multiple file formats
+ are specified to support a range of web browsers.
+2. survey-randomizer: A **frame** that randomly selects from one of the three 'options', in this case 'survey-1', 
+  'survey-2', or 'survey-3'. The `"sampler": "random"` setting tells Experimenter to simply pick of of the options at 
+  random. Other supported options are described here: TODO
+3. exit-survey: A simple post-study survey. Notice for each of the **frames** with `"type": "exp-survey"` there is 
+  a `formSchema` property that specifies the URL of another JSON schema to load. This corresponds with the input data 
+  expected by [Alpaca Forms](http://www.alpacajs.org/documentation.html). An example of one of these schemas is below:
 ```json
 {
     "schema": {
@@ -100,7 +110,8 @@ This JSON document describes a fairly simple experiment. It has three basic part
 
 ### Experiment data
 
-The data saved when a subject participates in a study varies based on how that experiment is defined. The general structure for this **session** data is:
+The data saved when a subject participates in a study varies based on how that experiment is defined. The general 
+structure for this **session** data is:
 
 ```json
 {
@@ -172,16 +183,20 @@ The data saved when a subject participates in a study varies based on how that e
 
 And descriptions of these properties are enumerated below:
 
-- *profileId*: This unqiue identifier of the participant. Presently this field follows the form: `<account.id>.<profile.id>`, where `<account.id>` is the unique identifier of the associated account (more information on account and profile data strucutres here: TODO), and `<profile.id>` is the unique identifier of the profile active during this particular session.
+- *profileId*: This unique identifier of the participant. Presently this field follows the form: 
+  `<account.id>.<profile.id>`, where `<account.id>` is the unique identifier of the associated account (more 
+  information on account and profile data strucutres here: TODO), and `<profile.id>` is the unique identifier of the profile active during this particular session.
 - *experimentId*: The unique identifier of the study the subject participated in.
-- *experimentVersion*: The unique indentifier of the version of the study the subject pariticipated in. TODO: more on JamDB, versioning
+- *experimentVersion*: The unique identifier of the version of the study the subject participated in. TODO: more 
+  on JamDB, versioning
 - *completed*: A true/false flag indicating whether or not the subject completed the study.
-- *sequqence*: The sequence of **frames** the subject actually saw (after running randomization, etc.)
+- *sequence*: The sequence of **frames** the subject actually saw (after running randomization, etc.)
 - *conditions*: For randomizers, this records what condition the subject was assigned
 - *expData*: A JSON object containing the data collected by each **frame** in the study. More on this to follow.
-- *feedback*: Some reasearchers may have a need to leave some session-specific feedback for a subject or internal use.
+- *feedback*: Some researchers may have a need to leave some session-specific feedback for a subject or internal use.
 - *hasReadFeedback*: A true/false flag to indicate whether or not the given feedback has been read.
-- *earlyExit*: If a subject chooses to leave a study early, a researcher may wish to collect some feedback as to why. This field is a place to store this feedback. (TODO more detail?)
+- *earlyExit*: If a subject chooses to leave a study early, a researcher may wish to collect some feedback as to why. 
+  This field is a place to store this feedback. (TODO more detail?)
 
 #### Sessions and `expData` in detail
 
@@ -229,5 +244,15 @@ Continuing with the example from above, lets walk through the data collected dur
 ```
 
 Things to note:
-- 'sequence' has resolved to three items following the pattern `<order>-<frame.id>`, where `<order>` is the order in the overall sequence where this **frame** appeared, and `<frame.id>` is the identifier of the frame as definited in the 'frames' property of the experiment structure. Notice in particular that since 'survey-2' was randomly selected, it appears here.
-- 'conditions' has the key/value pair `"1-survey-randomizer": 1`, where the format `<order>-<frame.id>` corrsponds with the `<order>` from the 'sequence' of the *original* experiment structre, and the `<frame.id>` again corresponds with the - 'expData' is an object with three properties (corresponding with the values from 'sequence'). You may notice that each of these objects have the common 'eventTimings' property -- this is a place to collect user-interaction events during an experiment, and by default contains the 'nextFrame' event which records when the user progressed to the next **frame** in the 'sequence'. Other properties besides 'eventTimings' are dependant on the **frame** type. Notice that 'exp-video' captures no data, and that both 'exp-survey' **frames** capture a 'formData' object.
+- 'sequence' has resolved to three items following the pattern `<order>-<frame.id>`, where `<order>` is the order in 
+  the overall sequence where this **frame** appeared, and `<frame.id>` is the identifier of the frame as defined in 
+  the 'frames' property of the experiment structure. Notice in particular that since 'survey-2' was randomly selected, 
+  it appears here.
+- 'conditions' has the key/value pair `"1-survey-randomizer": 1`, where the format `<order>-<frame.id>` corresponds 
+  with the `<order>` from the 'sequence' of the *original* experiment structure, and the `<frame.id>` again corresponds 
+  with the - 'expData' is an object with three properties (corresponding with the values from 'sequence'). You may 
+  notice that each of these objects have the common 'eventTimings' property- this is a place to collect 
+  user-interaction events during an experiment, and by default contains the 'nextFrame' event which records when the 
+  user progressed to the next **frame** in the 'sequence'. Other properties besides 'eventTimings' are dependent on 
+  the **frame** type. Notice that 'exp-video' captures no data, and that both 'exp-survey' **frames** capture a 
+  'formData' object.

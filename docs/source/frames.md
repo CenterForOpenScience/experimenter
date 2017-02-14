@@ -2,9 +2,11 @@
 
 ### Overview
 
-You may find you have a need for some experimental component is not included in Experimenter already. The goal of this section is to walk through extending the base functionality with your own code.
+You may find you have a need for some experimental component is not included in Experimenter already. The goal of this 
+section is to walk through extending the base functionality with your own code.
 
-We use the term 'frame' to describe the combination of JavaScript file and Handlebars HTML template that compose a **block** of an experiment.
+We use the term 'frame' to describe the combination of JavaScript file and Handlebars HTML template that compose a 
+**block** of an experiment.
 
 Experimenter is composed of three main modules:
 
@@ -12,11 +14,16 @@ Experimenter is composed of three main modules:
 - **lib/exp-models**: the data models used by **experimenter** and other applications
 - **exp-player**: the built-in rendering engine for experiments built in Experimenter
 
-Generally, all 'frame' development will happen in the exp-player module. By nature of the way the Experimenter respository is structured, this will mean making changes in the `experimenter/lib/exp-player` directory. These changes can be committed as part of the [exp-addons](https://github.com/CenterForOpenScience/exp-addons) git submodule (installed under `experimenter/lib`)
+Generally, all 'frame' development will happen in the exp-player module. By nature of the way the Experimenter 
+repository is structured, this will mean making changes in the `experimenter/lib/exp-player` directory. These changes 
+can be committed as part of the [exp-addons](https://github.com/CenterForOpenScience/exp-addons) git submodule 
+(installed under `experimenter/lib`)
 
 ### Getting Started
 
-One of the features of [Ember CLI](http://www.ember-cli.com/) is the abilty to provide 'blueprints' for code. These are basically just templates of all of the basic boilerplate needed to create a certain piece of code. To begin developing your own frame:
+One of the features of [Ember CLI](http://www.ember-cli.com/) is the abilty to provide 'blueprints' for code. These 
+are basically just templates of all of the basic boilerplate needed to create a certain piece of code. To begin 
+developing your own frame:
 
 ```bash
 cd experimenter/lib/exp-player
@@ -40,12 +47,13 @@ installing exp-frame
 Notice this created three new files:
 - `addon/components/exp-consent-form/component.js`: the JS file for your 'frame'
 - `addon/components/exp-consent-form/template.hbs`: the Handlebars template for your 'frame'
-- `app/components/exp-consent-form.js`: a boilerplate file that exposes the new frame to the Ember app-- don't modify this file unless you know what you're doing
+- `app/components/exp-consent-form.js`: a boilerplate file that exposes the new frame to the Ember app- 
+  you will almost never need to modify this file.
 
 Let's take a deeper look at the `component.js` file:
 
 ```javascript
-import ExpFrameBaseComponent from 'exp-player/components/exp-frame-base';
+import ExpFrameBaseComponent from 'exp-player/components/exp-frame-base/component';
 import layout from './template';
 
 export default ExpFrameBaseComponent.extend({
@@ -57,13 +65,13 @@ export default ExpFrameBaseComponent.extend({
         parameters: {
             type: 'object',
             properties: {
-                // define parameters here
+                // define configurable parameters here
             }
         },
         data: {
             type: 'object',
             properties: {
-                // define data structure here
+                // define data to be sent to the server here
             }
         }
     }
@@ -83,7 +91,7 @@ export default ExpFrameBaseComponent.extend({
 })
 ```
 
-does a couple things:
+does several things:
 - imports the `ExpFrameBaseComponent`: this is the superclass that all 'frames' must extend
 - imports the `layout`: this tells Ember what template to use
 - extends `ExpFrameBaseComponent` and specifies `layout: layout`
@@ -92,20 +100,20 @@ does a couple things:
 Next is the 'meta' section:
 
 ```javascript
-...
+    ...
     meta: {
         name: 'ExpConsentForm',
         description: 'TODO: a description of this frame goes here.',
         parameters: {
             type: 'object',
             properties: {
-                // define parameters here
+                // define configurable parameters here
             }
         },
         data: {
             type: 'object',
             properties: {
-                // define data structure here
+                // define data to be sent to the server here
             }
         }
     }
@@ -114,7 +122,7 @@ Next is the 'meta' section:
 
 which is comprised of:
 - name (optional): A human readable name for this 'frame'
-- description (optional): A human readable descripion for this 'frame'
+- description (optional): A human readable description for this 'frame'
 - parameters: JSON Schema defining what parameters this 'frame' accepts
 - data: JSON Schema defining what data this 'frame' outputs
 
