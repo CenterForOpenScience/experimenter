@@ -87,7 +87,7 @@ and
 - **images**: a list of objects specifying image src, alt, and title
   - type: list
   - default: empty
-- **prompts**: text of any header/prompt pararaphs to show the participant
+- **prompts**: text of any header/prompt paragraphs to show the participant
   - type: list of text-blocks
   - default: empty
 
@@ -260,7 +260,7 @@ None
 
 ### exp-video-consent
 
-> presen the participant with a written consent document then capture her spoken consent
+> present the participant with a written consent document then capture her spoken consent
 
 [view source code](https://github.com/CenterForOpenScience/exp-addons/blob/develop/exp-player/addon/components/exp-video-consent.js)
 

@@ -21,7 +21,7 @@ can be committed as part of the [exp-addons](https://github.com/CenterForOpenSci
 
 ### Getting Started
 
-One of the features of [Ember CLI](http://www.ember-cli.com/) is the abilty to provide 'blueprints' for code. These 
+One of the features of [Ember CLI](http://www.ember-cli.com/) is the ability to provide 'blueprints' for code. These 
 are basically just templates of all of the basic boilerplate needed to create a certain piece of code. To begin 
 developing your own frame:
 

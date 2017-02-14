@@ -72,7 +72,7 @@ The most important thing to note is that this module exports a single function. 
 
 Additionally, this function should return a two-item array containing:
 	- a list of resolved frames
-	- the conditions used to determine that resoleved list
+	- the conditions used to determine that resolved list
 	
 Let's walk through the implementation:
 

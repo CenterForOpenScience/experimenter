@@ -10,7 +10,7 @@ are a great place to learn more about this specification.
 
 ### Experiment structure
 
-Experimenter prevides an interface to define the structure of an experiment using a JSON document. This is composed to 
+Experimenter provides an interface to define the structure of an experiment using a JSON document. This is composed to 
 two segments:
 
 - **structure**: a definition of the **frames** you want to utilize in your experiment. This must take the form of a 
@@ -185,7 +185,7 @@ And descriptions of these properties are enumerated below:
 
 - *profileId*: This unique identifier of the participant. Presently this field follows the form: 
   `<account.id>.<profile.id>`, where `<account.id>` is the unique identifier of the associated account (more 
-  information on account and profile data strucutres here: TODO), and `<profile.id>` is the unique identifier of the profile active during this particular session.
+  information on account and profile data structures here: TODO), and `<profile.id>` is the unique identifier of the profile active during this particular session.
 - *experimentId*: The unique identifier of the study the subject participated in.
 - *experimentVersion*: The unique identifier of the version of the study the subject participated in. TODO: more 
   on JamDB, versioning
