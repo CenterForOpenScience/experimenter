@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to Experimenter's documentation!
-=================================
+==========================================
 
 **NOTE: This documentation is a work in progress**
 
@@ -23,3 +23,4 @@ Contents:
    frames
    mixins
    random
+   video_capture
