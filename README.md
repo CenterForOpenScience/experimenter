@@ -36,6 +36,11 @@ your project.
 * `yarn install --pure-lockfile`
 * `bower install`
 
+To use the video capture facilities of Experimenter, you will also need to place the file `VideoRecorder.swf` 
+in your `<project_name>/public/` folder. **This file is not part of the git repository**; it is from the HDFVR flash video 
+recorder and must be obtained from a team member with access to the licensed version. They can also provide the
+necessary configuration to talk to a valid and licensed streaming media server (eg Wowza); see below.
+
 ### Install submodule dependencies
 
 ```bash
