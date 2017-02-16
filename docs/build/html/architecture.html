@@ -34,6 +34,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Experimenter 0.0.0 documentation" href="index.html"/>
         <link rel="next" title="Glossary of Experimental Components" href="experiments_ref.html"/>
         <link rel="prev" title="Building an Experiment" href="experiments.html"/> 
@@ -95,6 +98,8 @@
 <li class="toctree-l1"><a class="reference internal" href="experiments_ref.html">Glossary of Experimental Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development: Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="frames.html">Development: Custom Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixins.html">Development: Mixins of premade functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="random.html">Development: Randomization</a></li>
 </ul>
 
             
@@ -129,7 +134,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/architecture.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/architecture.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -143,8 +148,12 @@
 <span id="architecture"></span><h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="jamdb-as-a-backend">
 <span id="jamdb-as-a-backend"></span><h2>JamDB as a Backend<a class="headerlink" href="#jamdb-as-a-backend" title="Permalink to this headline">¶</a></h2>
-<p>Experimenter&#8217;s backend is driven by <a class="reference external" href="https://jamdb.readthedocs.org/en/latest/">JamDB</a>, which provides a performant API over a document store. It offers <a class="reference external" href="http://json-schema.org/">JSON Schema</a> validation of submitted documents and a versioned history of all documents. This goal of this section of the documentation is to give a breif overview of the JamDB API in its relation to Experimenter.</p>
-<p>For now, the best resource on learning more about this is reading the code <a class="reference external" href="https://github.com/CenterForOpenScience/experimenter/tree/develop/examples">here</a> as well as the JamDB documentation.</p>
+<p>Experimenter&#8217;s backend is driven by <a class="reference external" href="https://jamdb.readthedocs.org/en/latest/">JamDB</a>, which provides a performant
+API over a document store. It offers <a class="reference external" href="http://json-schema.org/">JSON Schema</a> validation of submitted documents and a
+versioned history of all documents. This goal of this section of the documentation is to give a brief overview of the
+JamDB API in its relation to Experimenter.</p>
+<p>For now, the best resource on learning more about this is reading the code <a class="reference external" href="https://github.com/CenterForOpenScience/experimenter/tree/develop/examples">here</a>
+as well as the <a class="reference external" href="https://jamdb.readthedocs.org/en/latest/">JamDB documentation</a>.</p>
 </div>
 </div>
 
@@ -168,7 +177,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Center for Open Science.
-      Last updated on Apr 07, 2016.
+      Last updated on Feb 15, 2017.
 
     </p>
   </div>

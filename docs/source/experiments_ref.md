@@ -4,16 +4,19 @@
 
 ##### text-blocks
 
-Many of these components expect one or more paramters with the structure:
+Many of these components expect one or more parameters with the structure:
 ```json
 {
    "title": "My title",
-   "text": "Some text here" // optional,
+   "text": "Some text here",  // optional
    "markdown": "Some markdown text here" // optional
 }
 ```
 
-This pattern will be referred to in the rest of this document as a 'text-block'. Note: a text-block may specify _either_ a  'text' property or a 'markdown' property. The 'text' property supports lightwieght formatting using the '\n' character to create a newline, and '\t' to create indentation. The 'markdown' property will be formatted as [markdown](http://daringfireball.net/projects/markdown/).
+This pattern will be referred to in the rest of this document as a 'text-block'. Note: a text-block may 
+specify _either_ a  'text' property or a 'markdown' property. The 'text' property supports lightweight formatting 
+using the '\n' character to create a newline, and '\t' to create indentation. The 'markdown' property will be 
+formatted as [markdown](http://daringfireball.net/projects/markdown/).
 
 ##### remote-resources
 
@@ -21,7 +24,8 @@ Some items support loading additional content from a remote resource. This uses 
 
 `(JSON|URL):<url>`
 
-where the `JSON:` prefix means the fetched content should be parsed as JSON, and the `URL:` prefix should be interpreted as plain text. Examples are:
+where the `JSON:` prefix means the fetched content should be parsed as JSON, and the `URL:` prefix should be 
+interpreted as plain text. Examples are:
 
 `"formSchema": "JSON:https://s3.amazonaws.com/exampleexp/my_survey.json"`
 
@@ -83,7 +87,7 @@ and
 - **images**: a list of objects specifying image src, alt, and title
   - type: list
   - default: empty
-- **prompts**: text of any header/prompt pararaphs to show the participant
+- **prompts**: text of any header/prompt paragraphs to show the participant
   - type: list of text-blocks
   - default: empty
 
@@ -256,7 +260,7 @@ None
 
 ### exp-video-consent
 
-> presen the participant with a written consent document then capture her spoken consent
+> present the participant with a written consent document then capture her spoken consent
 
 [view source code](https://github.com/CenterForOpenScience/exp-addons/blob/develop/exp-player/addon/components/exp-video-consent.js)
 
@@ -319,4 +323,4 @@ None
 
 None
 
-- - -
+
