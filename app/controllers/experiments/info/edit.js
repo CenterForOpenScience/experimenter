@@ -87,7 +87,20 @@ export default Ember.Controller.extend({
             //But calling get returns the value returned by set....
             this.get('model.schema', schema).then(() => this.get('model').save())
                 .then(() => this.toast.success('Experiment updated'))
-                .catch(() => this.toast.error('The server refused to save the data, likely due to a schema error'));
+                .catch((err) => {
+                    const statusCode = Ember.get(err, 'errors.0.status');
+
+                    let msg;
+                    if (statusCode == 401 || statusCode == 403) {  // jshint ignore:line
+                        msg = 'Schema changes could not be saved because you are no longer logged in. Please make a copy of your work, then re-log-in.';
+                    } else if (statusCode == 400) {  // jshint ignore:line
+                        msg = 'The server refused to save the data, likely due to a schema error';
+                    } else {
+                        // Unknown error code, or error is not an AdapterError object, or code not provided by server in this error field.
+                        msg = `The server refused to save the data for an unknown reason. Full error: \n ${err.toString ? err.toString() : err}`;
+                    }
+                    this.toast.error(msg);
+                });
 
         },
         discard() {
