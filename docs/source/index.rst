@@ -15,7 +15,6 @@ Contents:
 .. toctree::
    :maxdepth: 15
 
-   experiments
    architecture
    experiments
    experiments_ref
@@ -24,3 +23,4 @@ Contents:
    mixins
    random
    video_capture
+   stimuli
