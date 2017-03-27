@@ -15,12 +15,13 @@ Contents:
 .. toctree::
    :maxdepth: 15
 
-   architecture
+   staging
    experiments
    experiments_ref
+   stimuli
    development
    frames
    mixins
    random
    video_capture
-   stimuli
+   architecture
