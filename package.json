@@ -1,10 +1,10 @@
 {
   "name": "experimenter",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Experimenter: behavioral science research platform admin interface",
   "private": true,
   "directories": {
-    "doc": "doc",
+    "doc": "docs",
     "test": "tests"
   },
   "scripts": {
