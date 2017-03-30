@@ -293,7 +293,125 @@ But what we really want to do is have some kids think about how tasty broccoli i
 
 Notice that since both of the frames in the `frameList` were of the same kind, we could define the kind in `commonFrameProperties`. We no longer define `id` values for the frames, as they will be automatically identified as `instruct-and-manip-1` and `instruct-and-manip-2`.
 
-If we wanted to have 75% of participants think about how tasty broccoli is, we could also weight the parameter sets by providing the optional parameter `"parameterSetWeights": [3, 1]"` to the randomizer frame. One use of this function is to stop testing conditions that you already have enough children in as data collection proceeds.
+If we wanted to have 75% of participants think about how tasty broccoli is, we could also weight the parameter sets by providing the optional parameter `"parameterSetWeights": [3, 1]"` to the randomizer frame. 
+
+> Note: One use of parameterSetWeights is to stop testing conditions that you already have enough children in as data collection proceeds.
+
+#### Nested randomizers
+
+The frame list you provide to the randomParameterSet randomizer can even include other randomizer frames! This allows you to, for instance, define a **trial** that includes several distinct **blocks** (say, an intro, video, and then 4 test questions), then show 10 of those trials with different parameters - without having to write out all 60 blocks. There's nothing "special" about doing this, but it can be a little more confusing. 
+
+Here's an example. Notice that `"kind": "choice"`, `"sampler": "random-parameter-set"`, `"frameList": ...`, and `commonFrameProperties` are `commonFrameProperties` of the outer frame `nested-trials`. That means that every "frame" we'll create as part of `nested-trials` will itself be a random-parameter-set generated list with the same frame sequence, although we'll be substituting in different parameter values. (This doesn't have to be the case - we could show different types of frames in the list - but in the simplest case where you're using randomParameterSet just to group similar repeated frame sequences, this is probably what you'd do.) The only thing that differs across the two (outer-level) **trials** is the `parameterSet` used, and we list only one parameter set for each trial, to describe (deterministically) how the outer-level `parameterSet` values should be applied to each particular frame.
+
+```json
+    "nested-trials": {
+        "kind": "choice",
+        "sampler": "random-parameter-set",
+        "commonFrameProperties": {
+            "kind": "choice",
+            "sampler": "random-parameter-set",
+            "frameList": [
+                {
+                    "nPhase": 0,
+                    "doRecording": false,
+                    "autoProceed": false,
+                    "parentTextBlock": {
+                        "title": "Parents!",
+                        "text": "Phase 0: instructions",
+                        "emph": true
+                    },
+                    "images": [
+                        {
+                            "id": "protagonist",
+                            "src": "PROTAGONISTFACELEFT",
+                            "left": "40",
+                            "bottom": "2",
+                            "height": "60",
+                            "animate": "fadein"
+                        }       
+                    ],
+                    "audioSources": [
+                        {
+                            "audioId": "firstAudio",
+                            "sources": [{"stub": "0INTRO"}]
+                        }
+                    ]
+                },
+                {
+                    "nPhase": 1,
+                    "doRecording": false,
+                    "autoProceed": false,
+                    "parentTextBlock": {
+                        "title": "Parents!",
+                        "text": "Phase 1: instructions",
+                        "emph": true
+                    },
+                    "images": [
+                        {
+                            "id": "protagonist",
+                            "src": "PROTAGONISTFACELEFT",
+                            "left": "40",
+                            "bottom": "2",
+                            "height": "60"
+                        }       
+                    ],
+                    "audioSources": [
+                        {
+                            "audioId": "firstAudio",
+                            "sources": [{"stub": "1INTRO"}]
+                        }
+                    ]
+                }
+            ],
+            "commonFrameProperties": {
+                "kind": "exp-lookit-dialogue-page",
+                "doRecording": true,
+                "nTrial": "NTRIAL",
+                "backgroundImage": "BACKGROUNDIMG",
+                "baseDir": "https://s3.amazonaws.com/lookitcontents/politeness/",
+                "audioTypes": ["mp3", "ogg"]
+            }
+        }, 
+        "frameList": [
+            {
+                "parameterSets": [
+                    {
+                        "PROTAGONISTFACELEFT": "PROTAGONISTFACELEFT_1",
+                        "BACKGROUNDIMG": "BACKGROUNDIMG_1",
+                        "0INTRO": "0INTRO_1",
+                        "1INTRO": "1INTRO_1",
+                        "NTRIAL": 1
+                    }
+                ]
+            },
+            {
+                "parameterSets": [
+                    {
+                        "PROTAGONISTFACELEFT": "PROTAGONISTFACELEFT_2",
+                        "BACKGROUNDIMG": "BACKGROUNDIMG_2",
+                        "0INTRO": "0INTRO_2",
+                        "1INTRO": "1INTRO_2",
+                        "NTRIAL": 2
+                    }
+                ]
+            }
+        ],
+        "parameterSets": [
+            {
+                "PROTAGONISTFACELEFT_1": "order1_test1_listener1.png",
+                "PROTAGONISTFACELEFT_2": "order1_test1_listener1_second.png",
+                "BACKGROUNDIMG_1": "order1_test1_background.png",
+                "BACKGROUNDIMG_2": "order1_test1_background.png",
+                "0INTRO_1": "polcon_example_1intro",
+                "1INTRO_1": "polcon_example_1intro",
+                "0INTRO_2": "polcon_example_1intro",
+                "1INTRO_2": "polcon_example_1intro"
+            }
+        ]
+    }
+```
+
+
 
 ### Testing your study
 
