@@ -17,6 +17,7 @@ Contents:
 
    staging
    experiments
+   experimentdata
    experiments_ref
    stimuli
    development
