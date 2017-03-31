@@ -522,17 +522,23 @@ And descriptions of these properties are enumerated below:
 
 #### Sessions and `expData` in detail
 
-Continuing with the example from above, lets walk through the data collected during a session (note: some fields are hidden):
+Lets walk through an example of data collected during a session (note: some fields are hidden):
 
 ```json
 {
 	"sequence": [
 		"0-intro-video",
-		"1-survey-2",
+		"1-survey",
 		"2-exit-survey"
 	],
 	"conditions": {
-		"survey-randomizer": 1
+        "1-survey": {
+            "parameterSet": {
+                "QUESTION1": "What is your favorite color?",
+                "QUESTION2": "What is your favorite number?"
+            },
+            "conditionNum": 0
+        }
 	},
 	"expData": {
 		"0-intro-video": {
@@ -541,7 +547,7 @@ Continuing with the example from above, lets walk through the data collected dur
 				"timestamp": "2016-03-23T16:28:20.753Z"
 			}]
 		},
-		"1-survey-2": {
+		"1-survey": {
 			"formData": {
 				"name": "Sam",
 				"favPie": "pecan"
@@ -570,10 +576,10 @@ Things to note:
   the overall sequence where this **frame** appeared, and `<frame.id>` is the identifier of the frame as defined in 
   the 'frames' property of the experiment structure. Notice in particular that since 'survey-2' was randomly selected, 
   it appears here.
-- 'conditions' has the key/value pair `"1-survey-randomizer": 1`, where the format `<order>-<frame.id>` corresponds 
+- 'conditions' has the key/value pair `"1-survey": 1`, where the format `<order>-<frame.id>` corresponds 
   with the `<order>` from the 'sequence' of the *original* experiment structure, and the `<frame.id>` again corresponds 
   with the identifier of the frame as defined in 
-  the 'frames' property of the experiment structure.
+  the 'frames' property of the experiment structure. Data will be stored in conditions for the first frame created by a randomizer (top-level only for now, i.e. not from nested randomizers). The data stored by a particular randomizer can be found under `methods: conditions` in the [randomizer documentation](http://centerforopenscience.github.io/exp-addons/modules/randomizers.html)
 - 'expData' is an object with three properties (corresponding with the values from 'sequence'). Each of these objects has an 'eventTimings' property. This is a place to collect user-interaction events during an experiment, and by default contains the 'nextFrame' event which records when the 
   user progressed to the next **frame** in the 'sequence'. You can see which events a particular frame records by looking at the 'Events' tab in its [frame documentation](http://centerforopenscience.github.io/exp-addons/modules/frames.html). Other properties besides 'eventTimings' are dependent on 
   the **frame** type. You can see which properties a particular frame type records by looking at the parameters of the `serializeContent` method under the 'Methods' tab in its [frame documentation](http://centerforopenscience.github.io/exp-addons/modules/frames.html).  Notice that 'exp-video' captures no data, and that both 'exp-survey' **frames** capture a 'formData' object.
