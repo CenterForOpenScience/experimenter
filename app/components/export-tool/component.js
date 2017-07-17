@@ -114,6 +114,7 @@ export default Ember.Component.extend({
                 const newRecord = {
                     PID: record.profileId,
                     SID: record.extra.studyId,
+                    completed: record.modifiedOn,
                     locale: record.extra.locale
                 };
 
