@@ -8,8 +8,15 @@
             </select>
         </div>
     </div>
-    <div class="export-tool-textarea-container">
-        {{textarea value=processedData class="export-tool-textarea"}}
+    <div class="export-tool-textarea-container" open=>
+        
+        {{#if processedData.show}}
+            {{textarea value=processedData.data class="export-tool-textarea"}}
+        
+        {{else}}
+            {{textarea value=processedData.message class="export-tool-textarea"}}
+
+        {{/if}}
     </div>
     <div class="row text-center">
         <button class="btn btn-primary" {{action "downloadFile"}}>Download</button>

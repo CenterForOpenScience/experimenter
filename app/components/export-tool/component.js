@@ -57,8 +57,15 @@ export default Ember.Component.extend({
      * @property {null|string} The processed data
      */
     processedData: Ember.computed('data', 'dataFormat', 'mappingFunction', function() {
-        let data = this.get('data') || [];
 
+        let data = this.get('data') || [];
+        var show = true;
+        var message = '';
+
+        if (data.length > 1000) {
+            show = false;
+            message = 'Dataset too large to preview. Please download to view.';
+        }
         if (data.toArray) {
             data = data.toArray();
         }
@@ -69,7 +76,11 @@ export default Ember.Component.extend({
 
         if (Ember.isPresent(dataArray)) {
             const mapped = mappingFunction ? dataArray.map(mappingFunction) : dataArray;
-            return this.convertToFormat(mapped, dataFormat);
+            return {
+                data: this.convertToFormat(mapped, dataFormat),
+                show: show,
+                message: message
+            };
         }
 
         return null;
@@ -173,7 +184,7 @@ export default Ember.Component.extend({
          * Creates a file for the user to download
          */
         downloadFile() {
-            const blob = new window.Blob([this.get('processedData')], {
+            const blob = new window.Blob([this.get('processedData.data')], {
                 type: 'text/plain;charset=utf-8'
             });
 
