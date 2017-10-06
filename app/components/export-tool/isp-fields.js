@@ -47,5 +47,6 @@ export default [
     ...generateNumericFields('Honest', 10),
     ...generateNumericFields('Micro', 6),
     ...generateNumericFields('Narq', 6),
-    ...generateNumericFields('ReligionScale', 17)
+    ...generateNumericFields('ReligionScale', 17),
+    'completed'
 ];
