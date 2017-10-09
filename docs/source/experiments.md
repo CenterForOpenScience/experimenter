@@ -293,169 +293,126 @@ But what we really want to do is have some kids think about how tasty broccoli i
 
 Notice that since both of the frames in the `frameList` were of the same kind, we could define the kind in `commonFrameProperties`. We no longer define `id` values for the frames, as they will be automatically identified as `instruct-and-manip-1` and `instruct-and-manip-2`.
 
-If we wanted to have 75% of participants think about how tasty broccoli is, we could also weight the parameter sets by providing the optional parameter `"parameterSetWeights": [3, 1]"` to the randomizer frame. One use of this function is to stop testing conditions that you already have enough children in as data collection proceeds.
+If we wanted to have 75% of participants think about how tasty broccoli is, we could also weight the parameter sets by providing the optional parameter `"parameterSetWeights": [3, 1]"` to the randomizer frame. 
+
+> Note: One use of parameterSetWeights is to stop testing conditions that you already have enough children in as data collection proceeds.
+
+#### Nested randomizers
+
+The frame list you provide to the randomParameterSet randomizer can even include other randomizer frames! This allows you to, for instance, define a **trial** that includes several distinct **blocks** (say, an intro, video, and then 4 test questions), then show 10 of those trials with different parameters - without having to write out all 60 blocks. There's nothing "special" about doing this, but it can be a little more confusing. 
+
+Here's an example. Notice that `"kind": "choice"`, `"sampler": "random-parameter-set"`, `"frameList": ...`, and `commonFrameProperties` are `commonFrameProperties` of the outer frame `nested-trials`. That means that every "frame" we'll create as part of `nested-trials` will itself be a random-parameter-set generated list with the same frame sequence, although we'll be substituting in different parameter values. (This doesn't have to be the case - we could show different types of frames in the list - but in the simplest case where you're using randomParameterSet just to group similar repeated frame sequences, this is probably what you'd do.) The only thing that differs across the two (outer-level) **trials** is the `parameterSet` used, and we list only one parameter set for each trial, to describe (deterministically) how the outer-level `parameterSet` values should be applied to each particular frame.
+
+```json
+    "nested-trials": {
+        "kind": "choice",
+        "sampler": "random-parameter-set",
+        "commonFrameProperties": {
+            "kind": "choice",
+            "sampler": "random-parameter-set",
+            "frameList": [
+                {
+                    "nPhase": 0,
+                    "doRecording": false,
+                    "autoProceed": false,
+                    "parentTextBlock": {
+                        "title": "Parents!",
+                        "text": "Phase 0: instructions",
+                        "emph": true
+                    },
+                    "images": [
+                        {
+                            "id": "protagonist",
+                            "src": "PROTAGONISTFACELEFT",
+                            "left": "40",
+                            "bottom": "2",
+                            "height": "60",
+                            "animate": "fadein"
+                        }       
+                    ],
+                    "audioSources": [
+                        {
+                            "audioId": "firstAudio",
+                            "sources": [{"stub": "0INTRO"}]
+                        }
+                    ]
+                },
+                {
+                    "nPhase": 1,
+                    "doRecording": false,
+                    "autoProceed": false,
+                    "parentTextBlock": {
+                        "title": "Parents!",
+                        "text": "Phase 1: instructions",
+                        "emph": true
+                    },
+                    "images": [
+                        {
+                            "id": "protagonist",
+                            "src": "PROTAGONISTFACELEFT",
+                            "left": "40",
+                            "bottom": "2",
+                            "height": "60"
+                        }       
+                    ],
+                    "audioSources": [
+                        {
+                            "audioId": "firstAudio",
+                            "sources": [{"stub": "1INTRO"}]
+                        }
+                    ]
+                }
+            ],
+            "commonFrameProperties": {
+                "kind": "exp-lookit-dialogue-page",
+                "doRecording": true,
+                "nTrial": "NTRIAL",
+                "backgroundImage": "BACKGROUNDIMG",
+                "baseDir": "https://s3.amazonaws.com/lookitcontents/politeness/",
+                "audioTypes": ["mp3", "ogg"]
+            }
+        }, 
+        "frameList": [
+            {
+                "parameterSets": [
+                    {
+                        "PROTAGONISTFACELEFT": "PROTAGONISTFACELEFT_1",
+                        "BACKGROUNDIMG": "BACKGROUNDIMG_1",
+                        "0INTRO": "0INTRO_1",
+                        "1INTRO": "1INTRO_1",
+                        "NTRIAL": 1
+                    }
+                ]
+            },
+            {
+                "parameterSets": [
+                    {
+                        "PROTAGONISTFACELEFT": "PROTAGONISTFACELEFT_2",
+                        "BACKGROUNDIMG": "BACKGROUNDIMG_2",
+                        "0INTRO": "0INTRO_2",
+                        "1INTRO": "1INTRO_2",
+                        "NTRIAL": 2
+                    }
+                ]
+            }
+        ],
+        "parameterSets": [
+            {
+                "PROTAGONISTFACELEFT_1": "order1_test1_listener1.png",
+                "PROTAGONISTFACELEFT_2": "order1_test1_listener1_second.png",
+                "BACKGROUNDIMG_1": "order1_test1_background.png",
+                "BACKGROUNDIMG_2": "order1_test1_background.png",
+                "0INTRO_1": "polcon_example_1intro",
+                "1INTRO_1": "polcon_example_1intro",
+                "0INTRO_2": "polcon_example_1intro",
+                "1INTRO_2": "polcon_example_1intro"
+            }
+        ]
+    }
+```
+
+
 
 ### Testing your study
 
 Experimenter has a built-in tool that allows you to try out your study. However, some functionality may not be exactly the same as on Lookit. We recommend testing your study from Lookit, which will be how participants experience it.
-
-### Experiment data
-
-You can see and download collected data from sessions marked as 'completed' (user filled out the exit survey) directly from the Experimenter application. 
-
-You can also download JSON study or accounts data from the command line using the python script [experimenter.py](https://github.com/CenterForOpenScience/lookit/blob/develop/scripts/experimenter.py) ([description](https://github.com/CenterForOpenScience/lookit/pull/85)); you'll need to set up a file config.json with the following content:
-
-```json
-{
-    "host": "https://staging-metadata.osf.io",
-    "namespace": "lookit",
-    "osf_token": "YOUR_OSF_TOKEN_HERE"
-}
-
-```
-
-You can create an OSF token for the staging server [here](https://staging.osf.io/settings/tokens/). 
-
-The collection name to use to get study session records is `session[STUDYIDHERE]s`, e.g. `session58d015243de08a00400316e0s`.
-
-The data saved when a subject participates in a study varies based on how that experiment is defined. The general structure for this **session** data is:
-
-```json
-{
-    "type": "object",
-    "properties": {
-        "profileId": {
-            "type": "string",
-            "pattern": "\w+\.\w+"
-        },
-        "experimentId": {
-            "type": "string",
-            "pattern": "\w+"
-        },
-        "experimentVersion": {
-            "type": "string"
-        },
-        "completed": {
-            "type": "boolean"
-        },
-        "sequence": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
-        },
-        "conditions": {
-            "type": "object"
-        },
-        "expData": {
-            "type": "object"
-        },
-        "feedback": {
-            "$oneOf": [{
-                "type": "string"
-            }, null]
-        },
-        "hasReadFeedback": {
-            "$oneOf": [{
-                "type": "boolean"
-            }, null]
-        },
-        "globalEventTimings": {
-            "type": "array",
-            "items": {
-                "type": "object"
-            }
-        }
-    },
-    "required": [
-        "profileId",
-        "experimentId",
-        "experimentVersion",
-        "completed",
-        "sequence",
-        "expData"
-    ]
-}
-```
-
-And descriptions of these properties are enumerated below:
-
-- *profileId*: This unique identifier of the participant. This field follows the form: `<account.id>.<profile.id>`, where `<account.id>` is the unique identifier of the associated account, and `<profile.id>` is the unique identifier of the profile active during this particular session (e.g. the participating child). Account data is stored in a separate database, and includes demographic survey data and the list of profiles associated with the account.
-- *experimentId*: The unique identifier of the study the subject participated in. 
-- *experimentVersion*: The unique identifier of the version of the study the subject participated in. TODO: more on JamDB, versioning
-- *completed*: A true/false flag indicating whether or not the subject completed the study.
-- *sequence*: The sequence of **frames** the subject actually saw (after running randomization, etc.)
-- *conditions*: For randomizers, this records what condition the subject was assigned
-- *expData*: A JSON object containing the data collected by each **frame** in the study. More on this to follow.
-- *feedback*: Some researchers may have a need to leave some session-specific feedback for a subject; this is shown to the participant in their 'completed studies' view.
-- *hasReadFeedback*: A true/false flag to indicate whether or not the given feedback has been read.
-- *globalEventTimings*: A list of events recorded during the study, not tied to a particular frame. Currently used for recording early exit from the study; an example value is 
-
-```json
-"globalEventTimings": [
-        {
-            "exitType": "browserNavigationAttempt", 
-            "eventType": "exitEarly", 
-            "lastPageSeen": 0, 
-            "timestamp": "2016-11-28T20:00:13.677Z"
-        }
-    ]
-```
-
-#### Sessions and `expData` in detail
-
-Continuing with the example from above, lets walk through the data collected during a session (note: some fields are hidden):
-
-```json
-{
-	"sequence": [
-		"0-intro-video",
-		"1-survey-2",
-		"2-exit-survey"
-	],
-	"conditions": {
-		"survey-randomizer": 1
-	},
-	"expData": {
-		"0-intro-video": {
-			"eventTimings": [{
-				"eventType": "nextFrame",
-				"timestamp": "2016-03-23T16:28:20.753Z"
-			}]
-		},
-		"1-survey-2": {
-			"formData": {
-				"name": "Sam",
-				"favPie": "pecan"
-			},
-			"eventTimings": [{
-				"eventType": "nextFrame",
-				"timestamp": "2016-03-23T16:28:26.925Z"
-			}]
-		},
-		"2-exit-survey": {
-			"formData": {
-				"thoughts": "Great!",
-				"wouldParticipateAgain": "Yes"
-			},
-			"eventTimings": [{
-				"eventType": "nextFrame",
-				"timestamp": "2016-03-23T16:28:32.339Z"
-			}]
-		}
-	}
-}
-```
-
-Things to note:
-- 'sequence' has resolved to three items following the pattern `<order>-<frame.id>`, where `<order>` is the order in 
-  the overall sequence where this **frame** appeared, and `<frame.id>` is the identifier of the frame as defined in 
-  the 'frames' property of the experiment structure. Notice in particular that since 'survey-2' was randomly selected, 
-  it appears here.
-- 'conditions' has the key/value pair `"1-survey-randomizer": 1`, where the format `<order>-<frame.id>` corresponds 
-  with the `<order>` from the 'sequence' of the *original* experiment structure, and the `<frame.id>` again corresponds 
-  with the identifier of the frame as defined in 
-  the 'frames' property of the experiment structure.
-- 'expData' is an object with three properties (corresponding with the values from 'sequence'). Each of these objects has an 'eventTimings' property. This is a place to collect user-interaction events during an experiment, and by default contains the 'nextFrame' event which records when the 
-  user progressed to the next **frame** in the 'sequence'. You can see which events a particular frame records by looking at the 'Events' tab in its [frame documentation](http://centerforopenscience.github.io/exp-addons/modules/frames.html). Other properties besides 'eventTimings' are dependent on 
-  the **frame** type. You can see which properties a particular frame type records by looking at the parameters of the `serializeContent` method under the 'Methods' tab in its [frame documentation](http://centerforopenscience.github.io/exp-addons/modules/frames.html).  Notice that 'exp-video' captures no data, and that both 'exp-survey' **frames** capture a 'formData' object.

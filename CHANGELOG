@@ -1,0 +1,15 @@
+*********
+ChangeLog
+*********
+
+0.3.0 (2017-10-09)
+==================
+- Feature: Don't try to display a data preview if the number of records is too large. ISP
+discovered that 3,000+ records can consume more than 1.5Gb of RAM in a single browser tab! Instead,
+display a message asking the user to download the data. (Thanks, @AddisonSchiller!)
+
+- Feature: Add "study completed" timestamps (the date and time the session was last modified) to
+output data. (Thanks, @AddisonSchiller!)
+
+- Docs: Split experiment docs into separate creation and data exploration docs. Add example and
+explanation of nesting randomizers. (Thanks, @kimberscott!)
