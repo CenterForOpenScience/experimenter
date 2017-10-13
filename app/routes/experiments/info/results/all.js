@@ -12,7 +12,7 @@ export default Ember.Route.extend({
     _fetchResults(collectionName, dest, page) {
         const options = {
             'filter[completed]': 1,
-            'page[size]': 100,
+            'page[size]': 500,
             page: page
         };
         return this.store.query(collectionName, options).then(res => {
