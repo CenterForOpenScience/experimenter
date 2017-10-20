@@ -2,6 +2,11 @@
 ChangeLog
 *********
 
+0.3.1 (2017-10-20)
+==================
+- Feature: Update data exporter to use the larger page sizes (100 => 500) recently added to JamDB.
+(Thanks, @AddisonSchiller!)
+
 0.3.0 (2017-10-09)
 ==================
 - Feature: Don't try to display a data preview if the number of records is too large. ISP
